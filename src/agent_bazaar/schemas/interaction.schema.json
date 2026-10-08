@@ -1,0 +1,406 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-bazaar:draft:0.4:interactions",
+  "title": "Agent Bazaar 0.4 interaction requests and receipts",
+  "description": "Structural interface only. C3 defines admission, replay, application and failure semantics; C6 defines native A2A carriage. No receipt substitutes for semantic adoption or native authority.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/interaction_request"
+    },
+    {
+      "$ref": "#/$defs/interaction_receipt"
+    }
+  ],
+  "$defs": {
+    "interaction_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "interaction_request"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "operation_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "recipient_agent_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "recipient_scope_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "purpose": {
+              "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/operation_purpose"
+            },
+            "subject_ref": {
+              "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+            },
+            "admission_basis_ref": {
+              "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+            }
+          },
+          "required": [
+            "operation_id",
+            "recipient_agent_id",
+            "recipient_scope_id",
+            "purpose",
+            "subject_ref",
+            "admission_basis_ref"
+          ]
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "body": {
+                "properties": {
+                  "purpose": {
+                    "enum": [
+                      "prepare_handoff",
+                      "dispatch_handoff",
+                      "reconcile_handoff"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "allOf": [
+              {
+                "properties": {
+                  "required_features": {
+                    "contains": {
+                      "const": "adapter-handoff"
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "required_features": {
+                    "contains": {
+                      "const": "lifecycle-evidence"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "interaction_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "interaction_receipt"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "request_ref": {
+              "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+            },
+            "operation_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "recipient_agent_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "recipient_scope_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "revision": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "previous_receipt_digest": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "outcome": {
+              "enum": [
+                "pending",
+                "applied",
+                "declined",
+                "blocked",
+                "conflict"
+              ]
+            },
+            "reason_code": {
+              "enum": [
+                "ok",
+                "in_progress",
+                "permission_absent",
+                "unsupported_semantics",
+                "invalid_record",
+                "identity_mismatch",
+                "authority_absent",
+                "quota_exhausted",
+                "evidence_unavailable",
+                "evidence_stale",
+                "lineage_conflict",
+                "selection_conflict",
+                "operation_conflict",
+                "already_finalized",
+                "recipient_declined",
+                "contact_closed",
+                "internal_unresolved"
+              ]
+            },
+            "result_refs": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+              },
+              "minItems": 0,
+              "uniqueItems": true
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "detail": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "request_ref",
+            "operation_id",
+            "recipient_agent_id",
+            "recipient_scope_id",
+            "revision",
+            "previous_receipt_digest",
+            "outcome",
+            "reason_code",
+            "result_refs",
+            "evidence_refs"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "revision": {
+                    "const": 1
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "previous_receipt_digest": {
+                    "type": "null"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "previous_receipt_digest": {
+                    "type": "string",
+                    "pattern": "^sha256:[0-9a-f]{64}$"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "outcome": {
+                    "const": "applied"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "result_refs": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                  },
+                  "reason_code": {
+                    "enum": [
+                      "ok",
+                      "already_finalized"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "outcome": {
+                    "const": "pending"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "reason_code": {
+                    "enum": [
+                      "in_progress",
+                      "internal_unresolved"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "outcome": {
+                    "enum": [
+                      "declined",
+                      "blocked",
+                      "conflict"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "reason_code": {
+                    "not": {
+                      "enum": [
+                        "ok",
+                        "in_progress"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ]
+    }
+  }
+}

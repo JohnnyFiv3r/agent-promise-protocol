@@ -1,0 +1,2 @@
+# Normative sources remain available alongside their packaged runtime copies.
+include schemas/*.schema.json

@@ -1,0 +1,223 @@
+{
+  "date": "2026-10-08",
+  "runtime_version": "0.1.0",
+  "contract_baseline": "f4a01e2c8c1ee6bb72cc6793933afbcedf91572c",
+  "source_manifest_digest": "sha256:67348252c1bb0ae9554bb3d8579bc11203a4a736418a2cc66311c5be6de0f006",
+  "source_manifest": [
+    {
+      "path": "MANIFEST.in",
+      "sha256": "2389e310ebbcc851d13a2b0a6b1804f8e1427577e47a03ec8be22f95accc74ba"
+    },
+    {
+      "path": "checks/validate.py",
+      "sha256": "2e7048c7c75e821ead445dad33c49e7f7954566f9c36e6547b552bccb0701a25"
+    },
+    {
+      "path": "policies/rp1.rego",
+      "sha256": "9bfd8263d5fcb8b88e385373d724a29d1b4a6130dfcd89e92ba6be38d0f4ac1e"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "04eaf5a0babf46720ad4b7b8ddbced4e223eb196ece5f15d568e9e06f7a3f9e1"
+    },
+    {
+      "path": "schemas/admission-policy.schema.json",
+      "sha256": "ce4171e6059ee9ba18c44d161ee66821d849957441a648b308ee04a5278e4c7f"
+    },
+    {
+      "path": "schemas/contract.schema.json",
+      "sha256": "1a7f382578f6dae27e7e524199e942acebf9fa0353f161f506a5d99f9e2e546b"
+    },
+    {
+      "path": "schemas/interaction.schema.json",
+      "sha256": "72a41a44e5de8edfbc840fb02b5c349d89341a197b160e2f6188554f19a6dace"
+    },
+    {
+      "path": "src/agent_bazaar/__init__.py",
+      "sha256": "04925434bdad8a80c51bdfc3190a3142fbae6011b3ca30869a7776498073d0a0"
+    },
+    {
+      "path": "src/agent_bazaar/clock.py",
+      "sha256": "1770b1926e69c5a73c15e851cf19eed2c93bd20d1f00843aa2e78ecd4abac2e6"
+    },
+    {
+      "path": "src/agent_bazaar/composition.py",
+      "sha256": "3ddb6c5ce77755c8bc010093a55153f2514f2619abcd649f20df1960b11b490a"
+    },
+    {
+      "path": "src/agent_bazaar/crypto.py",
+      "sha256": "d9127b5a9b9460cccf92965a4f2e6c665de4741bd601cf044c5eba69ff6a1859"
+    },
+    {
+      "path": "src/agent_bazaar/demo.py",
+      "sha256": "a9600370c2386dec5e0ab4ce42d24f3ed90971ac89033beeb1cd9286787a5f22"
+    },
+    {
+      "path": "src/agent_bazaar/domain.py",
+      "sha256": "8a86d2a67c1cb6ec9f3bb7bd7c42b33792a74a4e89cf0b2aebcdc4741525b8fb"
+    },
+    {
+      "path": "src/agent_bazaar/errors.py",
+      "sha256": "159d4224d89cbbfb66337067d2e48c834bfc168435b7513a8c25f1b5c789e499"
+    },
+    {
+      "path": "src/agent_bazaar/fixtures.py",
+      "sha256": "9a6c6c46f7a6a166cae7a6aeddac8b851e838dd1bc8d69d9fa9b5702e4d3aaaa"
+    },
+    {
+      "path": "src/agent_bazaar/guards.py",
+      "sha256": "5bf6956bc5768433183c94733856ddd385a488a738d926a729b2878e3a51c746"
+    },
+    {
+      "path": "src/agent_bazaar/handoff.py",
+      "sha256": "e4b71cd6c83e3a8762c1cab7a287a5c9e55fc22388c617e86cebe622a173f9a0"
+    },
+    {
+      "path": "src/agent_bazaar/harness.py",
+      "sha256": "64fd571f66359653d720d5a4719177bee21501ce03976e4a5eaff2301716813c"
+    },
+    {
+      "path": "src/agent_bazaar/policy.py",
+      "sha256": "725efd47418e7e5393da4e6ed631f9c86fe27feebaa76927c1669bd3c59208c8"
+    },
+    {
+      "path": "src/agent_bazaar/records.py",
+      "sha256": "67c8efa4b85c74bc8c1f607320cbfccd168d32b6c39c0bf2c904de20cb9e952e"
+    },
+    {
+      "path": "src/agent_bazaar/recovery.py",
+      "sha256": "424bc41badfca5e255a55f3efac94b0c1c46a5885ceec46d81b842a78df83fce"
+    },
+    {
+      "path": "src/agent_bazaar/schema.py",
+      "sha256": "d411ec8fdde10ec3dfebe96c01b507bca87f0ac582d283b594cded72541302cf"
+    },
+    {
+      "path": "src/agent_bazaar/schemas/__init__.py",
+      "sha256": "4b8bbd123d73bbfa65e191f455dc9dcee9dc1ca8a027a96569dc19538479158c"
+    },
+    {
+      "path": "src/agent_bazaar/schemas/admission-policy.schema.json",
+      "sha256": "ce4171e6059ee9ba18c44d161ee66821d849957441a648b308ee04a5278e4c7f"
+    },
+    {
+      "path": "src/agent_bazaar/schemas/contract.schema.json",
+      "sha256": "1a7f382578f6dae27e7e524199e942acebf9fa0353f161f506a5d99f9e2e546b"
+    },
+    {
+      "path": "src/agent_bazaar/schemas/interaction.schema.json",
+      "sha256": "72a41a44e5de8edfbc840fb02b5c349d89341a197b160e2f6188554f19a6dace"
+    },
+    {
+      "path": "src/agent_bazaar/storage.py",
+      "sha256": "4072646d76d2518929a3871fe9c257618cb23dcd29cc327ba8e85632d2fb3adc"
+    },
+    {
+      "path": "src/agent_bazaar/transport.py",
+      "sha256": "d1273aeb92fea6c12134752523e9ecedfdbfc2aaea281fa05d03761744884759"
+    },
+    {
+      "path": "tests/runtime/test_composition.py",
+      "sha256": "5fc5e302a009908ee30c28b73c9e0ff94985428c601cd0911d47fc95a3de7de3"
+    },
+    {
+      "path": "tests/runtime/test_crypto.py",
+      "sha256": "da22bbed8633f8a2698a0892ddc476d8ed35b826128c3ce4f5fa44ba02b022fa"
+    },
+    {
+      "path": "tests/runtime/test_handoff.py",
+      "sha256": "491f9fbd12eb3ada31fff8baf895d02d3ecf4782348f798c1f29491a4cbbf3c5"
+    },
+    {
+      "path": "tests/runtime/test_harness.py",
+      "sha256": "c9ad94095604705be89f949d1c023600ece991533d1c990a80da16564633c5b4"
+    },
+    {
+      "path": "tests/runtime/test_harness_guards.py",
+      "sha256": "780569427a5bdf8f0cce7bf4bd27d26874442b52a436abda4b8d7ea1396a3396"
+    },
+    {
+      "path": "tests/runtime/test_harness_transport.py",
+      "sha256": "c2558cf41635998aefc9f701c4257bdbd661578e19cad23f5df8b1d46bfac5cb"
+    },
+    {
+      "path": "tests/runtime/test_policy.py",
+      "sha256": "5d2595a5fe04bb8a15d339d2e8cdbffa2529dd3473a7b9e3d10da1a8771b6391"
+    },
+    {
+      "path": "tests/runtime/test_recovery.py",
+      "sha256": "ef07391d47264591ae3a86a5318027f2e20ca9f516f1f404cc35e31b92652fa7"
+    },
+    {
+      "path": "tests/runtime/test_refusal_ingress.py",
+      "sha256": "7f1acb4d8978ef2113448f46a12e8befdf6f9be3fe903e251148f1d56ecdc6a9"
+    },
+    {
+      "path": "tests/runtime/test_schema.py",
+      "sha256": "4413ab1e83d2266a0d09a42efbdee715d55c93b637f8db6904c06ecd8208690c"
+    },
+    {
+      "path": "tests/runtime/test_storage.py",
+      "sha256": "9b3397e7b35b3aaea0e01f52f744754e1c91a9cf9bbd4156450c133f81c36ce2"
+    },
+    {
+      "path": "tests/runtime/test_transport.py",
+      "sha256": "b0a7b1644da20271b649f8ff681e079514847e94453cb42f590a9530225766ff"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "ba001abf74a97c91707b7d3094863d42aadee4f573fd25052182d78ef58b5445"
+    }
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "runtime_suite": {
+    "command": "python -m pytest tests/runtime -q -ra",
+    "passed": 142,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 21.19
+  },
+  "opa": {
+    "version": "1.21.1",
+    "integration_exercised": true,
+    "strict_policy_check": "passed",
+    "binary_sha256": "a00a6469a0968c47c01137ed0dacaa88148be5d0eaa8524310cd371f3a98a169"
+  },
+  "authoring": {
+    "schemas": 3,
+    "semantic_records": 29,
+    "interactions": 6,
+    "admission_declarations": 2,
+    "supporting_documents": 27,
+    "references": 327
+  },
+  "package": {
+    "build": "wheel and sdist passed without warnings",
+    "isolated_install": "passed",
+    "outside_checkout_schema_validation": "passed",
+    "outside_checkout_demo": "passed",
+    "distributions": {
+      "agent_bazaar-0.1.0-py3-none-any.whl": "06584c310b069ce4d8402a1448289a7516da0c9606b8c393ce7785214cf9d542",
+      "agent_bazaar-0.1.0.tar.gz": "52623164be288d548c4ffbc827038b0ae10c16cc877a7a226bf047142118d601"
+    }
+  },
+  "demo": {
+    "bilateral_replay_simulated_calls": 1,
+    "deadline_refusal_after_restart": "refused",
+    "refused_simulated_calls": 0,
+    "three_agents_two_agreements": "passed",
+    "dependency_gate": "blocks until clearance",
+    "external_native_effects": false
+  },
+  "other_checks": {
+    "lockfile": "passed offline lock check",
+    "python_compile": "passed",
+    "ruff_0_14_0_f_rules": "passed",
+    "git_diff_whitespace": "passed"
+  },
+  "scope": "Single delegated SQLite authority realm. Real signatures, mutual TLS and OPA exercised. Demo uses controlled policies, clock, inbox/health and adapter. No live research, service, order, payment or settlement. No independent-implementation conformance claim."
+}

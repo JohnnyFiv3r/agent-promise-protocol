@@ -101,7 +101,7 @@ def main():
         'fixture_payload_digest_references': 'consistent',
         'cryptographic_proofs': 'nonvalidating fictional references; not verified',
         'capability_authority_status_and_clock_semantics': 'not verified',
-        'runtime_and_protocol_testing': 'proposed; not implemented or performed',
+        'runtime_and_protocol_testing': 'not assessed by this authoring checker; run the runtime tests separately',
     }, indent=2))
 
 
