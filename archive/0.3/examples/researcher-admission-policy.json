@@ -1,0 +1,124 @@
+{
+  "profile": "abp/admission-policy/0.3-draft",
+  "kind": "admission_policy_declaration",
+  "id": "fixture:researcher-admission-policy",
+  "issuer_agent_id": "agent:researcher",
+  "issuer_principal_id": "principal:researcher",
+  "created_at": "2026-10-08T12:00:00Z",
+  "recipient_agent_id": "agent:researcher",
+  "recipient_scope_id": "scope:researcher:bazaar",
+  "accounting_authority_id": "agent:researcher",
+  "authority_ref": {
+    "id": "fixture:researcher-principal-policy",
+    "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+  },
+  "eligibility_ref": {
+    "id": "fixture:admission-eligibility",
+    "digest": "sha256:88d654560c75987cf47c9674714f55566648e9ac00dd22e4e573cfa600691a75"
+  },
+  "status_policy_ref": {
+    "id": "fixture:clock-and-status-policy",
+    "digest": "sha256:1f2563bea9c4d98cfd2daede48b0e001ed0bf1bca1758638e6943f888f08b869"
+  },
+  "status_ref": "https://example.org/agent-bazaar/v0.3/status/researcher-admission",
+  "validity": {
+    "mode": "until_withdrawn",
+    "policy_ref": {
+      "id": "fixture:researcher-principal-policy",
+      "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+    },
+    "status_ref": "https://example.org/agent-bazaar/v0.3/status/researcher-admission"
+  },
+  "recovery_policy_ref": {
+    "id": "fixture:admission-recovery",
+    "digest": "sha256:5265d409923ac9623d2c0b875221d579cac0eb25b0aab62acf65805615130e4f"
+  },
+  "reply_max_bytes": 32768,
+  "pools": [
+    {
+      "allowance_id": "researcher:negotiation",
+      "traffic_class": "negotiation",
+      "record_kinds": [
+        "intent",
+        "promise",
+        "offer",
+        "candidate_terms",
+        "terms_adoption",
+        "clarification"
+      ],
+      "allow_status_query": false,
+      "allow_finalization": false,
+      "max_messages": 24,
+      "max_bytes": 262144,
+      "max_work_units": 24000,
+      "work_semantics_ref": {
+        "id": "fixture:admission-work",
+        "digest": "sha256:d690dce08536c6603c5cb03b3119817ddea73d9bea73d0333655fd2354d2236e"
+      },
+      "max_in_flight": 2,
+      "max_live_options": 8,
+      "validity": {
+        "mode": "until_withdrawn",
+        "policy_ref": {
+          "id": "fixture:researcher-principal-policy",
+          "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+        },
+        "status_ref": "https://example.org/agent-bazaar/v0.3/status/researcher-admission"
+      },
+      "replenishment": {
+        "mode": "none"
+      }
+    },
+    {
+      "allowance_id": "researcher:control",
+      "traffic_class": "control",
+      "record_kinds": [
+        "publication_contract",
+        "admission_grant",
+        "accepted_offer",
+        "finalization_notice",
+        "refusal_event",
+        "status_snapshot",
+        "withdrawal_event",
+        "negotiation_close"
+      ],
+      "allow_status_query": true,
+      "allow_finalization": true,
+      "max_messages": 128,
+      "max_bytes": 524288,
+      "max_work_units": 128,
+      "work_semantics_ref": {
+        "id": "fixture:admission-work",
+        "digest": "sha256:d690dce08536c6603c5cb03b3119817ddea73d9bea73d0333655fd2354d2236e"
+      },
+      "max_in_flight": 8,
+      "max_live_options": 0,
+      "validity": {
+        "mode": "until_withdrawn",
+        "policy_ref": {
+          "id": "fixture:researcher-principal-policy",
+          "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+        },
+        "status_ref": "https://example.org/agent-bazaar/v0.3/status/researcher-admission"
+      },
+      "replenishment": {
+        "mode": "none"
+      }
+    }
+  ],
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.3/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.3/keys/agent-researcher",
+      "signed_payload_digest": "sha256:5bf86d06b6971497e261dd63d451f6ecf3a43c4ad29f568675d9fdc0a2a20171",
+      "issuer_agent_id": "agent:researcher",
+      "scope": [
+        "admission_policy_declaration"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}

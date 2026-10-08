@@ -1,14 +1,18 @@
 # Agent Bazaar A2A interaction contract
 
-**ABP 0.2-draft · October 8, 2026 · [MIT](LICENSE)**
+**ABP 0.4-draft · October 8, 2026 · [MIT](LICENSE)**
 
 `MUST`, `MUST NOT` and `SHOULD` state requirements for a conforming participant. Each participant enforces them under its own authority. They do not confer power over another autonomous agent.
 
+The [eight governing contracts](contracts/README.md) supply the operational requirements for this common model: authorized actors, transition guards, durable effects, duplicates and failures. [Draft 0.4 decisions](decisions-v0.4.md) record the lifecycle boundary, universal agreement model and reference-profile choices. Conformance requires these contracts as well as the schema; a successful schema check alone cannot establish it.
+
 ## 1. Scope and controlling decisions
 
-The contract covers **publication through the accepted-offer object**, including the proofs and principal-refusal status needed to interpret that object. It owns emitted intent, qualified promises, admission, iterative alternative offers, exact adoption and originator-coordinated finalization.
+The contract covers **publication, qualified negotiation, bilateral formation, mandatory principal recovery, composition, adapter handoff and lifecycle evidence**. It specifies attributable acts and observable guarantees while preserving autonomous self-authorship and existing native mechanisms.
 
-AP2/UCP/ACP validation, payment, settlement, fulfillment and delivery assessment are outside the contract. Bazaar may carry agreed references to those systems; it neither implements their state machines nor issues their authority. The [user decisions](decisions-v0.2.md) supersede draft 0.1. The [contract map](contract-map.md) identifies the six current interfaces.
+Native AP2/UCP/ACP validation, execution, payment, fulfillment, assessment and settlement mechanisms remain outside the adapter boundary. Bazaar governs eligibility to hand off an action and what their returned evidence may establish; it neither performs those native acts nor issues their authority. [Decision 14 is explicitly revised](decisions-v0.4.md) to extend semantic coverage beyond formation. The remaining [earlier decisions](decisions-v0.2.md) continue to apply, with test proposals now requested. The [contract map](contract-map.md) identifies the eight interfaces.
+
+The mandatory baseline is `bilateral`: C1–C6, exact agreement and protected principal recovery. Composition, adapter handoff and lifecycle evidence are explicitly negotiated features. An ordinary bilateral agreement needs no plan, composition engine, auction, atomic bundle or adapter implementation. The [quickstart](docs/quickstart.md) and [RP1](profiles/reference-profile.md) give the normal path and concrete mechanisms.
 
 ## 2. Promise and act semantics
 
@@ -22,7 +26,9 @@ There is no standing-promise class. Continuing permission lives in principal pol
 
 ## 3. Common records, proof and policy
 
-Records carry a versioned profile, kind, ID, issuer agent/principal, creation time, typed body, required-extension identifiers and proof references. Content identity uses RFC 8785 canonical JSON, UTF-8 and SHA-256. Duplicate member names and values outside the canonical JSON profile MUST be rejected. Money or precision-sensitive quantities use explicitly defined units and exact representations under their semantic profile.
+Records carry a versioned profile, kind, ID, issuer agent/principal, creation time, typed body, required-feature and required-extension identifiers, and proof references. Every semantic/interaction envelope carries `required_features`, a unique array containing `bilateral`. Optional names are `composition`, `adapter-handoff` and `lifecycle-evidence`; handoff requires lifecycle evidence. The required set includes features implied by record kind, fields and interpreted subject/dependencies, even if a sender omits them. Before issuance, adoption or a dependent transition, the peers MUST understand and support the full required set. A recipient MUST block unsupported or falsely omitted requirements, never discard them to manufacture compatibility. Advertisement is capability disclosure, not consent or delegated authority.
+
+Content identity uses RFC 8785 canonical JSON, UTF-8 and SHA-256. Duplicate member names and values outside the canonical JSON profile MUST be rejected. Money or precision-sensitive quantities use explicitly defined units and exact representations under their semantic profile.
 
 Portable proof references name the existing suite and verification method, issuer, scope, signed payload digest and original native proof material. The payload digest covers the record excluding its top-level proof references. A conforming verifier MUST establish through the selected native suite that the proof authenticates those bytes, issuer and scope. Self-declared proof metadata is insufficient. Original native evidence retains its native bytes and verification rules.
 
@@ -32,7 +38,7 @@ Each required policy selects its authenticated status authority, clock/order, fi
 
 ## 4. Publication and intent
 
-The [publication contract](publication-contract.md) declares audience, permitted uses, contact mode, business-rule/delegation references, validity and commercial eligibility. Existing services may add discovery, ranking and subscriptions. They MUST NOT expand consent, manufacture offers, adopt promises for another agent or reinterpret matching as agreement.
+The [publication contract](publication-contract.md) declares audience, permitted uses, contact mode, business-rule/delegation references, validity and transaction eligibility. Existing services may add discovery, ranking and subscriptions. They MUST NOT expand consent, manufacture offers, adopt promises for another agent or reinterpret matching as agreement.
 
 Broadcast means permitted publication or subscription delivery. An intent includes exact publication policy and qualified emission/seeking scope, its requested outcome and preferences. Pricing/capability preferences are not the service offer the emitter has not yet issued. Revision chains preserve immutable history. Identical observations are duplicates; conflicting content at one revision is rejected or quarantined.
 
@@ -68,6 +74,8 @@ If an offer is itself the first initiating record, its own `origin` uses an expl
 
 A candidate identifies the origin/coordinator, agents/principals, selected option revisions, exact own promises, complete terms, policy references/eligibility evidence, selection constraints and refusal rules. Its refusal rules include each principal's positive review duration, notice rule/destination, refusal authority and current-status/clock policy. These rules are part of the terms both parties adopt.
 
+Each candidate action has one `promise_bindings` entry: `previously_issued` resolves the exact action from a selected offer or explicit promise; `issue_on_adoption` identifies the action that only its own author can issue through adoption. An optional request source identifies the request without claiming it issued that promise. [C2](contracts/02-qualified-actions.md) and [C4](contracts/04-formation.md) define the required equality and coverage checks.
+
 Each party issues an authenticated `terms_adoption` for the same candidate digest and its own promises, within its delegated authority. It cannot adopt another party's requested action on that party's behalf. A transport acknowledgment, discovery match, unsigned paraphrase, silence or inferred conversational agreement is not an adoption record.
 
 A party may directly accept an offered option without first issuing a reciprocal offer. Its adoption can confirm its previously issued qualified actions or issue the qualified own actions requested of it in the candidate. Where it undertakes no separate performance action, its adopted service-promise list may be empty; the act of adoption still requires capability and authority. The candidate alone issues neither party's new promises. Selection may contain one or several compatible options under the declared constraints. Both agents still adopt the same complete terms.
@@ -96,20 +104,34 @@ Refusal preserves history and prevents reliance on that accepted object. It does
 
 ## 10. Withdrawal and immutable replacement
 
-Issuers may withdraw their own intent, action promise or offer option according to its validity/policy. Events retain target identity, authority and ordering. Withdrawing one alternative does not withdraw another. Closing contact is not automatically the same act as withdrawing all promises or refusing accepted terms.
+Issuers may withdraw their own publication, intent, action promise, offer option, admission grant, candidate or adoption according to its validity/policy. Events retain target identity, authority and ordering. Withdrawing one alternative does not withdraw another. [C4](contracts/04-formation.md) orders withdrawal against finalization. Closing contact is not automatically the same act as withdrawing all promises or refusing accepted terms.
 
 Accepted bytes do not change. A material change creates a linked replacement with fresh adoption, explicit handling of outstanding commitments and new principal-window evidence. No replacement silently erases a prior native effect or reuses authority for altered terms. Effects outside Bazaar remain subject to their own systems.
 
-## 11. A2A binding and downstream boundary
+## 11. Universal agreements and composition
+
+One candidate format covers commercial and noncommercial exchanges. `agreement_terms` identifies exact typed terms and policy references; it does not require money, a price, a checkout or a settlement route. Domain vocabularies define action/subject/claim meanings. Interoperability profiles select concrete verification and communication mechanisms separately.
+
+When the optional `composition` feature is enabled, [C7](contracts/07-composition.md) defines immutable transaction plans, phase-specific dependencies and attributable component bindings. Plans declare slots and requirements without embedding the candidate digests that will reference the plan. Each candidate adopts its exact plan/slot; a binding then resolves that slot to one exact candidate. Transaction membership is not assent. The orchestrator distributes selected candidate references, while each bilateral agreement retains its originator as coordinator. Neither grouping nor orchestration implies global atomicity, disclosure permission or cancellation authority.
+
+## 12. Protected handoff and lifecycle evidence
+
+When `adapter-handoff` and `lifecycle-evidence` are enabled, [C8](contracts/08-adapter-boundary.md) defines side-effect-free preparation, guarded dispatch and read-only reconciliation. A handoff binds the exact accepted action occurrence, independently validated native authority, relevant dependency/clearance evidence and a frozen adapter translation. Stable action identity prevents new carriers, proof variants or adapter IDs from manufacturing another authorized occurrence. An unknown native outcome remains in doubt; retries must not cause another effect.
+
+Principal recovery is a participation requirement. `handoff_rules` pins the adopted protection policy. Ordinary agent assent cannot waive the positive period; an early-effect profile must preserve the actual protected right. RP1 permits only `no_effects` before clearance except independently authorized side-effect-free preparation. The later native action is independently authorized at its handoff boundary.
+
+Lifecycle evidence binds original reporters and native proof to exact agreements/actions under typed claim semantics. A provider's claim, recipient acknowledgment, assessment and settlement observation establish different facts. The protocol records and interprets those facts without operating the native service, payment or settlement mechanism. Unknown semantics, evidence conflicts and unavailable authorities block unsupported conclusions under the [trust/failure model](design/trust-and-failure-model.md).
+
+## 13. A2A binding and adapter boundary
 
 The [architecture](protocol-architecture.md) specifies extension advertisement/activation, native message/artifact carriage and portable proof. Native A2A task states remain task states. They cannot substitute for offer issuance, exact adoption, finalization or principal-window status.
 
-Bazaar's output supplies immutable terms, their provenance/proofs, policy references and sufficiently fresh accepted-object status. It contains no AP2 mandate, payment instruction, paid receipt, delivery assessment or settlement state. A downstream consumer must perform its own native validation and obtain its own authority. The [AP2 compatibility note](downstream-boundary.md) identifies how native commerce can preserve the accepted-object digest without importing payment machinery into this contract.
+Bazaar carries immutable terms, provenance, current clearance, exact handoff decisions and attributed lifecycle evidence. No Bazaar record becomes an AP2 mandate or native action authority by naming one. The [adapter boundary](downstream-boundary.md) specifies what crosses into a native system and what evidence returns. Native execution and settlement state machines remain external.
 
-## 12. Failure and extensibility
+## 14. Failure and extensibility
 
 Unknown required action/policy/proof semantics block the dependent transition. Conflicting content, option lineage or status evidence is retained and resolved explicitly. Remote unavailability never implies consent, refusal-window completion or failure of an already-issued promise. Any policy-based disposition must be attributable and must not fabricate an actor's adoption.
 
 An adapter MUST reject a translation that would change a qualified offer into an unissued proposal, attribute a counterpart request as its promise, lose a principal refusal right, or transform accepted terms into native authority. Breaking semantic changes require a distinct version and renewed understanding/adoption.
 
-The schema and illustrative records are authoring aids. Structural validity alone does not prove capability, authority, current consent, cryptographic authenticity, principal notification or an effective agreement. The testing regime is deferred by the user.
+The schema and illustrative records are authoring aids. Structural validity alone does not prove capability, authority, current consent, cryptographic authenticity, principal notification or an effective agreement. The [test proposals](tests/PROPOSED.md) stop at substituted adapters; executable behavioral and native interoperability tests have not been implemented.

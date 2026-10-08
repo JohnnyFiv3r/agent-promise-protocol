@@ -1,0 +1,8 @@
+{
+  "id": "fixture:admission-work",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "unit": "weighted_dispatch_unit",
+  "meaning": "Illustrative profile charges one unit for deterministic control handling; model work must reserve a finite estimated unit budget before dispatch and cannot exceed its reserved allowance.",
+  "native_profile": "https://example.org/agent-bazaar/v0.3/policies/work"
+}

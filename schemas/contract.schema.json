@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:agent-bazaar:draft:0.2:semantic-records",
-  "title": "Agent Bazaar v0.2 publication through accepted-offer records",
-  "description": "Structural proposal only. Offers issue qualified own promises. Principal refusal windows follow agent finalization. No execution, payment, delivery, or assessment state is defined. Schema acceptance does not verify cryptography, capability, authority, current status, clocks, or protocol semantics.",
+  "$id": "urn:agent-bazaar:draft:0.4:semantic-records",
+  "title": "Agent Bazaar 0.4 semantic records: bilateral core and optional composition/lifecycle features",
+  "description": "Universal semantic record structures for C1-C6 bilateral formation and principal recovery, plus optional C7 composition and C8 protected handoff/lifecycle evidence. Structural validity does not establish authority, current status, native execution, fulfillment or settlement. Native mechanisms remain external.",
   "oneOf": [
     {
       "$ref": "#/$defs/publication_contract"
@@ -36,6 +36,33 @@
     },
     {
       "$ref": "#/$defs/withdrawal_event"
+    },
+    {
+      "$ref": "#/$defs/admission_grant"
+    },
+    {
+      "$ref": "#/$defs/clarification"
+    },
+    {
+      "$ref": "#/$defs/negotiation_close"
+    },
+    {
+      "$ref": "#/$defs/transaction_plan"
+    },
+    {
+      "$ref": "#/$defs/composition_binding"
+    },
+    {
+      "$ref": "#/$defs/handoff_request"
+    },
+    {
+      "$ref": "#/$defs/prepared_handoff"
+    },
+    {
+      "$ref": "#/$defs/handoff_receipt"
+    },
+    {
+      "$ref": "#/$defs/lifecycle_evidence"
     }
   ],
   "$defs": {
@@ -442,7 +469,7 @@
         "policy_ref"
       ]
     },
-    "commercial_terms": {
+    "agreement_terms": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -768,7 +795,7 @@
             "admission_policy_ref"
           ]
         },
-        "commercial_policy_ref": {
+        "transaction_policy_ref": {
           "$ref": "#/$defs/content_ref"
         }
       },
@@ -780,7 +807,33 @@
         "principal_policy_ref",
         "discovery",
         "contact",
-        "commercial_policy_ref"
+        "transaction_policy_ref"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
       ]
     },
     "publication_contract": {
@@ -788,7 +841,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "publication_contract"
@@ -827,6 +880,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -838,7 +894,8 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
       ]
     },
     "intent_body": {
@@ -919,6 +976,32 @@
         "publication_contract_ref",
         "validity",
         "emission_promise"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
       ]
     },
     "intent": {
@@ -926,7 +1009,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "intent"
@@ -965,6 +1048,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -976,7 +1062,8 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
       ]
     },
     "promise_body": {
@@ -1000,7 +1087,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "promise"
@@ -1039,6 +1126,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -1050,7 +1140,8 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
       ]
     },
     "offer_body": {
@@ -1126,8 +1217,8 @@
           },
           "minItems": 0
         },
-        "commercial_terms": {
-          "$ref": "#/$defs/commercial_terms"
+        "agreement_terms": {
+          "$ref": "#/$defs/agreement_terms"
         },
         "route_selections": {
           "type": "array",
@@ -1152,7 +1243,7 @@
         "validity",
         "own_promises",
         "requested_counterpromises",
-        "commercial_terms",
+        "agreement_terms",
         "route_selections",
         "privacy_policy_ref"
       ],
@@ -1182,6 +1273,30 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_option_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_option_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
         }
       ]
     },
@@ -1190,7 +1305,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "offer"
@@ -1229,6 +1344,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -1240,7 +1358,8 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
       ]
     },
     "candidate_terms_body": {
@@ -1293,8 +1412,8 @@
           "minItems": 1,
           "description": "Selected qualified action descriptions, each attributable to its own promiser. Candidate authorship alone does not issue another participant's promises. Bilateral assent does not require a second substantive service promise or another reciprocal obligation."
         },
-        "commercial_terms": {
-          "$ref": "#/$defs/commercial_terms"
+        "agreement_terms": {
+          "$ref": "#/$defs/agreement_terms"
         },
         "route_selections": {
           "type": "array",
@@ -1338,6 +1457,76 @@
         },
         "replacement": {
           "$ref": "#/$defs/replacement"
+        },
+        "promise_bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/promise_binding"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "handoff_rules": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "policy_ref": {
+              "$ref": "#/$defs/content_ref"
+            },
+            "preclearance": {
+              "enum": [
+                "no_effects",
+                "protected_effects"
+              ]
+            },
+            "recovery_profile_ref": {
+              "$ref": "#/$defs/content_ref"
+            }
+          },
+          "required": [
+            "policy_ref",
+            "preclearance"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "preclearance": {
+                    "const": "protected_effects"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "recovery_profile_ref"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "recovery_profile_ref"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "composition": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "plan_ref": {
+              "$ref": "#/$defs/content_ref"
+            },
+            "component_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "plan_ref",
+            "component_id"
+          ]
         }
       },
       "required": [
@@ -1348,7 +1537,7 @@
         "selected_options",
         "publication_contract_refs",
         "own_promises",
-        "commercial_terms",
+        "agreement_terms",
         "route_selections",
         "selection_constraints_refs",
         "principal_refusal_windows",
@@ -1356,7 +1545,9 @@
         "status_authority_agent_id",
         "status_policy_ref",
         "validity",
-        "privacy_policy_ref"
+        "privacy_policy_ref",
+        "promise_bindings",
+        "handoff_rules"
       ]
     },
     "candidate_terms": {
@@ -1364,7 +1555,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "candidate_terms"
@@ -1403,6 +1594,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -1414,7 +1608,30 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "body": {
+                "required": [
+                  "composition"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "required_features": {
+                "contains": {
+                  "const": "composition"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "terms_adoption_body": {
@@ -1485,7 +1702,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "terms_adoption"
@@ -1524,6 +1741,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -1535,7 +1755,8 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
       ]
     },
     "accepted_offer_body": {
@@ -1620,7 +1841,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "accepted_offer"
@@ -1659,6 +1880,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -1670,7 +1894,8 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
       ]
     },
     "finalization_notice_body": {
@@ -1737,7 +1962,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "finalization_notice"
@@ -1776,6 +2001,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -1787,7 +2015,8 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
       ]
     },
     "refusal_event_body": {
@@ -1829,7 +2058,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "refusal_event"
@@ -1868,6 +2097,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -1879,7 +2111,8 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
       ]
     },
     "status_snapshot_body": {
@@ -2056,6 +2289,30 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_status_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_status_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
         }
       ]
     },
@@ -2064,7 +2321,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "status_snapshot"
@@ -2103,6 +2360,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -2114,7 +2374,8 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
       ]
     },
     "withdrawal_event_body": {
@@ -2126,7 +2387,10 @@
             "publication_contract",
             "intent",
             "promise",
-            "offer"
+            "offer",
+            "admission_grant",
+            "candidate_terms",
+            "terms_adoption"
           ]
         },
         "target_ref": {
@@ -2160,7 +2424,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.2-draft"
+          "const": "abp/0.4-draft"
         },
         "kind": {
           "const": "withdrawal_event"
@@ -2199,6 +2463,9 @@
             "$ref": "#/$defs/proof_reference"
           },
           "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
         }
       },
       "required": [
@@ -2210,7 +2477,1590 @@
         "created_at",
         "required_extensions",
         "body",
-        "proofs"
+        "proofs",
+        "required_features"
+      ]
+    },
+    "promise_binding": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "promise_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "promiser_agent_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "basis": {
+              "const": "previously_issued"
+            },
+            "source_ref": {
+              "$ref": "#/$defs/content_ref"
+            },
+            "source_promise_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "promise_id",
+            "promiser_agent_id",
+            "basis",
+            "source_ref",
+            "source_promise_id"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "promise_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "promiser_agent_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "basis": {
+              "const": "issue_on_adoption"
+            },
+            "request_source": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "offer_ref": {
+                  "$ref": "#/$defs/content_ref"
+                },
+                "request_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "offer_ref",
+                "request_id"
+              ]
+            }
+          },
+          "required": [
+            "promise_id",
+            "promiser_agent_id",
+            "basis"
+          ]
+        }
+      ]
+    },
+    "admission_grant_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "recipient_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "grantee_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "grantee_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recipient_scope_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_contract_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "admission_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "allowance_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "allowed_record_kinds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/semantic_kind"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        },
+        "negotiation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "operation_purposes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/operation_purpose"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "recipient_agent_id",
+        "grantee_agent_id",
+        "grantee_principal_id",
+        "recipient_scope_id",
+        "publication_contract_ref",
+        "admission_policy_ref",
+        "allowance_ids",
+        "allowed_record_kinds",
+        "validity",
+        "operation_purposes"
+      ]
+    },
+    "admission_grant": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "admission_grant"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/admission_grant_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ]
+    },
+    "clarification_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "$ref": "#/$defs/origin"
+        },
+        "negotiation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "mode": {
+          "enum": [
+            "question",
+            "answer"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "privacy_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "origin",
+        "negotiation_id",
+        "subject_ref",
+        "mode",
+        "text",
+        "privacy_policy_ref"
+      ]
+    },
+    "clarification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "clarification"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/clarification_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ]
+    },
+    "negotiation_close_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "$ref": "#/$defs/origin"
+        },
+        "negotiation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "origin",
+        "negotiation_id"
+      ]
+    },
+    "negotiation_close": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "negotiation_close"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/negotiation_close_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ]
+    },
+    "semantic_kind": {
+      "type": "string",
+      "enum": [
+        "publication_contract",
+        "intent",
+        "promise",
+        "offer",
+        "candidate_terms",
+        "terms_adoption",
+        "accepted_offer",
+        "finalization_notice",
+        "refusal_event",
+        "status_snapshot",
+        "withdrawal_event",
+        "admission_grant",
+        "clarification",
+        "negotiation_close",
+        "transaction_plan",
+        "composition_binding",
+        "handoff_request",
+        "prepared_handoff",
+        "handoff_receipt",
+        "lifecycle_evidence"
+      ]
+    },
+    "required_features": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "bilateral",
+          "composition",
+          "adapter-handoff",
+          "lifecycle-evidence"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "contains": {
+        "const": "bilateral"
+      }
+    },
+    "operation_purpose": {
+      "enum": [
+        "submit_record",
+        "finalize_candidate",
+        "query_status",
+        "prepare_handoff",
+        "dispatch_handoff",
+        "reconcile_handoff"
+      ]
+    },
+    "transaction_plan_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transaction_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "previous_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "orchestrator_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "required_agents": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/participant"
+                },
+                "minItems": 2,
+                "uniqueItems": true,
+                "maxItems": 2
+              },
+              "role": {
+                "enum": [
+                  "alternative",
+                  "contribution",
+                  "subcontract"
+                ]
+              },
+              "requirement": {
+                "$ref": "#/$defs/typed_value"
+              },
+              "selection_group": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "component_id",
+              "required_agents",
+              "role",
+              "requirement"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "dependency_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "subject_component_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "stage": {
+                "enum": [
+                  "formation",
+                  "handoff"
+                ]
+              },
+              "requires": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "component_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "condition": {
+                      "enum": [
+                        "agent_agreement",
+                        "principal_clearance",
+                        "evidence"
+                      ]
+                    },
+                    "evidence_type_uri": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "evidence_requirement_ref": {
+                      "$ref": "#/$defs/content_ref"
+                    }
+                  },
+                  "required": [
+                    "component_id",
+                    "condition"
+                  ],
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "condition": {
+                            "const": "evidence"
+                          }
+                        }
+                      },
+                      "then": {
+                        "required": [
+                          "evidence_type_uri",
+                          "evidence_requirement_ref"
+                        ]
+                      },
+                      "else": {
+                        "not": {
+                          "anyOf": [
+                            {
+                              "required": [
+                                "evidence_type_uri"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "evidence_requirement_ref"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "on_unavailable": {
+                "const": "hold"
+              },
+              "on_refused": {
+                "const": "block"
+              },
+              "on_failed": {
+                "enum": [
+                  "block",
+                  "hold"
+                ]
+              }
+            },
+            "required": [
+              "dependency_id",
+              "subject_component_id",
+              "stage",
+              "requires",
+              "on_unavailable",
+              "on_refused",
+              "on_failed"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "privacy_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        }
+      },
+      "required": [
+        "transaction_id",
+        "revision",
+        "previous_digest",
+        "orchestrator_agent_id",
+        "origin_ref",
+        "components",
+        "dependencies",
+        "privacy_policy_ref",
+        "validity"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "transaction_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "transaction_plan"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/transaction_plan_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ],
+      "allOf": [
+        {
+          "properties": {
+            "required_features": {
+              "contains": {
+                "const": "composition"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "composition_binding_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plan_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "component_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidate_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "plan_ref",
+        "component_id",
+        "candidate_ref"
+      ]
+    },
+    "composition_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "composition_binding"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/composition_binding_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ],
+      "allOf": [
+        {
+          "properties": {
+            "required_features": {
+              "contains": {
+                "const": "composition"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "action_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "promiser_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "promise_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "promiser_agent_id",
+        "promise_id"
+      ]
+    },
+    "handoff_request_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "handoff_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agreement_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "action_ref": {
+          "$ref": "#/$defs/action_ref"
+        },
+        "action_instance": {
+          "$ref": "#/$defs/typed_value"
+        },
+        "adapter_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adapter_profile_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "request_payload_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "dependency_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "clearance_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "authority_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "effect_class": {
+          "enum": [
+            "side_effect_free",
+            "externally_effective"
+          ]
+        }
+      },
+      "required": [
+        "handoff_id",
+        "agreement_ref",
+        "action_ref",
+        "action_instance",
+        "adapter_agent_id",
+        "adapter_profile_uri",
+        "request_payload_ref",
+        "dependency_evidence_refs",
+        "clearance_refs",
+        "authority_refs",
+        "effect_class"
+      ]
+    },
+    "handoff_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "handoff_request"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/handoff_request_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ],
+      "allOf": [
+        {
+          "properties": {
+            "required_features": {
+              "contains": {
+                "const": "adapter-handoff"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "required_features": {
+              "contains": {
+                "const": "lifecycle-evidence"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "prepared_handoff_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "handoff_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "handoff_key": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "adapter_profile_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "native_request_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "native_operation_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effect_class": {
+          "enum": [
+            "side_effect_free",
+            "externally_effective"
+          ]
+        },
+        "authorization_requirement_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "reconciliation_profile_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "handoff_ref",
+        "handoff_key",
+        "adapter_profile_uri",
+        "native_request_ref",
+        "native_operation_key",
+        "effect_class",
+        "authorization_requirement_refs",
+        "reconciliation_profile_ref"
+      ]
+    },
+    "prepared_handoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "prepared_handoff"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/prepared_handoff_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ],
+      "allOf": [
+        {
+          "properties": {
+            "required_features": {
+              "contains": {
+                "const": "adapter-handoff"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "required_features": {
+              "contains": {
+                "const": "lifecycle-evidence"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "handoff_receipt_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "handoff_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "handoff_key": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "phase": {
+          "enum": [
+            "prepare",
+            "dispatch",
+            "reconcile"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "previous_receipt_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "outcome": {
+          "enum": [
+            "prepared",
+            "blocked",
+            "not_dispatched",
+            "dispatched",
+            "in_doubt",
+            "resolved"
+          ]
+        },
+        "prepared_plan_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "authorization_decision_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "gate_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "native_operation_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "native_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "reason_code": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "handoff_ref",
+        "handoff_key",
+        "phase",
+        "revision",
+        "previous_receipt_digest",
+        "outcome",
+        "gate_evidence_refs",
+        "native_evidence_refs",
+        "reason_code"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_receipt_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_receipt_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "prepared",
+                  "dispatched",
+                  "resolved",
+                  "in_doubt"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "prepared_plan_ref",
+              "native_operation_key"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "dispatched"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "authorization_decision_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "phase": {
+                "const": "prepare"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "prepared",
+                  "blocked"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "prepared"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "phase": {
+                "const": "prepare"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "resolved"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "native_evidence_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/content_ref"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "handoff_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "handoff_receipt"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/handoff_receipt_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ],
+      "allOf": [
+        {
+          "properties": {
+            "required_features": {
+              "contains": {
+                "const": "adapter-handoff"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "required_features": {
+              "contains": {
+                "const": "lifecycle-evidence"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "lifecycle_evidence_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "agreement_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "action_ref": {
+          "$ref": "#/$defs/action_ref"
+        },
+        "action_instance": {
+          "$ref": "#/$defs/typed_value"
+        },
+        "category": {
+          "enum": [
+            "native_execution",
+            "fulfillment",
+            "assessment",
+            "settlement",
+            "reservation_disposition"
+          ]
+        },
+        "reporter_role": {
+          "enum": [
+            "performer",
+            "recipient",
+            "assessor",
+            "adapter",
+            "authority"
+          ]
+        },
+        "claim": {
+          "$ref": "#/$defs/typed_value"
+        },
+        "evidence_profile_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "native_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "authority_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "related_handoff_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "agreement_ref",
+        "action_ref",
+        "action_instance",
+        "category",
+        "reporter_role",
+        "claim",
+        "evidence_profile_uri",
+        "native_evidence_refs",
+        "observed_at",
+        "authority_refs"
+      ]
+    },
+    "lifecycle_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.4-draft"
+        },
+        "kind": {
+          "const": "lifecycle_evidence"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/lifecycle_evidence_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        },
+        "required_features": {
+          "$ref": "#/$defs/required_features"
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs",
+        "required_features"
+      ],
+      "allOf": [
+        {
+          "properties": {
+            "required_features": {
+              "contains": {
+                "const": "lifecycle-evidence"
+              }
+            }
+          }
+        }
       ]
     }
   }

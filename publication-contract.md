@@ -1,6 +1,6 @@
 # Publication and policy contract
 
-**Draft 0.2.** Existing discovery/subscription services and service sources use the same publication contract to connect to their agent harnesses. Each principal controls its own policy. The service retains matching, ranking, subscriptions and implementation of business rules.
+**Draft 0.4.** Existing discovery/subscription services and service sources use the same publication contract to connect to their agent harnesses. Each principal controls its own policy. The service retains matching, ranking, subscriptions and implementation of business rules.
 
 ## Publication surface
 
@@ -13,7 +13,7 @@
 | Contact mode | Closed, invitation required, or policy-permitted bounded first offer |
 | Admission policy | Eligible senders/topics, allowed message purposes, budgets and shared enforcement authority |
 | Validity | Explicit deadline, until withdrawn, or another understood referenced rule |
-| Principal policy references | Delegation for publication, offers and acceptance; review/refusal requirements; privacy and other commercial constraints |
+| Principal policy references | Delegation for publication, offers and acceptance; review/refusal requirements; privacy and other transaction constraints |
 | Commercial eligibility | Permitted arrangements or versioned rules for evaluating a negotiated arrangement |
 | Status/freshness policy | Authenticated source, ordering, clocks, evidence age and handling of unknown status |
 

@@ -1,18 +1,20 @@
-"""Check v0.2 document structure and local references only.
+"""Check v0.4 document structure and local references only.
 
 This is an artifact-integrity helper, not a protocol conformance or behavior test.
 Requires Python 3 and jsonschema. Run from the repository root: python3 checks/validate.py
 No cryptographic proof, principal policy, authority, capability, clock, A2A, or
-native order/payment mechanism is verified. A runtime testing regime is deferred.
+native order/payment mechanism is verified. Behavioral test proposals are in tests/PROPOSED.md; they are not executed here.
 """
 from pathlib import Path
 import hashlib
 import json
 
 from jsonschema import Draft202012Validator, FormatChecker
+from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parents[1]
-PROFILE = 'abp/0.2-draft'
+PROFILE = 'abp/0.4-draft'
+ADMISSION_PROFILE = 'abp/admission-policy/0.4-draft'
 
 
 def fixture_digest(value):
@@ -33,18 +35,36 @@ def walk(value):
 
 
 def main():
-    schema = json.loads((ROOT / 'schemas/contract.schema.json').read_text())
-    Draft202012Validator.check_schema(schema)
-    validator = Draft202012Validator(schema, format_checker=FormatChecker())
+    schemas = {
+        name: json.loads((ROOT / 'schemas' / f'{name}.schema.json').read_text())
+        for name in ('contract', 'interaction', 'admission-policy')
+    }
+    registry = Registry().with_resources(
+        (schema['$id'], Resource.from_contents(schema)) for schema in schemas.values()
+    )
+    validators = {}
+    for name, schema in schemas.items():
+        Draft202012Validator.check_schema(schema)
+        validators[name] = Draft202012Validator(
+            schema, registry=registry, format_checker=FormatChecker()
+        )
     examples = {
         path.name: json.loads(path.read_text())
         for path in sorted((ROOT / 'examples').glob('*.json'))
     }
-    records = {name: value for name, value in examples.items() if value.get('profile') == PROFILE}
-    for name, value in records.items():
-        errors = sorted(validator.iter_errors(value), key=lambda error: str(list(error.path)))
-        if errors:
-            raise ValueError(f'{name}: ' + '; '.join(error.message for error in errors))
+    groups = {'contract': {}, 'interaction': {}, 'admission-policy': {}}
+    for name, value in examples.items():
+        if value.get('profile') == ADMISSION_PROFILE:
+            groups['admission-policy'][name] = value
+        elif value.get('profile') == PROFILE:
+            category = 'interaction' if value['kind'] in ('interaction_request', 'interaction_receipt') else 'contract'
+            groups[category][name] = value
+    records = {name: value for group in groups.values() for name, value in group.items()}
+    for category, group in groups.items():
+        for name, value in group.items():
+            errors = sorted(validators[category].iter_errors(value), key=lambda error: str(list(error.path)))
+            if errors:
+                raise ValueError(f'{name}: ' + '; '.join(error.message for error in errors))
 
     by_id = {}
     for name, value in examples.items():
@@ -61,25 +81,27 @@ def main():
                 if target is None or fixture_digest(target) != item['digest']:
                     raise ValueError(f'{name}: unresolved or mismatched local reference {item["id"]}')
                 references += 1
-            for field in ('previous_digest', 'previous_option_digest', 'previous_status_digest'):
+            for field in ('previous_digest', 'previous_option_digest', 'previous_status_digest', 'previous_receipt_digest'):
                 prior = item.get(field)
                 if prior is not None and prior not in known_digests:
                     raise ValueError(f'{name}: unresolved {field}')
-        if value.get('profile') == PROFILE:
+        if name in records:
             unsigned_payload = {key: item for key, item in value.items() if key != 'proofs'}
             for proof in value['proofs']:
                 if proof['signed_payload_digest'] != fixture_digest(unsigned_payload):
                     raise ValueError(f'{name}: proof-reference payload digest does not match fixture bytes')
 
     print(json.dumps({
-        'schema_structure': 'Draft 2020-12 valid',
-        'protocol_record_shapes': len(records),
-        'illustrative_policy_and_evidence_documents': len(examples) - len(records),
+        'schema_structure': 'Three Draft 2020-12 schemas valid',
+        'semantic_record_shapes': len(groups['contract']),
+        'interaction_shapes': len(groups['interaction']),
+        'admission_declaration_shapes': len(groups['admission-policy']),
+        'supporting_documents_not_schema_validated': len(examples) - len(records),
         'local_content_references_checked': references,
         'fixture_payload_digest_references': 'consistent',
         'cryptographic_proofs': 'nonvalidating fictional references; not verified',
         'capability_authority_status_and_clock_semantics': 'not verified',
-        'runtime_and_protocol_testing': 'deferred; not performed',
+        'runtime_and_protocol_testing': 'proposed; not implemented or performed',
     }, indent=2))
 
 

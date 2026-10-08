@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.2-draft",
+  "profile": "abp/0.4-draft",
   "kind": "publication_contract",
   "id": "publication:researcher",
   "issuer_agent_id": "agent:researcher",
@@ -16,7 +16,7 @@
         "id": "fixture:researcher-principal-policy",
         "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
       },
-      "status_ref": "https://example.org/agent-bazaar/v0.2/status/researcher-publication"
+      "status_ref": "https://example.org/agent-bazaar/v0.4/status/researcher-publication"
     },
     "principal_policy_ref": {
       "id": "fixture:researcher-principal-policy",
@@ -39,26 +39,26 @@
     "contact": {
       "admission_kind": "first_offer",
       "admission_policy_ref": {
-        "id": "fixture:admission-policy",
-        "digest": "sha256:2d91a72f2edfc71443ae1a5da6bef9c7657e40dd0fe34089e8e05101340510aa"
+        "id": "fixture:researcher-admission-policy",
+        "digest": "sha256:15d69e8681213ea114809a3c120a99b53a4bca42d6557daf0ceb7275a56285d9"
       },
       "reply_allowance": {
         "policy_ref": {
-          "id": "fixture:admission-policy",
-          "digest": "sha256:2d91a72f2edfc71443ae1a5da6bef9c7657e40dd0fe34089e8e05101340510aa"
+          "id": "fixture:researcher-admission-policy",
+          "digest": "sha256:15d69e8681213ea114809a3c120a99b53a4bca42d6557daf0ceb7275a56285d9"
         }
       }
     },
-    "commercial_policy_ref": {
+    "transaction_policy_ref": {
       "id": "fixture:commercial-policy",
       "digest": "sha256:2628f0f441fc20cd404b93dca2bbda0901f926233534bfc6ff5200502032d14c"
     }
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.2/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.2/fictional-keys/agent-researcher",
-      "signed_payload_digest": "sha256:975400cced07cf96d1664e2d3d1818083192cef6dbd99754d52239c9f89e407a",
+      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:770b664b7ef1679af2b6fc8c80d974b9a04c43588eabd66152832d7e654518dd",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "synthetic-review-only"
@@ -68,5 +68,8 @@
         "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
       }
     }
+  ],
+  "required_features": [
+    "bilateral"
   ]
 }

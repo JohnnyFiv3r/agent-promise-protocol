@@ -1,0 +1,79 @@
+{
+  "profile": "abp/0.3-draft",
+  "kind": "status_snapshot",
+  "id": "status:research:1",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T18:01:00Z",
+  "required_extensions": [],
+  "body": {
+    "accepted_offer_ref": {
+      "id": "accepted:research",
+      "digest": "sha256:4200f55e2125476a060760cbe9c46d3dd98741a7a6a2c16a964fe4ec5b9d72c0"
+    },
+    "revision": 1,
+    "previous_status_digest": null,
+    "status": "pending_refusal_windows",
+    "as_of": "2026-10-08T18:01:00Z",
+    "freshness_policy_ref": {
+      "id": "fixture:clock-and-status-policy",
+      "digest": "sha256:1f2563bea9c4d98cfd2daede48b0e001ed0bf1bca1758638e6943f888f08b869"
+    },
+    "clock_evidence_ref": {
+      "id": "fixture:clock-and-status-policy",
+      "digest": "sha256:1f2563bea9c4d98cfd2daede48b0e001ed0bf1bca1758638e6943f888f08b869"
+    },
+    "notice_refs": [],
+    "principal_windows": [
+      {
+        "principal_id": "principal:requester",
+        "state": "awaiting_notice"
+      },
+      {
+        "principal_id": "principal:researcher",
+        "state": "awaiting_notice"
+      }
+    ],
+    "current_policy_authority_checks": [
+      {
+        "principal_id": "principal:requester",
+        "policy_status_ref": {
+          "id": "fixture:requester-current-evidence",
+          "digest": "sha256:ae8ca93c4104095e88efcb7a7725171817e589bd7f7b34849d030140fc9fa200"
+        },
+        "authority_status_ref": {
+          "id": "fixture:requester-current-evidence",
+          "digest": "sha256:ae8ca93c4104095e88efcb7a7725171817e589bd7f7b34849d030140fc9fa200"
+        }
+      },
+      {
+        "principal_id": "principal:researcher",
+        "policy_status_ref": {
+          "id": "fixture:researcher-current-evidence",
+          "digest": "sha256:6ab603ebe41c3c29283125c6c0a8aa458648f69bd389b27d98a44855920bd08b"
+        },
+        "authority_status_ref": {
+          "id": "fixture:researcher-current-evidence",
+          "digest": "sha256:6ab603ebe41c3c29283125c6c0a8aa458648f69bd389b27d98a44855920bd08b"
+        }
+      }
+    ],
+    "refusal_event_refs": [],
+    "status_authority_event_refs": []
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.3/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.3/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:d1ddc633d720eb7325744227866f4d007cda5fe7cfac402e85400ffd175c0f3a",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "profile": "abp/0.4-draft",
+  "kind": "interaction_receipt",
+  "id": "interaction_receipt:finalize-interaction-receipt",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T18:01:00Z",
+  "required_extensions": [],
+  "body": {
+    "request_ref": {
+      "id": "interaction_request:finalize-interaction-request",
+      "digest": "sha256:952921556ac71ddf62017f0d5462ac8f5fbd9cf6dbc1f678a637390467a32743"
+    },
+    "operation_id": "op:researcher:finalize:1",
+    "recipient_agent_id": "agent:requester",
+    "recipient_scope_id": "scope:requester:bazaar",
+    "revision": 1,
+    "previous_receipt_digest": null,
+    "outcome": "applied",
+    "reason_code": "ok",
+    "result_refs": [
+      {
+        "id": "accepted:research",
+        "digest": "sha256:052e001fd033e0ed4173aa424f5b914c728800e10f26f1ab76b06ee74f4fa59c"
+      }
+    ],
+    "evidence_refs": [
+      {
+        "id": "fixture:requester-current-evidence",
+        "digest": "sha256:ae8ca93c4104095e88efcb7a7725171817e589bd7f7b34849d030140fc9fa200"
+      }
+    ],
+    "detail": "The exact accepted object is pending principal refusal windows; this receipt is not clearance or payment authority."
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.4/keys/agent-requester",
+      "signed_payload_digest": "sha256:bd2d2ab3e3f23953bd57078398a204f03a09dda45b6c7455f6d11baacb0b2aa3",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "interaction_receipt"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ],
+  "required_features": [
+    "bilateral"
+  ]
+}

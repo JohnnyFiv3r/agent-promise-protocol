@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.2-draft",
+  "profile": "abp/0.4-draft",
   "kind": "status_snapshot",
   "id": "status:research:2",
   "issuer_agent_id": "agent:requester",
@@ -9,15 +9,15 @@
   "body": {
     "accepted_offer_ref": {
       "id": "accepted:research",
-      "digest": "sha256:95b39eabd2a57dc4ea5410dda6b4f81d9c4e2bbed219242de9ca9a7a3ad6768c"
+      "digest": "sha256:052e001fd033e0ed4173aa424f5b914c728800e10f26f1ab76b06ee74f4fa59c"
     },
     "revision": 2,
-    "previous_status_digest": "sha256:71446a9281b2447a452ca7c790e7f2232c14f42d4b7cd566a874d739c1cc07cd",
+    "previous_status_digest": "sha256:cc48a1dca6d04b6fac4a9a06f4b6ba62ed7f11c3d386b092da04323c53dfc0bd",
     "status": "refused",
     "as_of": "2026-10-08T18:03:10Z",
     "freshness_policy_ref": {
       "id": "fixture:clock-and-status-policy",
-      "digest": "sha256:9c6be2961dc40698504b7b4bce0ffed3d1e0d5411446b7f7ba5ae76d62acdc80"
+      "digest": "sha256:1f2563bea9c4d98cfd2daede48b0e001ed0bf1bca1758638e6943f888f08b869"
     },
     "clock_evidence_ref": {
       "id": "fixture:refusal-admission-evidence",
@@ -26,11 +26,11 @@
     "notice_refs": [
       {
         "id": "notice:requester",
-        "digest": "sha256:97150c5c39ef65eba22fb870481417e00c63c656ec2e56e8f9fcbf428a65750d"
+        "digest": "sha256:49c893bd12ec6cb0437aae24d7be3eca2cb18609b2e3b18a06e140dc4d000e28"
       },
       {
         "id": "notice:researcher",
-        "digest": "sha256:ca9008a0c5f34d805fe6d514d9561b7db7aaed3aae2cb1a1faaf0ac7071042b0"
+        "digest": "sha256:3aba759e077d8eb2cdc17a7471202d306d7e831d803cae08d6fd304535b33de7"
       }
     ],
     "principal_windows": [
@@ -39,7 +39,7 @@
         "state": "closed",
         "notice_ref": {
           "id": "notice:requester",
-          "digest": "sha256:97150c5c39ef65eba22fb870481417e00c63c656ec2e56e8f9fcbf428a65750d"
+          "digest": "sha256:49c893bd12ec6cb0437aae24d7be3eca2cb18609b2e3b18a06e140dc4d000e28"
         },
         "starts_at": "2026-10-08T18:01:05Z",
         "deadline": "2026-10-08T18:02:05Z"
@@ -49,7 +49,7 @@
         "state": "refused",
         "notice_ref": {
           "id": "notice:researcher",
-          "digest": "sha256:ca9008a0c5f34d805fe6d514d9561b7db7aaed3aae2cb1a1faaf0ac7071042b0"
+          "digest": "sha256:3aba759e077d8eb2cdc17a7471202d306d7e831d803cae08d6fd304535b33de7"
         },
         "starts_at": "2026-10-08T18:01:10Z",
         "deadline": "2026-10-08T18:03:10Z"
@@ -82,7 +82,7 @@
     "refusal_event_refs": [
       {
         "id": "refusal:researcher",
-        "digest": "sha256:2f1d5c1af46eb5028a615a0ce1dff6d966dfe7783ff7ba8f9c81fe0a8201eb90"
+        "digest": "sha256:8672bc411f43f2cb4e3f02f4134679b472260e98a600da84d157925a81253dd8"
       }
     ],
     "status_authority_event_refs": [
@@ -94,9 +94,9 @@
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.2/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.2/fictional-keys/agent-requester",
-      "signed_payload_digest": "sha256:c50698eeca88b6929573bbd3055a4f85b5996f0baf8c83dde4c2fc8a8a600923",
+      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:37849ea54722379f1b03eec765c57b3d0e242d2894f38ebb0c2fe9750bc95b1d",
       "issuer_agent_id": "agent:requester",
       "scope": [
         "synthetic-review-only"
@@ -106,5 +106,8 @@
         "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
       }
     }
+  ],
+  "required_features": [
+    "bilateral"
   ]
 }

@@ -1,47 +1,83 @@
 # Product specification: Agent Bazaar
 
-**Draft 0.2 · Owner: John Inniger · MIT licensed**
+**ABP 0.4-draft · Owner: John Inniger · MIT licensed**
 
-An agent should be able to express what it seeks, discover a counterpart, negotiate alternatives and form an exact accepted offer under its principal's policy. It should not need to have been built around that counterpart's API or product catalog.
+An agent expresses what it seeks. Other agents offer qualified actions. The originator selects and distributes one exact candidate for each counterparty agreement. Both agents adopt those terms, and every represented principal retains a protected opportunity to refuse.
 
-The product is an A2A interaction contract from publication through accepted offer. Existing discovery/subscription services connect through publication contracts. A service source may expose an MCP endpoint, API, proprietary dataset or any other product/service. Either harness may emit the initiating intent, make offers and coordinate the resulting negotiation according to its role as originator.
+Agent Bazaar makes that interaction portable across agent harnesses, discovery services, and product domains. Its default is one bilateral agreement. A service can offer an MCP endpoint, API capability, dataset, document analysis, physical service, or noncommercial information exchange without adopting a different agreement format.
 
-## Product behavior
+## Start with the ordinary agreement
 
-1. A principal sets permission to publish, receive contact, issue qualified actions and accept terms. Existing policy systems hold that delegation.
-2. An agent emits an intent under that policy. The qualified act of declaring or seeking an outcome is distinct from promising the outcome itself.
-3. A permitted recipient may make a first offer directly when policy allows it, or request an invitation. Discovery visibility alone does not permit contact.
-4. Agents issue qualified offers and may retain several named alternatives. Offer revisions replace one named option without erasing other options. Budgets limit admitted traffic; policies determine validity.
-5. Agents negotiate scope, price and commercial route as far as their principals allow. A new compatible route need not have been published as an identical object by both parties.
-6. Both agents adopt exact candidate terms, selected option revisions, policy evidence, coordinator identity and principal refusal rules. The originator records finalization in an immutable accepted-offer object.
-7. Each affected principal receives the final terms and a usable refusal path. The policy-defined review window preserves a human right of refusal after the agent-only handshake. The accepted object initially has pending-window status.
-8. Authenticated current status records refusal, closed windows or uncertainty. The object and status can then be interpreted by a downstream consumer. They never substitute for its own authorization.
+1. The principal supplies permission to publish, receive contact, issue qualified actions, and adopt terms, together with real limits and the designated notice/refusal integration.
+2. The agent emits an intent. Its qualified act of declaring or seeking an outcome does not promise to purchase, supply, or successfully obtain that outcome.
+3. A counterpart issues an offer when current recipient policy permits it. A bounded first offer needs no additional invitation when the policy already admits it. The offer issues only its author's conditional own promises.
+4. Agents clarify or revise offers within their budgets. Several named alternatives may coexist, with explicit shared-capacity or exclusivity constraints. Validity is policy-defined; silence and exhausted budgets do not invent a resolution.
+5. The declared originator/coordinator distributes one exact candidate reference containing complete terms, selected actions, current policy requirements, and positive principal-recovery rules. Participants do not independently reconstruct equivalent-looking terms.
+6. Each agent adopts that same candidate and only its own required actions. Direct acceptance does not require a reciprocal offer or an invented performance obligation. The coordinator records one immutable accepted object.
+7. The harness provides qualifying notice, a usable refusal path, and authoritative status. The application distinguishes agreement formed from recovery pending, cleared, refused, or unresolved. A valid refusal remains absorbing for that accepted object.
+8. Any subsequent native action still requires its own current authorization and must preserve the relevant principal rights. Agreement, clearance, and native authority are separate facts.
 
-## Scope
+This path requires no transaction plan, composition engine, auction, atomic bundle, native adapter, or payment mechanism. The baseline operations are `submit_record`, `finalize_candidate`, and `query_status`.
 
-Included: attributable publication consent; qualified intent and action promises; offers as promises; multiple alternatives; private bilateral negotiation; policy-controlled validity and budgets; originator coordination; exact adoption; immutable replacement; portable proof; principal notification/refusal and accepted-object status.
+## Three adoption layers
 
-Outside: discovery/ranking engines, identity providers, credential issuance, native AP2/UCP/ACP validation, payment handling, processors, settlement, fulfillment execution, delivery assessment and refunds. Named commercial conditions and service specifications are data agreed in the accepted terms, not implementations of those systems.
+| Layer | Responsibility |
+|---|---|
+| Universal contracts | Qualified self-authorship, exact terms and adoption, agent autonomy, principal recovery, and semantics of selected optional features |
+| [Default reference profile](profiles/reference-profile.md) and [harness interface](profiles/harness-interface.md) | Concrete verification, policy evaluation, exact-reference handling, durable replay/order, evidence retrieval, admission, and notice/refusal/status mechanics |
+| Application integration | Domain meaning, truthful capability and capacity, principal-approved permissions, real constraints, and authorized application hooks |
+
+Applications should connect an existing capability and its policies without inventing protocol machinery. The harness cannot manufacture competence, legitimate delegation, sufficient capacity, truthful native evidence, or reversible effects. RP1 specifies one complete default interoperability path; its harness is a design, not a shipped SDK.
+
+## Optional negotiated capabilities
+
+| Feature | Adds | What remains unchanged |
+|---|---|---|
+| `bilateral` | Required default C1–C6 agreement and principal recovery | Same domain-independent agreement format |
+| `composition` | C7 immutable component requirements, exact candidate bindings, and phase-specific dependencies | Each component remains a separately adopted bilateral agreement with its own originator/coordinator |
+| `lifecycle-evidence` | C8 attributed native-execution, fulfillment, assessment, settlement, and reservation-disposition claims | A claim does not create authority or prove its own truth |
+| `adapter-handoff` | C8 protected Prepare/Dispatch/Reconcile at a selected native boundary; requires `lifecycle-evidence` | Native systems independently validate and perform their actions |
+
+RP1 defaults to `supported_features: ["bilateral"]`. Optional features use the same universal schema and must be supported and explicitly accepted wherever they affect a participant. Unknown required semantics block the dependent act; an implementation cannot silently approximate them. Basic portable proof, delegation checks, and principal-status evidence remain mandatory even when lifecycle evidence is disabled.
+
+Composition permits alternatives, complementary contributions, and subcontracts without making every agent a signatory to every agreement. The transaction orchestrator distributes references within its delegated role; it cannot issue another agent's promise or replace a component's originator. Group membership is not assent, and a refused dependency does not invent cancellation authority or global rollback.
+
+When handoff is selected, RP1 permits separately authorized side-effect-free preparation and holds externally effective dispatch until relevant principal recovery clears and native action authority is current. The selected boundary preserves one authorized occurrence and uncertain outcomes across retries. It does not create a native execution or payment implementation.
+
+## Scope and boundaries
+
+The [eight governing contracts](contracts/README.md) cover publication consent, qualified intent and promises, private negotiation, independent alternatives, admission budgets, policy-controlled validity, exact formation, immutable replacement, portable proof, mandatory principal recovery, and the selected composition/handoff/evidence features.
+
+Existing discovery services retain matching, ranking, subscriptions, and their business rules. Existing identity and policy systems supply actual delegation. Domain vocabularies define action meaning without imposing a universal product ontology. Agents may negotiate new compatible arrangements under both principals' policies; identical prepublished route objects are not required.
+
+Native systems retain AP2/UCP/ACP validation, tool access, execution, payment handling, processors, fulfillment, assessment procedures, settlement, and refunds. Bazaar defines references, eligibility, and claim interpretation at the selected boundary. It does not implement those systems, appoint a universal evaluator, or operate a dispute court.
 
 ## Design requirements
 
 | ID | Requirement |
 |---|---|
-| P1 | Only an authenticated agent with the required capability and authority can issue its own qualified action; declarations do not prove qualification merely by asserting it. |
-| P2 | Intent emission, service offers, counterpart requests and exact adoption retain distinct meanings. |
-| P3 | Receiving an offer or discovering an intent cannot manufacture the recipient's promise. |
+| P1 | Only an authenticated agent with the relevant capability and authority issues its own qualified action; asserting qualification does not prove it. |
+| P2 | Intent emission, offers, requests for counterpart behavior, and exact adoption retain distinct meanings. |
+| P3 | Discovery, reception, plan membership, and silence cannot manufacture another agent's promise or assent. |
 | P4 | Multiple options remain independently identifiable, with explicit shared-capacity/exclusivity constraints. |
-| P5 | Validity comes from policy; traffic, retries and duplicate discovery paths cannot silently expand budgets or consent. |
-| P6 | Exact terms, selected alternatives, relevant policies and originator coordination are bound into portable proof. |
-| P7 | Agent agreement preserves principal refusal for the agreed positive window after notice of that agreement. |
-| P8 | Fresh evidence is required to interpret status; unavailable evidence never means refusal rights have been cleared. |
-| P9 | Accepted records are immutable; replacement and refusal leave attributable history. |
-| P10 | The same accepted object can be consumed by independent commerce systems without becoming a substitute for native authority. |
+| P5 | Policy determines validity and budgets; traffic, retries, new IDs, and alternate services cannot silently expand them. |
+| P6 | One exact candidate binds complete terms, action provenance, policies, selection, originator coordination, and refusal protection. |
+| P7 | Every distinct principal retains a positive protected recovery period with qualifying notice and a usable refusal path; ordinary agent assent cannot waive it. |
+| P8 | Fresh evidence distinguishes pending, cleared, refused, and unresolved recovery; missing evidence never implies clearance. |
+| P9 | Accepted records remain immutable; linked replacement, refusal, and recovery preserve attributable history. |
+| P10 | Agreement, principal clearance, and native authorization remain separate, including noncommercial exchanges. |
+| P11 | A single conforming agreement requires no composition engine or native adapter; the reference harness handles shared protocol mechanics. |
+| P12 | Optional features are negotiated explicitly; unsupported required dependencies or evidence semantics are rejected without approximation. |
+| P13 | Composed agreements preserve per-agent authorship and per-agreement coordination; partial progress does not imply global atomicity. |
+| P14 | Selected handoff gates bind exact action occurrence, current authority, principal protection, and recoverable outcome; lost replies do not authorize duplicate effects. |
+| P15 | Typed lifecycle claims preserve reporter, subject, evidence, and native interpretation; submission, fulfillment, assessment, and settlement are not interchangeable. |
 
-## Implementation and testing
+## Current deliverable and proposed testing
 
-The specification and original implementation will be MIT licensed. Comparison systems are conceptual references only. No comparison source, schemas or tests are adopted.
+This revision authors the reconciled specification, concrete reference-profile design, schemas, worked examples, and [proposed checks](tests/PROPOSED.md). It does not implement a running harness, native adapter, payment flow, or runtime conformance suite. Static validation is described separately in [validation](validation.md).
 
-The user has selected source-backed research as a potential first demonstration. The testing regime is deferred until this contract is written. An internal toy consumer may simulate downstream payment; simulation is not part of Bazaar and does not establish a native integration or real transaction.
+Proposed tests stop at controlled adapter substitutes and injected native evidence. They cover exact adoption, principal refusal, dependency guards, native translation boundaries, replay, and uncertain outcomes without creating real transactions. Source-backed research remains a possible demonstration domain, not the universal agreement format or a selected assessment regime.
 
-[User decisions](decisions-v0.2.md) and [contract map](contract-map.md) identify the current design. The archived draft's fixed research reviewer, correction budget and payment workflow are superseded.
+After contract/profile lock, adoption should be assessed by connecting an existing capability and principal policies through the quick-start and harness interface, while independent implementation assesses whether the specification yields the same semantics. A convenient SDK alone would establish neither interoperability nor correctness.
+
+[Current decisions](decisions-v0.4.md) and the [contract map](contract-map.md) govern this revision. Historical research-specific reviewer, correction, payment, and forced-expiry rules remain superseded.

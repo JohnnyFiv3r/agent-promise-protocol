@@ -1,29 +1,44 @@
-# Required contracts: publication through accepted offer
+# Contract map: one agreement, optional composition and lifecycle features
 
-**Draft 0.2.** Six interface contracts define one A2A extension. They are not separate required services. The [core contract](contract.md) and linked documents are normative for the draft; the [user decisions](decisions-v0.2.md) control the design.
+**ABP 0.4-draft · eight interface contracts**
 
-| ID | Contract | Owner and result |
+The default path is one bilateral agreement governed by C1–C6. The same primitive supports monetary and noncommercial exchanges. C7 and C8 add explicitly negotiated capabilities; they are not required services or prerequisites for an ordinary agreement.
+
+| ID | Contract | Scope and result |
 |---|---|---|
-| C1 | Publication and policy | Each principal/agent sets audience, permitted uses, admission, validity and commercial eligibility; existing services carry and enforce those rules. |
-| C2 | Qualified intent and promises | An agent issues only its own qualified actions; intent emission is scoped to declaring/seeking, while an offer promises its own proposed performance under conditions. |
-| C3 | Admission and negotiation | Each recipient controls finite traffic budgets and policy-defined validity. Policies can admit invitations or first offers. Several named options may coexist. |
-| C4 | Exact adoption and formation | The initiating record's author coordinates. Each party adopts the exact candidate terms and selected options, with current authority, capability and policy checks. |
-| C5 | Accepted offer and principal refusal | The coordinator emits immutable proof of agent agreement. Principal notice, policy-defined refusal windows and authenticated status preserve the post-handshake right of refusal. |
-| C6 | A2A and portable evidence | Native A2A carries the records; existing proof mechanisms authenticate exact content and authorship. Native task state never substitutes for agreement state. |
+| C1 | [Publication and policy](contracts/01-publication-policy.md) | Each principal controls consent, audience, permitted uses, admission, validity, privacy, and transaction eligibility. |
+| C2 | [Qualified actions](contracts/02-qualified-actions.md) | An agent issues only its own qualified actions. Intent covers declaring/seeking; an offer issues conditional own promises. Requests do not issue another agent's promise. |
+| C3 | [Admission and negotiation](contracts/03-admission-negotiation.md) | Recipient policy bounds traffic and work, may admit a first offer, and preserves independent options and recoverable operations. |
+| C4 | [Exact formation](contracts/04-formation.md) | The initiating-record author coordinates each bilateral agreement. Both agents adopt one exact candidate under current authority, qualification, and selection guards. |
+| C5 | [Principal refusal](contracts/05-principal-refusal.md) | Every represented principal retains a positive protected period with qualifying notice and usable refusal. Current evidence distinguishes pending, cleared, refused, and unresolved recovery. |
+| C6 | [A2A and portable proof](contracts/06-a2a-evidence.md) | Existing A2A carries explicit operations and attributable exact records. Native message/task outcomes never substitute for semantic agreement or clearance. |
+| C7 | [Optional composition](contracts/07-composition.md) | `composition` declares component requirements and dependencies, then binds each slot to one exact bilateral candidate without circular hashes or implied assent. |
+| C8 | [Optional adapter boundary and lifecycle evidence](contracts/08-adapter-boundary.md) | `adapter-handoff` governs protected native handoff; `lifecycle-evidence` governs attributed downstream claims. Neither performs the native act it describes. |
 
-## Required documents
+## Adoption layers
 
-- [Publication contract](publication-contract.md) defines C1 and the declared policy surface for C3.
-- [Universal promise proposal](promise-model.md) defines C2's shared semantic shape.
-- [Core contract](contract.md) defines C2–C5 transitions, alternatives, withdrawal and immutable replacement.
-- [Accepted-offer object](accepted-offer.md) details C4–C5 evidence and principal refusal.
-- [Architecture and binding](protocol-architecture.md) defines C6.
-- [Reference negotiation note](reference-negotiation-profile.md) illustrates policy-controlled admission without standardizing one permit service or fixed expiry.
+| Layer | Responsibility |
+|---|---|
+| Universal contracts | Authorship, qualified promises, exact adoption, autonomy, protected principal recovery, and the semantics of selected optional features |
+| [RP1 profile](profiles/reference-profile.md) and [harness interface](profiles/harness-interface.md) | Concrete verification, policy evaluation, durable replay/order, evidence retrieval, notice/refusal/status processing, and typed results |
+| Application integration | Understood action semantics, truthful capability/capacity, principal-approved permissions, real constraints, and authorized application hooks |
+
+RP1 defaults to `supported_features: ["bilateral"]`. `composition`, `lifecycle-evidence`, and `adapter-handoff` are explicit feature names. Handoff requires lifecycle evidence; the other features are not implied. An endpoint need not provide an adapter, plan, composition engine, auction, or atomic bundle to form a bilateral agreement and honor refusal.
+
+Each affected participant must support and accept required feature semantics. A requested advanced feature cannot silently degrade to a simpler operation. Portable proof and principal-status evidence remain part of the baseline even when `lifecycle-evidence` is absent.
+
+## Shared reference documents
+
+- [Core contract](contract.md) and [current decisions](decisions-v0.4.md): shared model and explicit scope reconciliation.
+- [Publication guide](publication-contract.md) and [promise model](promise-model.md): permission and qualified self-authorship.
+- [Accepted-offer object](accepted-offer.md): agent agreement and principal-recovery interpretation.
+- [Architecture](protocol-architecture.md) and [downstream boundary](downstream-boundary.md): how existing protocols retain their responsibilities.
+- [Quick-start](docs/quickstart.md) and [worked scenarios](examples/lifecycle-walkthroughs.md): one ordinary agreement before optional composition.
 
 ## Explicit boundary
 
-Bazaar can negotiate commercial conditions and identify downstream commerce/payment preferences. Its output is an accepted-offer object, exact terms, original proof and current refusal/withdrawal status. The status interface is part of interpreting that object; it does not administer execution, delivery, payment or settlement.
+Agent agreement does not establish principal clearance; clearance does not grant downstream authority. The optional handoff feature binds an exact action occurrence, frozen native translation, current eligibility, operation identity, and attributable observations. It does not issue native credentials or mandates, execute services, transfer funds, or establish native settlement.
 
-AP2/UCP/ACP, payment protocols and processors own their own validation and effects. An integration consumer determines whether and how to proceed using Bazaar evidence and its own authority requirements. [Downstream boundary](downstream-boundary.md) is an interoperability note, not another Bazaar transaction contract.
+The optional evidence feature can retain a fulfillment claim, assessment, native execution observation, settlement claim, or reservation disposition. Their selected semantics and native evidence determine what they establish. A claim, receipt, or orchestrator summary cannot manufacture an external result.
 
-The earlier delivery/assessment contract and payment-binding state machine are removed from the current scope. Research remains a possible toy-model scenario; its test and evaluation regime is undecided.
+[Proposed tests](tests/PROPOSED.md) concern the authored contracts through controlled adapter substitutes. They are not implemented runtime tests, live payment qualification, or demonstrated interoperability. The earlier formation-only boundary remains preserved in the [0.3 archive](archive/0.3/README.md).

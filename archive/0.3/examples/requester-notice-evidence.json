@@ -1,0 +1,9 @@
+{
+  "id": "fixture:requester-notice-evidence",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "principal_id": "principal:requester",
+  "notice_at": "2026-10-08T18:01:05Z",
+  "delivery_kind": "made_available",
+  "warning": "Fictional delivery evidence; not proof the principal read or approved anything."
+}

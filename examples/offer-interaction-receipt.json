@@ -1,0 +1,53 @@
+{
+  "profile": "abp/0.4-draft",
+  "kind": "interaction_receipt",
+  "id": "interaction_receipt:offer-interaction-receipt",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T18:00:20Z",
+  "required_extensions": [],
+  "body": {
+    "request_ref": {
+      "id": "interaction_request:offer-interaction-request",
+      "digest": "sha256:395cb5c18d2e8fdc20f7c732ef85d9e85d08cd9766de0818a3c9b18af5512bfa"
+    },
+    "operation_id": "op:researcher-standard-v2:submit:1",
+    "recipient_agent_id": "agent:requester",
+    "recipient_scope_id": "scope:requester:bazaar",
+    "revision": 1,
+    "previous_receipt_digest": null,
+    "outcome": "applied",
+    "reason_code": "ok",
+    "result_refs": [
+      {
+        "id": "offer:researcher-standard-offer-v2",
+        "digest": "sha256:d3381fd1b529e2d9ba8027c74f992952d7b3f5bf347473ce307102f98c0e565a"
+      }
+    ],
+    "evidence_refs": [
+      {
+        "id": "fixture:requester-current-evidence",
+        "digest": "sha256:ae8ca93c4104095e88efcb7a7725171817e589bd7f7b34849d030140fc9fa200"
+      }
+    ],
+    "detail": "Recorded this qualified offer revision. This receipt is not terms adoption or finalization."
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.4/keys/agent-requester",
+      "signed_payload_digest": "sha256:e8ba3f51c8445e4f3c28fda11e6c9d522b61d656d2a382d4b1528a48229b394d",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "interaction_receipt"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ],
+  "required_features": [
+    "bilateral"
+  ]
+}

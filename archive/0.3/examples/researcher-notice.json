@@ -1,0 +1,58 @@
+{
+  "profile": "abp/0.3-draft",
+  "kind": "finalization_notice",
+  "id": "notice:researcher",
+  "issuer_agent_id": "agent:principal-channel",
+  "issuer_principal_id": "principal:notice-service",
+  "created_at": "2026-10-08T18:01:10Z",
+  "required_extensions": [],
+  "body": {
+    "accepted_offer_ref": {
+      "id": "accepted:research",
+      "digest": "sha256:4200f55e2125476a060760cbe9c46d3dd98741a7a6a2c16a964fe4ec5b9d72c0"
+    },
+    "principal_id": "principal:researcher",
+    "notice_target_ref": {
+      "id": "fixture:researcher-notice-target",
+      "digest": "sha256:0f9fe63ff0974552baca32e24cfe3ca794a6ed83cee2caa0c06c51ec347bb3c6"
+    },
+    "notice_profile_ref": {
+      "id": "fixture:notice-profile",
+      "digest": "sha256:c61bb5b22d300571e7cc73137263d135abb36d3772125bf55225b0e6eea4b468"
+    },
+    "notice_kind": "made_available",
+    "notice_at": "2026-10-08T18:01:10Z",
+    "clock_evidence_ref": {
+      "id": "fixture:researcher-notice-evidence",
+      "digest": "sha256:3191407c9e2490ead759c511a955f810b33ce6593b4c4c43f0210b634d238f09"
+    },
+    "delivery_evidence_ref": {
+      "id": "fixture:researcher-notice-evidence",
+      "digest": "sha256:3191407c9e2490ead759c511a955f810b33ce6593b4c4c43f0210b634d238f09"
+    },
+    "terms_ref": {
+      "id": "candidate:research",
+      "digest": "sha256:c967d644452fbe2dabc1dfe0cd0100ffa6770874fcae3eb1f14e4a11a6fb9d14"
+    },
+    "review_duration_ms": 120000,
+    "refusal_mechanism_ref": {
+      "id": "fixture:refusal-mechanism",
+      "digest": "sha256:b64d7b8d73c7f4ae8222929e0b4bffb3cfdae952511255622addf021708adeb1"
+    }
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.3/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.3/fictional-keys/agent-principal-channel",
+      "signed_payload_digest": "sha256:794359ea8ddbcf7f0e1b323f0fba5d921c76067605d9e75472daf0dd06db706e",
+      "issuer_agent_id": "agent:principal-channel",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}

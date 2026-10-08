@@ -3,6 +3,6 @@
   "fixture_type": "illustrative_policy_or_evidence",
   "synthetic": true,
   "authority_agent_id": "agent:requester",
-  "endpoint": "https://example.org/agent-bazaar/v0.2/refusals/accepted-research",
+  "endpoint": "https://example.org/agent-bazaar/v0.4/refusals/accepted-research",
   "rule": "An authenticated principal or representative explicitly authorized by its policy may submit a refusal for the exact accepted digest. Ordinary agent adoption cannot waive refusal rights."
 }

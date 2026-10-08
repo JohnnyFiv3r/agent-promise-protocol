@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.2-draft",
+  "profile": "abp/0.4-draft",
   "kind": "offer",
   "id": "offer:researcher-standard-offer",
   "issuer_agent_id": "agent:researcher",
@@ -12,7 +12,7 @@
       "record_kind": "intent",
       "record_ref": {
         "id": "intent:requester",
-        "digest": "sha256:a571f1d41d11bd73ac24c5dd0c436299c9ee5692103db566d03420f396fb32b7"
+        "digest": "sha256:5ef45d8b43cf4ffad87550d06141ba48f34cf06bc1d6c7c4a237df58b99e42da"
       },
       "originator_agent_id": "agent:requester",
       "originator_principal_id": "principal:requester",
@@ -25,11 +25,11 @@
     "publication_contract_refs": [
       {
         "id": "publication:requester",
-        "digest": "sha256:ebccd4a54de7ab83381e2c5a3da31457dbdc70aeaa2b44fe052942ba41393319"
+        "digest": "sha256:ac6e63989fb28f0a5ec0aab3682f4f29f2a79050679e1978bf8f3ad07e100198"
       },
       {
         "id": "publication:researcher",
-        "digest": "sha256:1b9b4bb8ebac99163aefdfd09d23771ac298e9058deee9060a002e8334503dad"
+        "digest": "sha256:3a8768172b469af24cb2d22f2fda484402c8aee09cf6f28600bd326366207770"
       }
     ],
     "selection_constraints_ref": {
@@ -42,7 +42,7 @@
         "id": "fixture:researcher-principal-policy",
         "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
       },
-      "status_ref": "https://example.org/agent-bazaar/v0.2/status/researcher-standard-offer"
+      "status_ref": "https://example.org/agent-bazaar/v0.4/status/researcher-standard-offer"
     },
     "own_promises": [
       {
@@ -52,14 +52,14 @@
           "agent:requester"
         ],
         "action": {
-          "action_type": "https://example.org/agent-bazaar/v0.2/actions/produce_report",
+          "action_type": "https://example.org/agent-bazaar/v0.4/actions/produce_report",
           "semantics_ref": {
             "id": "fixture:action-semantics",
-            "digest": "sha256:78d32746b84fce453d336ef19bca89d3642a9dcabfb14116b7aadaddc1351152"
+            "digest": "sha256:0c04ba50bfcf115450a81d079a3ac2da2e5f273c063f9de162766d94456e6248"
           },
           "polarity": "provide",
           "subject": {
-            "type_uri": "https://example.org/agent-bazaar/v0.2/subjects/research-request",
+            "type_uri": "https://example.org/agent-bazaar/v0.4/subjects/research-request",
             "parameters": {
               "id": "subject:protocol-comparison"
             }
@@ -83,7 +83,7 @@
         ],
         "qualifications": [
           {
-            "type_uri": "https://example.org/agent-bazaar/v0.2/qualifications/agreed-counterperformance",
+            "type_uri": "https://example.org/agent-bazaar/v0.4/qualifications/agreed-counterperformance",
             "parameters": {
               "meaning": "The issued service promise is qualified by exact-term counterpart adoption and policy-governed acceptance status."
             }
@@ -95,7 +95,7 @@
             "id": "fixture:researcher-principal-policy",
             "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
           },
-          "status_ref": "https://example.org/agent-bazaar/v0.2/status/promise-research-standard"
+          "status_ref": "https://example.org/agent-bazaar/v0.4/status/promise-research-standard"
         }
       }
     ],
@@ -104,14 +104,14 @@
         "request_id": "request:receive",
         "requested_of_agent_id": "agent:requester",
         "action": {
-          "action_type": "https://example.org/agent-bazaar/v0.2/actions/receive_report",
+          "action_type": "https://example.org/agent-bazaar/v0.4/actions/receive_report",
           "semantics_ref": {
             "id": "fixture:action-semantics",
-            "digest": "sha256:78d32746b84fce453d336ef19bca89d3642a9dcabfb14116b7aadaddc1351152"
+            "digest": "sha256:0c04ba50bfcf115450a81d079a3ac2da2e5f273c063f9de162766d94456e6248"
           },
           "polarity": "receive",
           "subject": {
-            "type_uri": "https://example.org/agent-bazaar/v0.2/subjects/research-request",
+            "type_uri": "https://example.org/agent-bazaar/v0.4/subjects/research-request",
             "parameters": {
               "id": "subject:protocol-comparison"
             }
@@ -123,7 +123,7 @@
         },
         "qualifications": [
           {
-            "type_uri": "https://example.org/agent-bazaar/v0.2/qualifications/agreed-counterperformance",
+            "type_uri": "https://example.org/agent-bazaar/v0.4/qualifications/agreed-counterperformance",
             "parameters": {
               "meaning": "The issued service promise is qualified by exact-term counterpart adoption and policy-governed acceptance status."
             }
@@ -135,12 +135,12 @@
             "id": "fixture:requester-principal-policy",
             "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
           },
-          "status_ref": "https://example.org/agent-bazaar/v0.2/status/promise-receive-report"
+          "status_ref": "https://example.org/agent-bazaar/v0.4/status/promise-receive-report"
         }
       }
     ],
-    "commercial_terms": {
-      "profile_uri": "https://example.org/agent-bazaar/v0.2/commercial/example-no-consideration",
+    "agreement_terms": {
+      "profile_uri": "https://example.org/agent-bazaar/v0.4/commercial/example-no-consideration",
       "terms": {
         "consideration": "none",
         "purpose": "Fictional contract-shape review"
@@ -164,9 +164,9 @@
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.2/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.2/fictional-keys/agent-researcher",
-      "signed_payload_digest": "sha256:547c0c5be8c68994fb9207cb07eceb7ee46b5f181adaabd76cc0dcaa62ae4b3c",
+      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:13ebe28c07ab573038f06bd4c2129a2947e62b5459cbc27b9d3f515a0ed99b7a",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "synthetic-review-only"
@@ -176,5 +176,8 @@
         "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
       }
     }
+  ],
+  "required_features": [
+    "bilateral"
   ]
 }

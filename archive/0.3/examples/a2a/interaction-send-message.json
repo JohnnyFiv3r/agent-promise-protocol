@@ -1,0 +1,61 @@
+{
+  "jsonrpc": "2.0",
+  "id": "rpc:example-1",
+  "method": "SendMessage",
+  "params": {
+    "message": {
+      "messageId": "message:example-operation-1",
+      "role": "ROLE_USER",
+      "extensions": [
+        "https://github.com/JohnnyFiv3r/agent-bazaar/blob/main/protocol-architecture.md#v03"
+      ],
+      "parts": [
+        {
+          "mediaType": "application/json",
+          "data": {
+            "bazaar": {
+              "profile": "abp/0.3-draft",
+              "kind": "interaction_request",
+              "id": "interaction:example-operation-1",
+              "issuer_agent_id": "agent:requester",
+              "issuer_principal_id": "principal:requester",
+              "created_at": "<CREATION_TIME_UTC>",
+              "required_extensions": [],
+              "body": {
+                "operation_id": "operation:example-1",
+                "recipient_agent_id": "agent:researcher",
+                "recipient_scope_id": "scope:researcher-bazaar",
+                "purpose": "submit_record",
+                "subject_ref": {
+                  "id": "offer:example",
+                  "digest": "<SHA256_OF_COMPLETE_CANONICAL_SUBJECT_RECORD>",
+                  "locator": "https://example.org/bazaar/records/offer-example"
+                },
+                "admission_basis_ref": {
+                  "id": "policy:researcher-admission",
+                  "digest": "<SHA256_OF_CANONICAL_ADMISSION_POLICY>",
+                  "locator": "https://example.org/bazaar/policies/admission"
+                }
+              },
+              "proofs": [
+                {
+                  "suite_uri": "<SELECTED_EXISTING_PROOF_PROFILE_URI>",
+                  "verification_method": "<AUTHORIZED_VERIFICATION_METHOD_URI>",
+                  "signed_payload_digest": "<SHA256_OF_INTERACTION_WITH_TOP_LEVEL_PROOFS_REMOVED>",
+                  "issuer_agent_id": "agent:requester",
+                  "scope": ["<AUTHORIZED_PROOF_SCOPE>"],
+                  "native_proof_ref": {
+                    "id": "proof:example-operation-1",
+                    "digest": "<SHA256_OF_REFERENCED_NATIVE_PROOF_OBJECT>",
+                    "locator": "https://example.org/bazaar/proofs/example-operation-1"
+                  }
+                }
+              ]
+            },
+            "records": []
+          }
+        }
+      ]
+    }
+  }
+}

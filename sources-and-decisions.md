@@ -1,6 +1,6 @@
 # Sources and current decisions
 
-**Draft 0.2 · October 8, 2026.** The [fifteen user decisions](decisions-v0.2.md) control this revision. Earlier D1–D22 entries are preserved with [archived 0.1](archive/0.1/sources-and-decisions.md); they are not a second current decision register.
+**Draft 0.4 · October 8, 2026.** The [earlier user decisions](decisions-v0.2.md), explicitly reconciled by [0.4 decisions](decisions-v0.4.md), control this revision. Earlier D1–D22 entries are preserved with [archived 0.1](archive/0.1/sources-and-decisions.md); they are not a second current decision register.
 
 ## Promise Theory reading
 
@@ -23,7 +23,7 @@ The qualified-action wire model, budgeting, exact-term finalization and principa
 
 ## Native protocol sources and scope
 
-| Source | Use in draft 0.2 |
+| Source | Use in draft 0.4 |
 |---|---|
 | [A2A 1.0.0 specification](https://a2a-protocol.org/v1.0.0/specification/) and [extensions](https://a2a-protocol.org/latest/topics/extensions/) | Carrier/extension binding; native message, task and artifact meanings remain native. |
 | [RFC 8785](https://www.rfc-editor.org/rfc/rfc8785.html) | Canonicalization for Bazaar content identity, excluding top-level proof references for the signed payload. Native proof bytes retain their own formats. |
@@ -39,6 +39,8 @@ The [research ledger](research/README.md), [earlier overlap audit](novel-angle-a
 
 ## Authoring selections still requiring refinement
 
-The [universal action shape](promise-model.md) is a concrete proposal requested by the user. The [accepted-object contract](accepted-offer.md) makes notice/start/deadline/order semantics explicit without choosing a universal duration. Exact cryptographic suite/trust integration and public extension URI remain publication/implementation selections. Unknown required profiles block automatic interpretation rather than silently selecting a substitute.
+Draft 0.4 reconciles [eight governing interfaces](contracts/README.md) and records its [authoring choices](decisions-v0.4.md). These are original protocol engineering decisions, not requirements attributed to Promise Theory or copied from comparator implementations.
 
-The contract does not select an evaluation regime, correction budget, human reviewer, native payment route or runtime test suite. Those discussions follow contract authoring. Schema/reference checks are authoring validation only.
+The [universal action shape](promise-model.md) is a concrete proposal requested by the user. The [accepted-object contract](accepted-offer.md) makes notice/start/deadline/order semantics explicit without choosing a universal duration. [C6](contracts/06-a2a-evidence.md) selects the draft extension identifier and A2A binding. The [RP1 reference profile](profiles/reference-profile.md) selects concrete cryptographic, trust, policy, ordering and retrieval mechanisms for interoperability; the universal core permits other understood profiles. Unknown required profiles block automatic interpretation rather than silently selecting a substitute.
+
+The [proposed tests](tests/PROPOSED.md) cover contract behavior through substituted adapters. They select no research evaluator, correction budget, human reviewer or native payment route. Runtime tests and native integrations are unimplemented. Schema/reference checks remain authoring validation only; primary sources for the concrete mechanism choices are in [RP1](profiles/reference-profile.md).

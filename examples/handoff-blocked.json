@@ -1,0 +1,53 @@
+{
+  "profile": "abp/0.4-draft",
+  "required_extensions": [],
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:ce151b1333f1e513fa3150ab97206266537bf3c420b8302f174f97d20b98b702",
+      "issuer_agent_id": "agent:researcher",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ],
+  "kind": "handoff_receipt",
+  "id": "handoff-receipt:refusal-blocked",
+  "issuer_agent_id": "agent:researcher",
+  "issuer_principal_id": "principal:researcher",
+  "created_at": "2026-10-08T18:03:11Z",
+  "required_features": [
+    "bilateral",
+    "adapter-handoff",
+    "lifecycle-evidence"
+  ],
+  "body": {
+    "handoff_ref": {
+      "id": "handoff:report-once",
+      "digest": "sha256:9c2c5128c85dbb9083db104fdf8db7858f32bffa53507512736a39904bcacea4"
+    },
+    "handoff_key": "sha256:8254226be3dd50cccff01d909a2148d2cf613f51fd5285bac198903134c3fbbe",
+    "phase": "dispatch",
+    "revision": 1,
+    "previous_receipt_digest": null,
+    "outcome": "blocked",
+    "prepared_plan_ref": {
+      "id": "prepared:report-once",
+      "digest": "sha256:ed3989716a45c5ac45dcffd7e611a7793554bb1bcbbbef85492a939bd89fea1b"
+    },
+    "gate_evidence_refs": [
+      {
+        "id": "status:research:2",
+        "digest": "sha256:2ac010fb6edc06ffc479f4f7b944cf358d10e85439044978f5a11b0dbf82e8fe"
+      }
+    ],
+    "native_operation_key": "abp-rp1-8254226be3dd50cccff01d909a2148d2cf613f51fd5285bac198903134c3fbbe",
+    "native_evidence_refs": [],
+    "reason_code": "principal_refused"
+  }
+}

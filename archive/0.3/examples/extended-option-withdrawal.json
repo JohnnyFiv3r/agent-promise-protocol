@@ -1,0 +1,39 @@
+{
+  "profile": "abp/0.3-draft",
+  "kind": "withdrawal_event",
+  "id": "withdrawal:extended-option",
+  "issuer_agent_id": "agent:researcher",
+  "issuer_principal_id": "principal:researcher",
+  "created_at": "2026-10-08T18:03:20Z",
+  "required_extensions": [],
+  "body": {
+    "target_kind": "offer",
+    "target_ref": {
+      "id": "offer:researcher-extended-offer",
+      "digest": "sha256:19f0df67f7ad549b664d2507226ed0a8fe1e9583100b9455993e89120e601a89"
+    },
+    "authority_refs": [
+      {
+        "id": "fixture:researcher-principal-policy",
+        "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+      }
+    ],
+    "status_ref": "https://example.org/agent-bazaar/v0.3/status/researcher-extended-offer",
+    "reason": "Withdraw this alternative only; no other option is silently revised."
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.3/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.3/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:f2ae3f4477fdd43097e894ccc3f2f4dfdba52e99f1e385acc492253d07166f07",
+      "issuer_agent_id": "agent:researcher",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}

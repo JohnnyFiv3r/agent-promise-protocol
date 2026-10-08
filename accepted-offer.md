@@ -1,6 +1,6 @@
 # Accepted-offer object and principal refusal
 
-**Draft 0.2.** The output is an immutable record of exact agent agreement, accompanied by authenticated current status. Agent agreement is subject to the agreed post-handshake right of principal refusal. These semantics distinguish delegated agent negotiation from an exchange in which the humans themselves have just assented.
+**Draft 0.4.** The output is an immutable record of exact agent agreement, accompanied by authenticated current status. Agent agreement is subject to the agreed post-handshake right of principal refusal. These semantics distinguish delegated agent negotiation from an exchange in which the humans themselves have just assented.
 
 ## Formation inputs
 
@@ -8,7 +8,7 @@ A candidate identifies:
 
 - The initiating intent/promise/offer, its immutable content and author. That author is the declared coordinator.
 - The parties and principals, exact selected offer options/revisions, own qualified promises and complete terms.
-- The offering/action semantics and commercial arrangement, including the relevant policy references and eligibility evidence.
+- The offering/action semantics and agreement arrangement, including the relevant policy references and eligibility evidence.
 - Selection/capacity constraints, privacy rules and any linked replacement/disposition of prior commitments.
 - Each principal's refusal-policy reference, positive duration, notice destination/rule, refusal/status authority and clock/freshness policy.
 
@@ -69,4 +69,4 @@ A consumer MUST distinguish the immutable handshake proof from current review st
 
 A replacement identifies the prior accepted object and how prior unperformed commitments are superseded or otherwise disposed of. New terms receive fresh agent adoptions and principal windows. The replacement does not silently combine an old price, a new scope and an expired permission, nor erase any existing downstream effect. Implementations retain all relevant historical records.
 
-Bazaar ends at this accepted object and the evidence needed to interpret it. It defines no payment, fulfillment or assessment state machine.
+This object is the agreement milestone, optionally followed by [C7 composition](contracts/07-composition.md) and [C8 handoff/evidence](contracts/08-adapter-boundary.md). Agent agreement, principal clearance and native action authority remain distinct. Native execution, fulfillment and settlement mechanisms stay outside the adapter boundary.

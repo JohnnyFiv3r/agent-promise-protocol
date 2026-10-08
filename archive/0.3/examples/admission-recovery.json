@@ -1,0 +1,13 @@
+{
+  "id": "fixture:admission-recovery",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "operation_key": [
+    "recipient_scope_id",
+    "authenticated issuer_agent_id",
+    "operation_id"
+  ],
+  "replay_retention": "Durable operation keys and terminal outcomes until authenticated epoch retirement; retries in a retired epoch rejected.",
+  "recovery": "Atomically persist effect and result, or recover a pending operation before any reapplication. No automatic quota replenishment.",
+  "native_profile": "https://example.org/agent-bazaar/v0.3/policies/recovery"
+}

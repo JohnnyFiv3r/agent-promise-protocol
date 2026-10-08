@@ -1,6 +1,6 @@
 # Reference negotiation note: policy-controlled admission
 
-**Draft 0.2.** This note illustrates the admission contract. It does not mandate a permit format, a numerical quota, a fixed negotiation duration or forced closure.
+**Draft 0.4.** This note illustrates the admission contract. It does not mandate a permit format, a numerical quota, a fixed negotiation duration or forced closure.
 
 Each recipient's publication references an understood admission policy. That policy declares eligible participants/topics, admitted message kinds, finite message/byte/work budgets, concurrency/capacity limits, accounting authority and validity. It can admit a bounded first offer, require an invitation, or close contact entirely. Receiving a published intent does not independently authorize a response.
 
@@ -20,4 +20,4 @@ Budgets and validity are distinct. Exhaustion stops additional admitted work und
 
 Explicit closure is possible when policy or an actor requests it. It does not silently cancel independently issued qualified actions or an accepted object. Those require the corresponding authorized withdrawal/refusal event.
 
-No fixed four-offer/eight-message/thirty-minute default survives from draft 0.1. Numeric values in illustrative records are example policy choices only; the testing regime remains deferred.
+No fixed four-offer/eight-message/thirty-minute default survives from draft 0.1. Numeric values in illustrative records are example policy choices only; the [proposed test regime](tests/PROPOSED.md) remains unimplemented and stops at the adapter boundary.

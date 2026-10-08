@@ -1,0 +1,8 @@
+{
+  "id": "fixture:requester-current-evidence",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "principal_id": "principal:requester",
+  "agent_id": "agent:requester",
+  "warning": "Fictional policy, authority, capability and selection status; no live verifier was run."
+}

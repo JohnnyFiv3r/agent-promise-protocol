@@ -28,7 +28,7 @@ The [required contract map](contract-map.md) now drives authoring. The findings 
 
 Derive the contracts from the agreed diagram, the user's product thesis and the Promise Theory primitives: emitted intent, recipient autonomy, proposed own behavior, requested counterpart behavior and each promiser's own adoption. Use related work to challenge omissions and identify interoperability differences. Write Bazaar's schemas, transition rules, examples and adversarial cases from those requirements.
 
-Draft 0.2 treats a Bazaar offer as the issuer's qualified conditional promise. Any adapter must preserve its conditions, principal refusal rights and authorship; neither the offer nor accepted terms can become a native purchase instruction without that consumer's required authority. Any eventual adapter must preserve those semantics and its native system's evidence. This is an interface requirement, not a code-reuse decision.
+Draft 0.4 treats a Bazaar offer as the issuer's qualified conditional promise. Any adapter must preserve its conditions, principal refusal rights and authorship; neither the offer nor accepted terms can become a native purchase instruction without that consumer's required authority. Any eventual adapter must preserve those semantics and its native system's evidence. This is an interface requirement, not a code-reuse decision.
 
 The original material in this artifact directory is covered by [LICENSE](LICENSE). The copyright notice uses John Inniger, the recorded project owner. The [standard MIT text](https://opensource.org/license/mit) grants reuse of our work subject to its notice requirement; it does not grant rights in separately referenced materials.
 

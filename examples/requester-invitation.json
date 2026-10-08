@@ -1,0 +1,65 @@
+{
+  "profile": "abp/0.4-draft",
+  "kind": "admission_grant",
+  "id": "admission_grant:requester-invitation",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T12:05:00Z",
+  "required_extensions": [],
+  "body": {
+    "recipient_agent_id": "agent:requester",
+    "grantee_agent_id": "agent:researcher",
+    "grantee_principal_id": "principal:researcher",
+    "recipient_scope_id": "scope:requester:bazaar",
+    "publication_contract_ref": {
+      "id": "publication:requester",
+      "digest": "sha256:ac6e63989fb28f0a5ec0aab3682f4f29f2a79050679e1978bf8f3ad07e100198"
+    },
+    "admission_policy_ref": {
+      "id": "fixture:admission-policy",
+      "digest": "sha256:72e4886f91873691f62df3030a630053086f3d16bc0075916557d2bcc7c57ac7"
+    },
+    "allowance_ids": [
+      "requester:negotiation"
+    ],
+    "allowed_record_kinds": [
+      "offer",
+      "clarification",
+      "terms_adoption"
+    ],
+    "validity": {
+      "mode": "until_withdrawn",
+      "policy_ref": {
+        "id": "fixture:requester-principal-policy",
+        "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+      },
+      "status_ref": "https://example.org/agent-bazaar/v0.4/status/requester-invitation"
+    },
+    "negotiation_id": "negotiation:research",
+    "origin_ref": {
+      "id": "intent:requester",
+      "digest": "sha256:5ef45d8b43cf4ffad87550d06141ba48f34cf06bc1d6c7c4a237df58b99e42da"
+    },
+    "operation_purposes": [
+      "submit_record"
+    ]
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.4/keys/agent-requester",
+      "signed_payload_digest": "sha256:be8a08db10369361bf93ec03eed44f615177338b362ce5825689cf7482eb02bb",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "admission_grant"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ],
+  "required_features": [
+    "bilateral"
+  ]
+}

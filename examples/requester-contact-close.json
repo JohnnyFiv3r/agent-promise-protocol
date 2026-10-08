@@ -1,0 +1,41 @@
+{
+  "profile": "abp/0.4-draft",
+  "kind": "negotiation_close",
+  "id": "negotiation_close:requester-contact-close",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T12:30:00Z",
+  "required_extensions": [],
+  "body": {
+    "origin": {
+      "record_kind": "intent",
+      "record_ref": {
+        "id": "intent:requester",
+        "digest": "sha256:5ef45d8b43cf4ffad87550d06141ba48f34cf06bc1d6c7c4a237df58b99e42da"
+      },
+      "originator_agent_id": "agent:requester",
+      "originator_principal_id": "principal:requester",
+      "coordinator_agent_id": "agent:requester"
+    },
+    "negotiation_id": "negotiation:research",
+    "reason": "Stop discretionary negotiation contact after the refused agreement; this does not withdraw any separate issued promise."
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.4/keys/agent-requester",
+      "signed_payload_digest": "sha256:a11443e929125981098906be37fd81ef151b8aef35a8d765b2d618013de351e8",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "negotiation_close"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ],
+  "required_features": [
+    "bilateral"
+  ]
+}

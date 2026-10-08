@@ -1,0 +1,11 @@
+{
+  "id": "fixture:researcher-capability",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "agent_id": "agent:researcher",
+  "claims": [
+    "declare_interest",
+    "produce_report"
+  ],
+  "independently_verified": false
+}

@@ -1,0 +1,61 @@
+{
+  "profile": "abp/0.3-draft",
+  "kind": "admission_grant",
+  "id": "admission_grant:requester-invitation",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T12:05:00Z",
+  "required_extensions": [],
+  "body": {
+    "recipient_agent_id": "agent:requester",
+    "grantee_agent_id": "agent:researcher",
+    "grantee_principal_id": "principal:researcher",
+    "recipient_scope_id": "scope:requester:bazaar",
+    "publication_contract_ref": {
+      "id": "publication:requester",
+      "digest": "sha256:f8f1d235b819633662ab790ccc568f99677c00f8184e1658dded2b98495d4a1a"
+    },
+    "admission_policy_ref": {
+      "id": "fixture:admission-policy",
+      "digest": "sha256:a8b8aa9df38ddd1769e9328d0c5731c168ccbcd74c5b058ac7c3620a5197e689"
+    },
+    "allowance_ids": [
+      "requester:negotiation"
+    ],
+    "allowed_record_kinds": [
+      "offer",
+      "clarification",
+      "terms_adoption"
+    ],
+    "allow_status_query": false,
+    "allow_finalization": false,
+    "validity": {
+      "mode": "until_withdrawn",
+      "policy_ref": {
+        "id": "fixture:requester-principal-policy",
+        "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+      },
+      "status_ref": "https://example.org/agent-bazaar/v0.3/status/requester-invitation"
+    },
+    "negotiation_id": "negotiation:research",
+    "origin_ref": {
+      "id": "intent:requester",
+      "digest": "sha256:dfbb797c1cdbed9129a79ff4231b2046538cb2eaa2c63e25add3d2115367477a"
+    }
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.3/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.3/keys/agent-requester",
+      "signed_payload_digest": "sha256:4e36df8a9c189ddd2113df5e89a10cfc3b45d73d1b1a0abf59a4d2a9c5e5b0e3",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "admission_grant"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}
