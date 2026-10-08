@@ -1,0 +1,11 @@
+# Synthetic semantic examples
+
+These fixtures illustrate unsigned records and referenced policy/specification content. Timestamps, identities, prices and durations are fictional scenario values. No provider has been contacted, task executed or payment initiated. `example.org` URIs are documentation identifiers and placeholder status sources.
+
+Read the buyer/provider **publication contracts** first. Each declares discovery/contact consent and the same complete simulated route. Their intents reference their own publication records, so either side can publish interest without issuing a service offer. The service-owned [admission policy](admission-policy.json) explicitly selects the [reception-permit reference profile](../reference-negotiation-profile.md). The permit fixture illustrates the buyer's consent; a reciprocal permit is required by that profile for a full negotiation.
+
+The v1/v2 offers demonstrate explicit supersession without extending expiry. Each pins both publication records, one complete route, the offering specification and performance terms. The candidate identifies both final v2 offer heads, embeds the exact research performance terms, and selects the bilateral reference formation profile. Its procurement slot belongs to that formation profile, not every product or service. The terms remain a **candidate**, pending each author's own authenticated adoption and finalization.
+
+`research-rubric.json`, `research-service-spec.json`, `research-performance-terms.json`, `admission-policy.json` and `redistribution-policy.json` are referenced content, not semantic record envelopes. The other ten root JSON examples use the semantic-record schema. Fixture digests use an ASCII/small-integer subset equivalent to the specified canonicalization; hashes alone are not signatures or authority evidence.
+
+The schema does not compare actor identities, establish current consent or authority, resolve references, execute native protocols or prove conditional compatibility. [Contract](../contract.md) and [conformance](../conformance.md) define those obligations. The [A2A examples](a2a/README.md) show the native wire wrapper. [Structural checks](../checks/validate.py) reproduce fixture and reference validation, including synthetic paid-binding shapes; they do not execute payment.

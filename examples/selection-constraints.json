@@ -1,0 +1,8 @@
+{
+  "id": "fixture:selection-constraints",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "policy": "Researcher options standard and extended are exclusive alternatives for this declared intent.",
+  "max_simultaneous_selected_options": 1,
+  "enforcement": "Current reservations and capability/authority checked on issuance, adoption, and finalization."
+}

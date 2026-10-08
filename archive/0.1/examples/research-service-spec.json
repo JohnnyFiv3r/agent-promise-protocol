@@ -1,0 +1,6 @@
+{
+  "id": "spec:research-service-v1",
+  "kind": "service",
+  "fulfillment": "a2a_task",
+  "description": "An official-source research comparison delivered as report.md and claim-evidence.json; exact scope and review rules are selected in performance terms."
+}

@@ -1,0 +1,48 @@
+{
+  "jsonrpc": "2.0",
+  "id": "rpc:buyer-intent-1",
+  "method": "SendMessage",
+  "params": {
+    "message": {
+      "messageId": "record:buyer-intent",
+      "role": "ROLE_USER",
+      "extensions": [
+        "https://example.org/extensions/agent-bazaar/v0.1"
+      ],
+      "parts": [
+        {
+          "mediaType": "application/json",
+          "data": {
+            "profile": "abp/0.1-draft",
+            "kind": "intent",
+            "id": "record:buyer-intent",
+            "issuer_agent_id": "agent:buyer",
+            "issuer_principal_id": "principal:agent:buyer",
+            "created_at": "2026-10-08T18:00:00Z",
+            "required_extensions": [],
+            "body": {
+              "revision": 1,
+              "previous_digest": null,
+              "semantics": "interest_declaration",
+              "topic": "official-agent-protocol-research",
+              "preferences": [
+                "Public sources only; no purchase or execution is authorized."
+              ],
+              "disclosure_audience": [
+                "subscribed:research-market"
+              ],
+              "expires_at": "2026-10-08T19:00:00Z",
+              "intent_id": "intent:research-demand",
+              "market_posture": "seek_result",
+              "desired_outcome": "I seek a cited comparison of A2A, MCP, and AP2.",
+              "publication_contract_ref": {
+                "id": "record:buyer-publication",
+                "digest": "sha256:e7fb8584a53494ce26bf467b1edb422c99d282f2d2bb29385b92d02245fe2346"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

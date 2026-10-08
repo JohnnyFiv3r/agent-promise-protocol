@@ -1,0 +1,9 @@
+{
+  "id": "fixture:distribution-policy",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "allowed_audience": [
+    "subscribed:research-interest"
+  ],
+  "onward_use": "Only with issuer permission."
+}

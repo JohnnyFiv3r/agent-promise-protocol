@@ -1,0 +1,6 @@
+{
+  "id": "fixture:nonvalidating-native-proof",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "warning": "No signature, key, native proof, or principal approval exists. These examples cannot pass cryptographic or authority verification."
+}

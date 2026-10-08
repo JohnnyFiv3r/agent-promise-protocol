@@ -1,0 +1,13 @@
+{
+  "id": "research-rubric/0.1",
+  "criteria": [
+    "Artifact structure and digests match",
+    "All three protocols are covered",
+    "Every material factual claim has primary-source provenance",
+    "Human source review finds no known material unsupported claim",
+    "Unknown or version-sensitive conclusions are labeled"
+  ],
+  "reviewer": "named human reviewer; model-only judgment insufficient",
+  "max_corrections": 1,
+  "timeout": "unresolved"
+}

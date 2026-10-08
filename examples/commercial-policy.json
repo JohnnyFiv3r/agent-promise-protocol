@@ -1,0 +1,7 @@
+{
+  "id": "fixture:commercial-policy",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "note": "Opaque native terms may be proposed if each principal policy approves them; no exact published-route equality rule.",
+  "example_terms": "No purchase or charge is represented by these fictional examples."
+}

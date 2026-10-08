@@ -1,0 +1,9 @@
+{
+  "id": "fixture:notice-profile",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "event": "Authenticated delivery or availability of finalization at the designated principal channel.",
+  "required_content": "Exact accepted object and candidate terms, adopted review duration, and a usable authenticated refusal action.",
+  "insufficient_evidence": "Queueing or an unsupported negotiating-agent assertion.",
+  "not_evidence_of": "Human reading, human signature, or human approval."
+}

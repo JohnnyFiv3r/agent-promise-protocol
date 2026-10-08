@@ -1,0 +1,2 @@
+# Document-authoring validation only; no protocol runtime dependencies.
+jsonschema==4.26.0

@@ -1,0 +1,123 @@
+{
+  "profile": "abp/0.2-draft",
+  "kind": "accepted_offer",
+  "id": "accepted:research",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T18:01:00Z",
+  "required_extensions": [],
+  "body": {
+    "accepted_offer_id": "accepted:research",
+    "candidate_ref": {
+      "id": "candidate:research",
+      "digest": "sha256:869ca9dc60309f25ff43facfa1555d5e93fada10e1c7bbb2f9d1f8c6407ab924"
+    },
+    "origin": {
+      "record_kind": "intent",
+      "record_ref": {
+        "id": "intent:requester",
+        "digest": "sha256:a571f1d41d11bd73ac24c5dd0c436299c9ee5692103db566d03420f396fb32b7"
+      },
+      "originator_agent_id": "agent:requester",
+      "originator_principal_id": "principal:requester",
+      "coordinator_agent_id": "agent:requester"
+    },
+    "adoption_refs": [
+      {
+        "id": "adoption:requester",
+        "digest": "sha256:ee7b3d2671325b9d1e5f3edb84768be1bd4a97e78e34e814b89f09e0381e0135"
+      },
+      {
+        "id": "adoption:researcher",
+        "digest": "sha256:5789b219dfdcd8857c387530a4d00220392c66600b96722fde079b46dbf354a9"
+      }
+    ],
+    "finalized_at": "2026-10-08T18:01:00Z",
+    "principal_refusal_windows": [
+      {
+        "principal_id": "principal:requester",
+        "principal_policy_ref": {
+          "id": "fixture:requester-principal-policy",
+          "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+        },
+        "duration_ms": 60000,
+        "notice_target_ref": {
+          "id": "fixture:requester-notice-target",
+          "digest": "sha256:105d8982d7ff1a7325ef7bef3a609589c36115d50111e93db3b0ebe33a9251a3"
+        },
+        "notice_profile_ref": {
+          "id": "fixture:notice-profile",
+          "digest": "sha256:c61bb5b22d300571e7cc73137263d135abb36d3772125bf55225b0e6eea4b468"
+        },
+        "refusal_authority_ref": {
+          "id": "fixture:requester-principal-policy",
+          "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+        },
+        "refusal_mechanism_ref": {
+          "id": "fixture:refusal-mechanism",
+          "digest": "sha256:4535ba9d8526446798802efd3ddb139ea4399289b9a2ba1223634c5b2b8836a4"
+        }
+      },
+      {
+        "principal_id": "principal:researcher",
+        "principal_policy_ref": {
+          "id": "fixture:researcher-principal-policy",
+          "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+        },
+        "duration_ms": 120000,
+        "notice_target_ref": {
+          "id": "fixture:researcher-notice-target",
+          "digest": "sha256:0f9fe63ff0974552baca32e24cfe3ca794a6ed83cee2caa0c06c51ec347bb3c6"
+        },
+        "notice_profile_ref": {
+          "id": "fixture:notice-profile",
+          "digest": "sha256:c61bb5b22d300571e7cc73137263d135abb36d3772125bf55225b0e6eea4b468"
+        },
+        "refusal_authority_ref": {
+          "id": "fixture:researcher-principal-policy",
+          "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+        },
+        "refusal_mechanism_ref": {
+          "id": "fixture:refusal-mechanism",
+          "digest": "sha256:4535ba9d8526446798802efd3ddb139ea4399289b9a2ba1223634c5b2b8836a4"
+        }
+      }
+    ],
+    "clock_profile_ref": {
+      "id": "fixture:clock-and-status-policy",
+      "digest": "sha256:9c6be2961dc40698504b7b4bce0ffed3d1e0d5411446b7f7ba5ae76d62acdc80"
+    },
+    "status_authority_agent_id": "agent:requester",
+    "status_policy_ref": {
+      "id": "fixture:clock-and-status-policy",
+      "digest": "sha256:9c6be2961dc40698504b7b4bce0ffed3d1e0d5411446b7f7ba5ae76d62acdc80"
+    },
+    "status_ref": "https://example.org/agent-bazaar/v0.2/status/accepted-research",
+    "finalization_check_refs": [
+      {
+        "id": "fixture:requester-current-evidence",
+        "digest": "sha256:ae8ca93c4104095e88efcb7a7725171817e589bd7f7b34849d030140fc9fa200"
+      },
+      {
+        "id": "fixture:researcher-current-evidence",
+        "digest": "sha256:6ab603ebe41c3c29283125c6c0a8aa458648f69bd389b27d98a44855920bd08b"
+      }
+    ],
+    "initial_status": "pending_refusal_windows"
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.2/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.2/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:59b9459954f854f8d3c1e8f05869e736d2efe955052d81dcfcb45e70b3aeb711",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}

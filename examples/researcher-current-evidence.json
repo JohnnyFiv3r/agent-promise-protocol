@@ -1,0 +1,8 @@
+{
+  "id": "fixture:researcher-current-evidence",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "principal_id": "principal:researcher",
+  "agent_id": "agent:researcher",
+  "warning": "Fictional policy, authority, capability and selection status; no live verifier was run."
+}

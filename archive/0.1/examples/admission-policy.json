@@ -1,0 +1,15 @@
+{
+  "id": "policy:allowlisted-bounded-contact-v1",
+  "profile": "https://example.org/extensions/agent-bazaar/profiles/reception-permits/v0.1",
+  "allowed_agents": [
+    "agent:buyer",
+    "agent:sourcecheck"
+  ],
+  "topic": "official-agent-protocol-research",
+  "reference_profile": "reference-negotiation-profile.md",
+  "aggregate_window_seconds": 1800,
+  "max_ingress_messages": 128,
+  "max_ingress_bytes": 524288,
+  "max_active_channels": 4,
+  "on_capacity": "reject"
+}

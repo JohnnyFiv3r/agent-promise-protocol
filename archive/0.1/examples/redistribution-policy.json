@@ -1,0 +1,7 @@
+{
+  "id": "policy:research-market-disclosure-v1",
+  "allowed_audiences": [
+    "subscribed:research-market"
+  ],
+  "redistribution": "no onward redistribution beyond the declared audience"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "fixture:action-semantics",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "profile_uri": "https://example.org/agent-bazaar/v0.2/profiles/example-actions",
+  "actions": [
+    "declare_interest",
+    "receive_report",
+    "produce_report"
+  ],
+  "note": "Fictional profile for review. A schema-valid action URI is not evidence an implementation understands it."
+}

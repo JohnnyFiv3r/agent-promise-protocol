@@ -1,0 +1,10 @@
+{
+  "id": "fixture:clock-and-status-policy",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "clock": "Origin coordinator serializes authenticated notice, refusal admission, and closure events.",
+  "formula": "starts_at = max(finalized_at, notice_at); deadline = starts_at + duration_ms",
+  "boundary": "A refusal admitted at the deadline wins; closure must be strictly later.",
+  "missing_evidence": "No missing notice, unavailable status, or unresolved race yields a fabricated deadline or closed-window status.",
+  "freshness": "Illustrative current-status policy; no wall-clock promise of cross-service instantaneous knowledge."
+}

@@ -1,0 +1,157 @@
+{
+  "profile": "abp/0.1-draft",
+  "kind": "agreement_terms",
+  "id": "record:research-terms",
+  "issuer_agent_id": "agent:buyer",
+  "issuer_principal_id": "principal:agent:buyer",
+  "created_at": "2026-10-08T18:00:00Z",
+  "required_extensions": [],
+  "body": {
+    "agreement_id": "agreement:research-1",
+    "stage": "candidate",
+    "procurement_slot_id": "slot:buyer-research-1",
+    "buyer_agent_id": "agent:buyer",
+    "provider_agent_id": "agent:sourcecheck",
+    "offer_digests": [
+      "sha256:c504b0203c1232f20a1a7adffa9f7cea31f61560488b7af7d3b005fed0338a46",
+      "sha256:aea825f3b4c4c2e1286b504a9f0d3af0a213ff8af8491a4adedc3ce068eeb846"
+    ],
+    "promises": [
+      {
+        "id": "promise:receive-review",
+        "promiser_agent_id": "agent:buyer",
+        "performer_agent_id": "agent:buyer",
+        "promisee_ids": [
+          "agent:sourcecheck"
+        ],
+        "polarity": "receive",
+        "behavior_type": "abp:research:receive-and-review:0.1",
+        "behavior": "Receive the identified artifacts and arrange a rubric-based human review; receiving does not guarantee a passing assessment.",
+        "limits": [
+          "One correction at most",
+          "Review timeout yields unresolved"
+        ],
+        "conditions": [
+          {
+            "id": "condition:finalized",
+            "meaning": "Buyer finalization names these exact adopted promises; required inputs and fresh execution authority must separately be present before work.",
+            "assessor_agent_id": "agent:buyer",
+            "evidence_required": [
+              "signed agreement_finalized receipt",
+              "exact accepted terms and adoption records"
+            ],
+            "check_at": "assessment"
+          }
+        ],
+        "assessment_method": "review-timeliness/0.1"
+      },
+      {
+        "id": "promise:research-report-v2",
+        "promiser_agent_id": "agent:sourcecheck",
+        "performer_agent_id": "agent:sourcecheck",
+        "promisee_ids": [
+          "agent:buyer"
+        ],
+        "polarity": "provide",
+        "behavior_type": "abp:research:deliver-report:0.1",
+        "behavior": "Produce a report and claim-to-source evidence for the three named protocols.",
+        "limits": [
+          "Official primary sources only",
+          "No subcontracting",
+          "One correction at most",
+          "Include an explicit uncertainty appendix; repository inspection excluded"
+        ],
+        "conditions": [
+          {
+            "id": "condition:finalized",
+            "meaning": "Buyer finalization names these exact adopted promises; required inputs and fresh execution authority must separately be present before work.",
+            "assessor_agent_id": "agent:sourcecheck",
+            "evidence_required": [
+              "signed agreement_finalized receipt",
+              "exact accepted terms and adoption records"
+            ],
+            "check_at": "before_action"
+          }
+        ],
+        "assessment_method": "research-rubric/0.1"
+      }
+    ],
+    "settlement": {
+      "mode": "simulated",
+      "currency": "USD",
+      "amount_minor": "1500",
+      "minor_unit_exponent": 2,
+      "creates_payment_authority": false
+    },
+    "data_policy": [
+      "Public HTTPS sources only",
+      "Write only designated artifact sink",
+      "No external messages, credentials, private network access or subcontracting"
+    ],
+    "cancellation_policy": "Stop future admitted actions; report in-flight and completed effects; never imply rollback.",
+    "required_features": [
+      "self-authored-promises",
+      "bounded-reception",
+      "separate-execution-authority",
+      "human-semantic-review"
+    ],
+    "publication_contract_refs": [
+      {
+        "id": "record:buyer-publication",
+        "digest": "sha256:e7fb8584a53494ce26bf467b1edb422c99d282f2d2bb29385b92d02245fe2346"
+      },
+      {
+        "id": "record:provider-publication",
+        "digest": "sha256:78209eac7deac41e0f85fab478f404233aae0a3306addd129066abb91b2da190"
+      }
+    ],
+    "commercial_route_selection": {
+      "route_id": "route:simulated-usd-demo",
+      "route_digest": "sha256:b7aee8f7c80558a6d57ecf59fd0abfa69bb3529e70120aac4699fa96532cf8c8"
+    },
+    "offering": {
+      "kind": "service",
+      "fulfillment": "a2a_task",
+      "description": "An official-source research comparison delivered as report.md and claim-evidence.json; exact scope and review rules are selected in performance terms.",
+      "specification_ref": {
+        "id": "spec:research-service-v1",
+        "digest": "sha256:9bd2bd231cc9a2ba373bf70048e1bffef64f7948178f67051f4cb2819a9a03a5"
+      }
+    },
+    "performance_terms": {
+      "profile": "https://example.org/extensions/agent-bazaar/profiles/research/v0.1",
+      "terms": {
+        "inputs": {
+          "question": "Compare the roles of A2A, MCP, and AP2; identify uncertainty and version-sensitive statements.",
+          "protocols": [
+            "A2A",
+            "MCP",
+            "AP2"
+          ],
+          "source_policy": "official_primary_sources"
+        },
+        "deliverables": [
+          "report.md",
+          "claim-evidence.json"
+        ],
+        "acceptance": {
+          "evaluator_agent_id": "agent:human-reviewer",
+          "rubric_id": "research-rubric/0.1",
+          "rubric_digest": "sha256:9cdfed1201422bf915dc2d80deaa14c764e137fa529b3c74ec600c7d031fabdf",
+          "criteria": [
+            "Artifact structure and digests match",
+            "All three protocols are covered",
+            "Every material factual claim has primary-source provenance",
+            "Human source review finds no known material unsupported claim",
+            "Unknown or version-sensitive conclusions are labeled"
+          ],
+          "max_corrections": 1,
+          "review_timeout_outcome": "unresolved"
+        },
+        "delivery_window_seconds": 900,
+        "review_window_seconds": 3600
+      }
+    },
+    "formation_profile": "https://example.org/extensions/agent-bazaar/profiles/bilateral/v0.1"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "profile": "abp/0.1-draft",
+  "kind": "intent",
+  "id": "record:provider-intent",
+  "issuer_agent_id": "agent:sourcecheck",
+  "issuer_principal_id": "principal:agent:sourcecheck",
+  "created_at": "2026-10-08T18:00:00Z",
+  "required_extensions": [],
+  "body": {
+    "revision": 1,
+    "previous_digest": null,
+    "semantics": "interest_declaration",
+    "topic": "official-agent-protocol-research",
+    "preferences": [
+      "Public sources only; no purchase or execution is authorized."
+    ],
+    "disclosure_audience": [
+      "subscribed:research-market"
+    ],
+    "expires_at": "2026-10-08T19:00:00Z",
+    "intent_id": "intent:research-supply",
+    "market_posture": "seek_work",
+    "desired_outcome": "I seek bounded research assignments using official sources.",
+    "publication_contract_ref": {
+      "id": "record:provider-publication",
+      "digest": "sha256:78209eac7deac41e0f85fab478f404233aae0a3306addd129066abb91b2da190"
+    }
+  }
+}

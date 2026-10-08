@@ -1,0 +1,9 @@
+{
+  "id": "fixture:admission-policy",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "admission_kind": "first_offer",
+  "qualification": "Authenticated policy-eligible peers may send a direct first offer.",
+  "iterative_offers": "Allowed under declared recipient-local policy; policy controls message/byte/capacity limits.",
+  "automatic_receipt_loops": false
+}

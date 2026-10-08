@@ -1,0 +1,287 @@
+{
+  "profile": "abp/0.2-draft",
+  "kind": "candidate_terms",
+  "id": "candidate:research",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T18:00:40Z",
+  "required_extensions": [],
+  "body": {
+    "candidate_id": "candidate:research",
+    "origin": {
+      "record_kind": "intent",
+      "record_ref": {
+        "id": "intent:requester",
+        "digest": "sha256:a571f1d41d11bd73ac24c5dd0c436299c9ee5692103db566d03420f396fb32b7"
+      },
+      "originator_agent_id": "agent:requester",
+      "originator_principal_id": "principal:requester",
+      "coordinator_agent_id": "agent:requester"
+    },
+    "negotiation_id": "negotiation:research",
+    "participants": [
+      {
+        "agent_id": "agent:requester",
+        "principal_id": "principal:requester"
+      },
+      {
+        "agent_id": "agent:researcher",
+        "principal_id": "principal:researcher"
+      }
+    ],
+    "selected_options": [
+      {
+        "agent_id": "agent:requester",
+        "option_id": "option:receive-standard",
+        "offer_ref": {
+          "id": "offer:requester-offer",
+          "digest": "sha256:2d744bf2840a7c280a464b6f3b7fa9f757988ac7de800a33a2b31bd80d5da3ce"
+        },
+        "selection_constraints_ref": {
+          "id": "fixture:selection-constraints",
+          "digest": "sha256:45b6b09101a7b5f10c0ffeca3e98f6533b3dad87c1edb92381f0ce86e62a3b61"
+        }
+      },
+      {
+        "agent_id": "agent:researcher",
+        "option_id": "option:standard",
+        "offer_ref": {
+          "id": "offer:researcher-standard-offer-v2",
+          "digest": "sha256:0a701c8f2b46be070da1dd13d731855dafb26efa904d5dfc44db6b7413839728"
+        },
+        "selection_constraints_ref": {
+          "id": "fixture:selection-constraints",
+          "digest": "sha256:45b6b09101a7b5f10c0ffeca3e98f6533b3dad87c1edb92381f0ce86e62a3b61"
+        }
+      }
+    ],
+    "publication_contract_refs": [
+      {
+        "id": "publication:requester",
+        "digest": "sha256:ebccd4a54de7ab83381e2c5a3da31457dbdc70aeaa2b44fe052942ba41393319"
+      },
+      {
+        "id": "publication:researcher",
+        "digest": "sha256:1b9b4bb8ebac99163aefdfd09d23771ac298e9058deee9060a002e8334503dad"
+      }
+    ],
+    "own_promises": [
+      {
+        "promise_id": "promise:receive-report",
+        "promiser_agent_id": "agent:requester",
+        "promisee_ids": [
+          "agent:researcher"
+        ],
+        "action": {
+          "action_type": "https://example.org/agent-bazaar/v0.2/actions/receive_report",
+          "semantics_ref": {
+            "id": "fixture:action-semantics",
+            "digest": "sha256:78d32746b84fce453d336ef19bca89d3642a9dcabfb14116b7aadaddc1351152"
+          },
+          "polarity": "receive",
+          "subject": {
+            "type_uri": "https://example.org/agent-bazaar/v0.2/subjects/research-request",
+            "parameters": {
+              "id": "subject:protocol-comparison"
+            }
+          },
+          "resources": [],
+          "parameters": {
+            "scope": "Receive the agreed report; receipt alone is not a promise of favorable assessment."
+          }
+        },
+        "capability_refs": [
+          {
+            "id": "fixture:requester-capability",
+            "digest": "sha256:73d741482ed408dfc2ee5422253c63ce68c6534b386b152af06d6a96ea10601e"
+          }
+        ],
+        "authority_refs": [
+          {
+            "id": "fixture:requester-principal-policy",
+            "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+          }
+        ],
+        "qualifications": [
+          {
+            "type_uri": "https://example.org/agent-bazaar/v0.2/qualifications/agreed-counterperformance",
+            "parameters": {
+              "meaning": "The issued service promise is qualified by exact-term counterpart adoption and policy-governed acceptance status."
+            }
+          }
+        ],
+        "validity": {
+          "mode": "until_withdrawn",
+          "policy_ref": {
+            "id": "fixture:requester-principal-policy",
+            "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+          },
+          "status_ref": "https://example.org/agent-bazaar/v0.2/status/promise-receive-report"
+        }
+      },
+      {
+        "promise_id": "promise:research-standard-v2",
+        "promiser_agent_id": "agent:researcher",
+        "promisee_ids": [
+          "agent:requester"
+        ],
+        "action": {
+          "action_type": "https://example.org/agent-bazaar/v0.2/actions/produce_report",
+          "semantics_ref": {
+            "id": "fixture:action-semantics",
+            "digest": "sha256:78d32746b84fce453d336ef19bca89d3642a9dcabfb14116b7aadaddc1351152"
+          },
+          "polarity": "provide",
+          "subject": {
+            "type_uri": "https://example.org/agent-bazaar/v0.2/subjects/research-request",
+            "parameters": {
+              "id": "subject:protocol-comparison"
+            }
+          },
+          "resources": [],
+          "parameters": {
+            "scope": "Three protocol descriptions with primary-source citations. Include an explicit uncertainty appendix."
+          }
+        },
+        "capability_refs": [
+          {
+            "id": "fixture:researcher-capability",
+            "digest": "sha256:927c555dae7926efdbb240827e6ceb39bb700581b3cec1f9e43b10d6fc32c07f"
+          }
+        ],
+        "authority_refs": [
+          {
+            "id": "fixture:researcher-principal-policy",
+            "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+          }
+        ],
+        "qualifications": [
+          {
+            "type_uri": "https://example.org/agent-bazaar/v0.2/qualifications/agreed-counterperformance",
+            "parameters": {
+              "meaning": "The issued service promise is qualified by exact-term counterpart adoption and policy-governed acceptance status."
+            }
+          }
+        ],
+        "validity": {
+          "mode": "until_withdrawn",
+          "policy_ref": {
+            "id": "fixture:researcher-principal-policy",
+            "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+          },
+          "status_ref": "https://example.org/agent-bazaar/v0.2/status/promise-research-standard"
+        }
+      }
+    ],
+    "commercial_terms": {
+      "profile_uri": "https://example.org/agent-bazaar/v0.2/commercial/example-no-consideration",
+      "terms": {
+        "consideration": "none",
+        "purpose": "Fictional contract-shape review"
+      },
+      "policy_refs": [
+        {
+          "id": "fixture:requester-principal-policy",
+          "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+        },
+        {
+          "id": "fixture:researcher-principal-policy",
+          "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+        }
+      ]
+    },
+    "route_selections": [],
+    "selection_constraints_refs": [
+      {
+        "id": "fixture:selection-constraints",
+        "digest": "sha256:45b6b09101a7b5f10c0ffeca3e98f6533b3dad87c1edb92381f0ce86e62a3b61"
+      }
+    ],
+    "principal_refusal_windows": [
+      {
+        "principal_id": "principal:requester",
+        "principal_policy_ref": {
+          "id": "fixture:requester-principal-policy",
+          "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+        },
+        "duration_ms": 60000,
+        "notice_target_ref": {
+          "id": "fixture:requester-notice-target",
+          "digest": "sha256:105d8982d7ff1a7325ef7bef3a609589c36115d50111e93db3b0ebe33a9251a3"
+        },
+        "notice_profile_ref": {
+          "id": "fixture:notice-profile",
+          "digest": "sha256:c61bb5b22d300571e7cc73137263d135abb36d3772125bf55225b0e6eea4b468"
+        },
+        "refusal_authority_ref": {
+          "id": "fixture:requester-principal-policy",
+          "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+        },
+        "refusal_mechanism_ref": {
+          "id": "fixture:refusal-mechanism",
+          "digest": "sha256:4535ba9d8526446798802efd3ddb139ea4399289b9a2ba1223634c5b2b8836a4"
+        }
+      },
+      {
+        "principal_id": "principal:researcher",
+        "principal_policy_ref": {
+          "id": "fixture:researcher-principal-policy",
+          "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+        },
+        "duration_ms": 120000,
+        "notice_target_ref": {
+          "id": "fixture:researcher-notice-target",
+          "digest": "sha256:0f9fe63ff0974552baca32e24cfe3ca794a6ed83cee2caa0c06c51ec347bb3c6"
+        },
+        "notice_profile_ref": {
+          "id": "fixture:notice-profile",
+          "digest": "sha256:c61bb5b22d300571e7cc73137263d135abb36d3772125bf55225b0e6eea4b468"
+        },
+        "refusal_authority_ref": {
+          "id": "fixture:researcher-principal-policy",
+          "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+        },
+        "refusal_mechanism_ref": {
+          "id": "fixture:refusal-mechanism",
+          "digest": "sha256:4535ba9d8526446798802efd3ddb139ea4399289b9a2ba1223634c5b2b8836a4"
+        }
+      }
+    ],
+    "clock_profile_ref": {
+      "id": "fixture:clock-and-status-policy",
+      "digest": "sha256:9c6be2961dc40698504b7b4bce0ffed3d1e0d5411446b7f7ba5ae76d62acdc80"
+    },
+    "status_authority_agent_id": "agent:requester",
+    "status_policy_ref": {
+      "id": "fixture:clock-and-status-policy",
+      "digest": "sha256:9c6be2961dc40698504b7b4bce0ffed3d1e0d5411446b7f7ba5ae76d62acdc80"
+    },
+    "validity": {
+      "mode": "until_withdrawn",
+      "policy_ref": {
+        "id": "fixture:requester-principal-policy",
+        "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+      },
+      "status_ref": "https://example.org/agent-bazaar/v0.2/status/candidate-research"
+    },
+    "privacy_policy_ref": {
+      "id": "fixture:negotiation-privacy",
+      "digest": "sha256:61a3082343796d964fc7a781de3e3c076c8ecd2e6973e8f491bb2dac8b5ba01c"
+    }
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.2/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.2/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:0fe2e4dc55038a91c5a7f63c7810c67b350823b9d4c44e1f73796142c8442f40",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "profile": "https://example.org/extensions/agent-bazaar/profiles/research/v0.1",
+  "terms": {
+    "inputs": {
+      "question": "Compare the roles of A2A, MCP, and AP2; identify uncertainty and version-sensitive statements.",
+      "protocols": [
+        "A2A",
+        "MCP",
+        "AP2"
+      ],
+      "source_policy": "official_primary_sources"
+    },
+    "deliverables": [
+      "report.md",
+      "claim-evidence.json"
+    ],
+    "acceptance": {
+      "evaluator_agent_id": "agent:human-reviewer",
+      "rubric_id": "research-rubric/0.1",
+      "rubric_digest": "sha256:9cdfed1201422bf915dc2d80deaa14c764e137fa529b3c74ec600c7d031fabdf",
+      "criteria": [
+        "Artifact structure and digests match",
+        "All three protocols are covered",
+        "Every material factual claim has primary-source provenance",
+        "Human source review finds no known material unsupported claim",
+        "Unknown or version-sensitive conclusions are labeled"
+      ],
+      "max_corrections": 1,
+      "review_timeout_outcome": "unresolved"
+    },
+    "delivery_window_seconds": 900,
+    "review_window_seconds": 3600
+  }
+}

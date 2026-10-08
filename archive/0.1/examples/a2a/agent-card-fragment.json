@@ -1,0 +1,34 @@
+{
+  "capabilities": {
+    "extensions": [
+      {
+        "uri": "https://example.org/extensions/agent-bazaar/v0.1",
+        "description": "Emitted intent, bounded negotiation, and self-authored promises",
+        "required": true,
+        "params": {
+          "profiles": [
+            "abp/0.1-draft"
+          ],
+          "settlementModes": [
+            "none",
+            "simulated"
+          ],
+          "publicationContractRef": {
+            "id": "record:provider-publication",
+            "digest": "sha256:78209eac7deac41e0f85fab478f404233aae0a3306addd129066abb91b2da190"
+          },
+          "admissionProfiles": [
+            "https://example.org/extensions/agent-bazaar/profiles/reception-permits/v0.1"
+          ]
+        }
+      }
+    ]
+  },
+  "supportedInterfaces": [
+    {
+      "url": "https://research.example.org/a2a",
+      "protocolBinding": "JSONRPC",
+      "protocolVersion": "1.0"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "profile": "abp/0.1-draft",
+  "kind": "reception_permit",
+  "id": "record:buyer-permit",
+  "issuer_agent_id": "agent:buyer",
+  "issuer_principal_id": "principal:agent:buyer",
+  "created_at": "2026-10-08T18:00:00Z",
+  "required_extensions": [],
+  "body": {
+    "permit_id": "permit:buyer-inbox-1",
+    "channel_id": "channel:research-1",
+    "recipient_agent_id": "agent:buyer",
+    "sender_agent_id": "agent:sourcecheck",
+    "intent_digest": "sha256:ad3d8aff7b439657f7b5058a33effdd34efc8d4ee053073ebff0e1a16de370dd",
+    "topic": "official-agent-protocol-research",
+    "allowed_message_kinds": [
+      "offer",
+      "clarification"
+    ],
+    "sequence_start": 1,
+    "sequence_end": 8,
+    "max_offer_versions": 4,
+    "max_message_bytes": 16384,
+    "max_total_bytes": 65536,
+    "min_interval_seconds": 5,
+    "expires_at": "2026-10-08T18:30:00Z",
+    "policy_epoch": 1,
+    "control_allowance": {
+      "close": 1,
+      "close_ack": 1,
+      "formation_status_messages": 8,
+      "formation_status_max_bytes": 32768,
+      "formation_status_max_message_bytes": 4096,
+      "close_max_message_bytes": 1024
+    }
+  }
+}
