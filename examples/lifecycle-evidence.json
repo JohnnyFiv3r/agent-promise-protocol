@@ -1,11 +1,11 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "required_extensions": [],
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-researcher",
-      "signed_payload_digest": "sha256:166d80c97722316e7ee875f9beeae069c7e99d7e7a0d9730eef46985347b898a",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:7dd2b8f9a846e8e1b11d9cb22b9f161ab240a39fe0f5e86b64006febef6f1477",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "synthetic-review-only"
@@ -28,14 +28,14 @@
   "body": {
     "agreement_ref": {
       "id": "accepted:research",
-      "digest": "sha256:052e001fd033e0ed4173aa424f5b914c728800e10f26f1ab76b06ee74f4fa59c"
+      "digest": "sha256:c118dadbb21d29b8439b60ed9383757cce5607732e2778bdaa4c5754fe7b1a20"
     },
     "action_ref": {
       "promiser_agent_id": "agent:researcher",
       "promise_id": "promise:research-standard-v2"
     },
     "action_instance": {
-      "type_uri": "https://example.org/agent-bazaar/v0.4/occurrences/one-shot",
+      "type_uri": "https://example.org/agent-promise-protocol/v0.4/occurrences/one-shot",
       "parameters": {
         "ordinal": 1
       }
@@ -43,12 +43,12 @@
     "category": "native_execution",
     "reporter_role": "adapter",
     "claim": {
-      "type_uri": "https://example.org/agent-bazaar/v0.4/claims/not-dispatched",
+      "type_uri": "https://example.org/agent-promise-protocol/v0.4/claims/not-dispatched",
       "parameters": {
         "reason": "principal_refused"
       }
     },
-    "evidence_profile_uri": "https://example.org/agent-bazaar/v0.4/evidence/fictional-observation",
+    "evidence_profile_uri": "https://example.org/agent-promise-protocol/v0.4/evidence/fictional-observation",
     "native_evidence_refs": [
       {
         "id": "fixture:native-observation",
@@ -64,7 +64,7 @@
     ],
     "related_handoff_ref": {
       "id": "handoff:report-once",
-      "digest": "sha256:9c2c5128c85dbb9083db104fdf8db7858f32bffa53507512736a39904bcacea4"
+      "digest": "sha256:38a47ef5906d1d9699c829b80155c26e5ae4dc4e732eb63b308f7ef301c51c58"
     }
   }
 }

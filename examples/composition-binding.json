@@ -1,11 +1,11 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "required_extensions": [],
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-requester",
-      "signed_payload_digest": "sha256:e5bd08090faf28e007a520d570021b84c2f1b02519465b5fc232abe5da7c9006",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:c2c1b7c7042dcfdedd7395e16a7b463452809e3048a8379d6999ac7c925b9578",
       "issuer_agent_id": "agent:requester",
       "scope": [
         "synthetic-review-only"
@@ -28,12 +28,12 @@
   "body": {
     "plan_ref": {
       "id": "plan:research-contribution",
-      "digest": "sha256:e32b3bcfc6ac57882cabbc486598c156dc7524534e7fb0ef0986320ed60ad256"
+      "digest": "sha256:88975a64f2387c1e37250027fbd52ecfc6cb164ae7ae4cceedc4c0c4fce79eb5"
     },
     "component_id": "component:report",
     "candidate_ref": {
       "id": "candidate:composed-research",
-      "digest": "sha256:4b902770a496f7b2225b4a56d7906acdc70e781bddc555f6a22f8ab90e79ac4d"
+      "digest": "sha256:54528e3e4166c11acc1fda02875602c8c861072fde8a9c37a1a083e3466bf45c"
     }
   }
 }

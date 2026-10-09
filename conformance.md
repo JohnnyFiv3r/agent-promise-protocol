@@ -1,8 +1,10 @@
 # Conformance status and assessment
 
-**ABP 0.4 / RP1 · reference runtime 0.1 · baseline frozen at `f4a01e2`**
+**APP 0.4 / RP1 · reference runtime 0.1 · historical ABP baseline at `f4a01e2`**
 
 The repository contains a Python reference implementation and executable structural, cryptographic, behavioral and local integration tests. Those tests provide evidence for their actual assertions under their stated trust assumptions. They do not establish complete RP1 deployment conformance, independent interoperability or builder adoption.
+
+This is published as an **APP 0.4 Reference Draft** with an MIT reference runtime. The release's verification report identifies the actual checked revision and artifacts; it is not a certificate for a provider's deployment. See [release metadata](release.json), [validation](validation.md) and the [implementer guide](docs/implementer-guide.md).
 
 The normative requirements remain the [core contract](contract.md), [C1–C8](contracts/README.md), [RP1](profiles/reference-profile.md) and the frozen schemas. The implementation does not redefine a requirement when a test is easier to satisfy. An unsupported required meaning must block the act.
 
@@ -27,7 +29,7 @@ This reference realm uses explicit participant and resource-owner delegation to 
 | Integrated reference behavior | [`test_harness.py`](tests/runtime/test_harness.py) | Signed bilateral formation, admission/replay, exact promise provenance, shared capacity, protected refusal, optional composition and fake handoff through one implementation |
 | Deployment boundaries | [`test_deployment_portability.py`](tests/runtime/test_deployment_portability.py), [`test_admission_scope.py`](tests/runtime/test_admission_scope.py) | Separate-store evidence preserves authorship without semantic admission; recipient/allowance accounting remains scoped; neither proves distributed formation or hosted tenant isolation |
 
-[Validation](validation.md) separates the initial 142-test runtime run from the deployment/accounting follow-up, with source manifests, reproduction commands and the limits of each category. A skipped OPA integration test is not an OPA pass. Passing local A2A tests against this implementation does not show interoperability with a separately authored A2A/Bazaar participant.
+[Validation](validation.md) separates the initial 142-test runtime run from the deployment/accounting follow-up, with source manifests, reproduction commands and the limits of each category. A skipped OPA integration test is not an OPA pass. Passing local A2A tests against this implementation does not show interoperability with a separately authored A2A/APP participant.
 
 ## P01–P27 remain assessment proposals
 

@@ -1,6 +1,8 @@
 # Protected handoff and downstream evidence
 
-**ABP 0.4-draft · integration guide · October 8, 2026**
+**APP 0.4-draft · integration guide · October 9, 2026 namespace revision**
+
+This guide carries forward the October 8 ABP boundary under the distinct [APP namespace](docs/namespace-transition.md).
 
 The ordinary bilateral path produces exact agent agreement and interpretable principal-recovery status without requiring a native adapter. The optional `adapter-handoff` and `lifecycle-evidence` features extend that same agreement model through the [C8 boundary](contracts/08-adapter-boundary.md). Native systems retain action authorization, execution, commerce validation, payment, fulfillment, assessment, and settlement.
 
@@ -24,7 +26,7 @@ Every affected participant must support and accept the required semantics before
 
 When `adapter-handoff` is selected, C8 adds three explicit boundary operations over one exact handoff request:
 
-| Operation | Bazaar-side guarantee | Native boundary |
+| Operation | APP-side guarantee | Native boundary |
 |---|---|---|
 | `prepare_handoff` | Validate the adopted action and freeze the exact translation, native operation key, authorization requirements, and recovery interpretation | No external effect; a prepared translation is not permission to execute |
 | `dispatch_handoff` | Establish current clearance, relevant dependency predicates, exact action authority, and the protected disposition of the occurrence; durably record the decision | The selected native system performs the authorized attempt under its own contract |
@@ -52,9 +54,9 @@ An uncertain dispatch retains its original operation identity and possible effec
 
 ## Native commerce association
 
-A native commerce adapter may correlate exact Bazaar agreement/action references with a native order or Checkout using its selected authenticated extension mechanism. It must independently obtain and verify the native credentials, mandates, approvals, amounts, resource scope, and outcome evidence required by that system. Copying a Bazaar signature into a native object does not create a native mandate.
+A native commerce adapter may correlate exact APP agreement/action references with a native order or Checkout using its selected authenticated extension mechanism. It must independently obtain and verify the native credentials, mandates, approvals, amounts, resource scope, and outcome evidence required by that system. Copying an APP signature into a native object does not create a native mandate.
 
-AP2, UCP, ACP, paid-resource exchange protocols, and processors keep their own schemas, validation, effects, and finality rules. Bazaar retains exact references and interprets attributed evidence through the adopted adapter profile. It neither duplicates their financial state machines nor turns principal-window closure into a native human approval.
+AP2, UCP, ACP, paid-resource exchange protocols, and processors keep their own schemas, validation, effects, and finality rules. APP retains exact references and interprets attributed evidence through the adopted adapter profile. It neither duplicates their financial state machines nor turns principal-window closure into a native human approval.
 
 ## Authored scope and proposed checks
 

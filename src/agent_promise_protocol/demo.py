@@ -12,7 +12,7 @@ from .fixtures import Environment
 def run_demo(directory):
     directory = Path(directory)
     result = {
-        "runtime": "Agent Bazaar reference runtime 0.1",
+        "runtime": "Agent Promise Protocol reference runtime 0.1",
         "mode": "controlled simulation",
         "evidence_scope": {
             "protocol_signatures": "real Ed25519/JCS verification",
@@ -117,7 +117,7 @@ def run_demo(directory):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
-        description="Agent Bazaar controlled reference demonstrations"
+        description="Agent Promise Protocol controlled reference demonstrations"
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
     demo = subparsers.add_parser(
@@ -130,7 +130,9 @@ def main(argv=None):
         help="fresh output directory for durable SQLite scenario ledgers",
     )
     args = parser.parse_args(argv)
-    directory = args.directory or Path(tempfile.mkdtemp(prefix="agent-bazaar-demo-"))
+    directory = args.directory or Path(
+        tempfile.mkdtemp(prefix="agent-promise-protocol-demo-")
+    )
     print(json.dumps(run_demo(directory), indent=2))
     return 0
 

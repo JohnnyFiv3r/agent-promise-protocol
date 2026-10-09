@@ -4,15 +4,15 @@ from pathlib import Path
 
 import pytest
 
-from agent_bazaar.crypto import Signer
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.schema import SCHEMA_FILES, validate
+from agent_promise_protocol.crypto import Signer
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.schema import SCHEMA_FILES, validate
 from test_crypto import record
 
 
 def test_bundled_schemas_match_authoritative_repository_bytes():
     authoritative = Path(__file__).resolve().parents[2] / "schemas"
-    resources = files("agent_bazaar").joinpath("schemas")
+    resources = files("agent_promise_protocol").joinpath("schemas")
     for name in SCHEMA_FILES:
         assert (
             resources.joinpath(name).read_bytes() == (authoritative / name).read_bytes()

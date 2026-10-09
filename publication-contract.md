@@ -37,7 +37,7 @@ Publication exposes the owners' commercial constraints, not a mandatory exhausti
 
 The selected arrangement must have enough structure under its declared semantic profile to check it as a whole. Independent allowed components do not imply that every combination is permitted. Exact candidate terms pin the negotiated arrangement, the applicable policy revisions and the evidence that each policy admits it. An unknown required policy predicate blocks automated adoption.
 
-Commercial terms may name AP2/UCP/ACP, an exchange protocol, processor or settlement preference. Those are agreement data and downstream references, not proof of native compatibility or authority. Bazaar does not construct a Checkout, validate a mandate or invoke a payment contract.
+Commercial terms may name AP2/UCP/ACP, an exchange protocol, processor or settlement preference. Those are agreement data and downstream references, not proof of native compatibility or authority. APP does not construct a Checkout, validate a mandate or invoke a payment contract.
 
 ## Validity and budgets
 

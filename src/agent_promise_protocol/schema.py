@@ -16,7 +16,7 @@ SCHEMA_FILES = (
     "interaction.schema.json",
     "admission-policy.schema.json",
 )
-_RESOURCES = files("agent_bazaar").joinpath("schemas")
+_RESOURCES = files("agent_promise_protocol").joinpath("schemas")
 _SCHEMAS = [
     json.loads(_RESOURCES.joinpath(name).read_text(encoding="utf-8"))
     for name in SCHEMA_FILES

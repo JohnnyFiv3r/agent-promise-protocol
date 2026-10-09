@@ -6,16 +6,16 @@ from threading import Event
 
 import pytest
 
-from agent_bazaar.crypto import content_ref, digest
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.handoff import (
+from agent_promise_protocol.crypto import content_ref, digest
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.handoff import (
     FakeAdapter,
     Handoff,
     decode_native_wrapper,
     handoff_key,
     native_wrapper,
 )
-from agent_bazaar.storage import Ledger
+from agent_promise_protocol.storage import Ledger
 
 
 class Crash(BaseException):
@@ -176,7 +176,7 @@ def test_preparation_is_effect_free_frozen_and_does_not_imply_clearance(tmp_path
     assert world.adapter.operations == {}
     assert world.gate_calls == 0
     prepared = result["prepared"]["body"]
-    assert prepared["native_operation_key"] == "abp-rp1-" + world.key()[7:]
+    assert prepared["native_operation_key"] == "app-rp1-" + world.key()[7:]
     wrapper = world.handoff.resolve(prepared["native_request_ref"])
     assert decode_native_wrapper(wrapper, prepared["native_request_ref"]) == exact_bytes
     assert world.handoff.prepare(world.request) == result

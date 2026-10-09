@@ -1,14 +1,16 @@
 # Proposed contract and adapter-boundary tests
 
-**ABP 0.4-draft · 27 proposed scenarios · every behavioral and adoption scenario below is unrun**
+**APP 0.4-draft · 27 proposed assessment scenarios · partial executable coverage mapped separately**
 
-This document proposes the test regime for the [governing contracts](../contracts/README.md), including [composition](../contracts/07-composition.md), the [adapter boundary](../contracts/08-adapter-boundary.md) and the [reference profile](../profiles/reference-profile.md). It contains no executable tests and authorizes no live service, payment or settlement. The revision and reference profile must be locked before executable conformance fixtures or independent interoperability testing are implemented. Worked scenarios may expose a contract disagreement; they do not silently decide the contract.
+This document proposes the test regime for the [governing contracts](../contracts/README.md), including [composition](../contracts/07-composition.md), the [adapter boundary](../contracts/08-adapter-boundary.md) and the [reference profile](../profiles/reference-profile.md). It specifies scenarios and oracles, not an executable suite, and authorizes no live service, payment or settlement. The runtime was implemented against the frozen contract/profile baseline; its tests now exercise portions of this regime. Each assessment must identify the exact pinned revision. Worked scenarios may expose a contract disagreement; they do not silently decide the contract.
 
 ## Evidence status
 
 The repository's [authoring checker](../checks/validate.py) checks authored schema shapes, fixture structure and local reference/digest consistency within its documented limits. Its recorded output for a particular revision is evidence only of those checks. This proposal does not rerun that checker or claim that an earlier run validates the completed 0.4 draft.
 
-None of the scenarios below has been implemented or executed. Current fictional proof references are not signatures and cannot establish authenticated authorship. A future cryptographic case requires the selected real proof mechanism and controlled test keys; a future behavior case requires an instrumented participant implementation. A fake adapter result establishes only handling of that fake's contract, never actual fulfillment, settlement or AP2 interoperability.
+The [validation record](../validation.md) reports actual executable results; the [conformance assessment](../conformance.md) maps their partial coverage to P01–P27. These scenario IDs are not all certified as passed. External-builder adoption and independently authored interoperability remain unrun.
+
+Authored fictional proof references remain distinct from the runtime's real signatures and controlled keys. Behavioral checks use an instrumented reference participant, with controlled principal channels, clocks and fake native hooks. A fake adapter result establishes only handling of that fake's contract, never actual fulfillment, settlement or AP2 interoperability.
 
 ## Proposed test boundary and oracle
 
@@ -81,7 +83,7 @@ The oracle is the attributable result and permitted side effects: exact referenc
 - **Setup:** Admit `finalize_candidate`; interrupt after the durable result but before delivery. Later expire/withdraw the original action admission basis while retaining authorized outcome-recovery access.
 - **Stimulus:** Replay the same operation, then query formation through a different admitted operation for the same candidate; reuse the first operation key with changed content.
 - **Oracle:** All valid recovery returns the original accepted result without another formation. Recovery uses current disclosure permission rather than reapplying expired action eligibility. Conflicting reuse has a separate conflict response and cannot replace the original receipt chain. Repeat with recovery access revoked: withhold protected output without changing its durable disposition.
-- **Boundary:** Crash/replay semantics in controlled storage; no real crash tolerance claimed before implementation.
+- **Boundary:** Crash/replay semantics in controlled storage; only the actually exercised failure windows support a crash-recovery claim. Production storage and distributed recovery require separate qualification.
 
 ### P10 — Composition retains separate exact agreements
 
@@ -132,7 +134,7 @@ The oracle is the attributable result and permitted side effects: exact referenc
 - **Setup:** The adapter probe exposes a separately authorized irreversible action for an exact agreement, promise and adopted action occurrence, with its applicable dependencies.
 - **Stimulus:** Request `dispatch_handoff` while one required window is unstarted/open/refused, a dependency is unresolved, or action authority is absent. Then provide all qualifying prerequisites without changing the action.
 - **Oracle:** No execution call reaches the fake adapter before every required gate qualifies. Qualifying inputs permit only the exact authorized handoff. Unrelated independent components do not become implicit prerequisites; a `prepared` receipt alone never permits dispatch.
-- **Boundary:** Bazaar-to-fake-adapter gate; no actual service, transfer or settlement.
+- **Boundary:** APP-to-fake-adapter gate; no actual service, transfer or settlement.
 
 ### P17 — Side-effect-free preparation and no early effects
 
@@ -144,7 +146,7 @@ The oracle is the attributable result and permitted side effects: exact referenc
 ### P18 — Native authority remains separate
 
 - **Setup:** A valid agreement has cleared principal review. The fake adapter can independently return missing, stale, mismatched or current native authority for a specific actor/action.
-- **Stimulus:** Present only Bazaar proofs, a clearance status, an unrelated native credential and finally matching current authority.
+- **Stimulus:** Present only APP proofs, a clearance status, an unrelated native credential and finally matching current authority.
 - **Oracle:** Agreement and clearance never become a mandate or execution credential. Only separately qualified native authorization can permit the exact adapter action, still subject to the other handoff gates.
 - **Boundary:** A controlled native-authority probe; no claim of validating AP2/UCP/ACP or a payment provider.
 
@@ -194,14 +196,14 @@ The oracle is the attributable result and permitted side effects: exact referenc
 
 ## Adoption and independent implementation — assessed separately
 
-The following adoption scenarios assess whether the ordinary path is usable and whether the written standard is sufficient, separately from the correctness cases above. They are proposed and unrun. The SDK/reference harness is not implemented by this specification work; these scenarios cannot presently establish ease of adoption. Neither a convenient SDK nor a successful walkthrough proves independent interoperability.
+The following scenarios assess whether the ordinary path is usable and whether the written standard is sufficient, separately from the correctness cases above. P25 and P26 remain proposed and unrun. The reference runtime is available, while its high-level SDK facade remains a design interface; implementation tests do not establish builder ease of adoption. P27 has partial runtime coverage described in the conformance assessment. Neither a convenient SDK nor a successful walkthrough proves independent interoperability.
 
 ### P25 — Builder adoption through the default harness
 
-- **Setup:** After contract/profile lock and future SDK availability, give a builder who did not author the protocol the [quick-start](../docs/quickstart.md), [default profile](../profiles/reference-profile.md), future SDK and [application/harness interface](../profiles/harness-interface.md). Supply a controlled peer. The builder connects one existing capability, explicit principal policy, its actual capability/capacity constraints, the principal-designated notice/refusal channel and controlled native hook implementations. Native hooks remain fake probes in this test; the harness must not invent their authority or facts.
+- **Setup:** Pin the contract/profile and give a builder who did not author the protocol the [implementer guide](../docs/implementer-guide.md), [quick-start](../docs/quickstart.md), [default profile](../profiles/reference-profile.md), reference runtime and its documented [integration interfaces](../docs/runtime.md). Distinguish those implemented interfaces from the [proposed SDK facade](../profiles/harness-interface.md). Supply a controlled peer. The builder connects one existing capability, explicit principal policy, its actual capability/capacity constraints, the principal-designated notice/refusal channel and controlled native hook implementations. Native hooks remain fake probes in this test; the harness must not invent their authority or facts.
 - **Stimulus:** Using only the published materials, have the builder form one exact bilateral agreement and exercise a principal refusal through the designated channel. Ask the builder to identify agreement, pending/cleared/refused/unresolved principal status and separate downstream authorization. Record application integration changes, protocol-specific custom machinery and any undocumented explanations needed.
-- **Oracle:** The builder can complete the flow by supplying application facts, policy and declared hooks. The SDK handles the selected profile's proof/retrieval, durable operations, replay/ordering and notice/status mechanics without a bespoke protocol engine. Both principals retain positive protected periods; valid refusal is preserved and prevents dependent handoff. No principal authority, truthful capacity, waiver or native permission is inferred for convenience. Required undocumented protocol rules or application-authored replacements for promised harness mechanics are adoption gaps, even if the resulting flow is otherwise correct.
-- **Boundary:** Future SDK adoption in a controlled environment. Capability quality and real external performance are not assessed. No native execution or settlement occurs; observations about integration effort do not create an invented duration target or claim that today's design is already easy to adopt.
+- **Oracle:** The builder can complete the flow by supplying application facts, policy and declared hooks. The supplied harness handles the selected profile's proof/retrieval, durable operations, replay/ordering and notice/status mechanics without a bespoke protocol engine. Both principals retain positive protected periods; valid refusal is preserved and prevents dependent handoff. No principal authority, truthful capacity, waiver or native permission is inferred for convenience. Required undocumented protocol rules or application-authored replacements for promised harness mechanics are adoption gaps, even if the resulting flow is otherwise correct.
+- **Boundary:** Reference-harness adoption in a controlled environment. Capability quality and real external performance are not assessed. No native execution or settlement occurs; observations about integration effort do not create an invented duration target or claim that today's design is already easy to adopt.
 
 ### P26 — Independent participant without the SDK
 
@@ -217,12 +219,12 @@ The following adoption scenarios assess whether the ordinary path is usable and 
 - **Oracle:** The ordinary agreement/refusal flow remains available without advanced subsystems. Capability advertisement and required-semantics checks make unsupported advanced requirements explicit; they block only the dependent act instead of being silently approximated. Ignoring unrequired metadata is allowed only when it changes no authority, promise, adopted condition or recovery right. The minimal path still enforces exact adoption, applicable capacity constraints, durable recovery and every principal's protected period.
 - **Boundary:** Minimal integration surface and capability negotiation, not a weakened conformance mode. Negotiation-only participants have no implied native action authority or obligation to implement downstream execution.
 
-## Proposed sequence after contract lock
+## Assessment sequence after contract lock
 
 1. Pin the exact contract/schema/profile revision and resolve any scenario whose oracle still depends on an undecided semantic rule.
-2. Author executable structural and cryptographic fixtures with explicit trust roots and negative cases; preserve the distinction from current nonvalidating examples.
-3. Implement the behavioral scenarios against a participant harness and deterministic fake authorities/adapters. Retain authoritative ordering and side-effect evidence for failures and successful cases.
-4. Assess builder adoption through the future SDK and independent implementation without it as separate activities. Exercise independently implemented participants using the same pinned binding/profile; report usability, normative completeness and interoperability separately from single-implementation or fake-adapter results.
+2. Use the existing executable structural and cryptographic fixtures, and add missing cases with explicit trust roots and negative outcomes. Preserve the distinction from authored fictional examples.
+3. Complete the remaining behavioral scenario coverage against a participant harness and deterministic fake authorities/adapters. Retain authoritative ordering and side-effect evidence for failures and successful cases.
+4. Assess builder adoption through the supplied reference harness and independent implementation without it as separate activities. Exercise independently implemented participants using the same pinned binding/profile; report usability, normative completeness and interoperability separately from single-implementation or fake-adapter results.
 5. Propose any particular live native adapter qualification separately, with its actual authority and integration boundary. These tests neither select nor authorize such an integration.
 
 Passing the eventual suite would support only the advertised profile, declared trust assumptions and exercised boundaries. It would not prove honest counterparties, universal compatibility, real-world delivery, payment or settlement.

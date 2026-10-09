@@ -7,6 +7,6 @@
     "agent:researcher"
   ],
   "topic": "protocol-comparison",
-  "native_profile": "https://example.org/agent-bazaar/v0.4/policies/eligibility",
+  "native_profile": "https://example.org/agent-promise-protocol/v0.4/policies/eligibility",
   "meaning": "Only the two identified authenticated peers within this topic; no open unsolicited contact."
 }

@@ -20,4 +20,4 @@ Budgets and validity are distinct. Exhaustion stops additional admitted work und
 
 Explicit closure is possible when policy or an actor requests it. It does not silently cancel independently issued qualified actions or an accepted object. Those require the corresponding authorized withdrawal/refusal event.
 
-No fixed four-offer/eight-message/thirty-minute default survives from draft 0.1. Numeric values in illustrative records are example policy choices only; the [proposed test regime](tests/PROPOSED.md) remains unimplemented and stops at the adapter boundary.
+No fixed four-offer/eight-message/thirty-minute default survives from draft 0.1. Numeric values in illustrative records are example policy choices only. The broader [proposed test regime](tests/PROPOSED.md) stops at the adapter boundary; the [validation record](validation.md) separately identifies executable runtime coverage, including recipient/allowance accounting, without claiming that every proposed scenario has passed.

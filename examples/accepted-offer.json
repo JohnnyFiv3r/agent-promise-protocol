@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "kind": "accepted_offer",
   "id": "accepted:research",
   "issuer_agent_id": "agent:requester",
@@ -10,13 +10,13 @@
     "accepted_offer_id": "accepted:research",
     "candidate_ref": {
       "id": "candidate:research",
-      "digest": "sha256:8ac5ae7299cd8a46f4285576ee0a430c7d50515e94b2cf3d043997278f9d9572"
+      "digest": "sha256:8db3f9f6ac79bb8aa38634c5d4555d3cf023cd63290cbd2caad52ba949ae3c9e"
     },
     "origin": {
       "record_kind": "intent",
       "record_ref": {
         "id": "intent:requester",
-        "digest": "sha256:5ef45d8b43cf4ffad87550d06141ba48f34cf06bc1d6c7c4a237df58b99e42da"
+        "digest": "sha256:ad0c65c7cd4a6ad0c34f99463305a344899782c36dd56f5fbbb71dd05f1b0af7"
       },
       "originator_agent_id": "agent:requester",
       "originator_principal_id": "principal:requester",
@@ -25,11 +25,11 @@
     "adoption_refs": [
       {
         "id": "adoption:requester",
-        "digest": "sha256:c010a29602428589b52073cca9092f80ab61f644fd3a67db6c713ba2984ba281"
+        "digest": "sha256:59ed68d319765ba5baefd66d2827da9d55b2c95c8b2f89436adab642df37eb47"
       },
       {
         "id": "adoption:researcher",
-        "digest": "sha256:745676938a1189be14faa991d4e1717745ff920c657af602d0e6184c264d7e6b"
+        "digest": "sha256:a859ec3c69478ecbb943318fd9f81b2eef1264a90af970b43ebdea0eb664ba1a"
       }
     ],
     "finalized_at": "2026-10-08T18:01:00Z",
@@ -55,7 +55,7 @@
         },
         "refusal_mechanism_ref": {
           "id": "fixture:refusal-mechanism",
-          "digest": "sha256:e8ac2ff0190f49de916b4ea5052749d967c32ed0505907bc3c970add192b939f"
+          "digest": "sha256:a57e16b520478ed9f1003b989632814aa083ed46a87d5c550463e975e98e4608"
         }
       },
       {
@@ -79,7 +79,7 @@
         },
         "refusal_mechanism_ref": {
           "id": "fixture:refusal-mechanism",
-          "digest": "sha256:e8ac2ff0190f49de916b4ea5052749d967c32ed0505907bc3c970add192b939f"
+          "digest": "sha256:a57e16b520478ed9f1003b989632814aa083ed46a87d5c550463e975e98e4608"
         }
       }
     ],
@@ -92,7 +92,7 @@
       "id": "fixture:clock-and-status-policy",
       "digest": "sha256:1f2563bea9c4d98cfd2daede48b0e001ed0bf1bca1758638e6943f888f08b869"
     },
-    "status_ref": "https://example.org/agent-bazaar/v0.4/status/accepted-research",
+    "status_ref": "https://example.org/agent-promise-protocol/v0.4/status/accepted-research",
     "finalization_check_refs": [
       {
         "id": "fixture:requester-current-evidence",
@@ -107,9 +107,9 @@
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-requester",
-      "signed_payload_digest": "sha256:928acd5d232e86e5033f2e94667b0da1b1223e3c3bae0cd6b3a609ef550c97ec",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:416b51a3330c0f5ccde663a3fb9f2288fb5f3f0cdd1d2c26eb2f3e48845acdd7",
       "issuer_agent_id": "agent:requester",
       "scope": [
         "synthetic-review-only"

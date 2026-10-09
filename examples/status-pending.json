@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "kind": "status_snapshot",
   "id": "status:research:1",
   "issuer_agent_id": "agent:requester",
@@ -9,7 +9,7 @@
   "body": {
     "accepted_offer_ref": {
       "id": "accepted:research",
-      "digest": "sha256:052e001fd033e0ed4173aa424f5b914c728800e10f26f1ab76b06ee74f4fa59c"
+      "digest": "sha256:c118dadbb21d29b8439b60ed9383757cce5607732e2778bdaa4c5754fe7b1a20"
     },
     "revision": 1,
     "previous_status_digest": null,
@@ -63,9 +63,9 @@
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-requester",
-      "signed_payload_digest": "sha256:027eace4cd30761f09a3525aa409dfd9ecd2c0253e8ac7d5c24353b362d94d29",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:96d5f102e47e278628b1b961f81c7bfa2be58ff440afc6cf2a4e7651e8002b83",
       "issuer_agent_id": "agent:requester",
       "scope": [
         "synthetic-review-only"

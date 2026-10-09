@@ -24,8 +24,8 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
 
 from .errors import ProtocolError
 
-PROFILE = "abp/0.4-draft"
-PROFILE_URI = "https://github.com/JohnnyFiv3r/agent-bazaar/blob/main/profiles/reference-profile.md"
+PROFILE = "app/0.4-draft"
+PROFILE_URI = "https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/profiles/reference-profile.md"
 PROOF_PROFILE = PROFILE_URI + "#rp1-jws-ed25519"
 FEATURES = frozenset(
     {"bilateral", "composition", "lifecycle-evidence", "adapter-handoff"}
@@ -292,7 +292,7 @@ class Signer:
             self.private_key = Ed25519PrivateKey.from_private_bytes(self.private_key)
         self.kid = (
             kid
-            or "urn:agent-bazaar:key:"
+            or "urn:agent-promise-protocol:key:"
             + hashlib.sha256(
                 self.private_key.public_key().public_bytes(
                     serialization.Encoding.Raw, serialization.PublicFormat.Raw
@@ -330,15 +330,15 @@ class Signer:
         header = {
             "alg": "Ed25519",
             "kid": self.kid,
-            "typ": "abp-record+jws",
-            "abp_profile": PROFILE,
-            "abp_scope": scopes,
-            "crit": ["abp_profile", "abp_scope"],
+            "typ": "app-record+jws",
+            "app_profile": PROFILE,
+            "app_scope": scopes,
+            "crit": ["app_profile", "app_scope"],
         }
         signing = _b64(canonical(header)) + "." + _b64(canonical(unsigned))
         compact = signing + "." + _b64(self.private_key.sign(signing.encode("ascii")))
         wrapper = {
-            "id": "urn:agent-bazaar:proof:"
+            "id": "urn:agent-promise-protocol:proof:"
             + hashlib.sha256(compact.encode("ascii")).hexdigest(),
             "media_type": "application/jose",
             "compact_jws": compact,
@@ -534,7 +534,7 @@ class Registry:
                 "identity_mismatch", "semantic issuer principal is required"
             )
         expected_profile = (
-            "abp/admission-policy/0.4-draft"
+            "app/admission-policy/0.4-draft"
             if record.get("kind") == "admission_policy_declaration"
             else PROFILE
         )
@@ -625,10 +625,10 @@ class Registry:
                 expected = {
                     "alg": "Ed25519",
                     "kid": proof["verification_method"],
-                    "typ": "abp-record+jws",
-                    "abp_profile": PROFILE,
-                    "abp_scope": scopes,
-                    "crit": ["abp_profile", "abp_scope"],
+                    "typ": "app-record+jws",
+                    "app_profile": PROFILE,
+                    "app_scope": scopes,
+                    "crit": ["app_profile", "app_scope"],
                 }
                 if (
                     header != expected

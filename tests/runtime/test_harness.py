@@ -11,10 +11,10 @@ import sys
 
 import pytest
 
-from agent_bazaar.crypto import content_ref, PROOF_PROFILE
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.fixtures import Environment
-from agent_bazaar.schema import validate
+from agent_promise_protocol.crypto import content_ref, PROOF_PROFILE
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.fixtures import Environment
+from agent_promise_protocol.schema import validate
 
 
 @pytest.fixture
@@ -286,7 +286,7 @@ def test_demo_cli_reports_measured_simulation_results(tmp_path):
         [
             sys.executable,
             "-m",
-            "agent_bazaar.demo",
+            "agent_promise_protocol.demo",
             "demo",
             "--directory",
             str(tmp_path / "demo"),

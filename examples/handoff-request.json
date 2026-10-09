@@ -1,11 +1,11 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "required_extensions": [],
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-researcher",
-      "signed_payload_digest": "sha256:73defb5fe48da24f60f56164243950ce43ff554e336383f4579a9bd056dde114",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:f68a8e178d981abd51df7a34d8bf2e25317445b576dd6981811a82e9ef134c94",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "synthetic-review-only"
@@ -30,20 +30,20 @@
     "handoff_id": "handoff:report-once",
     "agreement_ref": {
       "id": "accepted:research",
-      "digest": "sha256:052e001fd033e0ed4173aa424f5b914c728800e10f26f1ab76b06ee74f4fa59c"
+      "digest": "sha256:c118dadbb21d29b8439b60ed9383757cce5607732e2778bdaa4c5754fe7b1a20"
     },
     "action_ref": {
       "promiser_agent_id": "agent:researcher",
       "promise_id": "promise:research-standard-v2"
     },
     "action_instance": {
-      "type_uri": "https://example.org/agent-bazaar/v0.4/occurrences/one-shot",
+      "type_uri": "https://example.org/agent-promise-protocol/v0.4/occurrences/one-shot",
       "parameters": {
         "ordinal": 1
       }
     },
     "adapter_agent_id": "agent:researcher",
-    "adapter_profile_uri": "https://example.org/agent-bazaar/v0.4/adapters/fictional-research",
+    "adapter_profile_uri": "https://example.org/agent-promise-protocol/v0.4/adapters/fictional-research",
     "request_payload_ref": {
       "id": "fixture:native-request-wrapper",
       "digest": "sha256:fd1e822d669e022f917ea739ddee0ce716885d56c9e0fbce65c83b0290b511dc"

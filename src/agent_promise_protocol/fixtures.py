@@ -23,7 +23,7 @@ from .schema import validate
 from .storage import Ledger
 
 
-U = "urn:agent-bazaar:controlled-research:"
+U = "urn:agent-promise-protocol:controlled-research:"
 AUTHORITY = U + "authority"
 START_MS = 1_791_484_800_000
 DURATION_MS = 100
@@ -426,7 +426,7 @@ class Environment:
         return self.sign(
             actor,
             {
-                "profile": "abp/admission-policy/0.4-draft",
+                "profile": "app/admission-policy/0.4-draft",
                 "kind": "admission_policy_declaration",
                 "id": "admission:" + actor,
                 "issuer_agent_id": "agent:" + actor,

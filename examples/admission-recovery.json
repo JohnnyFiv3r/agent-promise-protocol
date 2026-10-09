@@ -9,5 +9,5 @@
   ],
   "replay_retention": "Durable operation keys and terminal outcomes until authenticated epoch retirement; retries in a retired epoch rejected.",
   "recovery": "Atomically persist effect and result, or recover a pending operation before any reapplication. No automatic quota replenishment.",
-  "native_profile": "https://example.org/agent-bazaar/v0.4/policies/recovery"
+  "native_profile": "https://example.org/agent-promise-protocol/v0.4/policies/recovery"
 }

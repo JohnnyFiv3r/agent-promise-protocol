@@ -1,12 +1,12 @@
 {
-  "profile": "abp/admission-policy/0.4-draft",
+  "profile": "app/admission-policy/0.4-draft",
   "kind": "admission_policy_declaration",
   "id": "fixture:researcher-admission-policy",
   "issuer_agent_id": "agent:researcher",
   "issuer_principal_id": "principal:researcher",
   "created_at": "2026-10-08T12:00:00Z",
   "recipient_agent_id": "agent:researcher",
-  "recipient_scope_id": "scope:researcher:bazaar",
+  "recipient_scope_id": "scope:researcher:app",
   "accounting_authority_id": "agent:researcher",
   "authority_ref": {
     "id": "fixture:researcher-principal-policy",
@@ -14,24 +14,24 @@
   },
   "eligibility_ref": {
     "id": "fixture:admission-eligibility",
-    "digest": "sha256:a6e18b253cc0eaf2cf25a21e85de355d52020bc3d0bde60e0c6868b501efb488"
+    "digest": "sha256:02ca29b333d602acb4e57578d23977025d3eb24cc361bb496fe5efb91b3df22b"
   },
   "status_policy_ref": {
     "id": "fixture:clock-and-status-policy",
     "digest": "sha256:1f2563bea9c4d98cfd2daede48b0e001ed0bf1bca1758638e6943f888f08b869"
   },
-  "status_ref": "https://example.org/agent-bazaar/v0.4/status/researcher-admission",
+  "status_ref": "https://example.org/agent-promise-protocol/v0.4/status/researcher-admission",
   "validity": {
     "mode": "until_withdrawn",
     "policy_ref": {
       "id": "fixture:researcher-principal-policy",
       "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
     },
-    "status_ref": "https://example.org/agent-bazaar/v0.4/status/researcher-admission"
+    "status_ref": "https://example.org/agent-promise-protocol/v0.4/status/researcher-admission"
   },
   "recovery_policy_ref": {
     "id": "fixture:admission-recovery",
-    "digest": "sha256:7836a5a27e4049c070ae33c0bc73cb646385fc61830f8f0888aeb784e6b04c6e"
+    "digest": "sha256:f409d23cd62f1e36872be0c54a48bf632b615a31e5688a96a0aee461ae5f9b10"
   },
   "reply_max_bytes": 32768,
   "pools": [
@@ -51,7 +51,7 @@
       "max_work_units": 24000,
       "work_semantics_ref": {
         "id": "fixture:admission-work",
-        "digest": "sha256:a6eb9478066dcca5bed90257ef58f851ebeaf49cbfebda5adafd0739cad76c13"
+        "digest": "sha256:a63aa151eb0163355a13e211afe56797e5ef75a673a2208df3c61e630fb63b82"
       },
       "max_in_flight": 2,
       "max_live_options": 8,
@@ -61,7 +61,7 @@
           "id": "fixture:researcher-principal-policy",
           "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
         },
-        "status_ref": "https://example.org/agent-bazaar/v0.4/status/researcher-admission"
+        "status_ref": "https://example.org/agent-promise-protocol/v0.4/status/researcher-admission"
       },
       "replenishment": {
         "mode": "none"
@@ -88,7 +88,7 @@
       "max_work_units": 128,
       "work_semantics_ref": {
         "id": "fixture:admission-work",
-        "digest": "sha256:a6eb9478066dcca5bed90257ef58f851ebeaf49cbfebda5adafd0739cad76c13"
+        "digest": "sha256:a63aa151eb0163355a13e211afe56797e5ef75a673a2208df3c61e630fb63b82"
       },
       "max_in_flight": 8,
       "max_live_options": 0,
@@ -98,7 +98,7 @@
           "id": "fixture:researcher-principal-policy",
           "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
         },
-        "status_ref": "https://example.org/agent-bazaar/v0.4/status/researcher-admission"
+        "status_ref": "https://example.org/agent-promise-protocol/v0.4/status/researcher-admission"
       },
       "replenishment": {
         "mode": "none"
@@ -112,9 +112,9 @@
   ],
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/keys/agent-researcher",
-      "signed_payload_digest": "sha256:f35ae3991fb2467395763a5d4792ceae3d92876b2aa08429d0e6745ac0756e66",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/keys/agent-researcher",
+      "signed_payload_digest": "sha256:1b663dc071b62effd0ec8ce78fa198fedff22f259275e36bc7bc2855b1680223",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "admission_policy_declaration"

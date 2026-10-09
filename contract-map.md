@@ -1,6 +1,6 @@
 # Contract map: one agreement, optional composition and lifecycle features
 
-**ABP 0.4-draft · eight interface contracts**
+**APP 0.4-draft · eight interface contracts**
 
 The default path is one bilateral agreement governed by C1–C6. The same primitive supports monetary and noncommercial exchanges. C7 and C8 add explicitly negotiated capabilities; they are not required services or prerequisites for an ordinary agreement.
 
@@ -33,7 +33,7 @@ Each affected participant must support and accept required feature semantics. A 
 - [Publication guide](publication-contract.md) and [promise model](promise-model.md): permission and qualified self-authorship.
 - [Accepted-offer object](accepted-offer.md): agent agreement and principal-recovery interpretation.
 - [Architecture](protocol-architecture.md) and [downstream boundary](downstream-boundary.md): how existing protocols retain their responsibilities.
-- [Quick-start](docs/quickstart.md) and [worked scenarios](examples/lifecycle-walkthroughs.md): one ordinary agreement before optional composition.
+- [Implementer guide](docs/implementer-guide.md), [quick-start](docs/quickstart.md) and [worked scenarios](examples/lifecycle-walkthroughs.md): one ordinary agreement before optional composition.
 
 ## Explicit boundary
 
@@ -41,4 +41,4 @@ Agent agreement does not establish principal clearance; clearance does not grant
 
 The optional evidence feature can retain a fulfillment claim, assessment, native execution observation, settlement claim, or reservation disposition. Their selected semantics and native evidence determine what they establish. A claim, receipt, or orchestrator summary cannot manufacture an external result.
 
-[Proposed tests](tests/PROPOSED.md) concern the authored contracts through controlled adapter substitutes. They are not implemented runtime tests, live payment qualification, or demonstrated interoperability. The earlier formation-only boundary remains preserved in the [0.3 archive](archive/0.3/README.md).
+[Proposed tests](tests/PROPOSED.md) define the broader assessment through controlled adapter substitutes. The [reference runtime](docs/runtime.md) now has executable tests covering portions of that scope; [validation](validation.md) and [conformance](conformance.md) distinguish actual results from complete scenario qualification, live payment qualification and independent interoperability. The earlier formation-only boundary remains preserved in the [0.3 archive](archive/0.3/README.md).

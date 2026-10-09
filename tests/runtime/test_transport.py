@@ -11,9 +11,15 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.x509.oid import ExtendedKeyUsageOID, NameOID
 
-from agent_bazaar.crypto import Registry, Signer, canonical, content_ref, strict_loads
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.transport import (
+from agent_promise_protocol.crypto import (
+    Registry,
+    Signer,
+    canonical,
+    content_ref,
+    strict_loads,
+)
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.transport import (
     EXTENSION_URI,
     EvidenceRetriever,
     NativeError,
@@ -34,7 +40,7 @@ def certificates(path):
     """Real temporary test PKI, not a TLS-verification bypass."""
     now = datetime.now(timezone.utc)
     ca_key = ec.generate_private_key(ec.SECP256R1())
-    name = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, "Bazaar test CA")])
+    name = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, "APP test CA")])
     ca = (
         x509.CertificateBuilder()
         .subject_name(name)
@@ -197,7 +203,7 @@ def test_reject_malformed_native_carriers(mutate):
     elif mutate == "too_many_records":
         message["parts"][0]["data"]["records"] = [{}] * 65
     elif mutate == "method":
-        wire["method"] = "bazaar/accept"
+        wire["method"] = "app/accept"
     with pytest.raises(ProtocolError):
         decode_request(canonical(wire), headers)
 
@@ -228,7 +234,7 @@ def test_codec_rejects_untyped_envelopes(value):
 def test_untyped_embedded_envelope_kind_fails_before_callback():
     headers, raw = encode_request(signed_request(), [], message_id="message:1")
     wire = strict_loads(raw)
-    wire["params"]["message"]["parts"][0]["data"]["bazaar"]["kind"] = []
+    wire["params"]["message"]["parts"][0]["data"]["app"]["kind"] = []
     with pytest.raises(NativeError):
         decode_request(canonical(wire), headers)
 

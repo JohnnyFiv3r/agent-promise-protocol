@@ -1,6 +1,6 @@
 # Lifecycle walkthroughs
 
-**ABP 0.4-draft · schematic worked cases**
+**APP 0.4-draft · schematic worked cases**
 
 The first case is the ordinary bilateral path. The later cases show the [optional composition feature](../contracts/07-composition.md) reusing that same agreement primitive, alongside separately negotiated handoff/evidence features. These are not executable fixtures, native integrations, or completed transactions. Names such as `P_report`, `C_sources`, and `AO_sources` stand for exact content references in a real record. They are deliberately not JSON digests, proofs, credentials, endpoints, or demonstrated results.
 

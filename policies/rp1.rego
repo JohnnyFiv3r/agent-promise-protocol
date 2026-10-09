@@ -1,6 +1,6 @@
-# Original Agent Bazaar reference policy. No comparator/framework implementation.
+# Original Agent Promise Protocol reference policy. No comparator/framework implementation.
 # Load only administrator-verified owner-approved data with this policy.
-package agent_bazaar.rp1
+package agent_promise_protocol.rp1
 
 import rego.v1
 
@@ -30,13 +30,13 @@ dispatch_ready if {
 
 default allowed := false
 allowed if {
-    input.profile == "abp-rp1/0.1-draft"
-    input.policy_bundle_ref == data.agent_bazaar_policy.policy_bundle_ref
-    input.policy_data_ref == data.agent_bazaar_policy.policy_data_ref
+    input.profile == "app-rp1/0.1-draft"
+    input.policy_bundle_ref == data.agent_promise_protocol_policy.policy_bundle_ref
+    input.policy_data_ref == data.agent_promise_protocol_policy.policy_data_ref
     input.clock.uncertainty_ms >= 0
     input.clock.uncertainty_ms <= 1000
     count(input.authority_refs) > 0
-    some grant in data.agent_bazaar_grants
+    some grant in data.agent_promise_protocol_grants
     grant_matches(grant)
     dispatch_ready
 }
@@ -48,7 +48,7 @@ reasons := ["ok"] if allowed
 else := ["policy_denied"]
 
 expiration_ms := min({now_ms + lifetime_ms} | {object.get(grant, "valid_until_ms", 9007199254740991) |
-    some grant in data.agent_bazaar_grants
+    some grant in data.agent_promise_protocol_grants
     grant_matches(grant)
 })
 

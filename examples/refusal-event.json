@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "kind": "refusal_event",
   "id": "refusal:researcher",
   "issuer_agent_id": "agent:researcher",
@@ -9,7 +9,7 @@
   "body": {
     "accepted_offer_ref": {
       "id": "accepted:research",
-      "digest": "sha256:052e001fd033e0ed4173aa424f5b914c728800e10f26f1ab76b06ee74f4fa59c"
+      "digest": "sha256:c118dadbb21d29b8439b60ed9383757cce5607732e2778bdaa4c5754fe7b1a20"
     },
     "refusing_principal_id": "principal:researcher",
     "authority_ref": {
@@ -25,9 +25,9 @@
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-researcher",
-      "signed_payload_digest": "sha256:2e4fb82e7517bd6df229a12cbc2adba9e077f9da29bbbbc5e3bbeb37bd5f0524",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:4501b11aea74cdd1c88bb842ba8a0e354cb69382f356555fb4bff5a966a5c8c2",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "synthetic-review-only"

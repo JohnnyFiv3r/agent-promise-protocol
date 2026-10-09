@@ -2,18 +2,18 @@
   "capabilities": {
     "extensions": [
       {
-        "uri": "https://github.com/JohnnyFiv3r/agent-bazaar/blob/main/protocol-architecture.md#v04",
-        "description": "Agent Bazaar qualified intent, admitted negotiation and accepted-offer evidence",
+        "uri": "https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/protocol-architecture.md#v04",
+        "description": "Agent Promise Protocol qualified intent, admitted negotiation and accepted-offer evidence",
         "required": true,
         "params": {
           "profiles": [
-            "abp/0.4-draft"
+            "app/0.4-draft"
           ],
-          "recipientScopeId": "scope:researcher-bazaar",
+          "recipientScopeId": "scope:researcher-app",
           "admissionPolicyRef": {
             "id": "policy:researcher-admission",
             "digest": "<SHA256_OF_CANONICAL_ADMISSION_POLICY>",
-            "locator": "https://example.org/bazaar/policies/admission"
+            "locator": "https://example.org/app/policies/admission"
           },
           "proofProfiles": [
             "<SELECTED_EXISTING_PROOF_PROFILE_URI>"

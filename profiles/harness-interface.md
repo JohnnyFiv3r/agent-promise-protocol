@@ -1,6 +1,6 @@
 # Default harness: integration contract
 
-**ABP 0.4 / RP1 · proposed reference-harness interface. No SDK or runtime is implemented by this document.**
+**APP 0.4 / RP1 · application integration contract.** Reference runtime **0.1.0** supplies the Python mechanics described in the [runtime guide](../docs/runtime.md). The high-level facade below remains a proposed SDK interface, not the package's callable API.
 
 The harness packages the [reference profile](reference-profile.md) so the ordinary application does not implement C1–C6 itself. The universal contract remains the interoperability authority; a convenient facade cannot redefine its semantics.
 
@@ -16,7 +16,7 @@ One deployment configuration selects the RP1 preset and its trust/authority bind
 
 ## Hosting and connector boundary
 
-The same participant semantics apply to an embedded assistant and to a hosted runtime reached through one optional connector. A seller exposes a compatible A2A ABP endpoint. The participant's provider maintains its delegated keys, durable journal, inbound interactions and principal channels; an individual tool call or chat session is not the agreement lifetime. Hosting several principals does not merge their identities, disclosure permissions, admission pools or resource authority.
+The same participant semantics apply to an embedded assistant and to a hosted runtime reached through one optional connector. A seller exposes a compatible A2A APP endpoint. The participant's provider maintains its delegated keys, durable journal, inbound interactions and principal channels; an individual tool call or chat session is not the agreement lifetime. Hosting several principals does not merge their identities, disclosure permissions, admission pools or resource authority.
 
 Discovery, filtered intent distribution, offer comparison and the model-facing connector are application functions. They may be supplied by different providers and are not required harness algorithms or new wire methods. The [deployment model](../deployment-model.md) defines the role/custody separation, and the [independent-participant slice](../design/independent-participant-slice.md) states what remains beyond the shared-store runtime.
 
@@ -61,4 +61,4 @@ A capacity callback supplies real availability and exclusivity facts; the harnes
 
 A baseline deployment need not enable C7 or create transaction plans. It can negotiate and observe one agreement using C1–C6 and the RP1 preset. Optional composition repeats that same primitive with explicit plan/binding rules. Optional handoff/evidence uses C8 with the agreed native integrations. Required features are negotiated before adoption; unsupported features fail explicitly.
 
-The [proposed tests](../tests/PROPOSED.md) assess correctness and adoption separately. A future SDK passing its own tests will not by itself establish independent interoperability.
+The [runtime tests and validation record](../validation.md) exercise the implemented mechanics. The broader [proposed tests](../tests/PROPOSED.md) assess correctness and adoption separately; passing implementation tests does not by itself establish independent interoperability or builder ease of adoption. Use the [implementer guide](../docs/implementer-guide.md) for the current entry path.

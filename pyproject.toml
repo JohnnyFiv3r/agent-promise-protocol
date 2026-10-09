@@ -3,9 +3,9 @@ requires = ["setuptools==80.9.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "agent-bazaar"
+name = "agent-promise-protocol"
 version = "0.1.0"
-description = "MIT reference runtime for ABP 0.4 agreements and composition"
+description = "MIT reference runtime for APP 0.4 agreements and composition"
 requires-python = ">=3.11"
 license = "MIT"
 dependencies = ["cryptography>=45,<47", "rfc8785==0.1.4", "jsonschema==4.26.0", "referencing==0.37.0", "httpx>=0.28,<0.29"]
@@ -14,14 +14,14 @@ dependencies = ["cryptography>=45,<47", "rfc8785==0.1.4", "jsonschema==4.26.0", 
 dev = ["pytest>=8,<10"]
 
 [project.scripts]
-agent-bazaar = "agent_bazaar.demo:main"
+agent-promise-protocol = "agent_promise_protocol.demo:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 namespaces = false
 
 [tool.setuptools.package-data]
-agent_bazaar = ["schemas/*.schema.json"]
+agent_promise_protocol = ["schemas/*.schema.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests/runtime"]

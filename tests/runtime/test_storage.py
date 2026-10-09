@@ -6,8 +6,8 @@ import sys
 
 import pytest
 
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.storage import Ledger
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.storage import Ledger
 
 
 def test_json_copy_revision_and_nested_savepoint_rollback(tmp_path):
@@ -73,7 +73,7 @@ def test_process_crash_keeps_committed_tombstones_and_discards_open_write(tmp_pa
     path = tmp_path / "authority.db"
     program = """
 import os, sys
-from agent_bazaar.storage import Ledger
+from agent_promise_protocol.storage import Ledger
 ledger = Ledger(sys.argv[1])
 ledger.put('operation.tombstones', 'op-1', {'outcome': 'declined'})
 with ledger.transaction():

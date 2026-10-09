@@ -1,6 +1,6 @@
 # C7 — Composition and dependency coordination
 
-**Normative contract · ABP 0.4-draft**
+**Normative contract · APP 0.4-draft**
 
 Composition is an **optional negotiated feature over the ordinary bilateral agreement**. The default reference profile's baseline is the bilateral path: ask, offer, select one exact candidate, adopt, form the agreement, and preserve each principal's protected recovery. A single agreement does not require a transaction plan or composition machinery.
 

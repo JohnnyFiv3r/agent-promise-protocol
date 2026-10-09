@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pytest
 
-from agent_bazaar.crypto import (
+from agent_promise_protocol.crypto import (
     PROFILE,
     Registry,
     Signer,
@@ -24,12 +24,12 @@ from agent_bazaar.crypto import (
     content_ref,
     strict_loads,
 )
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.fixtures import Environment
-from agent_bazaar.records import RecordStore
-from agent_bazaar.schema import validate
-from agent_bazaar.storage import Ledger
-from agent_bazaar.transport import decode_request, encode_request
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.fixtures import Environment
+from agent_promise_protocol.records import RecordStore
+from agent_promise_protocol.schema import validate
+from agent_promise_protocol.storage import Ledger
+from agent_promise_protocol.transport import decode_request, encode_request
 
 
 @dataclass

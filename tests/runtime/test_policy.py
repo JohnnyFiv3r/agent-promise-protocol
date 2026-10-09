@@ -6,16 +6,16 @@ import time
 
 import pytest
 
-from agent_bazaar.crypto import content_ref, digest
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.policy import (
+from agent_promise_protocol.crypto import content_ref, digest
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.policy import (
     OPAClient,
     TestPolicy,
     check_commit,
     timestamp,
     validate_result,
 )
-from agent_bazaar.transport import client_tls_context
+from agent_promise_protocol.transport import client_tls_context
 from test_transport import certificates
 
 NOW = 1791417600000
@@ -25,7 +25,7 @@ def policy_input():
     subject = {"id": "urn:subject:1", "kind": "offer", "body": {"test": "controlled"}}
     ref = {"id": "urn:owner-approval", "digest": "sha256:" + "c" * 64}
     return {
-        "profile": "abp-rp1/0.1-draft",
+        "profile": "app-rp1/0.1-draft",
         "decision_id": "decision:1",
         "actor": {
             "agent_id": "agent:a",
@@ -178,11 +178,11 @@ def test_real_opa_1211_over_tls13_mtls(tmp_path):
     pki = certificates(tmp_path)
     request = policy_input()
     data = {
-        "agent_bazaar_policy": {
+        "agent_promise_protocol_policy": {
             "policy_bundle_ref": request["policy_bundle_ref"],
             "policy_data_ref": request["policy_data_ref"],
         },
-        "agent_bazaar_grants": grants(),
+        "agent_promise_protocol_grants": grants(),
     }
     data_path = tmp_path / "data.json"
     data_path.write_text(json.dumps(data))
@@ -222,7 +222,7 @@ def test_real_opa_1211_over_tls13_mtls(tmp_path):
                     pytest.fail(process.stderr.read().decode())
                 time.sleep(0.02)
         client = OPAClient(
-            f"https://127.0.0.1:{port}/v1/data/agent_bazaar/rp1/authorize",
+            f"https://127.0.0.1:{port}/v1/data/agent_promise_protocol/rp1/authorize",
             tls_context=client_tls_context(
                 cafile=pki["ca"],
                 certfile=pki["client"]["certfile"],

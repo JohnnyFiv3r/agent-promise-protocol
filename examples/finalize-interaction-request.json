@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "kind": "interaction_request",
   "id": "interaction_request:finalize-interaction-request",
   "issuer_agent_id": "agent:researcher",
@@ -9,22 +9,22 @@
   "body": {
     "operation_id": "op:researcher:finalize:1",
     "recipient_agent_id": "agent:requester",
-    "recipient_scope_id": "scope:requester:bazaar",
+    "recipient_scope_id": "scope:requester:app",
     "purpose": "finalize_candidate",
     "subject_ref": {
       "id": "candidate:research",
-      "digest": "sha256:8ac5ae7299cd8a46f4285576ee0a430c7d50515e94b2cf3d043997278f9d9572"
+      "digest": "sha256:8db3f9f6ac79bb8aa38634c5d4555d3cf023cd63290cbd2caad52ba949ae3c9e"
     },
     "admission_basis_ref": {
       "id": "publication:requester",
-      "digest": "sha256:ac6e63989fb28f0a5ec0aab3682f4f29f2a79050679e1978bf8f3ad07e100198"
+      "digest": "sha256:b288f4bb6dd2b0a5ab36e132c0c7acfac3ade1dec7aaf8231a36e482ca586b8a"
     }
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/keys/agent-researcher",
-      "signed_payload_digest": "sha256:8de4154165ae82916745f27fc482443eb47290fc7ff29b3c6fc2b3e9517648f3",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/keys/agent-researcher",
+      "signed_payload_digest": "sha256:8f97fb3c4d0f16b2b39eddde7b77e6d969b5c0621d40b979bdc101a054f39de9",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "interaction_request"

@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "kind": "intent",
   "id": "intent:requester",
   "issuer_agent_id": "agent:requester",
@@ -21,7 +21,7 @@
     ],
     "publication_contract_ref": {
       "id": "publication:requester",
-      "digest": "sha256:ac6e63989fb28f0a5ec0aab3682f4f29f2a79050679e1978bf8f3ad07e100198"
+      "digest": "sha256:b288f4bb6dd2b0a5ab36e132c0c7acfac3ade1dec7aaf8231a36e482ca586b8a"
     },
     "validity": {
       "mode": "until_withdrawn",
@@ -29,7 +29,7 @@
         "id": "fixture:requester-principal-policy",
         "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
       },
-      "status_ref": "https://example.org/agent-bazaar/v0.4/status/requester-intent"
+      "status_ref": "https://example.org/agent-promise-protocol/v0.4/status/requester-intent"
     },
     "emission_promise": {
       "promise_id": "promise:requester-declaration",
@@ -38,14 +38,14 @@
         "audience:research-interest"
       ],
       "action": {
-        "action_type": "https://example.org/agent-bazaar/v0.4/actions/declare_interest",
+        "action_type": "https://example.org/agent-promise-protocol/v0.4/actions/declare_interest",
         "semantics_ref": {
           "id": "fixture:action-semantics",
-          "digest": "sha256:0c04ba50bfcf115450a81d079a3ac2da2e5f273c063f9de162766d94456e6248"
+          "digest": "sha256:55c337595197fb5058523cb98c91d247c7b4258bc8b6b34d0dc9bdf588d4f63f"
         },
         "polarity": "provide",
         "subject": {
-          "type_uri": "https://example.org/agent-bazaar/v0.4/subjects/research-request",
+          "type_uri": "https://example.org/agent-promise-protocol/v0.4/subjects/research-request",
           "parameters": {
             "id": "subject:protocol-comparison"
           }
@@ -75,15 +75,15 @@
           "id": "fixture:requester-principal-policy",
           "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
         },
-        "status_ref": "https://example.org/agent-bazaar/v0.4/status/promise-requester-declaration"
+        "status_ref": "https://example.org/agent-promise-protocol/v0.4/status/promise-requester-declaration"
       }
     }
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-requester",
-      "signed_payload_digest": "sha256:600cd9f39d6f89b314c2b1d7c714c11a7d6fa489d97d0d814d0acf116f4dd11a",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:b5e6b9631063ce664906363988deb77feff49d0b33c0d14535a73f4d7eb4d788",
       "issuer_agent_id": "agent:requester",
       "scope": [
         "synthetic-review-only"

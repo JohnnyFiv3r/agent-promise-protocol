@@ -2,7 +2,7 @@ import copy
 
 import pytest
 
-from agent_bazaar.crypto import (
+from agent_promise_protocol.crypto import (
     PROFILE,
     Registry,
     Signer,
@@ -14,7 +14,7 @@ from agent_bazaar.crypto import (
     strict_loads,
     unsigned_digest,
 )
-from agent_bazaar.errors import ProtocolError
+from agent_promise_protocol.errors import ProtocolError
 
 
 def record():
@@ -107,7 +107,7 @@ def test_jws_tampering_cannot_hide_behind_rehashed_wrapper(mutation):
     elif mutation == "algorithm":
         header["alg"] = "EdDSA"
     elif mutation == "scope":
-        header["abp_scope"] = [PROFILE + "/record/offer"]
+        header["app_scope"] = [PROFILE + "/record/offer"]
     elif mutation == "payload":
         p = _b64(b"{}")
     elif mutation == "signature":

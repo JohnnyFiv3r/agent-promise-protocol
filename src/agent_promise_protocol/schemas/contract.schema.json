@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:agent-bazaar:draft:0.4:semantic-records",
-  "title": "Agent Bazaar 0.4 semantic records: bilateral core and optional composition/lifecycle features",
+  "$id": "urn:agent-promise-protocol:draft:0.4:semantic-records",
+  "title": "Agent Promise Protocol 0.4 semantic records: bilateral core and optional composition/lifecycle features",
   "description": "Universal semantic record structures for C1-C6 bilateral formation and principal recovery, plus optional C7 composition and C8 protected handoff/lifecycle evidence. Structural validity does not establish authority, current status, native execution, fulfillment or settlement. Native mechanisms remain external.",
   "oneOf": [
     {
@@ -841,7 +841,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "publication_contract"
@@ -1009,7 +1009,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "intent"
@@ -1087,7 +1087,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "promise"
@@ -1305,7 +1305,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "offer"
@@ -1555,7 +1555,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "candidate_terms"
@@ -1702,7 +1702,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "terms_adoption"
@@ -1841,7 +1841,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "accepted_offer"
@@ -1962,7 +1962,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "finalization_notice"
@@ -2058,7 +2058,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "refusal_event"
@@ -2321,7 +2321,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "status_snapshot"
@@ -2424,7 +2424,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "withdrawal_event"
@@ -2635,7 +2635,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "admission_grant"
@@ -2734,7 +2734,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "clarification"
@@ -2817,7 +2817,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "negotiation_close"
@@ -3162,7 +3162,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "transaction_plan"
@@ -3256,7 +3256,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "composition_binding"
@@ -3420,7 +3420,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "handoff_request"
@@ -3553,7 +3553,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "prepared_handoff"
@@ -3838,7 +3838,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "handoff_receipt"
@@ -3995,7 +3995,7 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
-          "const": "abp/0.4-draft"
+          "const": "app/0.4-draft"
         },
         "kind": {
           "const": "lifecycle_evidence"

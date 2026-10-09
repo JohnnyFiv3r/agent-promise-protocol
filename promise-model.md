@@ -28,7 +28,7 @@ These elements are represented by the generic promise/action definitions in the 
 
 ## Why this is universal without becoming a product ontology
 
-The shared structure answers who, what, in which direction, under which conditions, with what ability and authority, and for how long under policy. Domain-specific definitions supply resources, quantities, units, outputs and other terms through `action_type` and immutable `semantics_ref`. ABP requires shared understanding of those definitions, not a core taxonomy, mandatory capability catalog, central registry or maintainer approval.
+The shared structure answers who, what, in which direction, under which conditions, with what ability and authority, and for how long under policy. Domain-specific definitions supply resources, quantities, units, outputs and other terms through `action_type` and immutable `semantics_ref`. APP requires shared understanding of those definitions, not a core taxonomy, mandatory capability catalog, central registry or maintainer approval.
 
 Capability is the actor's ability to perform the described action; the product or other subject is what the action concerns. Supplying a bicycle, checking an invoice against purchase records, providing a specified amount of compute and granting dataset access illustrate that distinction. These are examples, not protocol categories. The same agent can provide inputs and receive a result; either market side can contain either polarity.
 

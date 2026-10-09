@@ -3,9 +3,9 @@ import concurrent.futures
 
 import pytest
 
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.recovery import Recovery
-from agent_bazaar.storage import Ledger
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.recovery import Recovery
+from agent_promise_protocol.storage import Ledger
 
 
 def ref(name):

@@ -7,11 +7,11 @@ real Ed25519 verification, C3 admission, C4 formation, and durable replay.
 
 import threading
 
-from agent_bazaar.crypto import Registry, check_ref, content_ref
-from agent_bazaar.fixtures import Environment
-from agent_bazaar.harness import FEATURES
-from agent_bazaar.records import ref_key
-from agent_bazaar.transport import (
+from agent_promise_protocol.crypto import Registry, check_ref, content_ref
+from agent_promise_protocol.fixtures import Environment
+from agent_promise_protocol.harness import FEATURES
+from agent_promise_protocol.records import ref_key
+from agent_promise_protocol.transport import (
     client_tls_context,
     decode_response,
     encode_request,

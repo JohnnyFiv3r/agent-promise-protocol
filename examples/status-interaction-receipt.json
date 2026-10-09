@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "kind": "interaction_receipt",
   "id": "interaction_receipt:status-interaction-receipt",
   "issuer_agent_id": "agent:requester",
@@ -9,11 +9,11 @@
   "body": {
     "request_ref": {
       "id": "interaction_request:status-interaction-request",
-      "digest": "sha256:9bd76d3aa4bb54771286195d306f7557124450a33d4e99c3fe8560941f2d3c30"
+      "digest": "sha256:e7cfcb4459263ac6bcdc07eee1b693ed4b6e109f510c5d7690a066939581bca7"
     },
     "operation_id": "op:researcher:status:1",
     "recipient_agent_id": "agent:requester",
-    "recipient_scope_id": "scope:requester:bazaar",
+    "recipient_scope_id": "scope:requester:app",
     "revision": 1,
     "previous_receipt_digest": null,
     "outcome": "applied",
@@ -21,7 +21,7 @@
     "result_refs": [
       {
         "id": "status:research:2",
-        "digest": "sha256:2ac010fb6edc06ffc479f4f7b944cf358d10e85439044978f5a11b0dbf82e8fe"
+        "digest": "sha256:1ccdf9b7ae341543b29fceea9d61661ffbbe385e3c6a4051535f69f9cc9eb8e0"
       }
     ],
     "evidence_refs": [
@@ -33,9 +33,9 @@
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/keys/agent-requester",
-      "signed_payload_digest": "sha256:bc09605328025d69e819882ac2b6d3aeff4a0cda6ddde3da99d2ef691c4429ee",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/keys/agent-requester",
+      "signed_payload_digest": "sha256:fd1443e30d7fd7efd8a25470ae17b675c3b5a74a5b502bad7e81bfb9f29eb5c0",
       "issuer_agent_id": "agent:requester",
       "scope": [
         "interaction_receipt"

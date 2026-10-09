@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "kind": "promise",
   "id": "promise-record:interest-disclosure",
   "issuer_agent_id": "agent:researcher",
@@ -9,7 +9,7 @@
   "body": {
     "publication_contract_ref": {
       "id": "publication:researcher",
-      "digest": "sha256:3a8768172b469af24cb2d22f2fda484402c8aee09cf6f28600bd326366207770"
+      "digest": "sha256:42f9a0514f8296e75105d290f34e264499ac4bed4388649875fa317c9e5eeacd"
     },
     "own_promise": {
       "promise_id": "promise:researcher-declaration",
@@ -18,14 +18,14 @@
         "audience:research-interest"
       ],
       "action": {
-        "action_type": "https://example.org/agent-bazaar/v0.4/actions/declare_interest",
+        "action_type": "https://example.org/agent-promise-protocol/v0.4/actions/declare_interest",
         "semantics_ref": {
           "id": "fixture:action-semantics",
-          "digest": "sha256:0c04ba50bfcf115450a81d079a3ac2da2e5f273c063f9de162766d94456e6248"
+          "digest": "sha256:55c337595197fb5058523cb98c91d247c7b4258bc8b6b34d0dc9bdf588d4f63f"
         },
         "polarity": "provide",
         "subject": {
-          "type_uri": "https://example.org/agent-bazaar/v0.4/subjects/research-request",
+          "type_uri": "https://example.org/agent-promise-protocol/v0.4/subjects/research-request",
           "parameters": {
             "id": "subject:protocol-comparison"
           }
@@ -55,15 +55,15 @@
           "id": "fixture:researcher-principal-policy",
           "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
         },
-        "status_ref": "https://example.org/agent-bazaar/v0.4/status/promise-researcher-declaration"
+        "status_ref": "https://example.org/agent-promise-protocol/v0.4/status/promise-researcher-declaration"
       }
     }
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-researcher",
-      "signed_payload_digest": "sha256:7b3d3d099849b2802459dadd5beb41b52d9356685d79e4f84e0c4b3c32aebeb1",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:257f35d05ac18c5ecf904bbc132d64722efb2ed2d31544c3dfffb5a65ed097a4",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "synthetic-review-only"

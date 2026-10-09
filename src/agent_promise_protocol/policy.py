@@ -133,7 +133,7 @@ def validate_input(value, *, policy_bundle_ref, policy_data_ref, now_ms):
     if (
         not isinstance(value, dict)
         or set(value) != INPUT_FIELDS
-        or value["profile"] != "abp-rp1/0.1-draft"
+        or value["profile"] != "app-rp1/0.1-draft"
         or not isinstance(value["act"], str)
         or value["act"] not in ACTS
     ):
@@ -292,7 +292,7 @@ class OPAClient:
         policy_data_ref,
     ):
         parsed = _safe_url(url)
-        if parsed.path != "/v1/data/agent_bazaar/rp1/authorize":
+        if parsed.path != "/v1/data/agent_promise_protocol/rp1/authorize":
             raise ProtocolError(
                 "policy_denied", "exact RP1 OPA decision endpoint required"
             )

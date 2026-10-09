@@ -1,6 +1,6 @@
 # C1 — Publication, consent, and principal policy
 
-**Normative contract · ABP 0.4-draft**
+**Normative contract · APP 0.4-draft**
 
 This contract governs permission to publish, discover, contact, and negotiate. `MUST`, `MUST NOT`, and `MAY` prescribe participant behavior. It implements the controlling [decisions](../decisions-v0.2.md); the [publication guide](../publication-contract.md) explains the surface and the [record schema](../schemas/contract.schema.json) defines its structure.
 

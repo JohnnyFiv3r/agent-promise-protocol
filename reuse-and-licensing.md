@@ -1,10 +1,10 @@
-# Agent Bazaar: licensing and independent implementation
+# Agent Promise Protocol: licensing and independent implementation
 
-**User-directed decision · October 8, 2026:** Bazaar's original specification, schemas, examples and implementation use the [MIT license](LICENSE). Comparison frameworks supply inspiration where permitted. Their implementation code, schemas, normative prose and test suites are not copied, translated or adapted into Bazaar.
+**User-directed decision · October 8, 2026:** APP's original specification, schemas, examples and implementation use the [MIT license](LICENSE). Comparison frameworks supply inspiration where permitted. Their implementation code, schemas, normative prose and test suites are not copied, translated or adapted into APP.
 
-This supersedes the earlier recommendation to adopt components from A202, AMP/ASA or other comparators. No comparison code or fixture suite was imported into the project. The research was not a clean-room exercise: selected public source was inspected. Future work must be independently authored from the Bazaar requirements and cited conceptual sources, without claiming an isolated provenance process that did not occur.
+This supersedes the earlier recommendation to adopt components from A202, AMP/ASA or other comparators. No comparison code or fixture suite was imported into the project. The research was not a clean-room exercise: selected public source was inspected. Future work must be independently authored from the APP requirements and cited conceptual sources, without claiming an isolated provenance process that did not occur.
 
-Existing A2A, MCP, AP2, checkout and payment protocols remain integration targets under their own specifications. That interoperability boundary does not require incorporating a comparison marketplace's implementation. Third-party materials linked for research retain their own licenses; Bazaar's MIT license does not relicense them.
+Existing A2A, MCP, AP2, checkout and payment protocols remain integration targets under their own specifications. That interoperability boundary does not require incorporating a comparison marketplace's implementation. Third-party materials linked for research retain their own licenses; APP's MIT license does not relicense them.
 
 The [required contract map](contract-map.md) now drives authoring. The findings below remain a source-availability record, not a dependency-selection plan.
 
@@ -26,9 +26,9 @@ The [required contract map](contract-map.md) now drives authoring. The findings 
 
 ## Independent authoring rule
 
-Derive the contracts from the agreed diagram, the user's product thesis and the Promise Theory primitives: emitted intent, recipient autonomy, proposed own behavior, requested counterpart behavior and each promiser's own adoption. Use related work to challenge omissions and identify interoperability differences. Write Bazaar's schemas, transition rules, examples and adversarial cases from those requirements.
+Derive the contracts from the agreed diagram, the user's product thesis and the Promise Theory primitives: emitted intent, recipient autonomy, proposed own behavior, requested counterpart behavior and each promiser's own adoption. Use related work to challenge omissions and identify interoperability differences. Write APP's schemas, transition rules, examples and adversarial cases from those requirements.
 
-Draft 0.4 treats a Bazaar offer as the issuer's qualified conditional promise. Any adapter must preserve its conditions, principal refusal rights and authorship; neither the offer nor accepted terms can become a native purchase instruction without that consumer's required authority. Any eventual adapter must preserve those semantics and its native system's evidence. This is an interface requirement, not a code-reuse decision.
+Draft 0.4 treats an APP offer as the issuer's qualified conditional promise. Any adapter must preserve its conditions, principal refusal rights and authorship; neither the offer nor accepted terms can become a native purchase instruction without that consumer's required authority. Any eventual adapter must preserve those semantics and its native system's evidence. This is an interface requirement, not a code-reuse decision.
 
 The original material in this artifact directory is covered by [LICENSE](LICENSE). The copyright notice uses John Inniger, the recorded project owner. The [standard MIT text](https://opensource.org/license/mit) grants reuse of our work subject to its notice requirement; it does not grant rights in separately referenced materials.
 

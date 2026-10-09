@@ -317,7 +317,7 @@ class Handoff:
             self._context(request)
             registration = self._adapter(request)
             payload = self.resolve(request["body"]["request_payload_ref"])
-            native_key = "abp-rp1-" + key.removeprefix("sha256:")
+            native_key = "app-rp1-" + key.removeprefix("sha256:")
             translation = registration["adapter"].prepare(
                 deepcopy(request), deepcopy(payload), native_key
             )

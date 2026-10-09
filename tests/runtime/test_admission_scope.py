@@ -8,8 +8,8 @@ from copy import deepcopy
 
 import pytest
 
-from agent_bazaar.crypto import content_ref
-from agent_bazaar.fixtures import Environment, U
+from agent_promise_protocol.crypto import content_ref
+from agent_promise_protocol.fixtures import Environment, U
 
 
 @pytest.fixture

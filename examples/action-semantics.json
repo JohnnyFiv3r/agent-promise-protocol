@@ -2,7 +2,7 @@
   "id": "fixture:action-semantics",
   "fixture_type": "illustrative_policy_or_evidence",
   "synthetic": true,
-  "profile_uri": "https://example.org/agent-bazaar/v0.4/profiles/example-actions",
+  "profile_uri": "https://example.org/agent-promise-protocol/v0.4/profiles/example-actions",
   "actions": [
     "declare_interest",
     "receive_report",
@@ -14,13 +14,13 @@
       "issuance": "Current authority to make a conditional commitment and capability under stated dependencies.",
       "adoption": "Exact candidate, self-authorship and current delegated authority.",
       "finalization": "Both adoptions plus ordered capacity and policy checks.",
-      "performance_condition": "The accepted object clears principal refusal and any separately agreed native prerequisites are met; no native authorization is issued by Bazaar."
+      "performance_condition": "The accepted object clears principal refusal and any separately agreed native prerequisites are met; no native authorization is issued by APP."
     }
   },
   "occurrence_rules": {
     "produce_report": {
       "cardinality": "one_per_accepted_action",
-      "type_uri": "https://example.org/agent-bazaar/v0.4/occurrences/one-shot",
+      "type_uri": "https://example.org/agent-promise-protocol/v0.4/occurrences/one-shot",
       "parameters": {
         "ordinal": 1
       }

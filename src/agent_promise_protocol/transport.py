@@ -18,9 +18,7 @@ from .crypto import canonical, check_ref, strict_loads
 from .errors import ProtocolError
 from .schema import validate
 
-EXTENSION_URI = (
-    "https://github.com/JohnnyFiv3r/agent-bazaar/blob/main/protocol-architecture.md#v04"
-)
+EXTENSION_URI = "https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/protocol-architecture.md#v04"
 MAX_REQUEST = 1024 * 1024
 HEADERS = {
     "A2A-Version": "1.0",
@@ -81,7 +79,7 @@ def _message(envelope, records, *, message_id, context_id=None, response=False):
         "parts": [
             {
                 "mediaType": "application/json",
-                "data": {"bazaar": envelope, "records": records},
+                "data": {"app": envelope, "records": records},
             }
         ],
         "extensions": [EXTENSION_URI],
@@ -159,15 +157,15 @@ def _parse_message(message, *, response=False):
     data = parts[0]["data"]
     if (
         not isinstance(data, dict)
-        or set(data) != {"bazaar", "records"}
+        or set(data) != {"app", "records"}
         or not isinstance(data["records"], list)
         or len(data["records"]) > 64
         or any(not isinstance(record, dict) for record in data["records"])
     ):
         raise NativeError(
-            "InvalidParamsError", -32602, "invalid Bazaar data part or record count"
+            "InvalidParamsError", -32602, "invalid APP data part or record count"
         )
-    envelope = data["bazaar"]
+    envelope = data["app"]
     if not isinstance(envelope, dict) or envelope.get("kind") != (
         "interaction_receipt" if response else "interaction_request"
     ):

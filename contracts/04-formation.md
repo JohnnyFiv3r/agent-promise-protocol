@@ -1,6 +1,6 @@
 # C4 — Exact adoption and originator-coordinated formation
 
-**ABP 0.4-draft · normative interface contract**
+**APP 0.4-draft · normative interface contract**
 
 This contract governs candidate creation, each agent's adoption and one durable accepted-offer result. It implements the controlling decisions in the [core contract](../contract.md); [record schemas](../schemas/contract.schema.json) define the structural fields. It uses [publication/policy](01-publication-policy.md), [qualified actions](02-qualified-actions.md), [admission/negotiation](03-admission-negotiation.md) and [portable A2A evidence](06-a2a-evidence.md). Principal refusal after finalization is governed by [C5](05-principal-refusal.md).
 

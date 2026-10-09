@@ -1,12 +1,12 @@
 # C5 — Principal notice, refusal and accepted-offer status
 
-**ABP 0.4-draft · normative interface contract**
+**APP 0.4-draft · normative interface contract**
 
 This contract governs interpretation of the immutable `accepted_offer` produced by [C4](04-formation.md). It uses [publication/policy](01-publication-policy.md), [qualified authority](02-qualified-actions.md) and [portable A2A evidence](06-a2a-evidence.md). The [core contract](../contract.md) and [record schemas](../schemas/contract.schema.json) define the common vocabulary.
 
 The accepted object records agent agreement. A separate current status establishes whether its adopted principal-refusal rules have been satisfied. Neither the object nor this status authorizes a downstream action or creates a human signature.
 
-The selected refusal/status authority is scoped to the accepted object and its adopted policies; it need not be a Bazaar-wide service or the custodian of every participant's journal. Independent ingress, hosting or replicas MUST preserve the profile's logical admission order and recovery guarantees. A participant's local copy, missing reply or elapsed local timer MUST NOT replace authenticated current authority evidence. A hosted assistant or connector MUST preserve the required principal notice/refusal and outcome-recovery paths across chat-session termination; ordinary negotiation authority cannot waive them. See the [deployment model](../deployment-model.md).
+The selected refusal/status authority is scoped to the accepted object and its adopted policies; it need not be an APP-wide service or the custodian of every participant's journal. Independent ingress, hosting or replicas MUST preserve the profile's logical admission order and recovery guarantees. A participant's local copy, missing reply or elapsed local timer MUST NOT replace authenticated current authority evidence. A hosted assistant or connector MUST preserve the required principal notice/refusal and outcome-recovery paths across chat-session termination; ordinary negotiation authority cannot waive them. See the [deployment model](../deployment-model.md).
 
 ## C5.1 Adopted rights and authorized actors
 

@@ -1,6 +1,6 @@
 # Agent-governing contracts
 
-**ABP 0.4-draft · normative · MIT**
+**APP 0.4-draft · normative · MIT**
 
 The default is **one bilateral agreement**: an agent asks, a counterpart offers its own qualified actions, the originator distributes one exact candidate, both agents adopt it, and every represented principal retains a protected opportunity to refuse. An ordinary agreement requires no transaction plan, composition engine, auction, atomic bundle, or native adapter.
 
@@ -45,6 +45,6 @@ These are interoperability surfaces, not a requirement to create a separate serv
 
 **Agent agreement, principal clearance, and downstream authorization remain separate.** Positive principal-recovery periods and usable refusal paths are universal. Optional handoff does not waive them; RP1 holds externally effective dispatch until relevant periods clear and current native authority is established.
 
-Bazaar governs exact commitments, optional composition, the selected adapter boundary, and interpretation of attributed evidence. Native systems perform execution, commerce validation, payments, fulfillment, assessment, and settlement. No native implementation or live integration is supplied here.
+APP governs exact commitments, optional composition, the selected adapter boundary, and interpretation of attributed evidence. Native systems perform execution, commerce validation, payments, fulfillment, assessment, and settlement. No native implementation or live integration is supplied here.
 
 [Worked examples](../examples/lifecycle-walkthroughs.md) are schematic. [Proposed tests](../tests/PROPOSED.md) stop at controlled adapter substitutes and injected evidence. The specification, profile, and proposed checks are not executed runtime-conformance or native-transaction evidence.

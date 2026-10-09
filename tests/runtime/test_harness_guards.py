@@ -4,11 +4,11 @@ from copy import deepcopy
 
 import pytest
 
-from agent_bazaar.crypto import Signer, content_ref, digest, unsigned_digest
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.fixtures import Environment, U
-from agent_bazaar.harness import FEATURES, P
-from agent_bazaar.records import ref_key
+from agent_promise_protocol.crypto import Signer, content_ref, digest, unsigned_digest
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.fixtures import Environment, U
+from agent_promise_protocol.harness import FEATURES, P
+from agent_promise_protocol.records import ref_key
 
 
 @pytest.fixture

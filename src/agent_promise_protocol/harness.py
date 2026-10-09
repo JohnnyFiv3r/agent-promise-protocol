@@ -1,4 +1,4 @@
-"""ABP semantic enforcement and signed A2A interaction outcomes.
+"""APP semantic enforcement and signed A2A interaction outcomes.
 
 A harness owns one agent's signer. Peers never receive that key. All participants
 in this reference deployment explicitly delegate conflicting state to one ledger.
@@ -17,8 +17,8 @@ from .recovery import Recovery
 from .composition import Composition
 from .handoff import Handoff
 
-P = "https://github.com/JohnnyFiv3r/agent-bazaar/blob/main/profiles/reference-profile.md"
-PROFILE = "abp/0.4-draft"
+P = "https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/profiles/reference-profile.md"
+PROFILE = "app/0.4-draft"
 CONTROL = {
     "publication_contract",
     "admission_grant",
@@ -327,7 +327,7 @@ class Harness:
         self.domain.require_ref(bundle)
         self.domain.require_ref(data)
         inp = {
-            "profile": "abp-rp1/0.1-draft",
+            "profile": "app-rp1/0.1-draft",
             "decision_id": f"decision:{uuid4()}",
             "actor": {
                 "agent_id": actor,

@@ -2,19 +2,19 @@
 
 <a id="rp1-v01"></a>
 
-**RP1 0.1-draft · ABP 0.4-draft · normative profile design.** The mechanisms below are selected. They have not been implemented or verified together. This document specifies neither a running deployment nor successful interoperability, execution, or payment integration.
+**RP1 0.1-draft · APP 0.4-draft · normative profile.** The mechanisms below are requirements for an implementation claiming this profile. [Reference runtime 0.1.0](../docs/runtime.md) implements and tests a controlled subset, including real cryptography, OPA and mutual TLS. Its [validation evidence](../validation.md) does not establish every requirement, independent interoperability or a production deployment. Native execution and payment integrations remain outside that evidence.
 
 RP1 binds the [core contracts](../contracts/README.md) to one interoperable set of mechanisms. Core semantics remain independent of this selection. `MUST`, `MUST NOT`, and `SHOULD` constrain an implementation claiming RP1. A value supplied by an authenticated principal policy is a required configuration input, not permission for an agent to invent a value.
 
 ## 1. Identifiers, dependencies and supported scope
 
-Let `P` be the exact URI `https://github.com/JohnnyFiv3r/agent-bazaar/blob/main/profiles/reference-profile.md`. RP1 uses these identifiers:
+Let `P` be the exact URI `https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/profiles/reference-profile.md`. RP1 uses these identifiers:
 
 | Purpose | Exact identifier |
 |---|---|
 | Reference profile | `P#rp1-v01` |
-| Semantic envelope | `abp/0.4-draft` |
-| A2A extension | `https://github.com/JohnnyFiv3r/agent-bazaar/blob/main/protocol-architecture.md#v04` |
+| Semantic envelope | `app/0.4-draft` |
+| A2A extension | `https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/protocol-architecture.md#v04` |
 | Proof profile | `P#rp1-jws-ed25519` |
 | Authorization decision interface | `P#rp1-opa` |
 | Evidence retrieval | `P#rp1-https-get` |
@@ -24,7 +24,7 @@ Let `P` be the exact URI `https://github.com/JohnnyFiv3r/agent-bazaar/blob/main/
 
 `P#…` in this table means textual expansion of `P`, not a relative identifier. Identifier comparison is exact. A mutable web page does not select a new version; participants MUST pin the understood contract, profile, policy and schema content. Unknown required profiles, fields, critical headers, action types, predicates or authority roles MUST fail closed. There is no fallback to ordinary chat, an older profile, or an alternative proof algorithm.
 
-RP1's default is **one bilateral agreement**, using `submit_record`, `finalize_candidate` and `query_status`. It requires no transaction plan, multi-party coordinator, native adapter or payment mechanism. The ordinary application supplies its capability, the principal's permission and designated notice channel, truthful limits, and performance integration only when that optional feature is enabled. The reference harness is responsible for the mechanical protocol work described below. The harness is a design responsibility here, not a shipped SDK.
+RP1's default is **one bilateral agreement**, using `submit_record`, `finalize_candidate` and `query_status`. It requires no transaction plan, multi-party coordinator, native adapter or payment mechanism. The ordinary application supplies its capability, the principal's permission and designated notice channel, truthful limits, and performance integration only when that optional feature is enabled. The reference harness is responsible for the mechanical protocol work described below. The Python runtime supplies implementation hooks; the high-level application facade in the [harness interface](harness-interface.md) remains a design contract rather than a published SDK API.
 
 Advanced capabilities use the same universal schema and these independently advertised feature identifiers:
 
@@ -35,13 +35,13 @@ Advanced capabilities use the same universal schema and these independently adve
 | `lifecycle-evidence` | Optional; typed C8 lifecycle evidence reporting and interpretation |
 | `adapter-handoff` | Optional; C8 Prepare/Dispatch/Reconcile; requires `lifecycle-evidence` |
 
-The Agent Card's Bazaar extension `params` MUST additionally contain `referenceProfileUri`, `profileManifestRef` and `supported_features`. They name this exact RP1 profile, the signed realm manifest below and the distinct enabled feature strings. Default `supported_features` is `["bilateral"]`. Every signed core record and interaction carries `required_features`, including `bilateral`. Its declared features and those necessarily implied by its kind and fields MUST be a subset of the verified support of every participant required for that transition. The harness checks this intersection before the dependent transition and again before adoption; receipt of an advanced record does not activate it. A transaction plan or candidate `composition` field requires `composition`. Native handoff requires `adapter-handoff` and `lifecycle-evidence`. Neither is required for an ordinary agreement, and a policy-filled `handoff_rules` field by itself requires no adapter. Known optional features may be omitted; unknown required ones are blocked, never approximated.
+The Agent Card's APP extension `params` MUST additionally contain `referenceProfileUri`, `profileManifestRef` and `supported_features`. They name this exact RP1 profile, the signed realm manifest below and the distinct enabled feature strings. Default `supported_features` is `["bilateral"]`. Every signed core record and interaction carries `required_features`, including `bilateral`. Its declared features and those necessarily implied by its kind and fields MUST be a subset of the verified support of every participant required for that transition. The harness checks this intersection before the dependent transition and again before adoption; receipt of an advanced record does not activate it. A transaction plan or candidate `composition` field requires `composition`. Native handoff requires `adapter-handoff` and `lifecycle-evidence`. Neither is required for an ordinary agreement, and a policy-filled `handoff_rules` field by itself requires no adapter. Known optional features may be omitted; unknown required ones are blocked, never approximated.
 
 Every supported formation's relevant commitment and resource conflicts are governed by one mutually accepted authority ledger. Every owner of a governed resource MUST explicitly delegate the relevant ledger decisions to that authority. A resource MUST use that same authority across all concurrent negotiations in RP1, not a different authority per offer. A formation spanning incompatible authorities is unsupported and MUST be blocked before adoption. Different independent domains may choose different authorities; RP1 does not require a global operator. Enabled composition additionally requires an acyclic C7 plan.
 
 The component's originator/coordinator still authors its `accepted_offer`; the authority's durable formation evidence does not replace that authorship or either adoption. The authority serializes the decisions delegated to it. It does not acquire ownership of agents, invent promises, or grant itself control over native systems.
 
-**Deployment scope:** this common conflict authority is selected for the affected owners and resources. It is not a mandatory Bazaar operator, discovery provider or custodian of all participant records. Separately hosted participants MAY keep distinct keys and permitted evidence stores while using the accepted authority for the facts it orders. That topology still needs authenticated remote authority/evidence bindings and current-status recovery; runtime 0.1's shared SQLite access does not implement them. This clarification does not add a cross-authority commit algorithm, relax the same-scope rule or create another RP1 wire version. See the [deployment model](../deployment-model.md).
+**Deployment scope:** this common conflict authority is selected for the affected owners and resources. It is not a mandatory APP operator, discovery provider or custodian of all participant records. Separately hosted participants MAY keep distinct keys and permitted evidence stores while using the accepted authority for the facts it orders. That topology still needs authenticated remote authority/evidence bindings and current-status recovery; runtime 0.1's shared SQLite access does not implement them. This clarification does not add a cross-authority commit algorithm, relax the same-scope rule or create another RP1 wire version. See the [deployment model](../deployment-model.md).
 
 Every RP1 candidate MUST select `handoff_rules.preclearance = "no_effects"` and the exact RP1 policy reference. `recovery_profile_ref` MUST be absent. The profile permits no exception for early payment, irreversible execution, secret release, or externally material reservation. Side-effect-free preparation has the limited independent authorization described in section 10.
 
@@ -53,7 +53,7 @@ An RP1 harness MUST load one authenticated manifest at realm enrollment, then fi
 |---|---|
 | `realm_id` | Stable nonempty deployment realm identifier |
 | `reference_profile_uri` | `P#rp1-v01` |
-| `abp_profile` | `abp/0.4-draft` |
+| `app_profile` | `app/0.4-draft` |
 | `a2a_extension_uri` | Section 1's exact extension URI |
 | `a2a_protocol_version`, `protocol_binding` | `1.0`, `JSONRPC` |
 | `transport_security` | `TLS1.3-mTLS-PKIX-pinned-leaf` |
@@ -71,7 +71,7 @@ The harness owns schema/proof verification, policy evaluation, evidence resoluti
 
 ## 2. Carrier and authenticated identity
 
-Use **A2A specification 1.0.0, wire version `1.0`, JSON-RPC over HTTPS**, with C6's `SendMessage`, activation headers and one data part containing `{bazaar, records}`. The native message is a carrier; its JSON-RPC result, extension acknowledgment, task state or transport receipt is not a Bazaar semantic receipt. [Pinned A2A specification](https://a2a-protocol.org/v1.0.0/specification/).
+Use **A2A specification 1.0.0, wire version `1.0`, JSON-RPC over HTTPS**, with C6's `SendMessage`, activation headers and one data part containing `{app, records}`. The native message is a carrier; its JSON-RPC result, extension acknowledgment, task state or transport receipt is not an APP semantic receipt. [Pinned A2A specification](https://a2a-protocol.org/v1.0.0/specification/).
 
 Endpoints MUST require TLS 1.3 with mutual certificate authentication and advertise native A2A mutual-TLS security. Both peers validate certificate chains against configured roots, validity and endpoint identity, then match the leaf certificate's SHA-256 DER digest against the active registry entry. TLS termination and the policy enforcement point MUST share an authenticated channel that preserves the verified peer identity; an arbitrary forwarded header is insufficient. These are profile constraints using [TLS 1.3](https://www.rfc-editor.org/rfc/rfc8446.html) and [PKIX certificate validation](https://www.rfc-editor.org/rfc/rfc5280.html).
 
@@ -112,20 +112,20 @@ Use an ordinary encoded payload in [JWS Compact Serialization](https://www.rfc-e
 |---|---|
 | `alg` | `Ed25519` |
 | `kid` | Exact registered verification-key URI; also equals `proof.verification_method` |
-| `typ` | `abp-record+jws` |
-| `abp_profile` | `abp/0.4-draft` |
-| `abp_scope` | Nonempty, lexicographically sorted, duplicate-free string array equal to `proof.scope` |
-| `crit` | Exactly `["abp_profile", "abp_scope"]` |
+| `typ` | `app-record+jws` |
+| `app_profile` | `app/0.4-draft` |
+| `app_scope` | Nonempty, lexicographically sorted, duplicate-free string array equal to `proof.scope` |
+| `crit` | Exactly `["app_profile", "app_scope"]` |
 
-These two critical parameters are RP1-defined JWS extension parameters, not claims of IANA registration. `abp_scope` authenticates the claimed signature purpose as well as the record bytes; moving a proof reference into a different scope MUST fail. The verifier MUST understand both critical parameters. It MUST reject unknown headers, `none`, detached payloads, `b64: false`, algorithm substitution, embedded keys and key-discovery URLs.
+These two critical parameters are RP1-defined JWS extension parameters, not claims of IANA registration. `app_scope` authenticates the claimed signature purpose as well as the record bytes; moving a proof reference into a different scope MUST fail. The verifier MUST understand both critical parameters. It MUST reject unknown headers, `none`, detached payloads, `b64: false`, algorithm substitution, embedded keys and key-discovery URLs.
 
-RP1 fixes the scope mechanically: a core semantic record or interaction uses the single scope string `"abp/0.4-draft/record/" + R.kind`; a section 3 profile document uses `"abp/0.4-draft/profile-document/" + R.type_uri`. Unknown kinds/types are rejected. `proof.suite_uri` MUST equal `P#rp1-jws-ed25519`; `proof.issuer_agent_id` MUST equal the signed record's `issuer_agent_id`; the key's registered agent and allowed scope MUST match. These checks authenticate the issuer's typed statement, not its permission to make it; section 4 supplies the latter.
+RP1 fixes the scope mechanically: a core semantic record or interaction uses the single scope string `"app/0.4-draft/record/" + R.kind`; a section 3 profile document uses `"app/0.4-draft/profile-document/" + R.type_uri`. Unknown kinds/types are rejected. `proof.suite_uri` MUST equal `P#rp1-jws-ed25519`; `proof.issuer_agent_id` MUST equal the signed record's `issuer_agent_id`; the key's registered agent and allowed scope MUST match. These checks authenticate the issuer's typed statement, not its permission to make it; section 4 supplies the latter.
 
 Let `H = UTF8(JCS(protected_header))`. Sign the ASCII bytes of `BASE64URL(H) + "." + BASE64URL(payload)`, without base64url padding, using Ed25519. The final compact value appends `"." + BASE64URL(signature)`. Verification MUST recover exactly `payload`, check its digest, authenticate the record's issuer through `kid`, and validate every required proof scope and current/historical authority applicable to the act. Comparing a supplied digest without verifying the payload and signature is insufficient.
 
 `proof.native_proof_ref` resolves to a JSON document containing exactly `{id, media_type, compact_jws}`, with `media_type = "application/jose"` and `id` equal to the reference ID. Its reference digest hashes JCS of that complete wrapper; `compact_jws` preserves the exact ASCII JWS string. The wrapper is created before the final `proofs` array. There is no circular digest: the signed payload excludes `proofs`, while the full record reference includes the resulting proof references.
 
-Profile evidence documents that are not core semantic records use exactly `{id, profile, type_uri, issuer_agent_id, issued_at, body, proofs}`, with `profile = "abp/0.4-draft"`; section 3 applies unchanged. Their type URI is the relevant section's `P#…` identifier plus a documented suffix such as `/policy-decision` or `/ledger-event`. They are referenced evidence, not new Bazaar semantic kinds or automatic instructions. Unknown evidence types cannot satisfy a guard. Registry documents use this envelope with `type_uri = P#rp1-v01/registry` and the section 2 fields in `body`.
+Profile evidence documents that are not core semantic records use exactly `{id, profile, type_uri, issuer_agent_id, issued_at, body, proofs}`, with `profile = "app/0.4-draft"`; section 3 applies unchanged. Their type URI is the relevant section's `P#…` identifier plus a documented suffix such as `/policy-decision` or `/ledger-event`. They are referenced evidence, not new APP semantic kinds or automatic instructions. Unknown evidence types cannot satisfy a guard. Registry documents use this envelope with `type_uri = P#rp1-v01/registry` and the section 2 fields in `body`.
 
 Different proof-only variants have distinct full content references but the same unsigned semantic identity. Preserve the exact full reference originally adopted. A valid re-signature cannot create another operation, accepted agreement, or handoff effect.
 
@@ -133,13 +133,13 @@ Different proof-only variants have distinct full content references but the same
 
 <a id="rp1-opa"></a>
 
-RP1 selects **Open Policy Agent 1.21.1, Rego v1**, using its REST Data API. The enforcement point posts `{"input": <the object below>}` to `/v1/data/agent_bazaar/rp1/authorize` over the configured mTLS channel and reads the API's `result` object. The version is pinned to the [OPA 1.21.1 release](https://github.com/open-policy-agent/opa/releases/tag/v1.21.1); request/response framing follows the [OPA Data API](https://www.openpolicyagent.org/docs/rest-api). This selects an existing policy engine and interface; it does not claim that this repository contains a Rego implementation.
+RP1 selects **Open Policy Agent 1.21.1, Rego v1**, using its REST Data API. The enforcement point posts `{"input": <the object below>}` to `/v1/data/agent_promise_protocol/rp1/authorize` over the configured mTLS channel and reads the API's `result` object. The version is pinned to the [OPA 1.21.1 release](https://github.com/open-policy-agent/opa/releases/tag/v1.21.1); request/response framing follows the [OPA Data API](https://www.openpolicyagent.org/docs/rest-api). The repository supplies an original [reference Rego policy](../policies/rp1.rego) and [client integration](../src/agent_promise_protocol/policy.py). Their [configuration and canonicalization limits](../policies/README.md) remain implementation-specific; deployments must still authenticate approval of their actual policy and data.
 
 The trusted enforcement point constructs the input from verified state. It MUST NOT forward an agent-supplied identity, clearance flag or policy result as trusted input. All fields below are required; nullable fields use JSON null rather than omission.
 
 | Input field | Exact meaning/type |
 |---|---|
-| `profile` | `abp-rp1/0.1-draft` |
+| `profile` | `app-rp1/0.1-draft` |
 | `decision_id` | New authority-scoped identifier for this evaluation |
 | `actor` | `{agent_id, principal_id, transport_certificate_digest}` from current authentication |
 | `act` | One of `submit_record`, `finalize_candidate`, `query_status`, `read_evidence`, `notice`, `refuse`, `prepare_handoff`, `dispatch_handoff`, `reconcile_handoff`, `report_evidence`, `authority_commit`; policy also checks the exact `subject.kind`/type and requested transition |
@@ -267,7 +267,7 @@ handoff_key = "sha256:" + lowercase_hex(SHA256(UTF8(JCS({
 
 Obtain the accepted identity and unsigned digest through verified C6 semantic identity. The exact adopted full `agreement_ref` remains in the request. `action_instance` contains the adopted `type_uri` and canonical `parameters`; its semantics and cardinality MUST match the promised permission. A random new instance identifier is not authorization for another effect. The key excludes handoff ID, proof variant, adapter, profile and carrier, so rerouting cannot multiply permission.
 
-The common handoff gate ledger pins one selected adapter, exact `prepared_handoff` reference and native operation key to this key. `native_operation_key` is exactly `"abp-rp1-" + the 64 lowercase hex characters of handoff_key`. An adapter unable to preserve that correlation in its native system cannot support externally effective RP1 dispatch. A different adapter or materially changed translation at an existing key is blocked. A replacement requires a fresh adopted candidate and explicit attributable disposition of the prior effect; a new candidate MUST NOT bypass a still-unknown prior effect.
+The common handoff gate ledger pins one selected adapter, exact `prepared_handoff` reference and native operation key to this key. `native_operation_key` is exactly `"app-rp1-" + the 64 lowercase hex characters of handoff_key`. An adapter unable to preserve that correlation in its native system cannot support externally effective RP1 dispatch. A different adapter or materially changed translation at an existing key is blocked. A replacement requires a fresh adopted candidate and explicit attributable disposition of the prior effect; a new candidate MUST NOT bypass a still-unknown prior effect.
 
 | Boundary operation | Required behavior |
 |---|---|
@@ -277,7 +277,7 @@ The common handoff gate ledger pins one selected adapter, exact `prepared_handof
 
 `prepared_handoff.body` is exactly C8's `{handoff_ref, handoff_key, adapter_profile_uri, native_request_ref, native_operation_key, effect_class, authorization_requirement_refs, reconciliation_profile_ref}`. `native_request_ref` identifies an immutable JSON wrapper containing exactly `{id, media_type, payload_encoding, payload, payload_digest}`. Its `id` equals the reference ID; `media_type` describes the native payload; `payload_encoding` is exactly `base64url`; `payload` contains the unpadded base64url encoding of the exact native bytes; and `payload_digest` is `"sha256:" + lowercase_hex(SHA256(decoded_payload_bytes))`. The common `native_request_ref.digest` instead hashes JCS of the **whole wrapper**, as every C6 content reference does. Both checks are required. Decoding MUST preserve bytes without parsing, normalizing or reserializing the native payload. Native-specific signatures, digests or credentials remain in their original native representation inside those bytes and are verified separately under the pinned adapter contract.
 
-This wrapper also carries native evidence when a C8 evidence reference must preserve opaque bytes. Its payload may be JSON or another native representation, but the outer common-reference digest always covers JCS JSON. The selected adapter contract must define a complete request representation covering the native target, operation and material parameters; a body-only wrapper cannot silently leave material request fields mutable. Bazaar treats that payload as external content and does not copy AP2, MCP or payment schemas into its core. `authorization_requirement_refs` enumerate every required native authority check. The reconciliation profile identifies how to locate, authenticate and interpret the native outcome by the same operation key, including finality and absence rules. A missing requirement or unsupported native correlation blocks preparation.
+This wrapper also carries native evidence when a C8 evidence reference must preserve opaque bytes. Its payload may be JSON or another native representation, but the outer common-reference digest always covers JCS JSON. The selected adapter contract must define a complete request representation covering the native target, operation and material parameters; a body-only wrapper cannot silently leave material request fields mutable. APP treats that payload as external content and does not copy AP2, MCP or payment schemas into its core. `authorization_requirement_refs` enumerate every required native authority check. The reconciliation profile identifies how to locate, authenticate and interpret the native outcome by the same operation key, including finality and absence rules. A missing requirement or unsupported native correlation blocks preparation.
 
 Preparation does not authorize dispatch. At dispatch, the adapter verifies that its actual native request equals the frozen request, that the current authorization covers that exact action/resource/amount/audience where applicable, and that native evidence is sufficiently fresh. The PEP binds this evidence to its OPA decision and the same ledger revision. The native invocation must begin before that decision's `valid_until` and within its 5-second maximum lifetime; an expired decision cannot be queued for later execution. A delegation to negotiate or principal-window closure alone does not satisfy these native checks.
 
@@ -305,4 +305,4 @@ RP1 does not select a live payment rail. A future native adapter must pin the ac
 | Principal recovery | Exact notice, protected refusal admission, evidence-backed credited time, no dispatch before clearance | Honest designated notice/clock/health authorities and principal's chosen channel |
 | Native boundary | Frozen request, fresh native authority, one journaled dispatch key, correlated evidence | Native authorization enforcement, idempotency/correlation, outcome truth and finality |
 
-The boundary test proposal should challenge these observable contracts: proof-scope substitution; request replay with altered bytes; competing resource formations; incompatible authorities; missing notice and unknown outage intervals; refusal at the deadline; stale policy at dispatch; rerouting the same effect to another adapter; crash after the dispatch marker; false native absence; and fulfillment evidence mislabeled as settlement. These are proposed verification targets. This profile makes no claim that they have been run or passed.
+The boundary assessment should challenge these observable contracts: proof-scope substitution; request replay with altered bytes; competing resource formations; incompatible authorities; missing notice and unknown outage intervals; refusal at the deadline; stale policy at dispatch; rerouting the same effect to another adapter; crash after the dispatch marker; false native absence; and fulfillment evidence mislabeled as settlement. The [validation record](../validation.md) and [conformance map](../conformance.md) distinguish executable coverage from the remaining proposed targets. A profile requirement alone is not evidence that its implementation has passed an assessment.

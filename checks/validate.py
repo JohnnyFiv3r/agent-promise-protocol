@@ -13,8 +13,8 @@ from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parents[1]
-PROFILE = 'abp/0.4-draft'
-ADMISSION_PROFILE = 'abp/admission-policy/0.4-draft'
+PROFILE = 'app/0.4-draft'
+ADMISSION_PROFILE = 'app/admission-policy/0.4-draft'
 
 
 def fixture_digest(value):

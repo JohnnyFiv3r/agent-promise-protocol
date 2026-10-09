@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "kind": "status_snapshot",
   "id": "status:research:2",
   "issuer_agent_id": "agent:requester",
@@ -9,10 +9,10 @@
   "body": {
     "accepted_offer_ref": {
       "id": "accepted:research",
-      "digest": "sha256:052e001fd033e0ed4173aa424f5b914c728800e10f26f1ab76b06ee74f4fa59c"
+      "digest": "sha256:c118dadbb21d29b8439b60ed9383757cce5607732e2778bdaa4c5754fe7b1a20"
     },
     "revision": 2,
-    "previous_status_digest": "sha256:cc48a1dca6d04b6fac4a9a06f4b6ba62ed7f11c3d386b092da04323c53dfc0bd",
+    "previous_status_digest": "sha256:7dffc5ca4ed76afd8cd9926db5f6bdb9241f5d211b2296d8f96648535f837c60",
     "status": "refused",
     "as_of": "2026-10-08T18:03:10Z",
     "freshness_policy_ref": {
@@ -26,11 +26,11 @@
     "notice_refs": [
       {
         "id": "notice:requester",
-        "digest": "sha256:49c893bd12ec6cb0437aae24d7be3eca2cb18609b2e3b18a06e140dc4d000e28"
+        "digest": "sha256:e3436237581dba97cef3b4413dcd27752328837947e0466729ee05181f12615b"
       },
       {
         "id": "notice:researcher",
-        "digest": "sha256:3aba759e077d8eb2cdc17a7471202d306d7e831d803cae08d6fd304535b33de7"
+        "digest": "sha256:314ce2c2ee28cd8b5d000c79f650af7a0076fa1bc51b13437344b9e939dfa85e"
       }
     ],
     "principal_windows": [
@@ -39,7 +39,7 @@
         "state": "closed",
         "notice_ref": {
           "id": "notice:requester",
-          "digest": "sha256:49c893bd12ec6cb0437aae24d7be3eca2cb18609b2e3b18a06e140dc4d000e28"
+          "digest": "sha256:e3436237581dba97cef3b4413dcd27752328837947e0466729ee05181f12615b"
         },
         "starts_at": "2026-10-08T18:01:05Z",
         "deadline": "2026-10-08T18:02:05Z"
@@ -49,7 +49,7 @@
         "state": "refused",
         "notice_ref": {
           "id": "notice:researcher",
-          "digest": "sha256:3aba759e077d8eb2cdc17a7471202d306d7e831d803cae08d6fd304535b33de7"
+          "digest": "sha256:314ce2c2ee28cd8b5d000c79f650af7a0076fa1bc51b13437344b9e939dfa85e"
         },
         "starts_at": "2026-10-08T18:01:10Z",
         "deadline": "2026-10-08T18:03:10Z"
@@ -82,7 +82,7 @@
     "refusal_event_refs": [
       {
         "id": "refusal:researcher",
-        "digest": "sha256:8672bc411f43f2cb4e3f02f4134679b472260e98a600da84d157925a81253dd8"
+        "digest": "sha256:4e7e0cd2c499aacdfaa2c387d59071c2083b9bbe56e05938dc038c001f64cc6e"
       }
     ],
     "status_authority_event_refs": [
@@ -94,9 +94,9 @@
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-requester",
-      "signed_payload_digest": "sha256:37849ea54722379f1b03eec765c57b3d0e242d2894f38ebb0c2fe9750bc95b1d",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:dc32005ac769261fe863438b6635cdf87316ed4bc0913a6c15a56c8e3f4b6bc9",
       "issuer_agent_id": "agent:requester",
       "scope": [
         "synthetic-review-only"

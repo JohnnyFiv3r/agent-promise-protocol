@@ -10,8 +10,8 @@ references does not prove the underlying predicates.
 
 The administrator must authenticate owner approval of the exact policy bundle,
 data snapshot and delegation before installing them. The reference service data
-has `agent_bazaar_policy` containing `policy_bundle_ref` and `policy_data_ref`,
-plus `agent_bazaar_grants`, an array of grants. A minimal grant shape is:
+has `agent_promise_protocol_policy` containing `policy_bundle_ref` and `policy_data_ref`,
+plus `agent_promise_protocol_grants`, an array of grants. A minimal grant shape is:
 
 ```json
 {
@@ -41,7 +41,7 @@ private key:
 ```
 
 `OPAClient` posts the exact RP1 input to
-`/v1/data/agent_bazaar/rp1/authorize`. It validates TLS 1.3, the configured CA,
+`/v1/data/agent_promise_protocol/rp1/authorize`. It validates TLS 1.3, the configured CA,
 server hostname and enrolled leaf digest before sending request bytes. It checks
 all result fields, reason codes, exact input digest, approved policy references,
 ledger revision, state digest and lifetime. The harness must compare the decision

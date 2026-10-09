@@ -1,10 +1,10 @@
-# Product specification: Agent Bazaar
+# Product specification: Agent Promise Protocol
 
-**ABP 0.4-draft · Owner: John Inniger · MIT licensed**
+**APP 0.4-draft · Owner: John Inniger · MIT licensed**
 
 An agent expresses what it seeks. Other agents offer qualified actions. The originator selects and distributes one exact candidate for each counterparty agreement. Both agents adopt those terms, and every represented principal retains a protected opportunity to refuse.
 
-Agent Bazaar makes that interaction portable across agent harnesses, discovery services, and product domains. Its default is one bilateral agreement. A service can offer an MCP endpoint, API capability, dataset, document analysis, physical service, or noncommercial information exchange without adopting a different agreement format.
+Agent Promise Protocol makes that interaction portable across agent harnesses, discovery services, and product domains. Its default is one bilateral agreement. A service can offer an MCP endpoint, API capability, dataset, document analysis, physical service, or noncommercial information exchange without adopting a different agreement format.
 
 ## Start with the ordinary agreement
 
@@ -27,7 +27,7 @@ This path requires no transaction plan, composition engine, auction, atomic bund
 | [Default reference profile](profiles/reference-profile.md) and [harness interface](profiles/harness-interface.md) | Concrete verification, policy evaluation, exact-reference handling, durable replay/order, evidence retrieval, admission, and notice/refusal/status mechanics |
 | Application integration | Domain meaning, truthful capability and capacity, principal-approved permissions, real constraints, and authorized application hooks |
 
-Applications should connect an existing capability and its policies without inventing protocol machinery. The harness cannot manufacture competence, legitimate delegation, sufficient capacity, truthful native evidence, or reversible effects. RP1 specifies one complete default interoperability path; its harness is a design, not a shipped SDK.
+Applications should connect an existing capability and its policies without inventing protocol machinery. The harness cannot manufacture competence, legitimate delegation, sufficient capacity, truthful native evidence, or reversible effects. RP1 specifies one complete default interoperability path. The [reference runtime](docs/runtime.md) supplies Python implementation hooks; the high-level facade in the [harness interface](profiles/harness-interface.md) remains a proposed SDK interface.
 
 ## Optional negotiated capabilities
 
@@ -50,7 +50,7 @@ The [eight governing contracts](contracts/README.md) cover publication consent, 
 
 Existing discovery services retain matching, ranking, subscriptions, and their business rules. Existing identity and policy systems supply actual delegation. Domain vocabularies define action meaning without imposing a universal product ontology. Agents may negotiate new compatible arrangements under both principals' policies; identical prepublished route objects are not required.
 
-Native systems retain AP2/UCP/ACP validation, tool access, execution, payment handling, processors, fulfillment, assessment procedures, settlement, and refunds. Bazaar defines references, eligibility, and claim interpretation at the selected boundary. It does not implement those systems, appoint a universal evaluator, or operate a dispute court.
+Native systems retain AP2/UCP/ACP validation, tool access, execution, payment handling, processors, fulfillment, assessment procedures, settlement, and refunds. APP defines references, eligibility, and claim interpretation at the selected boundary. It does not implement those systems, appoint a universal evaluator, or operate a dispute court.
 
 ## Design requirements
 
@@ -72,12 +72,12 @@ Native systems retain AP2/UCP/ACP validation, tool access, execution, payment ha
 | P14 | Selected handoff gates bind exact action occurrence, current authority, principal protection, and recoverable outcome; lost replies do not authorize duplicate effects. |
 | P15 | Typed lifecycle claims preserve reporter, subject, evidence, and native interpretation; submission, fulfillment, assessment, and settlement are not interchangeable. |
 
-## Current deliverable and proposed testing
+## Current deliverable and validation
 
-This revision authors the reconciled specification, concrete reference-profile design, schemas, worked examples, and [proposed checks](tests/PROPOSED.md). It does not implement a running harness, native adapter, payment flow, or runtime conformance suite. Static validation is described separately in [validation](validation.md).
+The repository contains the reconciled specification, concrete reference profile, schemas, worked examples and [reference runtime 0.1.0](docs/runtime.md). Its executable tests exercise cryptography, authenticated transport, policy, durable agreement/recovery, optional composition and simulated handoff. The [validation record](validation.md) separates those implementation results from authoring checks and the broader [proposed checks](tests/PROPOSED.md). There is no live native adapter, payment flow or independent interoperability result.
 
 Proposed tests stop at controlled adapter substitutes and injected native evidence. They cover exact adoption, principal refusal, dependency guards, native translation boundaries, replay, and uncertain outcomes without creating real transactions. Source-backed research remains a possible demonstration domain, not the universal agreement format or a selected assessment regime.
 
-After contract/profile lock, adoption should be assessed by connecting an existing capability and principal policies through the quick-start and harness interface, while independent implementation assesses whether the specification yields the same semantics. A convenient SDK alone would establish neither interoperability nor correctness.
+Adoption should next be assessed by connecting an existing capability and principal policies through the [implementer guide](docs/implementer-guide.md) and documented runtime interfaces, while independent implementation assesses whether the specification yields the same semantics. Those assessments remain unrun. A convenient SDK alone would establish neither interoperability nor correctness.
 
 [Current decisions](decisions-v0.4.md) and the [contract map](contract-map.md) govern this revision. Historical research-specific reviewer, correction, payment, and forced-expiry rules remain superseded.

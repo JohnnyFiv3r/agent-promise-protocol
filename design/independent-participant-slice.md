@@ -2,13 +2,13 @@
 
 **Implementation boundary and acceptance proposal · not an implemented federated profile**
 
-The [deployment model](../deployment-model.md) supports a connector-accessed or embedded buyer participant, separately hosted seller participants, and optional discovery/aggregation. This slice is the remaining ABP machinery needed to demonstrate those participants negotiating with separate stores. It preserves the existing C1–C8 boundaries and builds no provider search, indexing, ranking, subscription service, comparison engine, connector tools, shopping UI or payment integration.
+The [deployment model](../deployment-model.md) supports a connector-accessed or embedded buyer participant, separately hosted seller participants, and optional discovery/aggregation. This slice is the remaining APP machinery needed to demonstrate those participants negotiating with separate stores. It preserves the existing C1–C8 boundaries and builds no provider search, indexing, ranking, subscription service, comparison engine, connector tools, shopping UI or payment integration.
 
 ## First topology
 
 Use two separately addressed processes with distinct private keys, stores, public-only peer enrollment and principal policy evaluators. Exchange the same signed core records through C6. Neither participant receives the other's database handle, signer, private policy state or fixture object. Endpoints can be configured directly; no directory or central account service is needed.
 
-Start with a mutually selected RP1 conflict authority for the affected resources, explicitly delegated by both owners where necessary. It may be operated by one participant or a selected third party. The authority is scoped infrastructure, not a mandatory Bazaar service. Separate participant evidence stores do not remove the need for that one authority's recoverable order. A topology with incompatible resource authorities is a different profile task and remains blocked until its formation/withdrawal/recovery mechanism is defined and verified.
+Start with a mutually selected RP1 conflict authority for the affected resources, explicitly delegated by both owners where necessary. It may be operated by one participant or a selected third party. The authority is scoped infrastructure, not a mandatory APP service. Separate participant evidence stores do not remove the need for that one authority's recoverable order. A topology with incompatible resource authorities is a different profile task and remains blocked until its formation/withdrawal/recovery mechanism is defined and verified.
 
 ## Runtime responsibilities
 
@@ -23,7 +23,7 @@ Start with a mutually selected RP1 conflict authority for the affected resources
 ## Required demonstrations
 
 - Direct buyer/seller formation through A2A with no discovery service or MCP product implementation. Separate stores contain only records explicitly exchanged or locally authored.
-- The same seller endpoint works with a second independently configured buyer provider. No global provider account, proprietary buyer field or hidden original database is required by ABP.
+- The same seller endpoint works with a second independently configured buyer provider. No global provider account, proprietary buyer field or hidden original database is required by APP.
 - A relay carries the same signed intent/offer without acquiring its author's coordinator, promiser or principal authority. Optional routing does not broaden disclosure or reply consent.
 - A coordinator restart after committed formation and before delivery returns the original accepted object. A new carrier/session does not create another formation, allocation or refusal window.
 - A refusal durably admitted at the selected authority before/equal to the deadline remains effective when its response and the seller's status connection are lost. After reconnection, the seller observes the refusal and performs zero fake effects.

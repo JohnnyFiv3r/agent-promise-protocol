@@ -1,11 +1,11 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "required_extensions": [],
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/fictional-keys/agent-researcher",
-      "signed_payload_digest": "sha256:ce151b1333f1e513fa3150ab97206266537bf3c420b8302f174f97d20b98b702",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:8ffa3a50ac40f7b01308deb67cbabe78ed00418c6c8eefe5abcf85458dfab109",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "synthetic-review-only"
@@ -29,24 +29,24 @@
   "body": {
     "handoff_ref": {
       "id": "handoff:report-once",
-      "digest": "sha256:9c2c5128c85dbb9083db104fdf8db7858f32bffa53507512736a39904bcacea4"
+      "digest": "sha256:38a47ef5906d1d9699c829b80155c26e5ae4dc4e732eb63b308f7ef301c51c58"
     },
-    "handoff_key": "sha256:8254226be3dd50cccff01d909a2148d2cf613f51fd5285bac198903134c3fbbe",
+    "handoff_key": "sha256:8f181216acde457499c9d3fd70f6f8f50b4972090125dc9df8687a863e492000",
     "phase": "dispatch",
     "revision": 1,
     "previous_receipt_digest": null,
     "outcome": "blocked",
     "prepared_plan_ref": {
       "id": "prepared:report-once",
-      "digest": "sha256:ed3989716a45c5ac45dcffd7e611a7793554bb1bcbbbef85492a939bd89fea1b"
+      "digest": "sha256:37e1f5ede28cdab61538eea2126fe8d769d234be00af506f7df11a4896c97747"
     },
     "gate_evidence_refs": [
       {
         "id": "status:research:2",
-        "digest": "sha256:2ac010fb6edc06ffc479f4f7b944cf358d10e85439044978f5a11b0dbf82e8fe"
+        "digest": "sha256:1ccdf9b7ae341543b29fceea9d61661ffbbe385e3c6a4051535f69f9cc9eb8e0"
       }
     ],
-    "native_operation_key": "abp-rp1-8254226be3dd50cccff01d909a2148d2cf613f51fd5285bac198903134c3fbbe",
+    "native_operation_key": "app-rp1-8f181216acde457499c9d3fd70f6f8f50b4972090125dc9df8687a863e492000",
     "native_evidence_refs": [],
     "reason_code": "principal_refused"
   }

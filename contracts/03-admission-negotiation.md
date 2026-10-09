@@ -1,6 +1,6 @@
 # C3 — Admission and negotiation
 
-**ABP 0.4-draft · normative · MIT**
+**APP 0.4-draft · normative · MIT**
 
 This contract governs how a recipient admits work while allowing iterative offers. It applies to the [semantic records](../schemas/contract.schema.json), [interaction envelope](../schemas/interaction.schema.json) and [admission declaration](../schemas/admission-policy.schema.json). Numbers, validity and replenishment are policy choices, not protocol defaults.
 
@@ -38,7 +38,7 @@ The recipient MUST perform these gates before invoking an agent model or domain 
 4. For a new operation, resolve the exact admission basis and required policy/status evidence using bounded retrieval. Verify sender eligibility, purpose, subject scope, current validity and reply permission.
 5. Atomically reserve the applicable message/byte/work/in-flight allowance and persist a pending operation before dispatching work. Apply live-option and selection constraints separately where required.
 
-Malformed or unauthorized ingress may be dropped or receive a bounded native error; producing a signed Bazaar receipt is not an obligation to spend unbounded resources. Perimeter parsing/authentication abuse limits remain native responsibilities. The semantic quota cannot be evaded through these distinctions.
+Malformed or unauthorized ingress may be dropped or receive a bounded native error; producing a signed APP receipt is not an obligation to spend unbounded resources. Perimeter parsing/authentication abuse limits remain native responsibilities. The semantic quota cannot be evaded through these distinctions.
 
 ## C3-05 — Accounting and recovery
 

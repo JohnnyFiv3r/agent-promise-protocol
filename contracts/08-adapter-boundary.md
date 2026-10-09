@@ -1,14 +1,14 @@
 # C8 — Handoff, recovery protection and lifecycle evidence
 
-**ABP 0.4-draft · normative · MIT**
+**APP 0.4-draft · normative · MIT**
 
-This contract defines the Bazaar side of an adapter boundary. `adapter-handoff` (which requires `lifecycle-evidence`) enables its handoff operations; `lifecycle-evidence` alone enables attributed reporting. The default `bilateral` path needs neither an adapter nor a lifecycle reporting subsystem. Its mandatory principal recovery and policy-filled `handoff_rules` still prevent agent assent from being treated as native authority. It applies to the same universal agreements used for information, access, computation, services, goods, money and noncommercial exchanges. [C4](04-formation.md) governs agent agreement; [C5](05-principal-refusal.md) governs principal clearance; [C7](07-composition.md) governs component eligibility. Native systems independently authorize and perform their own acts.
+This contract defines the APP side of an adapter boundary. `adapter-handoff` (which requires `lifecycle-evidence`) enables its handoff operations; `lifecycle-evidence` alone enables attributed reporting. The default `bilateral` path needs neither an adapter nor a lifecycle reporting subsystem. Its mandatory principal recovery and policy-filled `handoff_rules` still prevent agent assent from being treated as native authority. It applies to the same universal agreements used for information, access, computation, services, goods, money and noncommercial exchanges. [C4](04-formation.md) governs agent agreement; [C5](05-principal-refusal.md) governs principal clearance; [C7](07-composition.md) governs component eligibility. Native systems independently authorize and perform their own acts.
 
 ## C8-01 — Boundary and actors
 
 The action's promiser or a specifically authorized representative may request a handoff. The selected adapter translates that exact action into its native request and reports attributable observations. A transaction orchestrator has no additional execution authority merely because it coordinates components. An assessor may issue an assessment only under the agreed assessment semantics and authority. An evidence relay preserves the original reporter and claim.
 
-Bazaar governs the request, its eligibility, preservation of the principal's protected right, operation identity and interpretation of returned evidence. It does not issue AP2 mandates, construct a payment protocol, perform fulfillment or establish settlement by fiat. Native validation, execution, payment and settlement remain beyond the adapter boundary. A deployment claiming compliance MUST enforce the preconditions here at its handoff gate; a native connector's presence in terms is insufficient.
+APP governs the request, its eligibility, preservation of the principal's protected right, operation identity and interpretation of returned evidence. It does not issue AP2 mandates, construct a payment protocol, perform fulfillment or establish settlement by fiat. Native validation, execution, payment and settlement remain beyond the adapter boundary. A deployment claiming compliance MUST enforce the preconditions here at its handoff gate; a native connector's presence in terms is insufficient.
 
 ## C8-02 — Three separate decisions
 
@@ -20,7 +20,7 @@ None implies the next. A historical signature or a valid native credential alone
 
 ## C8-03 — Recovery as participation and dispatch condition
 
-Each represented principal MUST have a positive, nonwaivable C5 period with qualifying notice and a usable refusal path. An arrangement that cannot preserve that protection MUST NOT be admitted as an equivalent Bazaar transaction.
+Each represented principal MUST have a positive, nonwaivable C5 period with qualifying notice and a usable refusal path. An arrangement that cannot preserve that protection MUST NOT be admitted as an equivalent APP transaction.
 
 Candidates contain `handoff_rules`: an exact policy reference, a `preclearance` mode and, only when `protected_effects` is requested, an exact recovery profile. The default mode is `no_effects`. Its default handoff holds irreversible effects until every principal period relevant to that action and its declared dependencies has cleared and current native action authority is established. An unknown effect classification MUST be treated as externally effective.
 
@@ -97,7 +97,7 @@ Preparation can be blocked without creating a dispatch. After any potential disp
 
 Lost responses, process restarts, new agent request IDs and alternate adapters MUST NOT trigger a second native act. Reconciliation is read-only with respect to the effect. Any permitted redelivery must be proven by the selected native idempotency semantics to address the same single operation and preserve the protection; lack of such evidence leaves the operation in doubt. RP1 never automatically redelivers after an ambiguous dispatch.
 
-A profile MUST state the limits of its native guarantee. Bazaar-side deduplication alone does not prove exactly-once execution by an external service. Supporting an adapter boundary does not establish that every native adapter can meet its requirements.
+A profile MUST state the limits of its native guarantee. APP-side deduplication alone does not prove exactly-once execution by an external service. Supporting an adapter boundary does not establish that every native adapter can meet its requirements.
 
 ## C8-08 — Refusal and dependent disposition
 

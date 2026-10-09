@@ -3,7 +3,7 @@
   "additionalProperties": false,
   "properties": {
     "profile": {
-      "const": "abp/admission-policy/0.4-draft"
+      "const": "app/admission-policy/0.4-draft"
     },
     "kind": {
       "const": "admission_policy_declaration"
@@ -37,23 +37,23 @@
       "minLength": 1
     },
     "authority_ref": {
-      "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+      "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/content_ref"
     },
     "eligibility_ref": {
-      "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+      "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/content_ref"
     },
     "status_policy_ref": {
-      "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+      "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/content_ref"
     },
     "status_ref": {
       "type": "string",
       "format": "uri"
     },
     "validity": {
-      "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/validity"
+      "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/validity"
     },
     "recovery_policy_ref": {
-      "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+      "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/content_ref"
     },
     "reply_max_bytes": {
       "type": "integer",
@@ -79,7 +79,7 @@
           "record_kinds": {
             "type": "array",
             "items": {
-              "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/semantic_kind"
+              "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/semantic_kind"
             },
             "minItems": 0,
             "uniqueItems": true
@@ -100,7 +100,7 @@
             "maximum": 9007199254740991
           },
           "work_semantics_ref": {
-            "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+            "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/content_ref"
           },
           "max_in_flight": {
             "type": "integer",
@@ -113,7 +113,7 @@
             "maximum": 9007199254740991
           },
           "validity": {
-            "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/validity"
+            "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/validity"
           },
           "replenishment": {
             "oneOf": [
@@ -137,7 +137,7 @@
                     "const": "policy_defined"
                   },
                   "rule_ref": {
-                    "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/content_ref"
+                    "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/content_ref"
                   }
                 },
                 "required": [
@@ -150,7 +150,7 @@
           "operation_purposes": {
             "type": "array",
             "items": {
-              "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/operation_purpose"
+              "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/operation_purpose"
             },
             "minItems": 1,
             "uniqueItems": true
@@ -197,7 +197,7 @@
     "proofs": {
       "type": "array",
       "items": {
-        "$ref": "urn:agent-bazaar:draft:0.4:semantic-records#/$defs/proof_reference"
+        "$ref": "urn:agent-promise-protocol:draft:0.4:semantic-records#/$defs/proof_reference"
       },
       "minItems": 1,
       "uniqueItems": true
@@ -224,7 +224,7 @@
     "proofs"
   ],
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:agent-bazaar:draft:0.4:admission-policy",
-  "title": "Agent Bazaar 0.4 admission policy disclosure",
+  "$id": "urn:agent-promise-protocol:draft:0.4:admission-policy",
+  "title": "Agent Promise Protocol 0.4 admission policy disclosure",
   "description": "Machine-readable declaration of selected existing admission policy. Values and renewal are policy choices. Native authority and proof must authenticate this content. C1/C3 supply normative cross-field, issuer, purpose and enforcement requirements."
 }

@@ -1,12 +1,12 @@
 # One capability, one agreement
 
-**ABP 0.4 / RP1 · integration design, not installation instructions for an existing SDK.**
+**APP 0.4-draft / RP1 · bilateral integration walkthrough.**
 
-The normal interaction is: express an outcome, receive qualified offers, select exact terms, adopt the same candidate, and honor each principal's protected refusal period. A conforming reference harness handles the protocol mechanics. This guide defines the intended adoption path to implement after contract/profile lock.
+The normal interaction is: express an outcome, receive qualified offers, select exact terms, adopt the same candidate, and honor each principal's protected refusal period. This guide describes that application flow. The [implementer guide](implementer-guide.md) gives the reading order and runnable commands for reference runtime **0.1.0**; the [runtime guide](runtime.md) documents its actual Python interfaces and controlled-deployment limits.
 
 ## Who integrates and who authorizes
 
-The buyer enables a connector to a delegated participant or uses an assistant with that participant embedded. The seller or its software provider exposes an A2A ABP endpoint backed by its business logic. Humans authorize policies and keep a usable notice/refusal interface; their providers handle durable protocol state. One connector can reach multiple compatible sellers, and direct peers need no discovery service. The [deployment model](../deployment-model.md) separates these product entry points from scoped protocol authorities; the [runtime guide](runtime.md) describes the implementation available today.
+The buyer enables a connector to a delegated participant or uses an assistant with that participant embedded. The seller or its software provider exposes an A2A APP endpoint backed by its business logic. Humans authorize policies and keep a usable notice/refusal interface; their providers handle durable protocol state. One connector can reach multiple compatible sellers, and direct peers need no discovery service. The [deployment model](../deployment-model.md) separates these product entry points from scoped protocol authorities; the [runtime guide](runtime.md) describes the implementation available today.
 
 ## What the application supplies
 
@@ -53,4 +53,4 @@ Advanced features are advertised and understood before a dependent act. A peer t
 
 ## How simplicity will be assessed
 
-After contract lock and harness implementation, give an independent builder this guide, RP1 and the SDK. They should connect one existing capability and principal policy, form an agreement and honor refusal without writing protocol machinery or obtaining unwritten rules from the authors. Separately, another implementation should interoperate from the specification without using the SDK. These are [proposed adoption tests](../tests/PROPOSED.md), not results already obtained.
+The next adoption assessment gives an independent builder this guide, RP1 and the reference runtime. They should connect one existing capability and principal policy, form an agreement and honor refusal without obtaining unwritten protocol rules from the authors. Separately, another implementation should interoperate from the specification without sharing the runtime. These remain [proposed adoption tests](../tests/PROPOSED.md); the existing implementation tests do not establish either result.

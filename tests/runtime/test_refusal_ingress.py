@@ -10,10 +10,10 @@ from threading import Event
 
 import pytest
 
-from agent_bazaar.crypto import content_ref, digest
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.fixtures import Environment
-from agent_bazaar.storage import Ledger
+from agent_promise_protocol.crypto import content_ref, digest
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.fixtures import Environment
+from agent_promise_protocol.storage import Ledger
 
 
 class SimulatedCrash(BaseException):

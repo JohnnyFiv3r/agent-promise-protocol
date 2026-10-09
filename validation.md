@@ -1,10 +1,16 @@
 # Validation evidence
 
-**ABP 0.4 / RP1 baseline frozen at `f4a01e2` · reference runtime 0.1**
+**APP 0.4 / RP1 · reference runtime 0.1 · historical ABP baseline at `f4a01e2`**
 
 The repository now has executable implementation tests in addition to its document-authoring checker. These evidence categories must remain separate. A successful structural check, signature verification, local policy decision, controlled behavioral test or fake adapter outcome does not establish the next category automatically.
 
-The frozen contract/profile/schema commit is `f4a01e2c8c1ee6bb72cc6793933afbcedf91572c`. The current draft adds [deployment and ownership clarifications](deployment-model.md) without changing wire schemas or RP1 authority guarantees. Current run results must identify their actual source state and cannot be inferred from the freeze commit alone.
+The historical ABP contract/profile/schema baseline is `f4a01e2c8c1ee6bb72cc6793933afbcedf91572c`. The current APP draft adds [deployment and ownership clarifications](deployment-model.md) and a distinct [APP namespace](docs/namespace-transition.md), preserving the underlying commitment and RP1 authority guarantees. The October 8 results below describe ABP sources; current APP run results must identify their actual source state and cannot be inferred from those earlier runs.
+
+## Published release evidence
+
+The [APP 0.4 Reference Draft release](https://github.com/JohnnyFiv3r/agent-promise-protocol/releases/tag/app-v0.4-draft.1) carries a fresh `verification-report.json`, `release-manifest.json` and `SHA256SUMS` alongside the rebuilt distributions. These identify the release commit, its exact source hashes, executed checks and package hashes. The October 8 manifests below remain historical; they are not rewritten to stand for later builds.
+
+The [CI workflow](.github/workflows/ci.yml) runs the release checker on supported Python versions. It requires the pinned OPA executable and successful actual OPA/mTLS tests, rejects skipped runtime tests, builds both distributions and validates the wheel in an isolated environment outside the checkout. A green run applies to its recorded source state. [Release instructions](RELEASING.md) describe how to reproduce and package that evidence.
 
 ## Recorded implementation run
 
@@ -26,12 +32,12 @@ From the repository root with Python 3.11 or newer and uv:
 uv sync --locked --extra dev
 uv run --locked --extra dev python checks/validate.py
 uv run --locked --extra dev python -m pytest tests/runtime -q -ra
-uv run --locked agent-bazaar demo
+uv run --locked agent-promise-protocol demo
 uv lock --check
 uv build --wheel --sdist
 ```
 
-The demo creates a fresh temporary output directory by default. An explicit `--directory PATH` must name a fresh fixture directory. Its JSON output identifies controlled inputs and keeps agreement, principal recovery, dispatch and simulated native-call observations distinct. See [`demo.py`](src/agent_bazaar/demo.py) and the integrated CLI assertions in [`test_harness.py`](tests/runtime/test_harness.py).
+The demo creates a fresh temporary output directory by default. An explicit `--directory PATH` must name a fresh fixture directory. Its JSON output identifies controlled inputs and keeps agreement, principal recovery, dispatch and simulated native-call observations distinct. See [`demo.py`](src/agent_promise_protocol/demo.py) and the integrated CLI assertions in [`test_harness.py`](tests/runtime/test_harness.py).
 
 The Python lockfile does not install OPA. The actual OPA integration requires the separately installed **1.21.1** executable at `.tools/opa`; its version is asserted by the test. When absent, that case is skipped and must not be counted as a successful OPA exercise. TLS tests require permission to bind local loopback sockets.
 
@@ -73,7 +79,7 @@ This establishes the tested package's schema-resource independence from the sour
 
 ## Authoring fixtures remain fictional
 
-[`checks/validate.py`](checks/validate.py) validates its implemented schema, fictional-record and local-reference constraints. The authored examples under [`examples/`](examples/README.md) remain design-review material. Their illustrative proof references and synthetic native evidence are not the dynamically signed runtime fixtures in [`fixtures.py`](src/agent_bazaar/fixtures.py).
+[`checks/validate.py`](checks/validate.py) validates its implemented schema, fictional-record and local-reference constraints. The authored examples under [`examples/`](examples/README.md) remain design-review material. Their illustrative proof references and synthetic native evidence are not the dynamically signed runtime fixtures in [`fixtures.py`](src/agent_promise_protocol/fixtures.py).
 
 The authoring run reports the following structural/reference coverage:
 

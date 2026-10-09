@@ -1,10 +1,10 @@
 # Trust and failure model
 
-**ABP 0.4-draft · specification companion · no runtime verification claimed**
+**APP 0.4-draft · specification companion · implementation evidence reported separately**
 
 This document bounds the claims made by the [governing contracts](../contracts/README.md), including [composition](../contracts/07-composition.md) and the [adapter boundary](../contracts/08-adapter-boundary.md). It distinguishes requirements a conforming participant can enforce itself, violations attributable evidence can expose, and guarantees that require a designated authority or external system. It does not add a reputation service, universal dispute process, payment rail or mandatory coordination topology.
 
-The lifecycle expansion described in the [reconciliation note](lifecycle-reconciliation.md) preserves three separate facts: agent agreement, principal clearance and authorization for a particular downstream action. Composition and evidence records do not merge those facts. Proposed checks are in [tests/PROPOSED.md](../tests/PROPOSED.md); they have not been implemented or run.
+The lifecycle expansion described in the [reconciliation note](lifecycle-reconciliation.md) preserves three separate facts: agent agreement, principal clearance and authorization for a particular downstream action. Composition and evidence records do not merge those facts. [Proposed checks](../tests/PROPOSED.md) describe the full assessment scope; the [validation record](../validation.md) and [conformance map](../conformance.md) identify the reference runtime's actual coverage and remaining gaps. Implementation tests do not discharge every trust dependency below.
 
 ## Actors and trust boundaries
 
@@ -12,7 +12,7 @@ An agent acts within authority delegated by its principal. Another agent, a disc
 
 Each bilateral agreement retains its own originator/coordinator and exact candidate. A transaction orchestrator coordinates a larger grouping under its own authority. Its role does not replace an agreement coordinator, create a component adoption, reserve another participant's capacity or authorize cancellation of unrelated agreements.
 
-An authority is trusted only for its declared scope. A principal-policy authority establishes delegated permission; a capacity authority establishes the resource facts it controls; a notice mechanism supplies the adopted notice evidence; a refusal/status authority orders the events used to determine principal clearance. An evidence reporter or assessor establishes only the claim assigned to its role and semantics. An adapter binds a separately authorized external operation to Bazaar references; the native system defines its own execution and result semantics.
+An authority is trusted only for its declared scope. A principal-policy authority establishes delegated permission; a capacity authority establishes the resource facts it controls; a notice mechanism supplies the adopted notice evidence; a refusal/status authority orders the events used to determine principal clearance. An evidence reporter or assessor establishes only the claim assigned to its role and semantics. An adapter binds a separately authorized external operation to APP references; the native system defines its own execution and result semantics.
 
 ## Classification of guarantees
 
@@ -26,7 +26,7 @@ The categories below overlap. For example, a verifier can locally check an autho
 | Durable formation | Preserve exact candidate/adoption bindings, replay protection and one formation result within the declared ordering scope | Cross-authority capacity protection and recovery depend on the selected mechanism. Local records cannot prove that an unrelated system has not consumed the same resource. |
 | Principal recovery | Require positive adopted periods, qualifying notice, usable refusal, authoritative ordering and fresh clearance evidence; withhold dependent irreversible handoff | Notice availability, clock/order integrity and completeness of refusal admission depend on the designated mechanisms. A signature cannot prove a principal actually read the terms. |
 | Composition eligibility | Evaluate the adopted dependency rules against exact component references and required evidence; preserve each component's rights | A grouping provides neither global assent nor atomic execution. Progress depends on component authorities and the declared dependency structure. |
-| Downstream handoff | Check the exact action, applicable clearance/dependencies and current native authority; preserve dispatch identity and unknown outcomes | Actual execution, duplicate suppression and recoverable native outcome depend on the selected adapter/native contract. Bazaar records alone cannot impose those properties on a service. |
+| Downstream handoff | Check the exact action, applicable clearance/dependencies and current native authority; preserve dispatch identity and unknown outcomes | Actual execution, duplicate suppression and recoverable native outcome depend on the selected adapter/native contract. APP records alone cannot impose those properties on a service. |
 | Fulfillment, assessment and settlement evidence | Authenticate the reporter, claim type, subject, native correlation, observation and required verification/finality rules | Delivery quality, an assessor's correctness, native settlement finality and reversibility remain claims under their particular semantics and trusted sources. |
 | Privacy | Enforce permitted disclosure and retrieval in the conforming participant's own paths | An authorized recipient can copy material outside those paths. Withdrawal of future permission cannot erase information already disclosed. |
 
@@ -81,6 +81,6 @@ Selecting these mechanisms is a design commitment, not evidence that an implemen
 
 ## Explicit limits
 
-Bazaar does not guarantee honest participants, universal capacity knowledge, eventual agreement, uninterrupted service, truthful providers, accurate assessors, universally reversible effects or settlement finality independent of the native system. It does not infer human approval from an elapsed period, claim all-or-nothing composition merely because an orchestrator exists, or impose a general dispute court.
+APP does not guarantee honest participants, universal capacity knowledge, eventual agreement, uninterrupted service, truthful providers, accurate assessors, universally reversible effects or settlement finality independent of the native system. It does not infer human approval from an elapsed period, claim all-or-nothing composition merely because an orchestrator exists, or impose a general dispute court.
 
-The contracts require conforming participants to refuse unsupported conclusions, preserve attributable evidence and keep unknown outcomes unresolved. `dispatch_handoff` records its durable boundary before an attempt; `reconcile_handoff` retrieves the original outcome and never initiates the action. These requirements govern adapter calls and evidence interpretation. Actual native effects remain externally reported facts, not effects independently proven by the Bazaar state machine, and live interoperability remains separate work.
+The contracts require conforming participants to refuse unsupported conclusions, preserve attributable evidence and keep unknown outcomes unresolved. `dispatch_handoff` records its durable boundary before an attempt; `reconcile_handoff` retrieves the original outcome and never initiates the action. These requirements govern adapter calls and evidence interpretation. Actual native effects remain externally reported facts, not effects independently proven by the APP state machine, and live interoperability remains separate work.

@@ -1,6 +1,6 @@
 # C2 — Qualified actions, promises, and adoption
 
-**Normative contract · ABP 0.4-draft**
+**Normative contract · APP 0.4-draft**
 
 This contract governs the meaning and authorship of an agent's promises. It implements the controlling [decisions](../decisions-v0.2.md) and refines the [promise model](../promise-model.md). Names such as `own_promise` and `promise_bindings` refer to the [record schema](../schemas/contract.schema.json). The [publication contract](01-publication-policy.md) governs permission and disclosure.
 
@@ -26,7 +26,7 @@ Within a candidate, each `(promiser_agent_id, promise_id)` MUST identify exactly
 
 Capability means an actor's ability to perform a described action involving a product, service, resource, information, access, or other subject or outcome. The subject is what the action concerns; the capability is the ability to perform that action. These examples are illustrative, not a category system or a restriction to AI tools.
 
-The common action structure MUST remain independent of product-specific vocabulary. ABP MUST NOT require a core product taxonomy, capability catalog, central vocabulary registry, or maintainer approval of domain definitions. Participants MUST still establish shared meaning through C2-04's action-semantics mechanism. Extensions MAY define action meanings and typed parameters, but MUST NOT alter self-authorship, require another actor's unissued promise, or erase a core condition. Free-form explanation MUST NOT silently widen typed scope or authority; conflicting required meanings MUST be resolved before issuance/adoption.
+The common action structure MUST remain independent of product-specific vocabulary. APP MUST NOT require a core product taxonomy, capability catalog, central vocabulary registry, or maintainer approval of domain definitions. Participants MUST still establish shared meaning through C2-04's action-semantics mechanism. Extensions MAY define action meanings and typed parameters, but MUST NOT alter self-authorship, require another actor's unissued promise, or erase a core condition. Free-form explanation MUST NOT silently widen typed scope or authority; conflicting required meanings MUST be resolved before issuance/adoption.
 
 ### C2-06
 

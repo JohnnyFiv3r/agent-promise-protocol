@@ -7,14 +7,14 @@
       "messageId": "message:example-operation-1",
       "role": "ROLE_USER",
       "extensions": [
-        "https://github.com/JohnnyFiv3r/agent-bazaar/blob/main/protocol-architecture.md#v04"
+        "https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/protocol-architecture.md#v04"
       ],
       "parts": [
         {
           "mediaType": "application/json",
           "data": {
-            "bazaar": {
-              "profile": "abp/0.4-draft",
+            "app": {
+              "profile": "app/0.4-draft",
               "kind": "interaction_request",
               "id": "interaction:example-operation-1",
               "issuer_agent_id": "agent:requester",
@@ -24,17 +24,17 @@
               "body": {
                 "operation_id": "operation:example-1",
                 "recipient_agent_id": "agent:researcher",
-                "recipient_scope_id": "scope:researcher-bazaar",
+                "recipient_scope_id": "scope:researcher-app",
                 "purpose": "submit_record",
                 "subject_ref": {
                   "id": "offer:example",
                   "digest": "<SHA256_OF_COMPLETE_CANONICAL_SUBJECT_RECORD>",
-                  "locator": "https://example.org/bazaar/records/offer-example"
+                  "locator": "https://example.org/app/records/offer-example"
                 },
                 "admission_basis_ref": {
                   "id": "policy:researcher-admission",
                   "digest": "<SHA256_OF_CANONICAL_ADMISSION_POLICY>",
-                  "locator": "https://example.org/bazaar/policies/admission"
+                  "locator": "https://example.org/app/policies/admission"
                 }
               },
               "proofs": [
@@ -49,7 +49,7 @@
                   "native_proof_ref": {
                     "id": "proof:example-operation-1",
                     "digest": "<SHA256_OF_REFERENCED_NATIVE_PROOF_OBJECT>",
-                    "locator": "https://example.org/bazaar/proofs/example-operation-1"
+                    "locator": "https://example.org/app/proofs/example-operation-1"
                   }
                 }
               ],

@@ -1,6 +1,8 @@
-# Agent Bazaar A2A interaction contract
+# Agent Promise Protocol A2A interaction contract
 
-**ABP 0.4-draft · October 8, 2026 · [MIT](LICENSE)**
+**APP 0.4-draft · October 9, 2026 namespace revision · [MIT](LICENSE)**
+
+The underlying contract was authored as ABP on October 8. The current [APP namespace](docs/namespace-transition.md) preserves those commitment semantics with distinct protocol identifiers.
 
 `MUST`, `MUST NOT` and `SHOULD` state requirements for a conforming participant. Each participant enforces them under its own authority. They do not confer power over another autonomous agent.
 
@@ -10,13 +12,13 @@ The [eight governing contracts](contracts/README.md) supply the operational requ
 
 The contract covers **publication, qualified negotiation, bilateral formation, mandatory principal recovery, composition, adapter handoff and lifecycle evidence**. It specifies attributable acts and observable guarantees while preserving autonomous self-authorship and existing native mechanisms.
 
-Native AP2/UCP/ACP validation, execution, payment, fulfillment, assessment and settlement mechanisms remain outside the adapter boundary. Bazaar governs eligibility to hand off an action and what their returned evidence may establish; it neither performs those native acts nor issues their authority. [Decision 14 is explicitly revised](decisions-v0.4.md) to extend semantic coverage beyond formation. The remaining [earlier decisions](decisions-v0.2.md) continue to apply, with test proposals now requested. The [contract map](contract-map.md) identifies the eight interfaces.
+Native AP2/UCP/ACP validation, execution, payment, fulfillment, assessment and settlement mechanisms remain outside the adapter boundary. APP governs eligibility to hand off an action and what their returned evidence may establish; it neither performs those native acts nor issues their authority. [Decision 14 is explicitly revised](decisions-v0.4.md) to extend semantic coverage beyond formation. The remaining [earlier decisions](decisions-v0.2.md) continue to apply, with test proposals now requested. The [contract map](contract-map.md) identifies the eight interfaces.
 
-The mandatory baseline is `bilateral`: C1–C6, exact agreement and protected principal recovery. Composition, adapter handoff and lifecycle evidence are explicitly negotiated features. An ordinary bilateral agreement needs no plan, composition engine, auction, atomic bundle or adapter implementation. The [quickstart](docs/quickstart.md) and [RP1](profiles/reference-profile.md) give the normal path and concrete mechanisms.
+The mandatory baseline is `bilateral`: C1–C6, exact agreement and protected principal recovery. Composition, adapter handoff and lifecycle evidence are explicitly negotiated features. An ordinary bilateral agreement needs no plan, composition engine, auction, atomic bundle or adapter implementation. The [implementer guide](docs/implementer-guide.md), [quickstart](docs/quickstart.md) and [RP1](profiles/reference-profile.md) give the normal path and concrete mechanisms.
 
 ### Deployment and ownership
 
-The core has no mandatory Bazaar operator, discovery service, network-wide registry or shared database. Independently hosted participants MAY retain their own durable journals or delegate custody under principal policy. Custody, routing and receipt of evidence MUST NOT confer another actor's promise, adoption, resource-selection or refusal authority. Coordination belongs to the authenticated originator; each other authority remains limited to its explicit adopted scope.
+The core has no mandatory APP operator, discovery service, network-wide registry or shared database. Independently hosted participants MAY retain their own durable journals or delegate custody under principal policy. Custody, routing and receipt of evidence MUST NOT confer another actor's promise, adoption, resource-selection or refusal authority. Coordination belongs to the authenticated originator; each other authority remains limited to its explicit adopted scope.
 
 An embedded buyer participant or a connector-accessed delegated participant uses the same C6 A2A records with independently hosted sellers. Connecting an assistant grants only the permissions actually delegated. Discovery, intent distribution and offer aggregation are optional application functions under C1; they do not alter intent/offer semantics or create new wire operations.
 
@@ -114,7 +116,7 @@ Refusal preserves history and prevents reliance on that accepted object. It does
 
 Issuers may withdraw their own publication, intent, action promise, offer option, admission grant, candidate or adoption according to its validity/policy. Events retain target identity, authority and ordering. Withdrawing one alternative does not withdraw another. [C4](contracts/04-formation.md) orders withdrawal against finalization. Closing contact is not automatically the same act as withdrawing all promises or refusing accepted terms.
 
-Accepted bytes do not change. A material change creates a linked replacement with fresh adoption, explicit handling of outstanding commitments and new principal-window evidence. No replacement silently erases a prior native effect or reuses authority for altered terms. Effects outside Bazaar remain subject to their own systems.
+Accepted bytes do not change. A material change creates a linked replacement with fresh adoption, explicit handling of outstanding commitments and new principal-window evidence. No replacement silently erases a prior native effect or reuses authority for altered terms. Effects outside APP remain subject to their own systems.
 
 ## 11. Universal agreements and composition
 
@@ -134,7 +136,7 @@ Lifecycle evidence binds original reporters and native proof to exact agreements
 
 The [architecture](protocol-architecture.md) specifies extension advertisement/activation, native message/artifact carriage and portable proof. Native A2A task states remain task states. They cannot substitute for offer issuance, exact adoption, finalization or principal-window status.
 
-Bazaar carries immutable terms, provenance, current clearance, exact handoff decisions and attributed lifecycle evidence. No Bazaar record becomes an AP2 mandate or native action authority by naming one. The [adapter boundary](downstream-boundary.md) specifies what crosses into a native system and what evidence returns. Native execution and settlement state machines remain external.
+APP carries immutable terms, provenance, current clearance, exact handoff decisions and attributed lifecycle evidence. No APP record becomes an AP2 mandate or native action authority by naming one. The [adapter boundary](downstream-boundary.md) specifies what crosses into a native system and what evidence returns. Native execution and settlement state machines remain external.
 
 ## 14. Failure and extensibility
 
@@ -142,4 +144,4 @@ Unknown required action/policy/proof semantics block the dependent transition. C
 
 An adapter MUST reject a translation that would change a qualified offer into an unissued proposal, attribute a counterpart request as its promise, lose a principal refusal right, or transform accepted terms into native authority. Breaking semantic changes require a distinct version and renewed understanding/adoption.
 
-The schema and illustrative records are authoring aids. Structural validity alone does not prove capability, authority, current consent, cryptographic authenticity, principal notification or an effective agreement. The [test proposals](tests/PROPOSED.md) stop at substituted adapters; executable behavioral and native interoperability tests have not been implemented.
+The schema and illustrative records are authoring aids. Structural validity alone does not prove capability, authority, current consent, cryptographic authenticity, principal notification or an effective agreement. The [reference runtime](docs/runtime.md) and its executable behavioral tests exercise a controlled implementation of this model, with simulated native adapters. The [validation record](validation.md) distinguishes those results from the broader [test proposals](tests/PROPOSED.md) and from unverified independent or native interoperability.

@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.4-draft",
+  "profile": "app/0.4-draft",
   "kind": "interaction_receipt",
   "id": "interaction_receipt:offer-interaction-receipt",
   "issuer_agent_id": "agent:requester",
@@ -9,11 +9,11 @@
   "body": {
     "request_ref": {
       "id": "interaction_request:offer-interaction-request",
-      "digest": "sha256:395cb5c18d2e8fdc20f7c732ef85d9e85d08cd9766de0818a3c9b18af5512bfa"
+      "digest": "sha256:ab67896b6cf5aebe41905bb6ae52b856605de32768b7c2653a2dc3a71d08abb0"
     },
     "operation_id": "op:researcher-standard-v2:submit:1",
     "recipient_agent_id": "agent:requester",
-    "recipient_scope_id": "scope:requester:bazaar",
+    "recipient_scope_id": "scope:requester:app",
     "revision": 1,
     "previous_receipt_digest": null,
     "outcome": "applied",
@@ -21,7 +21,7 @@
     "result_refs": [
       {
         "id": "offer:researcher-standard-offer-v2",
-        "digest": "sha256:d3381fd1b529e2d9ba8027c74f992952d7b3f5bf347473ce307102f98c0e565a"
+        "digest": "sha256:f0ab04410ef025abb4a362b80f6479c87239464f90c272dbe0c3dc8801ac117f"
       }
     ],
     "evidence_refs": [
@@ -34,9 +34,9 @@
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.4/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.4/keys/agent-requester",
-      "signed_payload_digest": "sha256:e8ba3f51c8445e4f3c28fda11e6c9d522b61d656d2a382d4b1528a48229b394d",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/keys/agent-requester",
+      "signed_payload_digest": "sha256:c77b23708b6580c6fc20a34885d29517fce2f823eb71ead59ae925a590c0e690",
       "issuer_agent_id": "agent:requester",
       "scope": [
         "interaction_receipt"

@@ -4,10 +4,10 @@ from copy import deepcopy
 
 import pytest
 
-from agent_bazaar.composition import Composition
-from agent_bazaar.crypto import content_ref, digest
-from agent_bazaar.errors import ProtocolError
-from agent_bazaar.storage import Ledger
+from agent_promise_protocol.composition import Composition
+from agent_promise_protocol.crypto import content_ref, digest
+from agent_promise_protocol.errors import ProtocolError
+from agent_promise_protocol.storage import Ledger
 
 
 def record(kind, record_id, body, issuer="orchestrator"):
