@@ -15,7 +15,15 @@ def timestamp(ms):
 
 
 def milliseconds(value):
-    return int(datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp() * 1000)
+    # RFC 3339 permits lowercase t/z, as does our schema format checker.
+    # Normalize only for interpretation; the signed record stays byte-exact.
+    try:
+        parsed = datetime.fromisoformat(value.upper().replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            raise ValueError("timestamp requires a timezone")
+        return int(parsed.timestamp() * 1000)
+    except (AttributeError, TypeError, ValueError, OverflowError) as error:
+        raise ProtocolError("invalid_record", "invalid timestamp") from error
 
 
 def need(condition, code, detail):

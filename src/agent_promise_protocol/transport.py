@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import http.client
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import math
 import ssl
 import threading
 import time
@@ -635,7 +636,7 @@ def make_handler(
     return Handler
 
 
-def serve_tls(address, handler, ssl_context):
+def serve_tls(address, handler, ssl_context, *, handshake_timeout=5.0):
     if (
         ssl_context.minimum_version < ssl.TLSVersion.TLSv1_3
         or ssl_context.verify_mode != ssl.CERT_REQUIRED
@@ -643,6 +644,32 @@ def serve_tls(address, handler, ssl_context):
         raise ProtocolError(
             "authority_absent", "server requires TLS1.3 mutual PKIX authentication"
         )
-    server = ThreadingHTTPServer(address, handler)
-    server.socket = ssl_context.wrap_socket(server.socket, server_side=True)
-    return server
+    if (
+        isinstance(handshake_timeout, bool)
+        or not isinstance(handshake_timeout, (int, float))
+        or not math.isfinite(handshake_timeout)
+        or handshake_timeout <= 0
+    ):
+        raise ValueError("handshake_timeout must be a finite positive duration")
+
+    class TLSServer(ThreadingHTTPServer):
+        def finish_request(self, request, client_address):
+            # ThreadingHTTPServer calls this in a worker. Keep the listening
+            # socket plain so an incomplete handshake cannot block accept().
+            try:
+                connection = ssl_context.wrap_socket(
+                    request, server_side=True, do_handshake_on_connect=False
+                )
+            except OSError:
+                return
+            with connection:
+                try:
+                    connection.settimeout(handshake_timeout)
+                    connection.do_handshake()
+                except OSError:
+                    # Unauthenticated/unfinished connections never reach HTTP.
+                    return
+                connection.settimeout(15)
+                super().finish_request(connection, client_address)
+
+    return TLSServer(address, handler)

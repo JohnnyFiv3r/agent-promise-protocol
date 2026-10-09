@@ -2,8 +2,10 @@ from datetime import datetime, timedelta, timezone
 import hashlib
 from http.server import BaseHTTPRequestHandler
 import ipaddress
+import socket
 import ssl
 import threading
+import time
 
 import pytest
 from cryptography import x509
@@ -341,6 +343,121 @@ def test_real_tls13_mtls_a2a_handler(tmp_path):
         server.shutdown()
         server.server_close()
         thread.join()
+
+
+def test_silent_tcp_client_does_not_block_mtls_request_or_shutdown(tmp_path):
+    pki = certificates(tmp_path)
+    caller = Signer("agent:a", "principal:a")
+    registry = Registry()
+    registry.register(caller, certificate_digests=[pki["client"]["pin"]])
+    observed = []
+
+    def apply(request, records, peer):
+        observed.append(peer["agent_id"])
+        return receipt_for(request), []
+
+    server = serve_tls(
+        ("127.0.0.1", 0),
+        make_handler(apply, registry, lambda: 100, "context:server"),
+        server_tls_context(
+            cafile=pki["ca"],
+            certfile=pki["server"]["certfile"],
+            keyfile=pki["server"]["keyfile"],
+        ),
+    )
+    accepting = threading.Event()
+    original_get_request = server.get_request
+
+    def observe_accept():
+        accepting.set()
+        return original_get_request()
+
+    server.get_request = observe_accept
+    thread = threading.Thread(
+        target=server.serve_forever, kwargs={"poll_interval": 0.01}, daemon=True
+    )
+    thread.start()
+    silent = socket.create_connection(server.server_address, timeout=2)
+    try:
+        assert accepting.wait(2)
+        request, _ = caller.sign(record())
+        headers, raw = encode_request(request, [], message_id="message:live-client")
+        response_headers, response_raw = pinned_https_request(
+            f"https://127.0.0.1:{server.server_port}/a2a",
+            method="POST",
+            body=raw,
+            headers=headers,
+            tls_context=client_tls_context(
+                cafile=pki["ca"],
+                certfile=pki["client"]["certfile"],
+                keyfile=pki["client"]["keyfile"],
+            ),
+            certificate_digest=pki["server"]["pin"],
+            max_bytes=1024 * 1024,
+            deadline=time.monotonic() + 2,
+        )
+        assert (
+            decode_response(response_raw, response_headers, request=request)["receipt"][
+                "body"
+            ]["outcome"]
+            == "applied"
+        )
+        assert observed == ["agent:a"]
+        # Shutdown must finish while the first TCP client is still connected
+        # and has never sent TLS bytes, rather than waiting for that peer.
+        stopping = threading.Thread(target=server.shutdown, daemon=True)
+        stopping.start()
+        stopping.join(1)
+        assert not stopping.is_alive()
+        server.server_close()
+        thread.join(1)
+        assert not thread.is_alive()
+    finally:
+        silent.close()
+        server.shutdown()
+        server.server_close()
+        thread.join(2)
+
+
+def test_silent_tls_handshake_times_out_before_http_handler(tmp_path):
+    pki = certificates(tmp_path)
+    reached_http = threading.Event()
+    server = serve_tls(
+        ("127.0.0.1", 0),
+        lambda *args: reached_http.set(),
+        server_tls_context(
+            cafile=pki["ca"],
+            certfile=pki["server"]["certfile"],
+            keyfile=pki["server"]["keyfile"],
+        ),
+        handshake_timeout=0.05,
+    )
+    thread = threading.Thread(
+        target=server.serve_forever, kwargs={"poll_interval": 0.01}, daemon=True
+    )
+    thread.start()
+    try:
+        with socket.create_connection(server.server_address, timeout=2) as silent:
+            assert silent.recv(1) == b""
+        assert not reached_http.is_set()
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(2)
+
+
+@pytest.mark.parametrize("duration", [0, -1, float("nan"), float("inf")])
+def test_server_requires_bounded_positive_handshake_timeout(duration):
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    context.minimum_version = ssl.TLSVersion.TLSv1_3
+    context.verify_mode = ssl.CERT_REQUIRED
+    with pytest.raises(ValueError, match="finite positive duration"):
+        serve_tls(
+            ("127.0.0.1", 0),
+            BaseHTTPRequestHandler,
+            context,
+            handshake_timeout=duration,
+        )
 
 
 def test_real_tls_evidence_digest_allowlist_and_budget(tmp_path):

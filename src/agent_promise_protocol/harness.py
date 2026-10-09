@@ -91,7 +91,7 @@ class Harness:
                 raise error
             return wrapper
 
-    def boundary_digest(self):
+    def boundary_digest(self, *, include_ledger=True):
         # Bind all mutable authority state and locally enrolled configuration.
         # Immutable object bytes are already bound by their exact references.
         def jsonable(value):
@@ -106,7 +106,7 @@ class Harness:
         return digest(
             jsonable(
                 {
-                    "ledger": self.ledger.snapshot(),
+                    **({"ledger": self.ledger.snapshot()} if include_ledger else {}),
                     "enrollments": {k: asdict(v) for k, v in self.enrollments.items()},
                     "identities": self.registry.identities,
                     "keys": {k: asdict(v) for k, v in self.registry.keys.items()},
@@ -677,6 +677,8 @@ class Harness:
             b = candidate["body"]
             adoptions = []
             participant_decisions = []
+            participant_deadlines = []
+            authority_boundary = self.boundary_digest()
             for p in b["participants"]:
                 ref = self.ledger.get(
                     "adoptions", ref_key(candidate_ref) + ":" + p["agent_id"]
@@ -686,12 +688,28 @@ class Harness:
                 self.verify(record)
                 self.guards.adoption(record)
                 adoptions.append(ref)
-                participant_decisions.append(
-                    content_ref(
-                        self.authorize(p["agent_id"], "authority_commit", candidate)
-                    )
+                participant_decision = self.authorize(
+                    p["agent_id"], "authority_commit", candidate
+                )
+                participant_decisions.append(content_ref(participant_decision))
+                participant_deadlines.append(
+                    milliseconds(participant_decision["body"]["result"]["valid_until"])
                 )
             decision = self.authorize(actor, "finalize_candidate", candidate)
+            need(
+                self.boundary_digest() == authority_boundary,
+                "authority_absent",
+                "participant authority changed while evaluating formation",
+            )
+            need(
+                self.now()
+                < min(
+                    *participant_deadlines,
+                    milliseconds(decision["body"]["result"]["valid_until"]),
+                ),
+                "authority_absent",
+                "participant authority expired before formation",
+            )
             self._reserve_capacity(candidate)
             accepted = self.emit(
                 "accepted_offer",
@@ -959,20 +977,9 @@ class Harness:
                 "identity_mismatch",
                 "wrong status authority",
             )
-            decision = self.authorize(caller or self.agent_id, "query_status", accepted)
-            reading = self.clock.read()
+            self.authorize(caller or self.agent_id, "query_status", accepted)
             c = self.resolve(accepted["body"]["candidate_ref"])
-            active = all(
-                self.enrollments[p["agent_id"]].active
-                for p in c["body"]["participants"]
-            )
-            obs = self.recovery.observe(
-                accepted_ref,
-                now_ms=reading.now_ms,
-                uncertainty_ms=reading.uncertainty_ms,
-                clock_evidence_ref=reading.evidence_ref,
-                authority_evidence_refs=[content_ref(decision)] if active else [],
-            )
+            obs = self._status_for_composition(accepted)
             previous = self.ledger.get("status_records", ref_key(accepted_ref))
             windows = []
             for p in obs["principals"]:
@@ -989,21 +996,27 @@ class Harness:
                     w["starts_at"] = timestamp(p["starts_at_ms"])
                     w["deadline"] = timestamp(p["effective_deadline_ms"])
                 windows.append(w)
+            evidence = self.emit_profile(
+                P + "#rp1-durable-authority/recovery-observation", obs
+            )
             checks = []
             for principal in sorted(
                 {p["principal_id"] for p in c["body"]["participants"]}
             ):
-                e = self._principal_enrollment(accepted, principal)
+                observed = next(
+                    check
+                    for check in obs["participant_authority_checks"]
+                    if check["principal_id"] == principal
+                )
                 checks.append(
                     {
                         "principal_id": principal,
-                        "policy_status_ref": e.principal_policy_ref,
-                        "authority_status_ref": content_ref(decision),
+                        "policy_status_ref": observed["policy_ref"],
+                        # The observation covers every agent for this principal,
+                        # including a denied or unavailable current evaluation.
+                        "authority_status_ref": content_ref(evidence),
                     }
                 )
-            evidence = self.emit_profile(
-                P + "#rp1-durable-authority/recovery-observation", obs
-            )
             record = self.emit(
                 "status_snapshot",
                 {
@@ -1013,9 +1026,9 @@ class Harness:
                     if not previous
                     else previous["ref"]["digest"],
                     "status": obs["status"],
-                    "as_of": timestamp(self.now()),
+                    "as_of": timestamp(obs["observed_at_ms"]),
                     "freshness_policy_ref": accepted["body"]["status_policy_ref"],
-                    "clock_evidence_ref": reading.evidence_ref,
+                    "clock_evidence_ref": obs["clock_evidence_ref"],
                     "notice_refs": [
                         p["notice_ref"]
                         for p in obs["principals"]
@@ -1036,25 +1049,100 @@ class Harness:
             )
             return record
 
+    def _current_participant_authority(self, candidate):
+        """Reevaluate each adopted participant, separately from read permission.
+
+        A pinned policy reference identifies delegation; it is not evidence that
+        delegation remains usable. Reuse the existing authority_commit act on
+        the exact candidate, without forming or re-adopting an agreement.
+        """
+        boundary = self.boundary_digest()
+        adopted_policies = {
+            window["principal_id"]: window["principal_policy_ref"]
+            for window in candidate["body"]["principal_refusal_windows"]
+        }
+        checks = []
+        for participant in candidate["body"]["participants"]:
+            actor, principal = participant["agent_id"], participant["principal_id"]
+            enrollment = self.enrollments.get(actor)
+            check = {
+                "agent_id": actor,
+                "principal_id": principal,
+                "policy_ref": enrollment.principal_policy_ref
+                if enrollment is not None and enrollment.principal_id == principal
+                else adopted_policies[principal],
+            }
+            try:
+                need(
+                    enrollment is not None and enrollment.principal_id == principal,
+                    "authority_absent",
+                    "adopted participant no longer has its principal enrollment",
+                )
+                decision = self.authorize(actor, "authority_commit", candidate)
+                check.update(
+                    state="allowed",
+                    decision_ref=content_ref(decision),
+                    valid_until_ms=milliseconds(
+                        decision["body"]["result"]["valid_until"]
+                    ),
+                )
+            except ProtocolError as error:
+                result = getattr(error, "policy_result", None)
+                check.update(
+                    state="denied" if result is not None else "unavailable",
+                    reason_code=error.code,
+                )
+                if result is not None:
+                    decision = self.emit_profile(
+                        P + "#rp1-opa/policy-decision",
+                        {
+                            "input": error.policy_input,
+                            "result": result,
+                            "evaluated_at": timestamp(self.now()),
+                        },
+                    )
+                    check["decision_ref"] = content_ref(decision)
+            checks.append(check)
+        # Individual decisions may each be fresh yet describe different local
+        # states. Only immutable evidence objects may be written by these checks;
+        # any other observed boundary change invalidates their joint reliance.
+        if self.boundary_digest() != boundary:
+            for check in checks:
+                if check["state"] == "allowed":
+                    check.update(state="stale", reason_code="authority_state_changed")
+        return checks
+
     def _status_for_composition(self, accepted):
-        # Current authoritative facts from the common ledger, even for a different coordinator.
-        ref = content_ref(accepted) if "body" in accepted else accepted
-        reading = self.clock.read()
-        a = self.resolve(ref)
-        c = self.resolve(a["body"]["candidate_ref"])
-        authorities = [
-            self.enrollments[p["agent_id"]].principal_policy_ref
-            for p in c["body"]["participants"]
-            if self.enrollments[p["agent_id"]].active
-        ]
-        obs = self.recovery.observe(
-            ref,
-            now_ms=reading.now_ms,
-            uncertainty_ms=reading.uncertainty_ms,
-            clock_evidence_ref=reading.evidence_ref,
-            authority_evidence_refs=authorities if len(authorities) == 2 else [],
-        )
-        return obs
+        # Current facts from the common authority, even for another coordinator.
+        with self.ledger.transaction():
+            ref = content_ref(accepted) if "body" in accepted else accepted
+            a = self.resolve(ref)
+            c = self.resolve(a["body"]["candidate_ref"])
+            checks = self._current_participant_authority(c)
+            reading = self.clock.read()
+            # Later evaluations may consume an earlier decision's lifetime.
+            # All decisions must still cover this exact observation time.
+            for check in checks:
+                if (
+                    check["state"] == "allowed"
+                    and reading.now_ms >= check["valid_until_ms"]
+                ):
+                    check["state"] = "expired"
+            current = bool(checks) and all(c["state"] == "allowed" for c in checks)
+            obs = self.recovery.observe(
+                ref,
+                now_ms=reading.now_ms,
+                uncertainty_ms=reading.uncertainty_ms,
+                clock_evidence_ref=reading.evidence_ref,
+                authority_evidence_refs=[c["decision_ref"] for c in checks]
+                if current
+                else [],
+            )
+            obs["participant_authority_checks"] = checks
+            obs["authority_valid_until_ms"] = (
+                min(c["valid_until_ms"] for c in checks) if current else None
+            )
+            return obs
 
     def _evidence_check(self, requirement, source_candidate, source_accepted, stage):
         fn = self.domain.evidence_checks.get(requirement.get("evidence_type_uri"))
@@ -1130,6 +1218,13 @@ class Harness:
         return True
 
     def _handoff_gate(self, request, prepared, native, now_ms):
+        # The caller's ledger transaction serializes durable realm state. Keep
+        # enrolled configuration stable as well, across every participant,
+        # dependency and executor check. Derived recovery/composition observation
+        # writes are expected here, so they do not belong in this configuration
+        # fingerprint. This is a local realm guarantee, not a global snapshot of
+        # independently administered policies or native services.
+        authority_context = self.boundary_digest(include_ledger=False)
         b = request["body"]
         accepted = self.resolve(b["agreement_ref"])
         candidate = self.resolve(accepted["body"]["candidate_ref"])
@@ -1154,6 +1249,7 @@ class Harness:
                 )
             )
         ]
+        authority_deadlines = [status["authority_valid_until_ms"]]
         dependencies = []
         for prerequisite in self.composition.dependency_agreements(
             candidate, "handoff", self.agreement_for_candidate
@@ -1165,6 +1261,7 @@ class Harness:
                 "dependency principal recovery not cleared",
             )
             dependencies.append(content_ref(prerequisite))
+            authority_deadlines.append(observed["authority_valid_until_ms"])
             clearance.append(
                 content_ref(
                     self.emit_profile(
@@ -1181,9 +1278,17 @@ class Harness:
             native_refs=native["evidence_refs"],
             action_ref=b["action_ref"],
         )
+        need(
+            self.boundary_digest(include_ledger=False) == authority_context,
+            "authority_absent",
+            "participant authority changed while evaluating handoff",
+        )
         return {
             "allow": True,
-            "valid_until_ms": milliseconds(decision["body"]["result"]["valid_until"]),
+            "valid_until_ms": min(
+                *authority_deadlines,
+                milliseconds(decision["body"]["result"]["valid_until"]),
+            ),
             "authorization_decision_ref": content_ref(decision),
             "gate_evidence_refs": clearance + dependencies + [content_ref(decision)],
         }

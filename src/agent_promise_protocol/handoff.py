@@ -407,6 +407,8 @@ class Handoff:
             self._compatible(request, slot)
             registration = self._adapter(request, slot)
             if slot["dispatch_attempt_started"]:
+                if self._has_local_no_call(slot):
+                    return self._retain_local_no_call(slot, "dispatch")
                 return slot["receipts"]["dispatch"]
             prepared = slot["prepared"]
             native_bytes = decode_native_wrapper(
@@ -447,12 +449,13 @@ class Handoff:
         if self.clock() >= min(gate["valid_until_ms"], native_auth["valid_until_ms"]):
             with self.ledger.transaction():
                 slot = self.ledger.get("handoff_slots", key)
-                return self._receipt(
+                self._receipt(
                     slot,
                     "dispatch",
                     "not_dispatched",
                     "authority_expired_before_native_call",
                 )
+                return self._retain_local_no_call(slot, "dispatch")
         try:
             observation = registration["adapter"].dispatch(
                 native_bytes, prepared["body"]["native_operation_key"]
@@ -465,7 +468,84 @@ class Handoff:
             slot = self.ledger.get("handoff_slots", key)
             return self._observe(slot, "dispatch", observation)
 
+    @staticmethod
+    def _has_local_no_call(slot):
+        # Only this boundary's durable post-marker, pre-call disposition proves
+        # local absence. A marker-only crash or native lookup does not prove it.
+        body = slot.get("receipts", {}).get("dispatch", {}).get("body", {})
+        return (
+            slot["dispatch_attempt_started"]
+            and (
+                slot.get("local_no_call_ref") is not None
+                or (
+                    body.get("outcome") == "not_dispatched"
+                    and body.get("reason_code")
+                    == "authority_expired_before_native_call"
+                )
+            )
+        )
+
+    def _retain_local_no_call(self, slot, phase, incoming=None):
+        disposition = slot["receipts"]["dispatch"]
+        # Retain the original signed local fact even if the latest receipt must
+        # report contradictory evidence. No automated conflict resolution is
+        # defined here: neither a later unknown nor final-absence lookup erases it.
+        local_ref = slot.setdefault("local_no_call_ref", content_ref(disposition))
+        conflicts = slot.setdefault("local_no_call_conflicts", [])
+        previous = slot.get("native_observation")
+        for observed in [
+            *slot.get("native_observation_history", []),
+            previous,
+            incoming,
+        ]:
+            if (
+                isinstance(observed, dict)
+                and observed.get("outcome") in {"dispatched", "resolved"}
+                and observed.get("native_evidence_refs")
+            ):
+                conflict = {
+                    "outcome": observed["outcome"],
+                    "native_evidence_refs": deepcopy(observed["native_evidence_refs"]),
+                }
+                if conflict not in conflicts:
+                    conflicts.append(conflict)
+        refs = []
+        for conflict in conflicts:
+            for ref in conflict["native_evidence_refs"]:
+                if ref not in refs:
+                    refs.append(ref)
+        outcome = "in_doubt" if conflicts else "not_dispatched"
+        reason = (
+            "local_native_disposition_conflict"
+            if conflicts
+            else "authority_expired_before_native_call"
+        )
+        observation = {
+            "outcome": outcome,
+            "native_evidence_refs": refs,
+            "local_disposition_ref": local_ref,
+        }
+        if previous and previous != observation:
+            slot.setdefault("native_observation_history", []).append(previous)
+        slot["native_observation"] = observation
+        if (
+            phase == "dispatch"
+            and disposition["body"]["outcome"] == outcome
+            and disposition["body"]["reason_code"] == reason
+            and disposition["body"]["native_evidence_refs"] == refs
+        ):
+            self.ledger.put("handoff_slots", slot["key"], slot)
+            return disposition
+        return self._receipt(
+            slot, phase, outcome, reason, native_refs=refs
+        )
+
     def _observe(self, slot, phase, observation):
+        # A read-only lookup may have started before the local no-call commit.
+        # An unknown cannot erase this writer's no-call fact; positive native
+        # evidence contradicting that fact must remain attributable and in doubt.
+        if self._has_local_no_call(slot):
+            return self._retain_local_no_call(slot, phase, observation)
         if not isinstance(observation, dict):
             observation = {}
         outcome = observation.get("outcome", "in_doubt")
@@ -508,6 +588,8 @@ class Handoff:
                 )
             self._compatible(request, slot)
             registration = self._adapter(request, slot)
+            if self._has_local_no_call(slot):
+                return self._retain_local_no_call(slot, "reconcile")
             if not slot["dispatch_attempt_started"]:
                 return self._receipt(
                     slot, "reconcile", "not_dispatched", "no_dispatch_attempt"

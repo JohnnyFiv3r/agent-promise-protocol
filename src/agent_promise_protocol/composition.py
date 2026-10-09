@@ -8,11 +8,11 @@ They must establish current evidence; no universal business vocabulary is inferr
 from __future__ import annotations
 
 from copy import deepcopy
-from datetime import datetime
 import time
 
 from .crypto import content_ref, digest, unsigned_digest
 from .errors import ProtocolError
+from .guards import milliseconds
 
 
 def same_ref(left, right):
@@ -309,13 +309,8 @@ class Composition:
         validity = plan["body"].get("validity", {})
         if validity.get("mode") == "expires_at":
             try:
-                deadline = int(
-                    datetime.fromisoformat(
-                        validity["expires_at"].replace("Z", "+00:00")
-                    ).timestamp()
-                    * 1000
-                )
-            except (ValueError, KeyError):
+                deadline = milliseconds(validity["expires_at"])
+            except (ProtocolError, KeyError):
                 raise ProtocolError(
                     "composition_invalid", "invalid plan expiration"
                 ) from None
