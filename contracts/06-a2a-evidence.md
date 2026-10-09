@@ -14,6 +14,12 @@ This URI identifies the `abp/0.4-draft` contract. It is compared as an exact ide
 
 A2A defines `SendMessage`, message data parts, direct message/task responses and endpoint-local context/task identifiers. This binding narrows those native structures without adding an RPC or enum value. [Pinned A2A 1.0.0 definition](https://raw.githubusercontent.com/a2aproject/A2A/v1.0.0/specification/a2a.proto).
 
+### Participant hosting and assistant entry points
+
+An ABP endpoint is an A2A endpoint advertising and enforcing this extension. The participant behind it MAY be embedded in an assistant or independently hosted by a principal's chosen provider. A connector, including an MCP-facing product, can invoke that participant under explicit delegation; the ABP peer exchange still uses this binding. Connector/tool calls do not add Bazaar RPCs or automatically grant disclosure, adoption, refusal or native action authority.
+
+The endpoint MUST preserve authenticated agent/principal bindings and recipient scopes independently of its physical host, customer-facing account or carrier session. New counteroffers require their own admitted interactions; a buyer participant therefore needs an inbound and recovery path beyond a disposable outbound tool response. Direct peer configuration and optional discovery/aggregation use the same records. No particular discovery provider, common participant database or global Bazaar registry is required by C6. The [deployment model](../deployment-model.md) bounds these roles; selected profiles still govern compatible trust and authority enrollment.
+
 ## 2. Advertisement and activation
 
 The Agent Card MUST advertise this URI in `capabilities.extensions`. An endpoint that requires Bazaar interpretation MUST set that extension's `required` flag to `true`. Its `supportedInterfaces` entry MUST declare `protocolBinding: "JSONRPC"` and `protocolVersion: "1.0"` for this binding.

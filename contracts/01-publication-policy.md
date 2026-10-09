@@ -115,3 +115,9 @@ Candidate terms MUST preserve each distinct principal's policy-required positive
 ### C1-26
 
 Permission to emit a declaration covers only the qualified emission it actually identifies. Neither discovery, matching, service compliance, nor reception consent issues another actor's promise. Principal policy provides continuing permission; it MUST NOT be promoted into a standing promise to negotiate, accept future work, or perform unspecified actions.
+
+### C1-27 — Hosted representation and optional aggregation
+
+A principal MAY choose an embedded participant or delegate to a hosted provider accessed through a connector. The provider MUST preserve the represented principal, the original issuer of relayed records and the exact scope of each delegated act. Hosting, discovery, subscription membership or connector installation MUST NOT be substituted for delegation, another party's issuance, candidate adoption or protected refusal authority.
+
+Discovery and buyer-side aggregation are optional application roles. Each intent delivery and reply MUST satisfy its own applicable disclosure and recipient-admission rules. A provider's private preferences or data for another customer are not authorized disclosures merely because the provider aggregates offers. Storage and evidence access remain scoped to the applicable principals and roles; see the [deployment model](../deployment-model.md).

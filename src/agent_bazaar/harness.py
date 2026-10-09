@@ -1188,6 +1188,100 @@ class Harness:
             "gate_evidence_refs": clearance + dependencies + [content_ref(decision)],
         }
 
+    def _option_key(self, subject):
+        body = subject["body"]
+        return digest(
+            [
+                self.recipient_scope,
+                subject["issuer_agent_id"],
+                body["negotiation_id"],
+                body["option_id"],
+            ]
+        )
+
+    def _option_is_live(self, entry):
+        ref = entry["ref"]
+        record = self.resolve(ref)
+        return not (
+            self.ledger.get("withdrawn", ref_key(ref))
+            or self.ledger.get(
+                "withdrawn_semantic", record["issuer_agent_id"] + "\x00" + record["id"]
+            )
+            or self.ledger.get("offer_disposed", ref_key(ref))
+        )
+
+    def _check_option_pool(self, subject, admission):
+        """Count applied options in the recipient's selected allowance only.
+
+        A membership survives revisions and record/proof replays. Its first
+        applied pool stays pinned, so a revision cannot move to unused allowance.
+        This is scope accounting inside the trusted authority, not a tenant ACL.
+        """
+        need(
+            isinstance(admission, dict)
+            and type(admission.get("max_live_options")) is int
+            and admission["max_live_options"] >= 0,
+            "internal_unresolved",
+            "retained offer admission requires operator reconciliation",
+        )
+        # Older runtimes did not retain recipient/pool option memberships. Do not
+        # interpret an absent index as unused allowance on an existing ledger.
+        # Reconciliation is an explicit operator task, never inferred from heads.
+        for _, operation in self.ledger.items("operations"):
+            if not operation["terminal"] or not operation.get("admission"):
+                continue
+            request = self.resolve(operation["request_ref"])
+            body = request["body"]
+            if (
+                body["recipient_scope_id"] != self.recipient_scope
+                or body["purpose"] != "submit_record"
+            ):
+                continue
+            receipt = self.resolve(operation["receipt_ref"])
+            if receipt["body"]["outcome"] != "applied":
+                continue
+            applied = self.resolve(body["subject_ref"])
+            if applied["kind"] != "offer":
+                continue
+            membership = self.ledger.get("admitted_options", self._option_key(applied))
+            need(
+                membership is not None
+                and membership["pool"] == operation["admission"]["pool"],
+                "internal_unresolved",
+                "retained offer allowance requires operator reconciliation",
+            )
+        key = self._option_key(subject)
+        old = self.ledger.get("admitted_options", key)
+        need(
+            old is None or old["pool"] == admission["pool"],
+            "quota_exhausted",
+            "option is bound to another allowance pool",
+        )
+        entry = {
+            "recipient_scope_id": self.recipient_scope,
+            "pool": admission["pool"],
+            "ref": content_ref(subject),
+            "revision": subject["body"]["revision"],
+        }
+        if old and old["revision"] >= entry["revision"]:
+            entry = old
+        live = sum(
+            1
+            for _, value in self.ledger.items("admitted_options")
+            if value["recipient_scope_id"] == self.recipient_scope
+            and value["pool"] == admission["pool"]
+            and self._option_is_live(value)
+        )
+        adding = self._option_is_live(entry) and (
+            old is None or not self._option_is_live(old)
+        )
+        need(
+            not adding or live < admission["max_live_options"],
+            "quota_exhausted",
+            "live option budget",
+        )
+        return key, entry
+
     def _admission(self, request, subject, size):
         b = request["body"]
         actor = request["issuer_agent_id"]
@@ -1339,20 +1433,15 @@ class Harness:
                 and used["in_flight"] + 1 <= pool["max_in_flight"]
             ):
                 continue
+            admission = {"pool": key, "policy_ref": e.admission_policy_ref}
             if subject["kind"] == "offer":
-                live = sum(
-                    1
-                    for k, v in self.ledger.items("heads")
-                    if k.startswith("offer:")
-                    and not self.ledger.get("withdrawn", ref_key(v["ref"]))
-                    and not self.ledger.get("offer_disposed", ref_key(v["ref"]))
-                )
-                is_new = self.ledger.get("heads", self._lineage(subject)[0]) is None
-                need(
-                    not is_new or live < pool["max_live_options"],
-                    "quota_exhausted",
-                    "live option budget",
-                )
+                admission["max_live_options"] = pool["max_live_options"]
+                try:
+                    self._check_option_pool(subject, admission)
+                except ProtocolError as error:
+                    if error.code != "quota_exhausted":
+                        raise
+                    continue
             used = {
                 "messages": used["messages"] + 1,
                 "bytes": used["bytes"] + size,
@@ -1360,7 +1449,7 @@ class Harness:
                 "in_flight": used["in_flight"] + 1,
             }
             self.ledger.put("quota", key, used)
-            return {"pool": key, "policy_ref": e.admission_policy_ref}
+            return admission
         raise ProtocolError("quota_exhausted", "finite admission budget exhausted")
 
     def _control_rate(self, request, subject):
@@ -1811,6 +1900,16 @@ class Harness:
                             self.store.admit_identity(subject)
                         else:
                             result = self._apply(subject)
+                            if subject["kind"] == "offer":
+                                # Recheck under the same serialized commit as the
+                                # semantic effect. Pending/invalid requests own no
+                                # live-option slot and cannot overbook this pool.
+                                option_key, membership = self._check_option_pool(
+                                    result, current["admission"]
+                                )
+                                self.ledger.put(
+                                    "admitted_options", option_key, membership
+                                )
                     elif b["purpose"] == "finalize_candidate":
                         result = self.finalize(
                             b["subject_ref"], caller=request["issuer_agent_id"]

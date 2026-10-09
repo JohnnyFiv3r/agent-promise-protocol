@@ -4,6 +4,10 @@
 
 The normal interaction is: express an outcome, receive qualified offers, select exact terms, adopt the same candidate, and honor each principal's protected refusal period. A conforming reference harness handles the protocol mechanics. This guide defines the intended adoption path to implement after contract/profile lock.
 
+## Who integrates and who authorizes
+
+The buyer enables a connector to a delegated participant or uses an assistant with that participant embedded. The seller or its software provider exposes an A2A ABP endpoint backed by its business logic. Humans authorize policies and keep a usable notice/refusal interface; their providers handle durable protocol state. One connector can reach multiple compatible sellers, and direct peers need no discovery service. The [deployment model](../deployment-model.md) separates these product entry points from scoped protocol authorities; the [runtime guide](runtime.md) describes the implementation available today.
+
 ## What the application supplies
 
 | Input | The application's responsibility |

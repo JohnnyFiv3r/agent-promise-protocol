@@ -8,6 +8,8 @@ This contract governs how a recipient admits work while allowing iterative offer
 
 The recipient controls its admission scope. Its principal or explicitly authorized policy administrator selects eligibility, limits and enforcement authority. A discovery service or relay MAY enforce delegated admission but MUST NOT expand it. The sender chooses what to request within that permission; it cannot mint allowance by changing transport, identity aliases, option IDs or negotiation IDs.
 
+Co-hosting recipients does not merge their allowances. Accounting MUST follow the declared recipient/allowance scope, including any owner-authorized shared scope across senders or routes. An unrelated recipient's options MUST NOT consume a local live-option allowance solely because their journals share a physical database. Conversely, a new sender alias, offer, session or routing service MUST NOT reset an allowance covering that same scope.
+
 An `admission_grant` is recipient-authored permission under a referenced publication/admission policy. It is the invitation when contact policy requires one. It is not a service offer, acceptance, standing promise or reservation of the recipient's capacity. The grant's peer, purpose, allowance and validity MUST be subsets of the issuer's current delegated permission. A native admission mechanism MAY supply equivalent understood evidence instead. No grant is required where current publication policy already admits the first offer.
 
 ## C3-02 — Required admission declaration

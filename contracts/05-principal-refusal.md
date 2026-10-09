@@ -6,6 +6,8 @@ This contract governs interpretation of the immutable `accepted_offer` produced 
 
 The accepted object records agent agreement. A separate current status establishes whether its adopted principal-refusal rules have been satisfied. Neither the object nor this status authorizes a downstream action or creates a human signature.
 
+The selected refusal/status authority is scoped to the accepted object and its adopted policies; it need not be a Bazaar-wide service or the custodian of every participant's journal. Independent ingress, hosting or replicas MUST preserve the profile's logical admission order and recovery guarantees. A participant's local copy, missing reply or elapsed local timer MUST NOT replace authenticated current authority evidence. A hosted assistant or connector MUST preserve the required principal notice/refusal and outcome-recovery paths across chat-session termination; ordinary negotiation authority cannot waive them. See the [deployment model](../deployment-model.md).
+
 ## C5.1 Adopted rights and authorized actors
 
 The candidate MUST specify exactly one refusal-window descriptor for each distinct authenticated principal represented by its two agents. Identity is determined by the selected trust mechanism, not by counting distinct JSON objects. If both agents represent the same principal, that principal has one effective descriptor. Conflicting applicable delegations or refusal rules MUST be resolved through the principal's authorized policy mechanism before adoption; an agent cannot select whichever rule is shorter.

@@ -1,0 +1,543 @@
+{
+  "date": "2026-10-08",
+  "change": "Deployment ownership clarification and recipient-scoped live-option accounting",
+  "parent_commit": "7dc68cb0a649c3522906ba19b6b263a558df3b6c",
+  "contract_baseline": "f4a01e2c8c1ee6bb72cc6793933afbcedf91572c",
+  "wire_schemas_changed": false,
+  "source_manifest_digest": "sha256:1f924829f8d180e3d445bd04d865b9285397a223a9c8a9273ee0ed5ec73a9504",
+  "manifest_digest_encoding": "UTF-8 JSON, sorted keys, compact separators, ensure_ascii=false",
+  "source_manifest": [
+    {
+      "path": "MANIFEST.in",
+      "sha256": "2389e310ebbcc851d13a2b0a6b1804f8e1427577e47a03ec8be22f95accc74ba"
+    },
+    {
+      "path": "README.md",
+      "sha256": "4415c5cff066f225b4da6105a902dfbde62a6b23da8ad8627f3c5bca45eb1518"
+    },
+    {
+      "path": "checks/validate.py",
+      "sha256": "2e7048c7c75e821ead445dad33c49e7f7954566f9c36e6547b552bccb0701a25"
+    },
+    {
+      "path": "conformance.md",
+      "sha256": "79358f62b0a5f9ac101636787b739d0394cbb10c2bd633548f2fae8cb31c455a"
+    },
+    {
+      "path": "contract.md",
+      "sha256": "8acd242be8b9f54b1d2ce740418d7492155af5763104a02863d4cd13e9b69639"
+    },
+    {
+      "path": "contracts/01-publication-policy.md",
+      "sha256": "b01635f9202973f83d2488f29bfbc38f311bc749b9274127c57a2d478c175256"
+    },
+    {
+      "path": "contracts/03-admission-negotiation.md",
+      "sha256": "729fc87fa6c71cf07dfa0d74fcecf8f962eda15d624eacc4d6a3adcb5a7d1ec5"
+    },
+    {
+      "path": "contracts/04-formation.md",
+      "sha256": "aa155a749a42a8835be5afd684b66a2fb5d3e206731fe75d6dd58ac6d641da46"
+    },
+    {
+      "path": "contracts/05-principal-refusal.md",
+      "sha256": "61961fd2d872259215bf25c08b39931cdedadf641abf89923947d65c5c714217"
+    },
+    {
+      "path": "contracts/06-a2a-evidence.md",
+      "sha256": "e8ee242f791781a8bb48ad949b1ef4285f078e6f7c4928548eeb395106b04186"
+    },
+    {
+      "path": "contracts/README.md",
+      "sha256": "a63e5d62c4c4d68c1051ddcd03ae7d1df8488ea496daec0444c6c3009120c406"
+    },
+    {
+      "path": "deployment-model.md",
+      "sha256": "5c8aa47a9f5b73d5f18a8715d2c86974a60b9769a276008ddd3a11bf23afef1d"
+    },
+    {
+      "path": "design/independent-participant-slice.md",
+      "sha256": "8325a72b5097b912b54d1c25c331352fa513c66fc0729c9731fb98ec67e29102"
+    },
+    {
+      "path": "docs/quickstart.md",
+      "sha256": "1a4b735be6845aa5e27e70a38988a1ef1a570ef1746746757facedb9101d3a8e"
+    },
+    {
+      "path": "docs/runtime.md",
+      "sha256": "0ae1610b9d98b087e1f837c84fd914f3397d078dc524cbf1bc5c20338138a3fc"
+    },
+    {
+      "path": "examples/a2a/agent-card-fragment.json",
+      "sha256": "10d94e11d028e49aa030cbb8f97131f741be8a9a86a26a9e4682b288ce9eba02"
+    },
+    {
+      "path": "examples/a2a/interaction-send-message.json",
+      "sha256": "2e7b8c7aaf06ce4bbe26d7f48bc2472ec492e9914a45c9d1b4740b3d086a70e8"
+    },
+    {
+      "path": "examples/accepted-offer.json",
+      "sha256": "f75cb4b56f3708dcc2817084d74ceb3636209b450b1b15dd7821d393c6a5da78"
+    },
+    {
+      "path": "examples/action-semantics.json",
+      "sha256": "8670549b97dd95fcf44e91cac01d670210dd9601c2ad60e4b76005647f21b4b6"
+    },
+    {
+      "path": "examples/adapter-requirements.json",
+      "sha256": "f6cfdcd3e3567932e7b47800ffd8c7f2381198cf01a4e4dc97e65d01b27668ae"
+    },
+    {
+      "path": "examples/admission-eligibility.json",
+      "sha256": "5f12e0c4b3e7fae0f81abd47007938facdfa1d83aa318b31a3d165d3858749b6"
+    },
+    {
+      "path": "examples/admission-policy.json",
+      "sha256": "9598ea7b955d70d44f9f11e4a926da17dc2933a2a0083d5dc515ccaf248125b1"
+    },
+    {
+      "path": "examples/admission-recovery.json",
+      "sha256": "05ac703eb3d71aae360524c0f974126b8a7998e760ee4066dbcf36d9164e19e4"
+    },
+    {
+      "path": "examples/admission-work.json",
+      "sha256": "8dec5b61059553fb66467fc295466de8d593beb007c16e7d764e5d9c1a9ad9ea"
+    },
+    {
+      "path": "examples/candidate-terms.json",
+      "sha256": "72f6e7b279c9de421e21eae626f244956292897eb3da2cc2668e405a0f1395d4"
+    },
+    {
+      "path": "examples/clock-and-status-policy.json",
+      "sha256": "747dfe905a010b8d0baa4f76bbba4eb98011ef52b5bba6ff0d1767940226986f"
+    },
+    {
+      "path": "examples/commercial-policy.json",
+      "sha256": "52b7729ccdd448f655a6d263632e4fe2540e17dc6ad60ad87c57921826c7ac7d"
+    },
+    {
+      "path": "examples/composed-candidate.json",
+      "sha256": "79601aaab5773df7350e6e544cab288c8bda735ccdaa7843d398c1742bd12ed2"
+    },
+    {
+      "path": "examples/composition-binding.json",
+      "sha256": "65e87024d9dd9122d2b481c1db30ac2c3db59820b2a5d336bac3c8f4e3375971"
+    },
+    {
+      "path": "examples/distribution-policy.json",
+      "sha256": "220c4f8d46349a987795bf8ccaf349ce2053c3da7bf28d533f9186bc918500c7"
+    },
+    {
+      "path": "examples/explicit-promise.json",
+      "sha256": "42a2b47524dd1a4c2b043c01a05bd0743f73e8db84daa014880ba9ee3fa4f4ab"
+    },
+    {
+      "path": "examples/extended-option-withdrawal.json",
+      "sha256": "a54cd1b5d43643638035b9c9f6948373723e3d44e9aa1dd477666e8ef0e23583"
+    },
+    {
+      "path": "examples/finalize-interaction-receipt.json",
+      "sha256": "eef2a25c44f27e76853d2838eaa79f3c32002ac157e7e5343ca8df452a8c3ef2"
+    },
+    {
+      "path": "examples/finalize-interaction-request.json",
+      "sha256": "c0a01942ad0fe7bc194fb6c4490a249c632e6b6e2f569ef82b09f7cfbda7c63b"
+    },
+    {
+      "path": "examples/handoff-blocked.json",
+      "sha256": "c14b31c8bc84fe7c0ee04723633fde7b9b16e7227f00fe8bf47eabf50469fca9"
+    },
+    {
+      "path": "examples/handoff-policy.json",
+      "sha256": "b74ef8eede95e50baa0b88230da0438b3d1c3a0973c54b6105b1b7dbdf383696"
+    },
+    {
+      "path": "examples/handoff-request.json",
+      "sha256": "690d2f9e2174273a77c360ec0eb77a73c78d67fb9e2bec5c53984c7491306cea"
+    },
+    {
+      "path": "examples/illustrative-native-proof.json",
+      "sha256": "02a9e5a03c9b112cf5c9a90137498be1ae12f69d296682ec37b4806b4009a313"
+    },
+    {
+      "path": "examples/lifecycle-evidence.json",
+      "sha256": "e2c3285ca3f4d1f01295c3b09a1b2cb8f880db59104fe7e109893f4a01e092ab"
+    },
+    {
+      "path": "examples/native-observation.json",
+      "sha256": "4f88ed95edf0e1c9d853fd5ea0582ece67bcfb21e326c7bd266ebe87da45c0bf"
+    },
+    {
+      "path": "examples/native-request-wrapper.json",
+      "sha256": "90850cdaae4608f8a861e06073d79aa94367332672256543ef949127f9dc1fb7"
+    },
+    {
+      "path": "examples/negotiation-privacy-policy.json",
+      "sha256": "9fccde522d1d1b79b77abcf49df3f385262d2167a0988cd6bd535d46edbd46be"
+    },
+    {
+      "path": "examples/notice-profile.json",
+      "sha256": "72bb09b8af0b97fc996fa49636eb49442113ee154d068ca2e29c497c7acd4223"
+    },
+    {
+      "path": "examples/offer-interaction-receipt.json",
+      "sha256": "0789f705c6d45cb7cd2765b49341aca3f0a3e0ecdea01e681fa307dea4748a1d"
+    },
+    {
+      "path": "examples/offer-interaction-request.json",
+      "sha256": "1b56d2d795fbe3563cb5da9d3f998efbbd0a093f0fad02eb99b467444069a98c"
+    },
+    {
+      "path": "examples/prepared-handoff.json",
+      "sha256": "77c8627af59a591128a0dcbe6712fa101906583f154b98b630c5e456d60575d8"
+    },
+    {
+      "path": "examples/refusal-admission-evidence.json",
+      "sha256": "bedc4db76f757ad8b52ff3b8437d27cab1e87c1b7d8573f3ab7e2f4dbff57c37"
+    },
+    {
+      "path": "examples/refusal-event.json",
+      "sha256": "703f844456d8ba440026f2cc1eee79d959ee31ba990ca8cd5953774381cb6950"
+    },
+    {
+      "path": "examples/refusal-mechanism.json",
+      "sha256": "6fa96be87f5d2a4c731ec8d47d209e8c01ecd800a62d69ac0482db5ea82b9e95"
+    },
+    {
+      "path": "examples/requester-adoption.json",
+      "sha256": "40af607f203dfdfa014712eaf53cb497f259bdba8b63f116d45e40162d96f36f"
+    },
+    {
+      "path": "examples/requester-capability.json",
+      "sha256": "d48d6773124b5873b45ee9776b3f86a3ec94f172f8ef2d34e51e215c06fbf56d"
+    },
+    {
+      "path": "examples/requester-contact-close.json",
+      "sha256": "4e52e2b32d788214c185d7116436df545fbb90a1df1f014ed8132ff2fda4b0b0"
+    },
+    {
+      "path": "examples/requester-current-evidence.json",
+      "sha256": "d6f4de0edb3cc592b2a9203037b27a5f0fb6d49d9f98b8deaca9f1f6650c7f18"
+    },
+    {
+      "path": "examples/requester-intent.json",
+      "sha256": "aed8cd1ab9a6c23951a6b19635534555e81606987fbd24e6b13154a18753343c"
+    },
+    {
+      "path": "examples/requester-invitation.json",
+      "sha256": "a0f9181421cc5bbb46127301746ed64f74e3f3ffa26964a2c257ee2d59db2ac7"
+    },
+    {
+      "path": "examples/requester-notice-evidence.json",
+      "sha256": "f83f115ca91b0f0592979fcdaecdad036143bbd9f6609bfab4a2ca80b5ed4986"
+    },
+    {
+      "path": "examples/requester-notice-target.json",
+      "sha256": "80b1c705d7d5e9d911e2e2e4b2900bd9c670043c0948c3bc9f049fc102c139e4"
+    },
+    {
+      "path": "examples/requester-notice.json",
+      "sha256": "a080c5f6eaa4e04a4a2252100cafe980a0e8a0546fa9fe9d94d8aedee3e5bafa"
+    },
+    {
+      "path": "examples/requester-offer.json",
+      "sha256": "60c72a06122e6b4835088f10d1af2830f4c32c3db1909f0713fb44c5eba42092"
+    },
+    {
+      "path": "examples/requester-principal-policy.json",
+      "sha256": "0c03f33f01ece9ffeb64bdb78b1e0f0c11b9b0603d6e506a0a153a295c9a66f6"
+    },
+    {
+      "path": "examples/requester-publication.json",
+      "sha256": "a6cc2050a5e0c337148da81f9e7b57e3dbaf1068579e77c1646e52c5a7964398"
+    },
+    {
+      "path": "examples/researcher-admission-policy.json",
+      "sha256": "d4214381ee716b04936cee38a48e83a8fa34d920503ec146e6f0c9313e0fe956"
+    },
+    {
+      "path": "examples/researcher-adoption.json",
+      "sha256": "d2c189a5734aeeb82131c212e83e471357ea034d10059f3b2694c49358cf145f"
+    },
+    {
+      "path": "examples/researcher-capability.json",
+      "sha256": "c4ccfac3a776a3469386bc5e85b31f116cd142942f06380c9847b9dcb9d5aea4"
+    },
+    {
+      "path": "examples/researcher-clarification.json",
+      "sha256": "74cfefd1ce0d136507fc3dc771bf0c06409eec8ab1851363137bad35be17cb0a"
+    },
+    {
+      "path": "examples/researcher-current-evidence.json",
+      "sha256": "630f3fd3c29d0b2214f27590da7d8e0a6265d6a315afbce365d39665a4c7efa4"
+    },
+    {
+      "path": "examples/researcher-extended-offer.json",
+      "sha256": "3ae7a9c293c37eb11efdb02f5174301e0c510cde839feb04150fada2a27552a9"
+    },
+    {
+      "path": "examples/researcher-intent.json",
+      "sha256": "04d78c1923a82df99c554be34e7077642b4950b88fcaea7589da4d5aab24230c"
+    },
+    {
+      "path": "examples/researcher-notice-evidence.json",
+      "sha256": "bb9dc8ec9929c3ce1a0204407cfde910e3f9d5be4aa320bd50255d05e1170f0d"
+    },
+    {
+      "path": "examples/researcher-notice-target.json",
+      "sha256": "f9e9e5efe0a23e504bab92c0090f7b5ede8a19552e4ee6e5b86b189b2354607b"
+    },
+    {
+      "path": "examples/researcher-notice.json",
+      "sha256": "bea3c2fedf180753d961c82331d51e3c16b7097a184b6b6183b0dd2f0fcca83e"
+    },
+    {
+      "path": "examples/researcher-principal-policy.json",
+      "sha256": "59d3d5fa60621e5b6ef665ee003f87391767255e238c9b23c7b35fe1882feae9"
+    },
+    {
+      "path": "examples/researcher-publication.json",
+      "sha256": "122f6c6b2de7c6307b957fda8ad0c8e92d17f68bf3cfe4f842d4261e23bea37e"
+    },
+    {
+      "path": "examples/researcher-standard-offer-v2.json",
+      "sha256": "9fbff37a25da2dec49afdb7d627a6d62799df2ae511dde4baa1c2b77ffda26a3"
+    },
+    {
+      "path": "examples/researcher-standard-offer.json",
+      "sha256": "1538eb6ae85e4556b7b7d7a0ab3bda45a0dae45531b241426254dd8e34460769"
+    },
+    {
+      "path": "examples/selection-constraints.json",
+      "sha256": "ac6de907c802132945359f7ffcde61455dc604c0b9f5069746b7e86cc647e088"
+    },
+    {
+      "path": "examples/status-interaction-receipt.json",
+      "sha256": "c4d9685bc50fc1432ccc93ba7b1a005be2f00f5f93a3524359e844e4db1c0020"
+    },
+    {
+      "path": "examples/status-interaction-request.json",
+      "sha256": "2d08ce7a6ddb79ca81f3176e86813c0ce845dc9c011b177449d5e2f7483e0c93"
+    },
+    {
+      "path": "examples/status-pending.json",
+      "sha256": "c4f96b52b1d1fa6ca451d474b67ea2305f833ac5b051cb0c9a0e45ad2ac7ec86"
+    },
+    {
+      "path": "examples/status-refused.json",
+      "sha256": "f93bb8a54f0abecae5bc42cae7d47bbd5c82144df5e20b48bb502bbe9edc3423"
+    },
+    {
+      "path": "examples/transaction-plan.json",
+      "sha256": "eaf5384a8681592e8271afb78e777882b712198f0a0af416394860339e6d9820"
+    },
+    {
+      "path": "policies/rp1.rego",
+      "sha256": "9bfd8263d5fcb8b88e385373d724a29d1b4a6130dfcd89e92ba6be38d0f4ac1e"
+    },
+    {
+      "path": "profiles/harness-interface.md",
+      "sha256": "b7e9370208eb7d12a2119c5b02a3534d0210b38669245cf854fa428ab5b2ae99"
+    },
+    {
+      "path": "profiles/reference-profile.md",
+      "sha256": "76667fa0209f6e54a585b2ee05b19a43df2ed636931724325de20a48c1a63ebd"
+    },
+    {
+      "path": "protocol-architecture.md",
+      "sha256": "d55c404fe909f92dd48c8c5bced86f51747eb63ef72987546d1c11bffd7267b7"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "04eaf5a0babf46720ad4b7b8ddbced4e223eb196ece5f15d568e9e06f7a3f9e1"
+    },
+    {
+      "path": "schemas/admission-policy.schema.json",
+      "sha256": "ce4171e6059ee9ba18c44d161ee66821d849957441a648b308ee04a5278e4c7f"
+    },
+    {
+      "path": "schemas/contract.schema.json",
+      "sha256": "1a7f382578f6dae27e7e524199e942acebf9fa0353f161f506a5d99f9e2e546b"
+    },
+    {
+      "path": "schemas/interaction.schema.json",
+      "sha256": "72a41a44e5de8edfbc840fb02b5c349d89341a197b160e2f6188554f19a6dace"
+    },
+    {
+      "path": "src/agent_bazaar/__init__.py",
+      "sha256": "04925434bdad8a80c51bdfc3190a3142fbae6011b3ca30869a7776498073d0a0"
+    },
+    {
+      "path": "src/agent_bazaar/clock.py",
+      "sha256": "1770b1926e69c5a73c15e851cf19eed2c93bd20d1f00843aa2e78ecd4abac2e6"
+    },
+    {
+      "path": "src/agent_bazaar/composition.py",
+      "sha256": "3ddb6c5ce77755c8bc010093a55153f2514f2619abcd649f20df1960b11b490a"
+    },
+    {
+      "path": "src/agent_bazaar/crypto.py",
+      "sha256": "d9127b5a9b9460cccf92965a4f2e6c665de4741bd601cf044c5eba69ff6a1859"
+    },
+    {
+      "path": "src/agent_bazaar/demo.py",
+      "sha256": "a9600370c2386dec5e0ab4ce42d24f3ed90971ac89033beeb1cd9286787a5f22"
+    },
+    {
+      "path": "src/agent_bazaar/domain.py",
+      "sha256": "8a86d2a67c1cb6ec9f3bb7bd7c42b33792a74a4e89cf0b2aebcdc4741525b8fb"
+    },
+    {
+      "path": "src/agent_bazaar/errors.py",
+      "sha256": "159d4224d89cbbfb66337067d2e48c834bfc168435b7513a8c25f1b5c789e499"
+    },
+    {
+      "path": "src/agent_bazaar/fixtures.py",
+      "sha256": "9a6c6c46f7a6a166cae7a6aeddac8b851e838dd1bc8d69d9fa9b5702e4d3aaaa"
+    },
+    {
+      "path": "src/agent_bazaar/guards.py",
+      "sha256": "5bf6956bc5768433183c94733856ddd385a488a738d926a729b2878e3a51c746"
+    },
+    {
+      "path": "src/agent_bazaar/handoff.py",
+      "sha256": "e4b71cd6c83e3a8762c1cab7a287a5c9e55fc22388c617e86cebe622a173f9a0"
+    },
+    {
+      "path": "src/agent_bazaar/harness.py",
+      "sha256": "1450e21778a7820ba6e401c6cd163c25c286bb0b302f45e36f7fb8635804b189"
+    },
+    {
+      "path": "src/agent_bazaar/policy.py",
+      "sha256": "725efd47418e7e5393da4e6ed631f9c86fe27feebaa76927c1669bd3c59208c8"
+    },
+    {
+      "path": "src/agent_bazaar/records.py",
+      "sha256": "67c8efa4b85c74bc8c1f607320cbfccd168d32b6c39c0bf2c904de20cb9e952e"
+    },
+    {
+      "path": "src/agent_bazaar/recovery.py",
+      "sha256": "424bc41badfca5e255a55f3efac94b0c1c46a5885ceec46d81b842a78df83fce"
+    },
+    {
+      "path": "src/agent_bazaar/schema.py",
+      "sha256": "d411ec8fdde10ec3dfebe96c01b507bca87f0ac582d283b594cded72541302cf"
+    },
+    {
+      "path": "src/agent_bazaar/schemas/__init__.py",
+      "sha256": "4b8bbd123d73bbfa65e191f455dc9dcee9dc1ca8a027a96569dc19538479158c"
+    },
+    {
+      "path": "src/agent_bazaar/schemas/admission-policy.schema.json",
+      "sha256": "ce4171e6059ee9ba18c44d161ee66821d849957441a648b308ee04a5278e4c7f"
+    },
+    {
+      "path": "src/agent_bazaar/schemas/contract.schema.json",
+      "sha256": "1a7f382578f6dae27e7e524199e942acebf9fa0353f161f506a5d99f9e2e546b"
+    },
+    {
+      "path": "src/agent_bazaar/schemas/interaction.schema.json",
+      "sha256": "72a41a44e5de8edfbc840fb02b5c349d89341a197b160e2f6188554f19a6dace"
+    },
+    {
+      "path": "src/agent_bazaar/storage.py",
+      "sha256": "4072646d76d2518929a3871fe9c257618cb23dcd29cc327ba8e85632d2fb3adc"
+    },
+    {
+      "path": "src/agent_bazaar/transport.py",
+      "sha256": "d1273aeb92fea6c12134752523e9ecedfdbfc2aaea281fa05d03761744884759"
+    },
+    {
+      "path": "tests/runtime/test_admission_scope.py",
+      "sha256": "55d32dc25eeabb8aff5079f634c9aa814d3a1c606c85f2d2e8044ab27007c080"
+    },
+    {
+      "path": "tests/runtime/test_composition.py",
+      "sha256": "5fc5e302a009908ee30c28b73c9e0ff94985428c601cd0911d47fc95a3de7de3"
+    },
+    {
+      "path": "tests/runtime/test_crypto.py",
+      "sha256": "da22bbed8633f8a2698a0892ddc476d8ed35b826128c3ce4f5fa44ba02b022fa"
+    },
+    {
+      "path": "tests/runtime/test_deployment_portability.py",
+      "sha256": "5b3aa96b12ea2c7fb6c385270f6eea991e8f432e58bbbacc64c22b25a6e84d2d"
+    },
+    {
+      "path": "tests/runtime/test_handoff.py",
+      "sha256": "491f9fbd12eb3ada31fff8baf895d02d3ecf4782348f798c1f29491a4cbbf3c5"
+    },
+    {
+      "path": "tests/runtime/test_harness.py",
+      "sha256": "c9ad94095604705be89f949d1c023600ece991533d1c990a80da16564633c5b4"
+    },
+    {
+      "path": "tests/runtime/test_harness_guards.py",
+      "sha256": "780569427a5bdf8f0cce7bf4bd27d26874442b52a436abda4b8d7ea1396a3396"
+    },
+    {
+      "path": "tests/runtime/test_harness_transport.py",
+      "sha256": "c2558cf41635998aefc9f701c4257bdbd661578e19cad23f5df8b1d46bfac5cb"
+    },
+    {
+      "path": "tests/runtime/test_policy.py",
+      "sha256": "5d2595a5fe04bb8a15d339d2e8cdbffa2529dd3473a7b9e3d10da1a8771b6391"
+    },
+    {
+      "path": "tests/runtime/test_recovery.py",
+      "sha256": "ef07391d47264591ae3a86a5318027f2e20ca9f516f1f404cc35e31b92652fa7"
+    },
+    {
+      "path": "tests/runtime/test_refusal_ingress.py",
+      "sha256": "7f1acb4d8978ef2113448f46a12e8befdf6f9be3fe903e251148f1d56ecdc6a9"
+    },
+    {
+      "path": "tests/runtime/test_schema.py",
+      "sha256": "4413ab1e83d2266a0d09a42efbdee715d55c93b637f8db6904c06ecd8208690c"
+    },
+    {
+      "path": "tests/runtime/test_storage.py",
+      "sha256": "9b3397e7b35b3aaea0e01f52f744754e1c91a9cf9bbd4156450c133f81c36ce2"
+    },
+    {
+      "path": "tests/runtime/test_transport.py",
+      "sha256": "b0a7b1644da20271b649f8ff681e079514847e94453cb42f590a9530225766ff"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "ba001abf74a97c91707b7d3094863d42aadee4f573fd25052182d78ef58b5445"
+    },
+    {
+      "path": "validation.md",
+      "sha256": "5ce4aae3239a9c16b3ac3540c9bb7f6b1c22d18ea607f96e0d1dbfe4fff9e36b"
+    }
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "runtime_suite": {
+    "command": ".venv/bin/python -m pytest tests/runtime -q -ra",
+    "passed": 155,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 22.79,
+    "actual_opa": "1.21.1",
+    "actual_mutual_tls": true
+  },
+  "new_checks": {
+    "portable_evidence": 5,
+    "recipient_allowance_accounting": 8
+  },
+  "authoring": {
+    "schemas": 3,
+    "semantic_records": 29,
+    "interactions": 6,
+    "admission_declarations": 2,
+    "supporting_documents": 27,
+    "references": 327
+  },
+  "package_build": "Not rerun; validation/runtime-0.1.json retains the earlier distribution evidence.",
+  "scope": "Distinct stores and keys only in portable-evidence tests. Integrated formation and recovery use one trusted shared SQLite authority. No complete independent-store negotiation, federated formation, hosted tenant isolation, discovery or shopping product, live service, native order, payment or settlement."
+}

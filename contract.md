@@ -14,6 +14,14 @@ Native AP2/UCP/ACP validation, execution, payment, fulfillment, assessment and s
 
 The mandatory baseline is `bilateral`: C1–C6, exact agreement and protected principal recovery. Composition, adapter handoff and lifecycle evidence are explicitly negotiated features. An ordinary bilateral agreement needs no plan, composition engine, auction, atomic bundle or adapter implementation. The [quickstart](docs/quickstart.md) and [RP1](profiles/reference-profile.md) give the normal path and concrete mechanisms.
 
+### Deployment and ownership
+
+The core has no mandatory Bazaar operator, discovery service, network-wide registry or shared database. Independently hosted participants MAY retain their own durable journals or delegate custody under principal policy. Custody, routing and receipt of evidence MUST NOT confer another actor's promise, adoption, resource-selection or refusal authority. Coordination belongs to the authenticated originator; each other authority remains limited to its explicit adopted scope.
+
+An embedded buyer participant or a connector-accessed delegated participant uses the same C6 A2A records with independently hosted sellers. Connecting an assistant grants only the permissions actually delegated. Discovery, intent distribution and offer aggregation are optional application functions under C1; they do not alter intent/offer semantics or create new wire operations.
+
+The [deployment model](deployment-model.md) specifies the custody and role separation. A selected profile still supplies recoverable formation, conflict ordering and principal status. RP1's common conflict authority is one concrete preset, not a protocol-wide service; separate authoritative conflict domains require an understood mechanism rather than inference from separate local journals.
+
 ## 2. Promise and act semantics
 
 A promise is an agent's qualified action: the agent has the capability and delegated authority to perform the action within explicit conditions, limits and policy validity. Capability and authority are separate qualifications. A signature authenticates an assertion; it does not make a false capability assertion true.

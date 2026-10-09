@@ -41,6 +41,8 @@ Every supported formation's relevant commitment and resource conflicts are gover
 
 The component's originator/coordinator still authors its `accepted_offer`; the authority's durable formation evidence does not replace that authorship or either adoption. The authority serializes the decisions delegated to it. It does not acquire ownership of agents, invent promises, or grant itself control over native systems.
 
+**Deployment scope:** this common conflict authority is selected for the affected owners and resources. It is not a mandatory Bazaar operator, discovery provider or custodian of all participant records. Separately hosted participants MAY keep distinct keys and permitted evidence stores while using the accepted authority for the facts it orders. That topology still needs authenticated remote authority/evidence bindings and current-status recovery; runtime 0.1's shared SQLite access does not implement them. This clarification does not add a cross-authority commit algorithm, relax the same-scope rule or create another RP1 wire version. See the [deployment model](../deployment-model.md).
+
 Every RP1 candidate MUST select `handoff_rules.preclearance = "no_effects"` and the exact RP1 policy reference. `recovery_profile_ref` MUST be absent. The profile permits no exception for early payment, irreversible execution, secret release, or externally material reservation. Side-effect-free preparation has the limited independent authorization described in section 10.
 
 ### Realm manifest and harness responsibilities

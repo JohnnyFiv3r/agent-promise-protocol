@@ -14,6 +14,12 @@ The harness packages the [reference profile](reference-profile.md) so the ordina
 
 One deployment configuration selects the RP1 preset and its trust/authority bindings. Per-capability registration supplies the application's facts and callbacks. The application is not asked to implement JCS, signatures, a policy interpreter or an operation journal. A deployment claiming the preset must still operate those mechanisms correctly; the spec does not make them disappear.
 
+## Hosting and connector boundary
+
+The same participant semantics apply to an embedded assistant and to a hosted runtime reached through one optional connector. A seller exposes a compatible A2A ABP endpoint. The participant's provider maintains its delegated keys, durable journal, inbound interactions and principal channels; an individual tool call or chat session is not the agreement lifetime. Hosting several principals does not merge their identities, disclosure permissions, admission pools or resource authority.
+
+Discovery, filtered intent distribution, offer comparison and the model-facing connector are application functions. They may be supplied by different providers and are not required harness algorithms or new wire methods. The [deployment model](../deployment-model.md) defines the role/custody separation, and the [independent-participant slice](../design/independent-participant-slice.md) states what remains beyond the shared-store runtime.
+
 ## Registration surface
 
 A registration identifies `capability_semantics_ref`, `principal_policy_ref`, `capacity_provider`, `principal_channel`, and optionally an `adapter` implementing C8. It declares the features it needs. `bilateral` is always supported by RP1; `composition`, `adapter-handoff` and `lifecycle-evidence` are optional additional capabilities; adapter-handoff requires lifecycle-evidence.

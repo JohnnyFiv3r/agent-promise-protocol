@@ -6,6 +6,8 @@ The default is **one bilateral agreement**: an agent asks, a counterpart offers 
 
 These eight contracts define one agreement model. C1–C6 govern the baseline. C7 and C8 add explicitly negotiated features over that same model. A conforming harness verifies applicable requirements and preserves recoverable outcomes; it cannot grant itself authority, manufacture capability, or compel an autonomous agent to perform.
 
+The [deployment model](../deployment-model.md) clarifies independent participant hosting, optional connector/discovery providers, participant-owned custody and scoped authorities using these same eight interfaces. No ninth core contract, new wire operation or mandatory network operator is introduced. RP1's common conflict authority remains an explicit profile constraint.
+
 | Contract | Applies to | Governs and produces |
 |---|---|---|
 | [C1 — Publication and policy](01-publication-policy.md) | Baseline | Principal consent, privacy, permitted contact, current policy, and attributable publication permission |

@@ -4,13 +4,19 @@
 
 The repository now has executable implementation tests in addition to its document-authoring checker. These evidence categories must remain separate. A successful structural check, signature verification, local policy decision, controlled behavioral test or fake adapter outcome does not establish the next category automatically.
 
-The frozen contract/profile/schema commit is `f4a01e2c8c1ee6bb72cc6793933afbcedf91572c`. Implementation and documentation changes are assessed against that baseline; current run results must identify their actual checkout and cannot be inferred from the freeze commit alone.
+The frozen contract/profile/schema commit is `f4a01e2c8c1ee6bb72cc6793933afbcedf91572c`. The current draft adds [deployment and ownership clarifications](deployment-model.md) without changing wire schemas or RP1 authority guarantees. Current run results must identify their actual source state and cannot be inferred from the freeze commit alone.
 
 ## Recorded implementation run
 
-On October 8, 2026, the final runtime suite completed with **142 passed, 0 failed, 0 skipped** in 21.19 seconds on Python 3.13.5/macOS arm64. This run included the actual OPA 1.21.1 and TLS 1.3 mutual-authentication cases, including a complete signed harness finalization/replay round trip.
+On October 8, 2026, the initial runtime suite recorded with implementation commit `7dc68cb` completed with **142 passed, 0 failed, 0 skipped** in 21.19 seconds on Python 3.13.5/macOS arm64. This run included the actual OPA 1.21.1 and TLS 1.3 mutual-authentication cases, including a complete signed harness finalization/replay round trip.
 
 The CLI's bilateral, deadline-refusal and three-agent/two-agreement scenarios passed. Wheel and source archive builds completed without warnings; an isolated wheel installation outside the checkout validated schemas and ran the full controlled demo. The source manifest, artifact hashes, commands, environment and bounded claims are recorded in [`validation/runtime-0.1.json`](validation/runtime-0.1.json). That manifest identifies the tested implementation independently of the earlier specification freeze.
+
+## Deployment and accounting follow-up
+
+The October 8 follow-up completed with **155 passed, 0 failed, 0 skipped** in 22.79 seconds, including actual OPA and mutual TLS. It adds five portable-evidence checks and eight recipient/allowance accounting regressions. The latter include concurrent pending applications, exact replay and safe handling of old applied/pending admission records. The authoring checker also passed with the counts below.
+
+[`validation/deployment-clarification.json`](validation/deployment-clarification.json) identifies the source state, command and evidence boundaries of this run. The package was not rebuilt for this follow-up; the earlier distribution hashes remain historical. Separate participant formation/recovery, multi-customer storage isolation and external-builder adoption remain unimplemented or unassessed as identified below.
 
 ## Reproduce the checks
 
@@ -52,14 +58,16 @@ The [policy notes](policies/README.md) identify the tested executable provenance
 | [`test_composition.py`](tests/runtime/test_composition.py) | Acyclic plans, exact bindings, proof variants, required predicates, current status and stage-specific/transitive dependency clearance |
 | [`test_handoff.py`](tests/runtime/test_handoff.py) | Effect-free fake preparation, frozen native bytes, separate fresh native authority, durable markers, concurrent attempts, injected crash/reply-loss windows and read-only reconciliation |
 | [`test_harness.py`](tests/runtime/test_harness.py) | Integrated signed formation, operation replay/conflict, provenance, capacity, refusal/control authority, controlled composition/handoff and CLI observations |
+| [`test_deployment_portability.py`](tests/runtime/test_deployment_portability.py) | Separate keys, public-only peer enrollment and separate stores verify explicitly transported evidence; custody does not transfer authorship or install semantic state; incompatible authority scope blocks |
+| [`test_admission_scope.py`](tests/runtime/test_admission_scope.py) | Recipient/pool live-option accounting, pinned revisions, semantic failure, pending races, withdrawal and safe blocking of unresolved legacy accounting; not tenant access isolation |
 
 Additional integration regressions are in [`test_harness_guards.py`](tests/runtime/test_harness_guards.py), [`test_refusal_ingress.py`](tests/runtime/test_refusal_ingress.py) and [`test_harness_transport.py`](tests/runtime/test_harness_transport.py). They cover capacity-policy substitution, withdrawn provenance, current counterparty authority, uninterpreted commercial arrangements, proof variants, persistent lineage forks, protected control budgets, uncertain refusal verification and durable ingress observed through a second ledger connection. The transport case independently verifies signed results from response bytes and confirms that carrier replay preserves one formation and one allocation.
 
 These are implementation-specific assertions, not a statement that every normative requirement or proposed P01–P27 oracle has passed. The [conformance assessment](conformance.md) maps partial coverage and identifies the unrun external-builder and independent-implementation work.
 
-## Package verification
+## Initial package verification
 
-The wheel and source distribution were built into a temporary directory. Runtime dependencies were installed from the lockfile with package-hash verification into a separate temporary environment, then the wheel was installed there. An isolated Python process outside the checkout loaded all bundled schemas, accepted a structurally valid signed interaction and rejected an added unknown field. Wheel and source-distribution schema bytes were compared with the authoritative files.
+For the initial `7dc68cb` implementation run, the wheel and source distribution were built into a temporary directory. Runtime dependencies were installed from the lockfile with package-hash verification into a separate temporary environment, then the wheel was installed there. An isolated Python process outside the checkout loaded all bundled schemas, accepted a structurally valid signed interaction and rejected an added unknown field. Wheel and source-distribution schema bytes were compared with the authoritative files. Those artifact hashes do not describe the subsequent deployment/accounting changes.
 
 This establishes the tested package's schema-resource independence from the source checkout. It does not establish production deployment, reproducibility across every Python/platform combination, or a durable deployment configuration for keys, policies and external services. The permanent schema-copy drift assertion is in [`test_schema.py`](tests/runtime/test_schema.py).
 
@@ -89,6 +97,8 @@ Historical authoring-only results must not be relabeled as current runtime valid
 The controlled demo uses `TestPolicy`, `ControlledClock`, signed simulated inbox/health observations and `FakeAdapter`. Actual OPA and HTTPS/mTLS are exercised in separate local integration tests, not silently substituted into that demo. No test performs real research, creates a native order, contacts a payment rail or establishes settlement.
 
 The authority tests operate on one explicitly delegated shared SQLite ledger. Local transactional writer serialization does not provide federated consensus, failover fencing against a copied database or exclusion of allocations made outside the declared authority.
+
+Portable-evidence tests use distinct participant stores and keys, with no sender resolver during receipt verification. They establish exact evidence carriage and authorship, not complete remote negotiation, current-status reliance or separate-authority formation. The integrated mTLS formation test still reads semantic state from a shared authority store. The [independent-participant slice](design/independent-participant-slice.md) names the remaining demonstrations; no discovery, aggregation or shopping product is part of them.
 
 Production NTS/time continuity, real qualifying HTTPS principal inbox/refusal operation, authenticated registry-revision installation, deployment key custody and native adapter qualification remain external work. `policy_defined` validity and unsupported semantic predicates block. Rare object-key order differences between OPA and JCS also block instead of accepting a changed digest.
 

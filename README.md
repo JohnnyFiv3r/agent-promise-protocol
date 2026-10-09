@@ -31,6 +31,12 @@ Applications supply understood action semantics, truthful capability and constra
 
 Keep **agent agreement**, **principal clearance**, and **downstream authorization** separate. A positive refusal-window status never fabricates native action authority or a human signature.
 
+## Hosting and ownership
+
+A buyer can use one connector to its delegated ABP participant, or an embedded participant. Sellers expose independently hosted A2A ABP endpoints. Discovery, intent routing and offer aggregation are optional application services. Each participant may retain its own permitted signed evidence; the core requires no Bazaar-operated ledger or mandatory discovery provider.
+
+The [deployment model](deployment-model.md) distinguishes journal custody from scoped coordinator, resource and refusal/status authority. RP1 currently selects a common conflict authority, and runtime 0.1 uses a shared SQLite store. The [independent-participant slice](design/independent-participant-slice.md) is the remaining distributed-runtime work; separate-store portability tests do not claim it has already been implemented.
+
 ## Contracts and design baseline
 
 - [Eight governing contracts](contracts/README.md): C1–C6 define bilateral formation and recovery; C7 adds composition; C8 defines the adapter boundary and evidence.
@@ -39,7 +45,7 @@ Keep **agent agreement**, **principal clearance**, and **downstream authorizatio
 - [Semantic schemas](schemas/contract.schema.json), [interaction envelopes](schemas/interaction.schema.json), and [admission declaration](schemas/admission-policy.schema.json).
 - [Fictional authored examples](examples/README.md), [worked scenarios](examples/lifecycle-walkthroughs.md), [runtime source](src/agent_bazaar/), and [executable tests](tests/runtime/).
 
-The normative contracts/profile remain frozen design inputs. Their statements about implementation status describe the baseline when written; this README and the runtime guide describe the later implementation. [P01–P27](tests/PROPOSED.md) remain proposed assessment scenarios, with partial coverage by executable tests. They are not a checklist in which every proposal has passed.
+The original contract/profile baseline is preserved at `f4a01e2`. The current draft adds wire-compatible [deployment and ownership clarifications](deployment-model.md); schemas, extension identifiers and RP1 authority guarantees are unchanged. Implementation-status statements in older design prose describe its authoring stage; this README and the runtime guide describe the runtime. [P01–P27](tests/PROPOSED.md) remain proposed assessment scenarios, with partial coverage by executable tests. They are not a checklist in which every proposal has passed.
 
 ## Native boundary and current limits
 

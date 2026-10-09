@@ -38,7 +38,13 @@ flowchart TB
 
 The optional branches are not prerequisites for a bilateral agreement. A2A carries Bazaar interactions; MCP exposes tool capabilities; native authorization and payment contracts retain their own rules. Naming a framework does not implement an adapter. Bazaar distinguishes agreement, principal clearance, downstream permission and attributable outcome evidence; none substitutes for another.
 
-[RP1](profiles/reference-profile.md) fixes the default mechanisms in an authenticated realm manifest and assigns protocol mechanics to the [reference harness design](profiles/harness-interface.md). Applications supply truthful capability, principal permission, real constraints and notice integration; native adapters are needed only for the corresponding optional feature. No SDK or runtime is implemented by this architecture, and [boundary tests](tests/PROPOSED.md) are proposed, not passed.
+[RP1](profiles/reference-profile.md) fixes the default mechanisms in an authenticated realm manifest and assigns protocol mechanics to the [reference harness design](profiles/harness-interface.md). Applications supply truthful capability, principal permission, real constraints and notice integration; native adapters are needed only for the corresponding optional feature. The [Python runtime](docs/runtime.md) implements a controlled shared-authority subset; [validation](validation.md) distinguishes its executable tests from the broader proposed assessments.
+
+## Hosting and state ownership
+
+The [deployment model](deployment-model.md) shows the optional connector or embedded buyer participant communicating with independently hosted seller endpoints. Discovery and aggregation are application roles, not a compulsory Bazaar gateway. Participants can keep separate durable journals and exchange portable evidence. The originator, resource authority and refusal/status authority retain their explicit roles; storing a copy does not transfer those roles.
+
+RP1 selects one common conflict authority for a compatible scope, while the current runtime realizes it through a shared SQLite store. Separate participant custody is a permitted topology, not evidence that the runtime already implements remote authoritative-result handling or cross-authority formation. The [next protocol-runtime slice](design/independent-participant-slice.md) defines those demonstration boundaries without implementing a shopping product.
 
 ## Symmetry and origin
 

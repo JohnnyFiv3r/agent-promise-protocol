@@ -25,8 +25,9 @@ This reference realm uses explicit participant and resource-owner delegation to 
 | Optional composition | [`test_composition.py`](tests/runtime/test_composition.py) | DAG validation, exact slot bindings, proof-variant identity, current and transitive dependency checks under configured predicates |
 | Adapter boundary | [`test_handoff.py`](tests/runtime/test_handoff.py) | Frozen native bytes, stable dispatch identity, current authority gates, marker-before-call behavior and uncertainty-preserving fake reconciliation |
 | Integrated reference behavior | [`test_harness.py`](tests/runtime/test_harness.py) | Signed bilateral formation, admission/replay, exact promise provenance, shared capacity, protected refusal, optional composition and fake handoff through one implementation |
+| Deployment boundaries | [`test_deployment_portability.py`](tests/runtime/test_deployment_portability.py), [`test_admission_scope.py`](tests/runtime/test_admission_scope.py) | Separate-store evidence preserves authorship without semantic admission; recipient/allowance accounting remains scoped; neither proves distributed formation or hosted tenant isolation |
 
-[Validation](validation.md) records the 142-test local run, its exact source manifest, additional harness/ingress/transport regressions and reproduction commands and the limits of each category. A skipped OPA integration test is not an OPA pass. Passing local A2A tests against this implementation does not show interoperability with a separately authored A2A/Bazaar participant.
+[Validation](validation.md) separates the initial 142-test runtime run from the deployment/accounting follow-up, with source manifests, reproduction commands and the limits of each category. A skipped OPA integration test is not an OPA pass. Passing local A2A tests against this implementation does not show interoperability with a separately authored A2A/Bazaar participant.
 
 ## P01–P27 remain assessment proposals
 
@@ -47,6 +48,8 @@ This is a partial topic map. It neither states that every oracle in a row has be
 ## Remaining deployment and assessment work
 
 Current implementation limits include `policy_defined` validity, production authenticated time/continuity and HTTPS inbox qualification, signed registry revision installation, deployment key custody and distributed successor fencing. Rare OPA/JCS object-key ordering differences fail closed. See the [runtime guide](docs/runtime.md#current-limits) and [policy notes](policies/README.md).
+
+The [deployment model](deployment-model.md) permits embedded or connector-accessed buyers, independent sellers, optional discovery and separately held journals. RP1 still requires one selected authority for a conflict scope. Its remote bindings and complete separate-store formation/recovery remain the [next runtime slice](design/independent-participant-slice.md), not an outcome of portable-record tests.
 
 Builder adoption must be assessed with a builder who did not author the runtime, supplying actual capability semantics, principal permissions, constraints and controlled integrations using the published materials. Record undocumented rules and bespoke protocol machinery rather than inferring usability from an internal walkthrough.
 

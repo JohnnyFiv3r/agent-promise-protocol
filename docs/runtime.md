@@ -4,6 +4,8 @@
 
 This package implements protocol mechanics for a controlled, explicitly enrolled authority realm. It provides a runnable bilateral path, optional acyclic composition, principal recovery, and a frozen adapter boundary. It is an independent MIT implementation using general-purpose libraries. It does not alter the frozen contracts or certify a production RP1 deployment.
 
+The [deployment clarification](../deployment-model.md) keeps independent hosting and optional connector/aggregation providers within the existing core semantics. The [independent-participant slice](../design/independent-participant-slice.md) is not implemented by this runtime: formation reads both adoptions and capacity locally; recovery and composition read the common authority store. Transported evidence can be independently verified without thereby installing a remote accepted/status result as locally authoritative state. Shared database access is trusted authority access, not a multi-customer isolation layer.
+
 ## Install, run and inspect
 
 Use Python 3.11 or newer. The checked-in `uv.lock` pins runtime and development dependency versions and distribution hashes; the build backend is pinned in `pyproject.toml`.
@@ -89,6 +91,10 @@ This shows the constructor contract; it is not a ready-made production enrollmen
 The transport functions `encode_request`/`decode_request` and `encode_response`/`decode_response` carry one native A2A data part with `{bazaar, records}`. `make_handler` obtains peer identity from the actual TLS socket and its enrolled leaf certificate; `serve_tls` requires a TLS 1.3 context with mandatory client authentication. A trusted callback invokes the harness and returns `(receipt, supporting_records)`. The callback must materialize permitted result/proof evidence within the response allowance; support records do not independently execute operations.
 
 A missing extension acknowledgment preserves an unknown outcome. Recover the same signed logical operation instead of inventing a new operation ID. Native transport success, an interaction receipt, accepted terms and native performance are separate observations.
+
+Live-option accounting follows the addressed recipient and selected allowance pool, even when several recipients share this trusted ledger. The first applied revision pins an option to that pool; revisions and proof variants do not gain fresh allowance. Pending or semantically rejected offers occupy no live-option slot, and application rechecks capacity in the same transaction as the semantic effect.
+
+Ledgers created before this accounting index need explicit operator reconciliation if they retain applied offers without consistent recipient/pool memberships. New offer admission then fails with `internal_unresolved`; exact historical operation replay remains available. Resuming an old pending offer whose saved admission lacks the live-option limit also returns a durable blocked result without applying the offer. There is no automatic backfill from global offer heads and no permission to clear the journal or reset consumed quotas. This guard preserves uncertainty; it is not a supplied migration utility or a tenant access-control mechanism.
 
 `OPAClient` calls the exact RP1 REST Data API endpoint over the configured mutual-TLS connection. It checks the result's exact input digest, approved policy/data references, authority revision, boundary digest, reason codes and lifetime. OPA errors, missing results, extra obligations, mismatched state and expired decisions deny the act. There is no automatic fallback to `TestPolicy`.
 
