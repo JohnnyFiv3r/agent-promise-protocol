@@ -1,0 +1,7 @@
+{
+  "id": "fixture:adapter-requirements",
+  "synthetic": true,
+  "required": "Exact independently authorized produce_report action after principal clearance, delegated adapter, target, occurrence, capacity and disclosure limits.",
+  "reconciliation": "Read-only lookup by native operation key; never redeliver after ambiguity.",
+  "note": "Fictional native authorization and adapter semantics; no credential or running service."
+}

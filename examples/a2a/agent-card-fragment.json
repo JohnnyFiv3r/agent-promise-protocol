@@ -1,0 +1,38 @@
+{
+  "capabilities": {
+    "extensions": [
+      {
+        "uri": "https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/protocol-architecture.md#v04",
+        "description": "Agent Promise Protocol qualified intent, admitted negotiation and accepted-offer evidence",
+        "required": true,
+        "params": {
+          "profiles": [
+            "app/0.4-draft"
+          ],
+          "recipientScopeId": "scope:researcher-app",
+          "admissionPolicyRef": {
+            "id": "policy:researcher-admission",
+            "digest": "<SHA256_OF_CANONICAL_ADMISSION_POLICY>",
+            "locator": "https://example.org/app/policies/admission"
+          },
+          "proofProfiles": [
+            "<SELECTED_EXISTING_PROOF_PROFILE_URI>"
+          ],
+          "evidenceRetrievalProfiles": [
+            "<SELECTED_EVIDENCE_RETRIEVAL_PROFILE_URI>"
+          ],
+          "supported_features": [
+            "bilateral"
+          ]
+        }
+      }
+    ]
+  },
+  "supportedInterfaces": [
+    {
+      "url": "https://example.org/researcher/a2a",
+      "protocolBinding": "JSONRPC",
+      "protocolVersion": "1.0"
+    }
+  ]
+}

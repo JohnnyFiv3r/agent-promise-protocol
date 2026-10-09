@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.2-draft",
+  "profile": "app/0.4-draft",
   "kind": "status_snapshot",
   "id": "status:research:1",
   "issuer_agent_id": "agent:requester",
@@ -9,7 +9,7 @@
   "body": {
     "accepted_offer_ref": {
       "id": "accepted:research",
-      "digest": "sha256:95b39eabd2a57dc4ea5410dda6b4f81d9c4e2bbed219242de9ca9a7a3ad6768c"
+      "digest": "sha256:c118dadbb21d29b8439b60ed9383757cce5607732e2778bdaa4c5754fe7b1a20"
     },
     "revision": 1,
     "previous_status_digest": null,
@@ -17,11 +17,11 @@
     "as_of": "2026-10-08T18:01:00Z",
     "freshness_policy_ref": {
       "id": "fixture:clock-and-status-policy",
-      "digest": "sha256:9c6be2961dc40698504b7b4bce0ffed3d1e0d5411446b7f7ba5ae76d62acdc80"
+      "digest": "sha256:1f2563bea9c4d98cfd2daede48b0e001ed0bf1bca1758638e6943f888f08b869"
     },
     "clock_evidence_ref": {
       "id": "fixture:clock-and-status-policy",
-      "digest": "sha256:9c6be2961dc40698504b7b4bce0ffed3d1e0d5411446b7f7ba5ae76d62acdc80"
+      "digest": "sha256:1f2563bea9c4d98cfd2daede48b0e001ed0bf1bca1758638e6943f888f08b869"
     },
     "notice_refs": [],
     "principal_windows": [
@@ -63,9 +63,9 @@
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.2/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.2/fictional-keys/agent-requester",
-      "signed_payload_digest": "sha256:c1fd63cd8a5276ef3cf74cf0ed8155d8eee30dbe71a5f95f033b9e43f7ffec46",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:96d5f102e47e278628b1b961f81c7bfa2be58ff440afc6cf2a4e7651e8002b83",
       "issuer_agent_id": "agent:requester",
       "scope": [
         "synthetic-review-only"
@@ -75,5 +75,8 @@
         "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
       }
     }
+  ],
+  "required_features": [
+    "bilateral"
   ]
 }

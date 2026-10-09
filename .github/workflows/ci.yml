@@ -1,0 +1,56 @@
+name: Reference release verification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ['app-v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reference-verification-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.13']
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c7f87aa956e4c323abf06d5dec078e358f6b4d04 # v6.0.0
+        with:
+          version: '0.7.18'
+          python-version: ${{ matrix.python }}
+          enable-cache: false
+      - name: Install locked Python dependencies
+        run: uv sync --locked --extra dev
+      - name: Install checksum-pinned OPA 1.21.1
+        # Publisher checksum and GitHub immutable-release digest independently
+        # checked at https://github.com/open-policy-agent/opa/releases/tag/v1.21.1
+        run: |
+          mkdir -p .tools
+          curl --fail --location --retry 3 --proto '=https' --tlsv1.2 \
+            https://github.com/open-policy-agent/opa/releases/download/v1.21.1/opa_linux_amd64_static \
+            --output .tools/opa
+          echo '668506eb17a2eaa1fce6cc0d1f42ef85125d4ac5bda5fc74d1152d0c77145031  .tools/opa' | sha256sum --check --strict
+          chmod +x .tools/opa
+      - name: Verify source, integrations and installed distributions
+        run: uv run --locked --extra dev python checks/release_check.py --output-dir .runtime/release-check
+      - name: Retain verification evidence and distributions
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: reference-verification-python-${{ matrix.python }}
+          path: .runtime/release-check/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30

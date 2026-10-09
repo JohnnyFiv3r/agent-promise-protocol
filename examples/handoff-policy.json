@@ -1,0 +1,10 @@
+{
+  "id": "fixture:handoff-policy",
+  "synthetic": true,
+  "fixture_type": "illustrative_policy_or_evidence",
+  "preclearance": "no_effects",
+  "preparation": "Local translation and separately permitted read-only checks only; no protected disclosure, charge, reservation or capacity consumption.",
+  "dispatch": "All relevant principal periods must clear and current separately delegated native authority must cover exact action and translation.",
+  "adapter_selection": "The promiser may nominate an adapter for preparation only. Dispatch must match adopted terms and all current principal constraints.",
+  "profile_status": "Fictional semantics; not an implemented RP1 policy bundle."
+}

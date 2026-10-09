@@ -1,0 +1,49 @@
+{
+  "profile": "abp/0.3-draft",
+  "kind": "interaction_receipt",
+  "id": "interaction_receipt:status-interaction-receipt",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T18:03:10Z",
+  "required_extensions": [],
+  "body": {
+    "request_ref": {
+      "id": "interaction_request:status-interaction-request",
+      "digest": "sha256:5ec9bef23e7bec7932845cfd30fa57bcbb9109e77a8c3bfee6a2e07208e89cd8"
+    },
+    "operation_id": "op:researcher:status:1",
+    "recipient_agent_id": "agent:requester",
+    "recipient_scope_id": "scope:requester:bazaar",
+    "revision": 1,
+    "previous_receipt_digest": null,
+    "outcome": "applied",
+    "reason_code": "ok",
+    "result_refs": [
+      {
+        "id": "status:research:2",
+        "digest": "sha256:69d9016f8c5c1ad64b0ec5964b1fbba1fbec2b5d0150ef2b2c4c052690a07773"
+      }
+    ],
+    "evidence_refs": [
+      {
+        "id": "fixture:requester-current-evidence",
+        "digest": "sha256:ae8ca93c4104095e88efcb7a7725171817e589bd7f7b34849d030140fc9fa200"
+      }
+    ]
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.3/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.3/keys/agent-requester",
+      "signed_payload_digest": "sha256:3febbbbd607449db4ad9ffe55819b5baa495b429e4079949df12f6aca6035e34",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "interaction_receipt"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "source": "https://markburgess.org/BookOfPromises.pdf",
+  "source_sha256": "f188f673bd4a48ad9d748a2e5aa5407f1180fd7b07577ebbe6df5a588b319d3b",
+  "pdf_pages": 318,
+  "manifest_words": 74230,
+  "manifest_chars": 694113,
+  "coverage_ranges_in_page_order": [
+    {
+      "pdf_page_start": 1,
+      "pdf_page_end": 15,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 16,
+      "pdf_page_end": 30,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 31,
+      "pdf_page_end": 45,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 46,
+      "pdf_page_end": 60,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 61,
+      "pdf_page_end": 75,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 76,
+      "pdf_page_end": 90,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 91,
+      "pdf_page_end": 105,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 106,
+      "pdf_page_end": 120,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 121,
+      "pdf_page_end": 135,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 136,
+      "pdf_page_end": 150,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 151,
+      "pdf_page_end": 165,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 166,
+      "pdf_page_end": 180,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 181,
+      "pdf_page_end": 195,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 196,
+      "pdf_page_end": 210,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 211,
+      "pdf_page_end": 225,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 226,
+      "pdf_page_end": 240,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 241,
+      "pdf_page_end": 255,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 256,
+      "pdf_page_end": 270,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 271,
+      "pdf_page_end": 285,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 286,
+      "pdf_page_end": 292,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 293,
+      "pdf_page_end": 300,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 301,
+      "pdf_page_end": 310,
+      "read_full_extracted_text": true
+    },
+    {
+      "pdf_page_start": 311,
+      "pdf_page_end": 318,
+      "read_full_extracted_text": true
+    }
+  ],
+  "covered_page_count": 318,
+  "sequence_note": "Pages 001-210 read in sequence; pages 226-318 followed; skipped pages 211-225 were then read in full. Pages 286-300 were re-read in smaller batches after a truncation warning in one earlier output. These ranges cover all PDF pages 1-318 with no omissions.",
+  "figure_visual_checks": [
+    {
+      "pdf_page": 21,
+      "printed_page": 5,
+      "figure": "1.1",
+      "result": "Rendered and visually inspected."
+    },
+    {
+      "pdf_page": 183,
+      "printed_page": 167,
+      "figure": "13.11",
+      "result": "Rendered and visually inspected; nested general invitation, specific invitation, promise."
+    }
+  ],
+  "limits": "Text extraction flattens some equations and may omit diagrams. Other figures were consumed via extracted text/captions, not individually rendered."
+}

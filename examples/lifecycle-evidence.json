@@ -1,0 +1,70 @@
+{
+  "profile": "app/0.4-draft",
+  "required_extensions": [],
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:7dd2b8f9a846e8e1b11d9cb22b9f161ab240a39fe0f5e86b64006febef6f1477",
+      "issuer_agent_id": "agent:researcher",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ],
+  "kind": "lifecycle_evidence",
+  "id": "evidence:report-not-performed",
+  "issuer_agent_id": "agent:researcher",
+  "issuer_principal_id": "principal:researcher",
+  "created_at": "2026-10-08T18:03:12Z",
+  "required_features": [
+    "bilateral",
+    "lifecycle-evidence"
+  ],
+  "body": {
+    "agreement_ref": {
+      "id": "accepted:research",
+      "digest": "sha256:c118dadbb21d29b8439b60ed9383757cce5607732e2778bdaa4c5754fe7b1a20"
+    },
+    "action_ref": {
+      "promiser_agent_id": "agent:researcher",
+      "promise_id": "promise:research-standard-v2"
+    },
+    "action_instance": {
+      "type_uri": "https://example.org/agent-promise-protocol/v0.4/occurrences/one-shot",
+      "parameters": {
+        "ordinal": 1
+      }
+    },
+    "category": "native_execution",
+    "reporter_role": "adapter",
+    "claim": {
+      "type_uri": "https://example.org/agent-promise-protocol/v0.4/claims/not-dispatched",
+      "parameters": {
+        "reason": "principal_refused"
+      }
+    },
+    "evidence_profile_uri": "https://example.org/agent-promise-protocol/v0.4/evidence/fictional-observation",
+    "native_evidence_refs": [
+      {
+        "id": "fixture:native-observation",
+        "digest": "sha256:198720bcfbab5f1add56c2e28aec11a436d9bf95306630d07ee8f0cc86de58be"
+      }
+    ],
+    "observed_at": "2026-10-08T18:03:11Z",
+    "authority_refs": [
+      {
+        "id": "fixture:researcher-principal-policy",
+        "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+      }
+    ],
+    "related_handoff_ref": {
+      "id": "handoff:report-once",
+      "digest": "sha256:38a47ef5906d1d9699c829b80155c26e5ae4dc4e732eb63b308f7ef301c51c58"
+    }
+  }
+}

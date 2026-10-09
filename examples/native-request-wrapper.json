@@ -1,0 +1,7 @@
+{
+  "id": "fixture:native-request-wrapper",
+  "media_type": "application/json",
+  "payload_encoding": "base64url",
+  "payload": "eyJhY3Rpb24iOiJwcm9kdWNlX3JlcG9ydCIsIm9yZGluYWwiOjEsInN1YmplY3QiOiJzdWJqZWN0OnByb3RvY29sLWNvbXBhcmlzb24ifQ",
+  "payload_digest": "sha256:2c0b5c38bda9d0f8ecc9c36f21e8f665c325a08bb9bb7954476f2e92ba30e32a"
+}

@@ -1,6 +1,6 @@
 # Accepted-offer object and principal refusal
 
-**Draft 0.2.** The output is an immutable record of exact agent agreement, accompanied by authenticated current status. Agent agreement is subject to the agreed post-handshake right of principal refusal. These semantics distinguish delegated agent negotiation from an exchange in which the humans themselves have just assented.
+**Draft 0.4.** The output is an immutable record of exact agent agreement, accompanied by authenticated current status. Agent agreement is subject to the agreed post-handshake right of principal refusal. These semantics distinguish delegated agent negotiation from an exchange in which the humans themselves have just assented.
 
 ## Formation inputs
 
@@ -8,7 +8,7 @@ A candidate identifies:
 
 - The initiating intent/promise/offer, its immutable content and author. That author is the declared coordinator.
 - The parties and principals, exact selected offer options/revisions, own qualified promises and complete terms.
-- The offering/action semantics and commercial arrangement, including the relevant policy references and eligibility evidence.
+- The offering/action semantics and agreement arrangement, including the relevant policy references and eligibility evidence.
 - Selection/capacity constraints, privacy rules and any linked replacement/disposition of prior commitments.
 - Each principal's refusal-policy reference, positive duration, notice destination/rule, refusal/status authority and clock/freshness policy.
 
@@ -48,7 +48,7 @@ A principal, or an explicitly authorized representative exercising that principa
 
 The declared authority uses its authenticated clock and durable ordering. A valid refusal admitted at or before the deadline prevails. Window closure is recorded only after the deadline and after resolving admitted/refused/duplicate event order. A retry preserves operation identity; it cannot create a second refusal or erase one. A network timestamp supplied solely by an untrusted sender cannot establish timely admission.
 
-A timely refusal makes the accepted object `refused` for downstream reliance. The historical adoptions and finalization remain intact. Removing or retracting the refusal cannot revive that object; renewed agreement requires a linked replacement and fresh adoptions. Bazaar performs no refund, reversal or cancellation of an external native transaction.
+A timely refusal makes the accepted object `refused` for downstream reliance. The historical adoptions and finalization remain intact. Removing or retracting the refusal cannot revive that object; renewed agreement requires a linked replacement and fresh adoptions. APP performs no refund, reversal or cancellation of an external native transaction.
 
 ## Current status
 
@@ -69,4 +69,4 @@ A consumer MUST distinguish the immutable handshake proof from current review st
 
 A replacement identifies the prior accepted object and how prior unperformed commitments are superseded or otherwise disposed of. New terms receive fresh agent adoptions and principal windows. The replacement does not silently combine an old price, a new scope and an expired permission, nor erase any existing downstream effect. Implementations retain all relevant historical records.
 
-Bazaar ends at this accepted object and the evidence needed to interpret it. It defines no payment, fulfillment or assessment state machine.
+This object is the agreement milestone, optionally followed by [C7 composition](contracts/07-composition.md) and [C8 handoff/evidence](contracts/08-adapter-boundary.md). Agent agreement, principal clearance and native action authority remain distinct. Native execution, fulfillment and settlement mechanisms stay outside the adapter boundary.

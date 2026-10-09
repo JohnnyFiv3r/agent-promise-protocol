@@ -1,6 +1,6 @@
 # Sources and current decisions
 
-**Draft 0.2 · October 8, 2026.** The [fifteen user decisions](decisions-v0.2.md) control this revision. Earlier D1–D22 entries are preserved with [archived 0.1](archive/0.1/sources-and-decisions.md); they are not a second current decision register.
+**Draft 0.4 · October 8, 2026.** The [earlier user decisions](decisions-v0.2.md), explicitly reconciled by [0.4 decisions](decisions-v0.4.md), control this revision. Earlier D1–D22 entries are preserved with [archived 0.1](archive/0.1/sources-and-decisions.md); they are not a second current decision register.
 
 ## Promise Theory reading
 
@@ -19,19 +19,19 @@ The book treats declared intention as a promise, distinguishes proposed descript
 | Lifecycle; conflicts | 85–88, 96–98 | 101–104, 112–114 |
 | Invitations and intrusive messages | 165–172 | 181–188 |
 
-The qualified-action wire model, budgeting, exact-term finalization and principal refusal window are Bazaar engineering choices. The book does not prescribe these record types or lifecycle rules. Existing systems retain native authentication and downstream commerce functions.
+The qualified-action wire model, budgeting, exact-term finalization and principal refusal window are APP engineering choices. The book does not prescribe these record types or lifecycle rules. Existing systems retain native authentication and downstream commerce functions.
 
 ## Native protocol sources and scope
 
-| Source | Use in draft 0.2 |
+| Source | Use in draft 0.4 |
 |---|---|
 | [A2A 1.0.0 specification](https://a2a-protocol.org/v1.0.0/specification/) and [extensions](https://a2a-protocol.org/latest/topics/extensions/) | Carrier/extension binding; native message, task and artifact meanings remain native. |
-| [RFC 8785](https://www.rfc-editor.org/rfc/rfc8785.html) | Canonicalization for Bazaar content identity, excluding top-level proof references for the signed payload. Native proof bytes retain their own formats. |
-| [AP2 specification](https://ap2-protocol.org/ap2/specification/) and [Checkout Mandate](https://ap2-protocol.org/ap2/checkout_mandate/) | Rechecked for an informative downstream association: exact Bazaar terms/proof can be correlated to native signed Checkout content; the consumer creates and validates native mandates. |
-| [AP2 authorization framework](https://ap2-protocol.org/ap2/agent_authorization/) | Distinguish native delegated authority and trusted user interaction from Bazaar's post-handshake refusal evidence. |
-| [MIT license](https://opensource.org/license/mit) | Standard license text applied to original Bazaar material; linked third-party material is not relicensed. |
+| [RFC 8785](https://www.rfc-editor.org/rfc/rfc8785.html) | Canonicalization for APP content identity, excluding top-level proof references for the signed payload. Native proof bytes retain their own formats. |
+| [AP2 specification](https://ap2-protocol.org/ap2/specification/) and [Checkout Mandate](https://ap2-protocol.org/ap2/checkout_mandate/) | Rechecked for an informative downstream association: exact APP terms/proof can be correlated to native signed Checkout content; the consumer creates and validates native mandates. |
+| [AP2 authorization framework](https://ap2-protocol.org/ap2/agent_authorization/) | Distinguish native delegated authority and trusted user interaction from APP's post-handshake refusal evidence. |
+| [MIT license](https://opensource.org/license/mit) | Standard license text applied to original APP material; linked third-party material is not relicensed. |
 
-The AP2 compatibility check found no native Bazaar accepted-offer type or principal-refusal window. Those are our contract semantics. The downstream note is not evidence of an implemented adapter, validated mandate or paid transaction.
+The AP2 compatibility check found no native APP accepted-offer type or principal-refusal window. Those are our contract semantics. The downstream note is not evidence of an implemented adapter, validated mandate or paid transaction.
 
 ## Related work
 
@@ -39,6 +39,8 @@ The [research ledger](research/README.md), [earlier overlap audit](novel-angle-a
 
 ## Authoring selections still requiring refinement
 
-The [universal action shape](promise-model.md) is a concrete proposal requested by the user. The [accepted-object contract](accepted-offer.md) makes notice/start/deadline/order semantics explicit without choosing a universal duration. Exact cryptographic suite/trust integration and public extension URI remain publication/implementation selections. Unknown required profiles block automatic interpretation rather than silently selecting a substitute.
+Draft 0.4 reconciles [eight governing interfaces](contracts/README.md) and records its [authoring choices](decisions-v0.4.md). These are original protocol engineering decisions, not requirements attributed to Promise Theory or copied from comparator implementations.
 
-The contract does not select an evaluation regime, correction budget, human reviewer, native payment route or runtime test suite. Those discussions follow contract authoring. Schema/reference checks are authoring validation only.
+The [universal action shape](promise-model.md) is a concrete proposal requested by the user. The [accepted-object contract](accepted-offer.md) makes notice/start/deadline/order semantics explicit without choosing a universal duration. [C6](contracts/06-a2a-evidence.md) selects the draft extension identifier and A2A binding. The [RP1 reference profile](profiles/reference-profile.md) selects concrete cryptographic, trust, policy, ordering and retrieval mechanisms for interoperability; the universal core permits other understood profiles. Unknown required profiles block automatic interpretation rather than silently selecting a substitute.
+
+The [proposed tests](tests/PROPOSED.md) cover contract behavior through substituted adapters. They select no research evaluator, correction budget, human reviewer or native payment route. The subsequent [reference runtime](docs/runtime.md) supplies executable implementation checks, with coverage and limits recorded in [validation](validation.md) and [conformance](conformance.md). Native integrations and independent interoperability remain separate, unverified work. Schema/reference checks remain authoring validation only; primary sources for the concrete mechanism choices are in [RP1](profiles/reference-profile.md).

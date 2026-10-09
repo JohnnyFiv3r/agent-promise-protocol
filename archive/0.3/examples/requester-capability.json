@@ -1,0 +1,11 @@
+{
+  "id": "fixture:requester-capability",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "agent_id": "agent:requester",
+  "claims": [
+    "declare_interest",
+    "receive_report"
+  ],
+  "independently_verified": false
+}

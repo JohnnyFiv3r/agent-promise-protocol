@@ -1,0 +1,97 @@
+{
+  "profile": "abp/0.3-draft",
+  "kind": "intent",
+  "id": "intent:requester",
+  "issuer_agent_id": "agent:requester",
+  "issuer_principal_id": "principal:requester",
+  "created_at": "2026-10-08T18:00:00Z",
+  "required_extensions": [],
+  "body": {
+    "intent_id": "intent:requester",
+    "revision": 1,
+    "previous_digest": null,
+    "market_posture": "seek_result",
+    "topic": "agent-protocol-research",
+    "desired_outcome": "I seek a cited comparison of three agent protocols.",
+    "preferences": [
+      "Official public sources"
+    ],
+    "disclosure_audience": [
+      "subscribed:research-interest"
+    ],
+    "publication_contract_ref": {
+      "id": "publication:requester",
+      "digest": "sha256:f8f1d235b819633662ab790ccc568f99677c00f8184e1658dded2b98495d4a1a"
+    },
+    "validity": {
+      "mode": "until_withdrawn",
+      "policy_ref": {
+        "id": "fixture:requester-principal-policy",
+        "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+      },
+      "status_ref": "https://example.org/agent-bazaar/v0.3/status/requester-intent"
+    },
+    "emission_promise": {
+      "promise_id": "promise:requester-declaration",
+      "promiser_agent_id": "agent:requester",
+      "promisee_ids": [
+        "audience:research-interest"
+      ],
+      "action": {
+        "action_type": "https://example.org/agent-bazaar/v0.3/actions/declare_interest",
+        "semantics_ref": {
+          "id": "fixture:action-semantics",
+          "digest": "sha256:d2e14c31d975e765c91ce54b86e062f411e2c160424d8a807eda4f280c370398"
+        },
+        "polarity": "provide",
+        "subject": {
+          "type_uri": "https://example.org/agent-bazaar/v0.3/subjects/research-request",
+          "parameters": {
+            "id": "subject:protocol-comparison"
+          }
+        },
+        "resources": [],
+        "parameters": {
+          "declaration": "I seek a cited comparison of three agent protocols.",
+          "scope": "Disclosing this interest only; sought performance, purchase and counterpart action are not issued promises."
+        }
+      },
+      "capability_refs": [
+        {
+          "id": "fixture:requester-capability",
+          "digest": "sha256:73d741482ed408dfc2ee5422253c63ce68c6534b386b152af06d6a96ea10601e"
+        }
+      ],
+      "authority_refs": [
+        {
+          "id": "fixture:requester-principal-policy",
+          "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+        }
+      ],
+      "qualifications": [],
+      "validity": {
+        "mode": "until_withdrawn",
+        "policy_ref": {
+          "id": "fixture:requester-principal-policy",
+          "digest": "sha256:0fc698f81d879d184bd4ee20c70de9bf960f6cb122367102fdbb43251c05e794"
+        },
+        "status_ref": "https://example.org/agent-bazaar/v0.3/status/promise-requester-declaration"
+      }
+    }
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.3/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.3/fictional-keys/agent-requester",
+      "signed_payload_digest": "sha256:e0699dd6f7553ec03809e11057929881d21f340b2da13978f971c3be46b596d2",
+      "issuer_agent_id": "agent:requester",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}

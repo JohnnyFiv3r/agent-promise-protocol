@@ -1,0 +1,14 @@
+{
+  "id": "fixture:requester-principal-policy",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "principal_id": "principal:requester",
+  "delegated_agent_id": "agent:requester",
+  "refusal_duration_ms": 60000,
+  "notice_target_ref": {
+    "id": "fixture:requester-notice-target",
+    "digest": "sha256:105d8982d7ff1a7325ef7bef3a609589c36115d50111e93db3b0ebe33a9251a3"
+  },
+  "refusal_representation": "Fictional policy explicitly authorizes this agent to exercise the principal refusal right; no waiver through ordinary adoption.",
+  "delegation": "Fictional durable policy for publication, qualified own promises and exact-term adoption within its scope."
+}

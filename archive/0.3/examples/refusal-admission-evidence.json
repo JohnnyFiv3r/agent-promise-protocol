@@ -1,0 +1,7 @@
+{
+  "id": "fixture:refusal-admission-evidence",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "admitted_at": "2026-10-08T18:03:10Z",
+  "note": "Fictional coordinator admission exactly at the researcher deadline; refusal takes precedence over closure."
+}

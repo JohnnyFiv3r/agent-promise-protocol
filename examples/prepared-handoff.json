@@ -1,0 +1,53 @@
+{
+  "profile": "app/0.4-draft",
+  "required_extensions": [],
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:17bafa395faed15b3b5e192ee76736e0a7e05efb48bb3843005f95b0d16bb4a6",
+      "issuer_agent_id": "agent:researcher",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ],
+  "kind": "prepared_handoff",
+  "id": "prepared:report-once",
+  "issuer_agent_id": "agent:researcher",
+  "issuer_principal_id": "principal:researcher",
+  "created_at": "2026-10-08T18:01:21Z",
+  "required_features": [
+    "bilateral",
+    "adapter-handoff",
+    "lifecycle-evidence"
+  ],
+  "body": {
+    "handoff_ref": {
+      "id": "handoff:report-once",
+      "digest": "sha256:38a47ef5906d1d9699c829b80155c26e5ae4dc4e732eb63b308f7ef301c51c58"
+    },
+    "handoff_key": "sha256:8f181216acde457499c9d3fd70f6f8f50b4972090125dc9df8687a863e492000",
+    "adapter_profile_uri": "https://example.org/agent-promise-protocol/v0.4/adapters/fictional-research",
+    "native_request_ref": {
+      "id": "fixture:native-request-wrapper",
+      "digest": "sha256:fd1e822d669e022f917ea739ddee0ce716885d56c9e0fbce65c83b0290b511dc"
+    },
+    "native_operation_key": "app-rp1-8f181216acde457499c9d3fd70f6f8f50b4972090125dc9df8687a863e492000",
+    "effect_class": "externally_effective",
+    "authorization_requirement_refs": [
+      {
+        "id": "fixture:adapter-requirements",
+        "digest": "sha256:2436459f70a5fd19fb6c7e36895bbdfc23ac5a70a603429bb7258503f8597016"
+      }
+    ],
+    "reconciliation_profile_ref": {
+      "id": "fixture:adapter-requirements",
+      "digest": "sha256:2436459f70a5fd19fb6c7e36895bbdfc23ac5a70a603429bb7258503f8597016"
+    }
+  }
+}

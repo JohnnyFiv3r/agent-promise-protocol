@@ -1,0 +1,2737 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-bazaar:draft:0.3:semantic-records",
+  "title": "Agent Bazaar v0.3 publication through accepted-offer records",
+  "description": "Structural projection of the normative C1-C6 contracts. Offers issue qualified own promises; candidates identify exact promise provenance. No execution, payment, delivery or assessment state is defined. Structural validity does not verify cryptography, capability, authority, current status, clocks or protocol semantics.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/publication_contract"
+    },
+    {
+      "$ref": "#/$defs/intent"
+    },
+    {
+      "$ref": "#/$defs/promise"
+    },
+    {
+      "$ref": "#/$defs/offer"
+    },
+    {
+      "$ref": "#/$defs/candidate_terms"
+    },
+    {
+      "$ref": "#/$defs/terms_adoption"
+    },
+    {
+      "$ref": "#/$defs/accepted_offer"
+    },
+    {
+      "$ref": "#/$defs/finalization_notice"
+    },
+    {
+      "$ref": "#/$defs/refusal_event"
+    },
+    {
+      "$ref": "#/$defs/status_snapshot"
+    },
+    {
+      "$ref": "#/$defs/withdrawal_event"
+    },
+    {
+      "$ref": "#/$defs/admission_grant"
+    },
+    {
+      "$ref": "#/$defs/clarification"
+    },
+    {
+      "$ref": "#/$defs/negotiation_close"
+    }
+  ],
+  "$defs": {
+    "content_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "locator": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "digest"
+      ]
+    },
+    "proof_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "suite_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Selected existing proof profile in a real deployment. It must authenticate exact record content, issuer and scope; self-declared metadata is insufficient. Example URIs are unimplemented placeholders."
+        },
+        "verification_method": {
+          "type": "string",
+          "format": "uri"
+        },
+        "signed_payload_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "native_proof_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "suite_uri",
+        "verification_method",
+        "signed_payload_digest",
+        "issuer_agent_id",
+        "scope",
+        "native_proof_ref"
+      ]
+    },
+    "validity": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "const": "until_withdrawn"
+            },
+            "policy_ref": {
+              "$ref": "#/$defs/content_ref"
+            },
+            "status_ref": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "required": [
+            "mode",
+            "policy_ref",
+            "status_ref"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "const": "expires_at"
+            },
+            "policy_ref": {
+              "$ref": "#/$defs/content_ref"
+            },
+            "expires_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "status_ref": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "required": [
+            "mode",
+            "policy_ref",
+            "expires_at",
+            "status_ref"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "const": "policy_defined"
+            },
+            "policy_ref": {
+              "$ref": "#/$defs/content_ref"
+            },
+            "status_ref": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "required": [
+            "mode",
+            "policy_ref",
+            "status_ref"
+          ]
+        }
+      ]
+    },
+    "typed_value": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "parameters": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "type_uri",
+        "parameters"
+      ]
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "action_type": {
+          "type": "string",
+          "format": "uri"
+        },
+        "semantics_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "polarity": {
+          "enum": [
+            "provide",
+            "receive"
+          ]
+        },
+        "subject": {
+          "$ref": "#/$defs/typed_value"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typed_value"
+          },
+          "minItems": 0
+        },
+        "parameters": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "action_type",
+        "semantics_ref",
+        "polarity",
+        "subject",
+        "resources",
+        "parameters"
+      ]
+    },
+    "own_promise": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "promise_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "promiser_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "promisee_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "action": {
+          "$ref": "#/$defs/action"
+        },
+        "capability_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        },
+        "authority_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typed_value"
+          },
+          "minItems": 0
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        }
+      },
+      "required": [
+        "promise_id",
+        "promiser_agent_id",
+        "promisee_ids",
+        "action",
+        "capability_refs",
+        "authority_refs",
+        "qualifications",
+        "validity"
+      ]
+    },
+    "requested_counterpromise": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requested_of_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "$ref": "#/$defs/action"
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typed_value"
+          },
+          "minItems": 0
+        },
+        "requested_validity": {
+          "$ref": "#/$defs/validity"
+        }
+      },
+      "required": [
+        "request_id",
+        "requested_of_agent_id",
+        "action",
+        "qualifications",
+        "requested_validity"
+      ]
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "record_kind": {
+          "enum": [
+            "intent",
+            "promise",
+            "offer"
+          ]
+        },
+        "record_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "originator_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "originator_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "coordinator_agent_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "record_kind",
+        "record_ref",
+        "originator_agent_id",
+        "originator_principal_id",
+        "coordinator_agent_id"
+      ]
+    },
+    "self_offer_origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "self_origin": {
+          "const": true
+        },
+        "record_kind": {
+          "const": "offer"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "originator_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "originator_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "coordinator_agent_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "self_origin",
+        "record_kind",
+        "record_id",
+        "originator_agent_id",
+        "originator_principal_id",
+        "coordinator_agent_id"
+      ],
+      "description": "Only an initiating offer may use this marker, avoiding a circular self digest. record_id must equal the containing offer ID, and its originator/principal/coordinator must equal the authenticated issuer. Later records use a normal content reference to this complete initiating offer."
+    },
+    "participant": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "agent_id",
+        "principal_id"
+      ]
+    },
+    "reply_allowance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "message_limit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "byte_limit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        }
+      },
+      "required": [
+        "policy_ref"
+      ]
+    },
+    "commercial_terms": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "terms": {
+          "type": "object"
+        },
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile_uri",
+        "terms",
+        "policy_refs"
+      ]
+    },
+    "route_selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "route_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profile_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "selection": {
+          "type": "object"
+        },
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "route_id",
+        "profile_uri",
+        "selection",
+        "policy_refs"
+      ]
+    },
+    "option_selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "option_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "offer_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "selection_constraints_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "agent_id",
+        "option_id",
+        "offer_ref",
+        "selection_constraints_ref"
+      ]
+    },
+    "refusal_window": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "principal_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "notice_target_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "notice_profile_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "refusal_authority_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "refusal_mechanism_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "principal_id",
+        "principal_policy_ref",
+        "duration_ms",
+        "notice_target_ref",
+        "notice_profile_ref",
+        "refusal_authority_ref",
+        "refusal_mechanism_ref"
+      ]
+    },
+    "replacement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accepted_offer_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "disposition_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "accepted_offer_ref",
+        "disposition_ref"
+      ]
+    },
+    "window_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": [
+            "awaiting_notice",
+            "open",
+            "closed",
+            "refused",
+            "unresolved"
+          ]
+        },
+        "notice_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "starts_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "principal_id",
+        "state"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "open",
+                  "closed"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "notice_ref",
+              "starts_at",
+              "deadline"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "awaiting_notice"
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "starts_at"
+                  ]
+                },
+                {
+                  "required": [
+                    "deadline"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "current_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "policy_status_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "authority_status_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "principal_id",
+        "policy_status_ref",
+        "authority_status_ref"
+      ]
+    },
+    "publication_contract_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "previous_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        },
+        "principal_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "discovery": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "audiences": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "permitted_uses": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "index",
+                  "match",
+                  "subscription_delivery",
+                  "redistribute"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "distribution_policy_ref": {
+              "$ref": "#/$defs/content_ref"
+            }
+          },
+          "required": [
+            "audiences",
+            "permitted_uses",
+            "distribution_policy_ref"
+          ]
+        },
+        "contact": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "admission_kind": {
+              "enum": [
+                "first_offer",
+                "invitation",
+                "closed"
+              ]
+            },
+            "admission_policy_ref": {
+              "$ref": "#/$defs/content_ref"
+            },
+            "reply_allowance": {
+              "$ref": "#/$defs/reply_allowance"
+            }
+          },
+          "required": [
+            "admission_kind",
+            "admission_policy_ref"
+          ]
+        },
+        "commercial_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "contract_id",
+        "revision",
+        "previous_digest",
+        "validity",
+        "principal_policy_ref",
+        "discovery",
+        "contact",
+        "commercial_policy_ref"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "publication_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "publication_contract"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/publication_contract_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "intent_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "intent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "previous_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "market_posture": {
+          "enum": [
+            "seek_result",
+            "seek_work",
+            "seek_collaboration"
+          ]
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "desired_outcome": {
+          "type": "string",
+          "minLength": 1
+        },
+        "preferences": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "disclosure_audience": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "publication_contract_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        },
+        "emission_promise": {
+          "$ref": "#/$defs/own_promise"
+        }
+      },
+      "required": [
+        "intent_id",
+        "revision",
+        "previous_digest",
+        "market_posture",
+        "topic",
+        "desired_outcome",
+        "preferences",
+        "disclosure_audience",
+        "publication_contract_ref",
+        "validity",
+        "emission_promise"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "intent"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/intent_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "promise_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "publication_contract_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "own_promise": {
+          "$ref": "#/$defs/own_promise"
+        }
+      },
+      "required": [
+        "publication_contract_ref",
+        "own_promise"
+      ]
+    },
+    "promise": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "promise"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/promise_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "offer_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "semantics": {
+          "const": "issued_qualified_promises"
+        },
+        "origin": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/origin"
+            },
+            {
+              "$ref": "#/$defs/self_offer_origin"
+            }
+          ]
+        },
+        "negotiation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "option_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "previous_option_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "responds_to_offer_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "publication_contract_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "selection_constraints_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        },
+        "own_promises": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/own_promise"
+          },
+          "minItems": 1
+        },
+        "requested_counterpromises": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/requested_counterpromise"
+          },
+          "minItems": 0
+        },
+        "commercial_terms": {
+          "$ref": "#/$defs/commercial_terms"
+        },
+        "route_selections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/route_selection"
+          },
+          "minItems": 0
+        },
+        "privacy_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "semantics",
+        "origin",
+        "negotiation_id",
+        "option_id",
+        "revision",
+        "previous_option_digest",
+        "publication_contract_refs",
+        "selection_constraints_ref",
+        "validity",
+        "own_promises",
+        "requested_counterpromises",
+        "commercial_terms",
+        "route_selections",
+        "privacy_policy_ref"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "origin": {
+                "required": [
+                  "self_origin"
+                ],
+                "properties": {
+                  "self_origin": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "revision": {
+                "const": 1
+              },
+              "previous_option_digest": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_option_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_option_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "offer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "offer"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/offer_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "candidate_terms_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin": {
+          "$ref": "#/$defs/origin"
+        },
+        "negotiation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/participant"
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "selected_options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/option_selection"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "One or more complete compatible options, subject to their selection constraints. Direct acceptance of a single offered option does not require a reciprocal offer record."
+        },
+        "publication_contract_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "own_promises": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/own_promise"
+          },
+          "minItems": 1,
+          "description": "Selected qualified action descriptions, each attributable to its own promiser. Candidate authorship alone does not issue another participant's promises. Bilateral assent does not require a second substantive service promise or another reciprocal obligation."
+        },
+        "commercial_terms": {
+          "$ref": "#/$defs/commercial_terms"
+        },
+        "route_selections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/route_selection"
+          },
+          "minItems": 0
+        },
+        "selection_constraints_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        },
+        "principal_refusal_windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/refusal_window"
+          },
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "description": "Exactly one entry per distinct principal identified by the two candidate participants. The agents may share a principal. Uniqueness is by principal_id, not whole-object equality; cross-record coverage and authenticated identity require verification beyond JSON Schema."
+        },
+        "clock_profile_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "status_authority_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        },
+        "privacy_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "replacement": {
+          "$ref": "#/$defs/replacement"
+        },
+        "promise_bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/promise_binding"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "candidate_id",
+        "origin",
+        "negotiation_id",
+        "participants",
+        "selected_options",
+        "publication_contract_refs",
+        "own_promises",
+        "commercial_terms",
+        "route_selections",
+        "selection_constraints_refs",
+        "principal_refusal_windows",
+        "clock_profile_ref",
+        "status_authority_agent_id",
+        "status_policy_ref",
+        "validity",
+        "privacy_policy_ref",
+        "promise_bindings"
+      ]
+    },
+    "candidate_terms": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "candidate_terms"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/candidate_terms_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "terms_adoption_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidate_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "origin": {
+          "$ref": "#/$defs/origin"
+        },
+        "adopted_own_promise_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true,
+          "description": "IDs of this authenticated adopter's qualified actions in the exact candidate. Adoption may confirm already-issued own promises or issue requested own actions at adoption, without a reciprocal offer. An empty list means assent without issuing a substantive performance promise; the adoption still requires its capability and authority evidence. It never issues another actor's promises."
+        },
+        "authority_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        },
+        "capability_status_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        },
+        "policy_status_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        },
+        "selection_status_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        }
+      },
+      "required": [
+        "candidate_ref",
+        "origin",
+        "adopted_own_promise_ids",
+        "authority_refs",
+        "capability_status_refs",
+        "policy_status_refs",
+        "selection_status_refs",
+        "validity"
+      ]
+    },
+    "terms_adoption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "terms_adoption"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/terms_adoption_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "accepted_offer_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accepted_offer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidate_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "origin": {
+          "$ref": "#/$defs/origin"
+        },
+        "adoption_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "finalized_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "principal_refusal_windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/refusal_window"
+          },
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "description": "Exactly one entry per distinct principal identified by the two candidate participants. The agents may share a principal. Uniqueness is by principal_id, not whole-object equality; cross-record coverage and authenticated identity require verification beyond JSON Schema."
+        },
+        "clock_profile_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "status_authority_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "status_ref": {
+          "type": "string",
+          "format": "uri"
+        },
+        "finalization_check_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        },
+        "initial_status": {
+          "const": "pending_refusal_windows"
+        }
+      },
+      "required": [
+        "accepted_offer_id",
+        "candidate_ref",
+        "origin",
+        "adoption_refs",
+        "finalized_at",
+        "principal_refusal_windows",
+        "clock_profile_ref",
+        "status_authority_agent_id",
+        "status_policy_ref",
+        "status_ref",
+        "finalization_check_refs",
+        "initial_status"
+      ]
+    },
+    "accepted_offer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "accepted_offer"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/accepted_offer_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "finalization_notice_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accepted_offer_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notice_target_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "notice_profile_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "notice_kind": {
+          "enum": [
+            "delivered",
+            "made_available"
+          ]
+        },
+        "notice_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "clock_evidence_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "delivery_evidence_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "terms_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "review_duration_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "refusal_mechanism_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "accepted_offer_ref",
+        "principal_id",
+        "notice_target_ref",
+        "notice_profile_ref",
+        "notice_kind",
+        "notice_at",
+        "clock_evidence_ref",
+        "delivery_evidence_ref",
+        "terms_ref",
+        "review_duration_ms",
+        "refusal_mechanism_ref"
+      ]
+    },
+    "finalization_notice": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "finalization_notice"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/finalization_notice_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "refusal_event_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accepted_offer_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "refusing_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "status_authority_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "clock_evidence_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "accepted_offer_ref",
+        "refusing_principal_id",
+        "authority_ref",
+        "status_authority_agent_id",
+        "clock_evidence_ref"
+      ]
+    },
+    "refusal_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "refusal_event"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/refusal_event_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "status_snapshot_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accepted_offer_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "previous_status_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": [
+            "pending_refusal_windows",
+            "refused",
+            "refusal_windows_closed",
+            "unresolved"
+          ]
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "freshness_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "clock_evidence_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "notice_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 0
+        },
+        "principal_windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/window_observation"
+          },
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "description": "Exactly one entry per distinct principal identified by the two candidate participants. The agents may share a principal. Uniqueness is by principal_id, not whole-object equality; cross-record coverage and authenticated identity require verification beyond JSON Schema."
+        },
+        "current_policy_authority_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/current_check"
+          },
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "description": "Exactly one entry per distinct principal identified by the two candidate participants. The agents may share a principal. Uniqueness is by principal_id, not whole-object equality; cross-record coverage and authenticated identity require verification beyond JSON Schema."
+        },
+        "refusal_event_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 0
+        },
+        "status_authority_event_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "accepted_offer_ref",
+        "revision",
+        "previous_status_digest",
+        "status",
+        "as_of",
+        "freshness_policy_ref",
+        "clock_evidence_ref",
+        "notice_refs",
+        "principal_windows",
+        "current_policy_authority_checks",
+        "refusal_event_refs",
+        "status_authority_event_refs"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "refused"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "refusal_event_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/content_ref"
+                },
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "refusal_windows_closed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "notice_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/content_ref"
+                },
+                "minItems": 1,
+                "maxItems": 2,
+                "uniqueItems": true
+              },
+              "refusal_event_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/content_ref"
+                },
+                "minItems": 0,
+                "maxItems": 0
+              },
+              "principal_windows": {
+                "type": "array",
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/window_observation"
+                    },
+                    {
+                      "properties": {
+                        "state": {
+                          "const": "closed"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 2,
+                "uniqueItems": true
+              },
+              "status_authority_event_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/content_ref"
+                },
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_status_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_status_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "status_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "status_snapshot"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/status_snapshot_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "withdrawal_event_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target_kind": {
+          "enum": [
+            "publication_contract",
+            "intent",
+            "promise",
+            "offer",
+            "admission_grant",
+            "candidate_terms",
+            "terms_adoption"
+          ]
+        },
+        "target_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "authority_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
+          },
+          "minItems": 1
+        },
+        "status_ref": {
+          "type": "string",
+          "format": "uri"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "target_kind",
+        "target_ref",
+        "authority_refs",
+        "status_ref"
+      ]
+    },
+    "withdrawal_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "withdrawal_event"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/withdrawal_event_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "promise_binding": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "promise_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "promiser_agent_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "basis": {
+              "const": "previously_issued"
+            },
+            "source_ref": {
+              "$ref": "#/$defs/content_ref"
+            },
+            "source_promise_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "promise_id",
+            "promiser_agent_id",
+            "basis",
+            "source_ref",
+            "source_promise_id"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "promise_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "promiser_agent_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "basis": {
+              "const": "issue_on_adoption"
+            },
+            "request_source": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "offer_ref": {
+                  "$ref": "#/$defs/content_ref"
+                },
+                "request_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "offer_ref",
+                "request_id"
+              ]
+            }
+          },
+          "required": [
+            "promise_id",
+            "promiser_agent_id",
+            "basis"
+          ]
+        }
+      ]
+    },
+    "admission_grant_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "recipient_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "grantee_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "grantee_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recipient_scope_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_contract_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "admission_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "allowance_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "allowed_record_kinds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/semantic_kind"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "allow_status_query": {
+          "type": "boolean"
+        },
+        "validity": {
+          "$ref": "#/$defs/validity"
+        },
+        "negotiation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "allow_finalization": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "recipient_agent_id",
+        "grantee_agent_id",
+        "grantee_principal_id",
+        "recipient_scope_id",
+        "publication_contract_ref",
+        "admission_policy_ref",
+        "allowance_ids",
+        "allowed_record_kinds",
+        "allow_status_query",
+        "validity",
+        "allow_finalization"
+      ]
+    },
+    "admission_grant": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "admission_grant"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/admission_grant_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "clarification_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "$ref": "#/$defs/origin"
+        },
+        "negotiation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/content_ref"
+        },
+        "mode": {
+          "enum": [
+            "question",
+            "answer"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "privacy_policy_ref": {
+          "$ref": "#/$defs/content_ref"
+        }
+      },
+      "required": [
+        "origin",
+        "negotiation_id",
+        "subject_ref",
+        "mode",
+        "text",
+        "privacy_policy_ref"
+      ]
+    },
+    "clarification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "clarification"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/clarification_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "negotiation_close_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "$ref": "#/$defs/origin"
+        },
+        "negotiation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "origin",
+        "negotiation_id"
+      ]
+    },
+    "negotiation_close": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "abp/0.3-draft"
+        },
+        "kind": {
+          "const": "negotiation_close"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "body": {
+          "$ref": "#/$defs/negotiation_close_body"
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proof_reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "id",
+        "issuer_agent_id",
+        "issuer_principal_id",
+        "created_at",
+        "required_extensions",
+        "body",
+        "proofs"
+      ]
+    },
+    "semantic_kind": {
+      "type": "string",
+      "enum": [
+        "publication_contract",
+        "intent",
+        "promise",
+        "offer",
+        "candidate_terms",
+        "terms_adoption",
+        "accepted_offer",
+        "finalization_notice",
+        "refusal_event",
+        "status_snapshot",
+        "withdrawal_event",
+        "admission_grant",
+        "clarification",
+        "negotiation_close"
+      ]
+    }
+  }
+}

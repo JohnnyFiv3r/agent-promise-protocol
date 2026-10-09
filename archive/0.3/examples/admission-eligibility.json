@@ -1,0 +1,12 @@
+{
+  "id": "fixture:admission-eligibility",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "eligible_agent_ids": [
+    "agent:requester",
+    "agent:researcher"
+  ],
+  "topic": "protocol-comparison",
+  "native_profile": "https://example.org/agent-bazaar/v0.3/policies/eligibility",
+  "meaning": "Only the two identified authenticated peers within this topic; no open unsolicited contact."
+}

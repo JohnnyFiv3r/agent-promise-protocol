@@ -1,0 +1,34 @@
+{
+  "title": "APP 0.4 Reference Draft",
+  "tag": "app-v0.4-draft.1",
+  "date": "2026-10-09",
+  "status": "reference-draft",
+  "license": "MIT",
+  "protocol": "app/0.4-draft",
+  "reference_profile": "RP1 0.1-draft",
+  "runtime_version": "0.1.0",
+  "extension_uri": "https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/protocol-architecture.md#v04",
+  "reference_profile_uri": "https://github.com/JohnnyFiv3r/agent-promise-protocol/blob/main/profiles/reference-profile.md#rp1-v01",
+  "baseline_feature": "bilateral",
+  "optional_features": ["composition", "adapter-handoff", "lifecycle-evidence"],
+  "schema_ids": [
+    "urn:agent-promise-protocol:draft:0.4:semantic-records",
+    "urn:agent-promise-protocol:draft:0.4:interactions",
+    "urn:agent-promise-protocol:draft:0.4:admission-policy"
+  ],
+  "normative_sources": [
+    "contract.md",
+    "contracts/01-publication-policy.md",
+    "contracts/02-qualified-actions.md",
+    "contracts/03-admission-negotiation.md",
+    "contracts/04-formation.md",
+    "contracts/05-principal-refusal.md",
+    "contracts/06-a2a-evidence.md",
+    "contracts/07-composition.md",
+    "contracts/08-adapter-boundary.md",
+    "profiles/reference-profile.md",
+    "schemas/contract.schema.json",
+    "schemas/interaction.schema.json",
+    "schemas/admission-policy.schema.json"
+  ]
+}

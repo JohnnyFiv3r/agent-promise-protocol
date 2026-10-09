@@ -1,0 +1,12 @@
+{
+  "id": "fixture:negotiation-privacy",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "audience": [
+    "agent:requester",
+    "agent:researcher",
+    "principal:requester",
+    "principal:researcher"
+  ],
+  "rule": "Private negotiation and terms; policy-designated principal channels may expose exact terms for refusal. No third-party redistribution is authorized."
+}

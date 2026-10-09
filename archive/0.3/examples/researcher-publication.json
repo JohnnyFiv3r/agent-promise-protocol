@@ -1,0 +1,72 @@
+{
+  "profile": "abp/0.3-draft",
+  "kind": "publication_contract",
+  "id": "publication:researcher",
+  "issuer_agent_id": "agent:researcher",
+  "issuer_principal_id": "principal:researcher",
+  "created_at": "2026-10-08T18:00:00Z",
+  "required_extensions": [],
+  "body": {
+    "contract_id": "publication:researcher",
+    "revision": 1,
+    "previous_digest": null,
+    "validity": {
+      "mode": "until_withdrawn",
+      "policy_ref": {
+        "id": "fixture:researcher-principal-policy",
+        "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+      },
+      "status_ref": "https://example.org/agent-bazaar/v0.3/status/researcher-publication"
+    },
+    "principal_policy_ref": {
+      "id": "fixture:researcher-principal-policy",
+      "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
+    },
+    "discovery": {
+      "audiences": [
+        "subscribed:research-interest"
+      ],
+      "permitted_uses": [
+        "index",
+        "match",
+        "subscription_delivery"
+      ],
+      "distribution_policy_ref": {
+        "id": "fixture:distribution-policy",
+        "digest": "sha256:2ebe5a8829e94f5c2b543d7d26698657343b52f45d5e94cb139887d843bb4d5d"
+      }
+    },
+    "contact": {
+      "admission_kind": "first_offer",
+      "admission_policy_ref": {
+        "id": "fixture:researcher-admission-policy",
+        "digest": "sha256:3098c475ab0e50e140df8dc3a175c5801b07edc35f7d745dd2a43cfb0f3e9024"
+      },
+      "reply_allowance": {
+        "policy_ref": {
+          "id": "fixture:researcher-admission-policy",
+          "digest": "sha256:3098c475ab0e50e140df8dc3a175c5801b07edc35f7d745dd2a43cfb0f3e9024"
+        }
+      }
+    },
+    "commercial_policy_ref": {
+      "id": "fixture:commercial-policy",
+      "digest": "sha256:2628f0f441fc20cd404b93dca2bbda0901f926233534bfc6ff5200502032d14c"
+    }
+  },
+  "proofs": [
+    {
+      "suite_uri": "https://example.org/agent-bazaar/v0.3/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-bazaar/v0.3/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:0aa05c223ce5089913e4d975cc00a27c669ee28d1f94b8e081eeebdc8a493aec",
+      "issuer_agent_id": "agent:researcher",
+      "scope": [
+        "synthetic-review-only"
+      ],
+      "native_proof_ref": {
+        "id": "fixture:nonvalidating-native-proof",
+        "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
+      }
+    }
+  ]
+}

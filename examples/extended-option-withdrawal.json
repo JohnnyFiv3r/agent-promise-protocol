@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.2-draft",
+  "profile": "app/0.4-draft",
   "kind": "withdrawal_event",
   "id": "withdrawal:extended-option",
   "issuer_agent_id": "agent:researcher",
@@ -10,7 +10,7 @@
     "target_kind": "offer",
     "target_ref": {
       "id": "offer:researcher-extended-offer",
-      "digest": "sha256:ccb68d0adf7014f1688ca7bc887bb71d7badbb02eae3105ae9425396c30631f9"
+      "digest": "sha256:48475b159268cde76be462c2ddd59ef97a0611672d84e1eb8bb80e446a03b747"
     },
     "authority_refs": [
       {
@@ -18,14 +18,14 @@
         "digest": "sha256:1b566fc6ef22887b836be3e2d90ec3b1e00ab29e4e5f89a0c4b1c82c7daecbf7"
       }
     ],
-    "status_ref": "https://example.org/agent-bazaar/v0.2/status/researcher-extended-offer",
+    "status_ref": "https://example.org/agent-promise-protocol/v0.4/status/researcher-extended-offer",
     "reason": "Withdraw this alternative only; no other option is silently revised."
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.2/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.2/fictional-keys/agent-researcher",
-      "signed_payload_digest": "sha256:1ade6a613e3b9b4a2d4195388b1bb812db6bc8c3eab098e14c8657cae8acc701",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-researcher",
+      "signed_payload_digest": "sha256:fdec39f58e9153b60bb2d3ee60a6dd427806199823adbea8aa76faefb862b6d5",
       "issuer_agent_id": "agent:researcher",
       "scope": [
         "synthetic-review-only"
@@ -35,5 +35,8 @@
         "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
       }
     }
+  ],
+  "required_features": [
+    "bilateral"
   ]
 }

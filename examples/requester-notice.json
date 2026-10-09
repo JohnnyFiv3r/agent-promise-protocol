@@ -1,5 +1,5 @@
 {
-  "profile": "abp/0.2-draft",
+  "profile": "app/0.4-draft",
   "kind": "finalization_notice",
   "id": "notice:requester",
   "issuer_agent_id": "agent:principal-channel",
@@ -9,7 +9,7 @@
   "body": {
     "accepted_offer_ref": {
       "id": "accepted:research",
-      "digest": "sha256:95b39eabd2a57dc4ea5410dda6b4f81d9c4e2bbed219242de9ca9a7a3ad6768c"
+      "digest": "sha256:c118dadbb21d29b8439b60ed9383757cce5607732e2778bdaa4c5754fe7b1a20"
     },
     "principal_id": "principal:requester",
     "notice_target_ref": {
@@ -32,19 +32,19 @@
     },
     "terms_ref": {
       "id": "candidate:research",
-      "digest": "sha256:869ca9dc60309f25ff43facfa1555d5e93fada10e1c7bbb2f9d1f8c6407ab924"
+      "digest": "sha256:8db3f9f6ac79bb8aa38634c5d4555d3cf023cd63290cbd2caad52ba949ae3c9e"
     },
     "review_duration_ms": 60000,
     "refusal_mechanism_ref": {
       "id": "fixture:refusal-mechanism",
-      "digest": "sha256:4535ba9d8526446798802efd3ddb139ea4399289b9a2ba1223634c5b2b8836a4"
+      "digest": "sha256:a57e16b520478ed9f1003b989632814aa083ed46a87d5c550463e975e98e4608"
     }
   },
   "proofs": [
     {
-      "suite_uri": "https://example.org/agent-bazaar/v0.2/proof-profile-not-selected",
-      "verification_method": "https://example.org/agent-bazaar/v0.2/fictional-keys/agent-principal-channel",
-      "signed_payload_digest": "sha256:b9560fa89906ca6bd3223c6d95cddd09eeca1ff6bf684c4f9d4c6427e35dea4c",
+      "suite_uri": "https://example.org/agent-promise-protocol/v0.4/proof-profile-not-selected",
+      "verification_method": "https://example.org/agent-promise-protocol/v0.4/fictional-keys/agent-principal-channel",
+      "signed_payload_digest": "sha256:61a621105be23b4a7276cb60525e3e7e71539c4760bbf0b081fd3d9709ac392e",
       "issuer_agent_id": "agent:principal-channel",
       "scope": [
         "synthetic-review-only"
@@ -54,5 +54,8 @@
         "digest": "sha256:4c9ef3b4a8ae40e32869ef6c82332f15d6f84af8ab520cb5e6b39d9cd79942c3"
       }
     }
+  ],
+  "required_features": [
+    "bilateral"
   ]
 }

@@ -1,0 +1,7 @@
+{
+  "id": "fixture:researcher-notice-target",
+  "fixture_type": "illustrative_policy_or_evidence",
+  "synthetic": true,
+  "principal_id": "principal:researcher",
+  "channel": "https://example.org/principal/researcher/notices"
+}

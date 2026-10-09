@@ -1,0 +1,7 @@
+{
+  "id": "fixture:native-observation",
+  "synthetic": true,
+  "claim": "No report performance or assessment is asserted; the requested performance was blocked by principal refusal.",
+  "observed_operation": "handoff:report-once",
+  "note": "Authored fictional observation, not evidence from a running adapter."
+}
